@@ -1,3 +1,19 @@
+<?php
+    include("partials/_db.php");
+    $phoneNumber = $_POST['phoneNumber'];
+    // echo 'it is my '.$phoneNumber.'';
+    $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_array($result);
+    if(!$row){
+        echo "not";
+        header("location:view-profile.php?pnot=true");
+    }
+    $name = $row['name'];
+    $district = $row['district'];
+    $phone = $row['phone'];
+    $wing = $row['interest'];
+?>
 <!doctype html>
 <html lang="en">
 
@@ -9,7 +25,10 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         body {
-            background: rgb(255, 236, 200);
+            background: #f7e092;
+        }
+        #card td{
+            text-transform:capitalize ;
         }
     </style>
 </head>
@@ -23,29 +42,29 @@
             </div>
             <div class="col-md p-3">
                 <div class="shadow-lg bg-white rounded-5 p-4">
-                    <table class="table p-3 ">
+                    <table class="table p-3 " id="card">
                         <thead>
                             <tr>
                                 <th scope="col-md">Name</th>
-                                <td colspan="2">Ankit</td>
+                                <td colspan="2"><?php echo $name; ?></td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">City</th>
-                                <td colspan="2">Jagadhri</td>
+                                <td colspan="2"><?php echo $district; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Phone No</th>
-                                <td colspan="2">8930840560</td>
+                                <td colspan="2"><?php echo $phone; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Wing</th>
-                                <td colspan="2">GIEO Gita</td>
+                                <td colspan="2"><?php echo $wing; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Designation</th>
-                                <td colspan="2">sadasye</td>
+                                <td colspan="2">सदस्य</td>
                             </tr>
                         </tbody>
                     </table>
