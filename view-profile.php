@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-8 d-flex align-items-center">
                     <div class="card-body  ">
-                        <form action="member.php" method="POST">
+                        <form action="member.php" method="GET">
                             <div class="form-floating mb-3">
                                 <input name="phoneNumber" type="tel" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                                 <label for="floatingInput">Phone Number</label>
