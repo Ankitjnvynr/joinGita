@@ -1,3 +1,5 @@
+let ourcountry = ['Australia','Canada','United Kingdom','India','Japan','New Zealand','United Arab Emirates','United States'];
+
 document.addEventListener('DOMContentLoaded', function () {
   const countrySelect = document.getElementById('countrySelect');
   const stateSelect = document.getElementById('stateSelect');
@@ -9,13 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('js/countries.json')
       .then((response) => response.json())
       .then((data) => {
-          data.countries.forEach((country) => {
+        
+        data.countries.forEach((country) => {
+          if(ourcountry.includes(country.name)){
+              // console.log(country.name)
               const option = document.createElement('option');
               option.value = country.name;
               option.textContent = country.name;
               option.setAttribute("dataValue", country.id)
               // option.dataValue = country.id;
               countrySelect.appendChild(option);
+            }
           });
       })
       .catch((error) => console.error('Error:', error));
@@ -58,12 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
       citySelect.innerHTML = '<option value="">-- Select City --</option>';
 
       var selectedState = stateSelect.options[stateSelect.selectedIndex].getAttribute('dataValue');
-      console.log(selectedState);
+      // console.log(selectedState);
       // Fetch cities based on the selected state and country
       fetch('js/cities.json')
           .then((response) => response.json())
           .then((data3) => {
-              console.log(data3)
+              // console.log(data3)
               data3.cities.forEach((city) => {
                   if (city.state_id == selectedState) {
                       const option = document.createElement('option');

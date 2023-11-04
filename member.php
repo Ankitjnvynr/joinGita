@@ -1,7 +1,10 @@
 <?php
 $statusMsg = '';
 include("partials/_db.php");
-
+if(! isset($_GET['phoneNumber'])){
+    header('location:view-profile.php');
+    exit;
+}
 
 if (isset($_POST['Update'])) {
     $targetDir = "imgs/";
@@ -50,6 +53,7 @@ if (isset($_POST['Update'])) {
     $update = mysqli_query($conn, $usql);
     $update = true;
 }
+$phoneNumber =false;
 $phoneNumber = $_GET['phoneNumber'];
 $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
 $result = mysqli_query($conn, $sql);
