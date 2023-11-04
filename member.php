@@ -1,68 +1,68 @@
 <?php
-    $statusMsg = ''; 
-    include("partials/_db.php");
-    
+$statusMsg = '';
+include("partials/_db.php");
 
-    if(isset($_POST['Update'])){
-        $targetDir = "imgs/";
-        $updateEmail =$_POST['updateEmail'];
-        $phoneNumber = $_GET['phoneNumber'];
 
-        if(!empty($_FILES["pic"]["name"])){ 
-            $fileName = basename($_FILES["pic"]["name"]); 
-            $targetFilePath = $targetDir . $fileName; 
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION); 
-         
-            // Allow certain file formats 
-            $allowTypes = array('jpg','png','jpeg','gif'); 
-            if(in_array($fileType, $allowTypes)){ 
-                // Upload file to server 
-                $phoneNumber = $_GET['phoneNumber'];
-                $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
-                $result = mysqli_query($conn,$sql);
-                $row = mysqli_fetch_array($result);
-                $statusMsg = 'Please select a file to upload.'; 
-                $fileNameUnlink = $row['pic'];
-                unlink($targetDir.$fileNameUnlink);
-                if(move_uploaded_file($_FILES["pic"]["tmp_name"], $targetFilePath)){
-                    $updateImg =true;
-                    if($updateImg){ 
-                        $statusMsg = "Picture Updated successfully."; 
-                    }else{ 
-                        $statusMsg = "File upload failed, please try again."; 
-                    }  
-                }else{ 
-                    $statusMsg = "Sorry, there was an error uploading your file."; 
-                } 
-            }else{ 
-                $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
-            } 
-        }else{ 
+if (isset($_POST['Update'])) {
+    $targetDir = "imgs/";
+    $updateEmail = $_POST['updateEmail'];
+    $phoneNumber = $_GET['phoneNumber'];
+
+    if (!empty($_FILES["pic"]["name"])) {
+        $fileName = basename($_FILES["pic"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+        // Allow certain file formats 
+        $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
+        if (in_array($fileType, $allowTypes)) {
+            // Upload file to server 
             $phoneNumber = $_GET['phoneNumber'];
             $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
-            $result = mysqli_query($conn,$sql);
+            $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result);
-            $statusMsg = 'Please select a file to upload.'; 
-            $fileName = $row['pic'];
-        } 
-        // Insert image file name into database 
-        $usql = "UPDATE `users` SET `email`='$updateEmail', `pic`='$fileName' WHERE `phone` = $phoneNumber";
-        $update = mysqli_query($conn,$usql);
-        $update = true;
+            $statusMsg = 'Please select a file to upload.';
+            $fileNameUnlink = $row['pic'];
+            unlink($targetDir . $fileNameUnlink);
+            if (move_uploaded_file($_FILES["pic"]["tmp_name"], $targetFilePath)) {
+                $updateImg = true;
+                if ($updateImg) {
+                    $statusMsg = "Picture Updated successfully.";
+                } else {
+                    $statusMsg = "File upload failed, please try again.";
+                }
+            } else {
+                $statusMsg = "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.';
+        }
+    } else {
+        $phoneNumber = $_GET['phoneNumber'];
+        $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+        $statusMsg = 'Please select a file to upload.';
+        $fileName = $row['pic'];
     }
-    $phoneNumber = $_GET['phoneNumber'];
-    $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
-    $result = mysqli_query($conn,$sql);
-    $row = mysqli_fetch_array($result);
-    if(!$row){
-        echo "not";
-        header("location:view-profile.php?pnot=true");
-    }
-    $name = $row['name'];
-    $district = $row['district'];
-    $phone = $row['phone'];
-    $wing = $row['interest'];
-    
+    // Insert image file name into database 
+    $usql = "UPDATE `users` SET `email`='$updateEmail', `pic`='$fileName' WHERE `phone` = $phoneNumber";
+    $update = mysqli_query($conn, $usql);
+    $update = true;
+}
+$phoneNumber = $_GET['phoneNumber'];
+$sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+if (!$row) {
+    echo "not";
+    header("location:view-profile.php?pnot=true");
+}
+$name = $row['name'];
+$district = $row['district'];
+$phone = $row['phone'];
+$wing = $row['interest'];
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -71,16 +71,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Member</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-    body {
-        background: #f7e092;
-    }
+        body {
+            background: #f7e092;
+        }
 
-    #card td {
-        text-transform: capitalize;
-    }
+        #card td {
+            text-transform: capitalize;
+        }
     </style>
 </head>
 
@@ -88,9 +87,7 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-md  d-flex justify-content-center align-items-center p-3">
-                <img style="width: 42%; aspect-ratio: 1/1; object-fit:cover;"
-                    class="rounded-circle shadow-lg border border-black" src="imgs/<?php echo $row['pic'] ?>"
-                    alt="user image" class="user">
+                <img style="width: 42%; aspect-ratio: 1/1; object-fit:cover;" class="rounded-circle shadow-lg border border-black" src="imgs/<?php echo $row['pic'] ?>" alt="user image" class="user">
             </div>
             <div class="col-md p-3">
                 <div class="shadow-lg bg-white rounded-5 p-4">
@@ -131,18 +128,15 @@
                     <h4>Update your Profile</h4>
                 </div>
                 <div class="col-md ">
-                    <form action=" <?php echo $_SERVER['PHP_SELF']."?phoneNumber=".$phoneNumber; ?>" method="POST"
-                        enctype="multipart/form-data">
+                    <form action=" <?php echo $_SERVER['PHP_SELF'] . "?phoneNumber=" . $phoneNumber; ?>" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md my-2 ">
                                 <label for="updatephone">Phone No</label>
-                                <input type="text" class="form-control" value="<?php echo $phone; ?>" id="updatephone"
-                                    aria-label="First name" disabled>
+                                <input type="text" class="form-control" value="<?php echo $phone; ?>" id="updatephone" aria-label="First name" disabled>
                             </div>
                             <div class="col-md my-2">
                                 <label for="updateEmail">Email address</label>
-                                <input type="text" value="<?php echo $row['email']; ?>" class="form-control"
-                                    id="updateEmail" name="updateEmail" aria-label="Last name">
+                                <input type="text" value="<?php echo $row['email']; ?>" class="form-control" id="updateEmail" name="updateEmail" aria-label="Last name">
                             </div>
                         </div>
                         <div class="row">
@@ -193,14 +187,12 @@
                 <div class="col-md d-flex justify-content-center flex-column align-items-center">
                     <h3 class="fw-bold">​मासिक प्रवास</h3>
                     <div class="my-2">
-                        <img height="400px" class="rounded-3 shadow-lg"
-                            src="imgs/पूज्य महाराज जी के आगामी कार्यकृम_edited.webp" alt="">
+                        <img height="400px" class="rounded-3 shadow-lg" src="imgs/पूज्य महाराज जी के आगामी कार्यकृम_edited.webp" alt="">
                     </div>
                 </div>
                 <div class="col-md d-flex flex-column justify-content-center align-items-center">
                     <h3 class="fw-bold">VIDEOS</h3>
-                    <video src="imgs/file.mp4" height="400px" class="object-fit-cover rounded-3 shadow-lg"
-                        controls></video>
+                    <video src="imgs/file.mp4" height="400px" class="object-fit-cover rounded-3 shadow-lg" controls></video>
                 </div>
             </div>
             <hr>
@@ -249,11 +241,9 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <script>
-        
         function fileValidation() {
             var fileInput = document.getElementById('pic');
             var filePath = fileInput.value;
@@ -263,7 +253,8 @@
                 alert('Invalid file type');
                 fileInput.value = '';
                 return false;
-            }} 
+            }
+        }
     </script>
 </body>
 

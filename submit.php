@@ -42,15 +42,18 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     try{
         $result = mysqli_query($conn,$sql);
         if($result){
-            echo "insert success!";
+            echo "Please Wait..........";
+            header("location:view-profile.php?joined=true");
+            exit;
+      
         }
 
     } catch(Exception $err){
       if($err){
         header("location:index.php?dphoneExiit=true");
+        exit;
       }
     }
 }
 
-// $conn->close();
-?>
+$conn->close();

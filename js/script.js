@@ -1,89 +1,79 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const countrySelect = document.getElementById('countrySelect');
+  const stateSelect = document.getElementById('stateSelect');
+  const citySelect = document.getElementById('citySelect');
 
-
-
-
-$(document).ready(function() {
-    //-------------------------------SELECT CASCADING-------------------------//
-    
-    var selectedCountry = (selectedRegion = selectedCity = "");
-    // This is a demo API key for testing purposes. You should rather request your API key (free) from http://battuta.medunes.net/
-    var BATTUTA_KEY = "8ac6a73eff40f218fc7cb61691c996cb";
-    //"00000000000000000000000000000000";
-    // Populate country select box from battuta API
-    url =
-      "https://battuta.medunes.net/api/country/all/?key=" +
-      BATTUTA_KEY +
-      "&callback=?"; 
+  // Replace this URL with the correct path to your JSON file containing countries, states, and cities
   
-    // EXTRACT JSON DATA.
-    $.getJSON(url, function(data) {
-      // console.log(data);
-      $.each(data, function(index, value) {
-        // APPEND OR INSERT DATA TO SELECT ELEMENT.
-        $("#country").append(
-          '<option value="' + value.code + '">' + value.name + "</option>"
-        );
-      });
-    });
-    // Country selected --> update region list .
-    $("#country").change(function() {
-      selectedCountry = this.options[this.selectedIndex].text;
-      countryCode = $("#country").val();
-      // Populate country select box from battuta API
-      url =
-        "https://battuta.medunes.net/api/region/" +
-        countryCode +
-        "/all/?key=" +
-        BATTUTA_KEY +
-        "&callback=?";
-      $.getJSON(url, function(data) {
-        $("#region option").remove();
-        $('#region').append('<option value="">Please select your region</option>');
-        $.each(data, function(index, value) {
-          // APPEND OR INSERT DATA TO SELECT ELEMENT.
-          $("#region").append(
-            '<option value="' + value.region + '">' + value.region + "</option>"
-          );
-        });
-      });
-    });
-    // Region selected --> updated city list
-    $("#region").on("change", function() {
-      selectedRegion = this.options[this.selectedIndex].text;
-      // Populate country select box from battuta API
-      countryCode = $("#country").val();
-      region = $("#region").val();
-      url =
-        "https://battuta.medunes.net/api/city/" +
-        countryCode +
-        "/search/?region=" +
-        region +
-        "&key=" +
-        BATTUTA_KEY +
-        "&callback=?";
-      $.getJSON(url, function(data) {
-        console.log(data);
-        $("#city option").remove();
-        $('#city').append('<option value="">Please select your city</option>');
-        $.each(data, function(index, value) {
-          // APPEND OR INSERT DATA TO SELECT ELEMENT.
-          $("#city").append(
-            '<option value="' + value.city + '">' + value.city + "</option>"
-          );
-        });
-      });
-    });
-    // city selected --> update location string
-    $("#city").on("change", function() {
-      selectedCity = this.options[this.selectedIndex].text;
-      $("#location").html(
-        "Locatation: Country: " +
-          selectedCountry +
-          ", Region: " +
-          selectedRegion +
-          ", City: " +
-          selectedCity
-      );
-    });
+  // Fetch countries from the JSON
+  fetch('js/countries.json')
+      .then((response) => response.json())
+      .then((data) => {
+          data.countries.forEach((country) => {
+              const option = document.createElement('option');
+              option.value = country.name;
+              option.textContent = country.name;
+              option.setAttribute("dataValue", country.id)
+              // option.dataValue = country.id;
+              countrySelect.appendChild(option);
+          });
+      })
+      .catch((error) => console.error('Error:', error));
+
+  // On country selection change, load respective states
+  countrySelect.addEventListener('change', function () {
+      stateSelect.disabled = false;
+      citySelect.disabled = true;
+      stateSelect.innerHTML = '<option value="">-- Select State --</option>';
+
+      var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute('dataValue');
+      // console.log(selectedCountry);
+
+
+      // console.log("hii");
+
+      // Fetch states based on the selected country
+      fetch('js/states.json')
+          .then((response) => response.json())
+          .then((data1) => {
+              data1.states.forEach(state => {
+                  if (state.country_id == selectedCountry) {
+                      // console.log(state)
+                      const option = document.createElement('option');
+                      option.value = state.name;
+                      option.setAttribute("dataValue", state.id)
+                      option.textContent = state.name;
+                      stateSelect.appendChild(option);
+                  }
+              });
+
+          }
+          )
+          .catch((error) => console.error('Error:', error));
   });
-  
+
+  // On state selection change, load respective cities
+  stateSelect.addEventListener('change', function () {
+      citySelect.disabled = false;
+      citySelect.innerHTML = '<option value="">-- Select City --</option>';
+
+      var selectedState = stateSelect.options[stateSelect.selectedIndex].getAttribute('dataValue');
+      console.log(selectedState);
+      // Fetch cities based on the selected state and country
+      fetch('js/cities.json')
+          .then((response) => response.json())
+          .then((data3) => {
+              console.log(data3)
+              data3.cities.forEach((city) => {
+                  if (city.state_id == selectedState) {
+                      const option = document.createElement('option');
+                      option.value = city.name;
+                      option.textContent = city.name;
+                      citySelect.appendChild(option);
+                  }
+              });
+
+          })
+          .catch((error) => console.error('Error:', error));
+  });
+});
