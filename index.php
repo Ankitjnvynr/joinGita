@@ -93,7 +93,7 @@
           </select>
         </div>
         <div class="form-group col-md mb-3">
-          <select name="married" class="form-control" required>
+          <select name="married" id="married" class="form-control" onchange="aniver()" required>
             <option value="">-- select Marital Status --</option>
             <option value="Married" aria-selected="false">Married</option>
             <option value="Unmarried" aria-selected="false">Unmarried</option>
@@ -195,6 +195,15 @@
           <label for="dob">Birth Date</label>
         </div>
       </div>
+      <div class="row">
+
+        <div id="aniversry" class="form-floating mb-3 col-md">
+          
+        </div>
+        <div class="form-floating mb-3 col-md">
+          
+        </div>
+      </div>
       <div class="form-floating mb-3 col-md ">
         <textarea name="message" class="form-control" name="message" id="" col-mds="30" rows="30"></textarea>
         <label for="floatingInput">Message(if any)</label>
@@ -212,32 +221,29 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   <script src="statelist.js"></script>
   <script src="js/script.js"></script>
-  
-    <?php
-    if (isset($_GET['dphoneExiit'])) {
+  <script src="js/another.js"></script>
 
-      $pnot = false;
-      $pnot = $_GET['dphoneExiit'];
-      if ($pnot == true) {
-        echo '
+  <?php
+  if (isset($_GET['dphoneExiit'])) {
+
+    $pnot = false;
+    $pnot = $_GET['dphoneExiit'];
+    if ($pnot == true) {
+      echo '
             <script>
                 const toastLiveExample = document.getElementById("phtoast")
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
                 toastBootstrap.show()
             </script>
                 ';
-      }
     }
-    ?>
-  
+  }
+  ?>
+
 </body>
 
 </html>
