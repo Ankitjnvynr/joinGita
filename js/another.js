@@ -7,9 +7,14 @@ function aniver() {
         let AniverDate = document.createElement('input');
         AniverDate.type = 'date';
         AniverDate.name='AniverDate';
-        
+        AniverDate.id='AniverDate';
+        AniverDate.classList.add('form-control')
         console.log(AniverDate)
-        console.log(aniversry)
+        let AniverLabel = document.createElement('label');
+        AniverLabel.innerText="Aniversary Date"
+        AniverLabel.setAttribute('for','AniverDate')
+        console.log(AniverLabel)
         aniversry.appendChild(AniverDate)
+        aniversry.appendChild(AniverLabel)
     }
 }
