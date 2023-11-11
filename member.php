@@ -1,7 +1,7 @@
 <?php
 $statusMsg = '';
 include("partials/_db.php");
-if(! isset($_GET['phoneNumber'])){
+if (!isset($_GET['phoneNumber'])) {
     header('location:view-profile.php');
     exit;
 }
@@ -26,7 +26,9 @@ if (isset($_POST['Update'])) {
             $row = mysqli_fetch_array($result);
             $statusMsg = 'Please select a file to upload.';
             $fileNameUnlink = $row['pic'];
-            unlink($targetDir . $fileNameUnlink);
+            if ($fileNameUnlink != 'defaultusers.png') {
+                unlink($targetDir . $fileNameUnlink);
+            }
             if (move_uploaded_file($_FILES["pic"]["tmp_name"], $targetFilePath)) {
                 $updateImg = true;
                 if ($updateImg) {
@@ -53,7 +55,7 @@ if (isset($_POST['Update'])) {
     $update = mysqli_query($conn, $usql);
     $update = true;
 }
-$phoneNumber =false;
+$phoneNumber = false;
 $phoneNumber = $_GET['phoneNumber'];
 $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
 $result = mysqli_query($conn, $sql);
@@ -254,7 +256,7 @@ $wing = $row['interest'];
             // Allowing file type
             var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
             if (!allowedExtensions.exec(filePath)) {
-                alert('Invalid file type');
+                alert('File must be jpg, jpeg or png');
                 fileInput.value = '';
                 return false;
             }

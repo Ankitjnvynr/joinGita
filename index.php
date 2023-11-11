@@ -20,6 +20,16 @@
     .form-floating>label {
       left: 10px;
     }
+
+    
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
@@ -68,7 +78,7 @@
 
 
         <div class="form-floating mb-3 col-md ">
-          <input type="text" class="form-control" name="phone" placeholder="name@example.com" required>
+          <input type="number" class="form-control" id="phone" name="phone"  maxlength="20" placeholder="name@example.com" required>
           <label for="floatingInput">Phone No(without country code)</label>
         </div>
 
@@ -79,7 +89,7 @@
           <label for="floatingInput">Email </label>
         </div>
         <div class="form-floating mb-3 col-md">
-          <input type="text" class="form-control" name="whatsapp" placeholder="name@example.com" required>
+          <input type="number" class="form-control" name="whatsapp" placeholder="name@example.com" required>
           <label for="floatingInput">WhatsApp Number</label>
         </div>
       </div>
@@ -198,10 +208,10 @@
       <div class="row">
 
         <div id="aniversry" class="form-floating mb-3 col-md">
-          
+
         </div>
         <div class="form-floating mb-3 col-md">
-          
+
         </div>
       </div>
       <div class="form-floating mb-3 col-md ">

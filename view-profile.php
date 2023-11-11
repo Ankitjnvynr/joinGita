@@ -16,10 +16,18 @@
             position: relative;
 
         }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
-    
+
     <link rel="stylesheet" href="style.css" />
 
     <title>Document</title>
@@ -77,7 +85,7 @@
                         <form action="member.php" method="GET">
                             <h5 class="text-center mb-2">View your Profile</h5>
                             <div class="form-floating mb-3">
-                                <input name="phoneNumber" type="tel" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                                <input name="phoneNumber" type="number"  class="form-control" id="floatingInput" placeholder="name@example.com" required>
                                 <label for="floatingInput">Phone Number</label>
                             </div>
                             <div class="text-center"><button name="submit" type="submit" class="btn btn-danger p-4 py-2 p"><b>View</b></button></div>
