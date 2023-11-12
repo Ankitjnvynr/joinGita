@@ -20,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     $dob = $_POST["dob"];
     $message = $_POST["message"];
     $aniver_date = $_POST["anniversaryDate"];
-
+    $hash_id = md5($phone);
     
     
 
     // Use prepared statements to insert data
-    $sql = "INSERT INTO `users`( `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$district','$state','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
+    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id',$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$district','$state','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
 
     try{
         $result = mysqli_query($conn,$sql);
