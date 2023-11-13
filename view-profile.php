@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" href="style.css" />
 
-    <title>View Profile</title>
+    <title>View</title>
 </head>
 
 <body>
