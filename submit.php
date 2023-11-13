@@ -3,6 +3,7 @@ include("partials/_db.php");
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
     // echo "btn is pressed";
+    
     $country = $_POST["country"];
     $name = $_POST["name"];
     $phone = $_POST["phone"];
@@ -19,13 +20,13 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     $education = $_POST["education"];
     $dob = $_POST["dob"];
     $message = $_POST["message"];
-    $aniver_date = $_POST["anniversaryDate"];
+    $aniver_date = $_POST['ani-date'];
     $hash_id = md5($phone);
     
     
 
     // Use prepared statements to insert data
-    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id',$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$district','$state','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
+    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$district','$state','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
 
     try{
         $result = mysqli_query($conn,$sql);
@@ -38,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     } catch(Exception $err){
       if($err){
+        echo $err;
         header("location:index.php?dphoneExiit=true");
         exit;
       }
