@@ -28,10 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch((error) => console.error('Error:', error));
 
     var url = 'http://www.geoplugin.net/json.gp?jsoncallback=?';
+    console.log(url)
     $.getJSON(url)
         .success(function (data) {
             var country_code = data.geoplugin_countryCode;
-            console.log(country_code)
+            // console.log(country_code)
             var $country = $('#countrySelect');
             $country.find('option[sortname="' + country_code + '"]').prependTo($country);
             $country.find('option[sortname=""]').text('--------------');

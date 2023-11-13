@@ -26,7 +26,7 @@
         $.getJSON(url)
             .success(function(data){
                 var country_code = data.geoplugin_countryCode;
-                console.log(country_code)
+                console.log()
                 var $country = $('#country');
                 $country.find('option[sortname="'+country_code+'"]').prependTo($country);
                 $country.find('option[sortname=""]').text('--------------');
