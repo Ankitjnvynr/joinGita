@@ -69,7 +69,7 @@
 
 
     <div class="container p-md-4 shadow-lg my-3 rounded " style="padding-bottom: 1%;">
-        <div class="text-center">
+        <div class="text-center pt-2">
             <h4>
                 Not a member - <a href="index.php" class="btn btn-danger p-4 py-2 p"><b>Join Now</b></a>
             </h4>
@@ -77,7 +77,7 @@
         <hr>
         <div class="card mb-3 ">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4 d-flex justify-content-center">
                     <img src="imgs/guruji.webp" class="img-fluid rounded-start m-auto" alt="...">
                 </div>
                 <div class="col-md-8 d-flex align-items-center">

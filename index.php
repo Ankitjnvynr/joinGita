@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div class="container p-md-4 shadow-lg my-3 rounded " style="padding-bottom: 1%;">
+  <div class="container p-2 p-md-4  shadow-lg  my-3 rounded " style="padding-bottom: 1%;">
     <div class="text-center">
       <h4>
         Already a member - <a href="view-profile.php" class="btn btn-danger p-4 py-2 p"><b>View Profile</b></a>
