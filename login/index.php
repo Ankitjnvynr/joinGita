@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION['loggedin'])) {
-//	header('location : dashboard.php');
-	header("location: alluser.php");
+    //	header('location : dashboard.php');
+    header("location: alluser.php");
 
-	exit;
+    exit;
 }
 include("../partials/_db.php");
 $msg = false;
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 
 <head>
-    
+
     <title>GIEO Gita : Login</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -70,6 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="msg red"><?php echo $msg; ?></div>
 
         <button type="submit">Log In</button>
+
+        <div class="p-reset">
+            <a href="password_reset.php">Forgot Password ? <span>Reset</span></a>
+        </div>
 
     </form>
 </body>

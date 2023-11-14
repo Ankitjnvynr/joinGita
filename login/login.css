@@ -144,3 +144,13 @@ button{
     60%{opacity: 1;}
     100%{opacity: 0;}
 }
+.p-reset{
+    margin-top: 20px;
+}
+.p-reset a{
+    text-decoration: none;
+
+}
+.p-reset a span{
+    border-bottom: 3px solid red;
+}
