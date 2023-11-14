@@ -1,15 +1,15 @@
 <?php
 $statusMsg = '';
 include("partials/_db.php");
-if (!isset($_GET['phoneNumber'])) {
-    header('location:view-profile.php');
+if (!isset($_GET['member'])) {
+    // header('location:view-profile.php');
     exit;
 }
 
 if (isset($_POST['Update'])) {
     $targetDir = "imgs/";
     $updateEmail = $_POST['updateEmail'];
-    $phoneNumber = $_GET['phoneNumber'];
+    $memberId = $_GET['member'];
 
     if (!empty($_FILES["pic"]["name"])) {
         $fileName = basename($_FILES["pic"]["name"]);
@@ -20,8 +20,8 @@ if (isset($_POST['Update'])) {
         $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
         if (in_array($fileType, $allowTypes)) {
             // Upload file to server 
-            $phoneNumber = $_GET['phoneNumber'];
-            $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
+            $memberId = $_GET['member'];
+            $sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result);
             $statusMsg = 'Please select a file to upload.';
@@ -43,21 +43,21 @@ if (isset($_POST['Update'])) {
             $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.';
         }
     } else {
-        $phoneNumber = $_GET['phoneNumber'];
-        $sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
+        $memberId = $_GET['member'];
+        $sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result);
         $statusMsg = 'Please select a file to upload.';
         $fileName = $row['pic'];
     }
     // Insert image file name into database 
-    $usql = "UPDATE `users` SET `email`='$updateEmail', `pic`='$fileName' WHERE `phone` = $phoneNumber";
+    $usql = "UPDATE `users` SET `email`='$updateEmail', `pic`='$fileName' WHERE `hash_id` = '$memberId'";
     $update = mysqli_query($conn, $usql);
     $update = true;
 }
-$phoneNumber = false;
-$phoneNumber = $_GET['phoneNumber'];
-$sql = "SELECT * FROM `users` WHERE `phone` = $phoneNumber";
+$memberId = false;
+$memberId = $_GET['member'];
+$sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 if (!$row) {
@@ -87,6 +87,10 @@ $wing = $row['interest'];
         #card td {
             text-transform: capitalize;
         }
+        .op{
+            opacity: 0;
+            animation: op 5s;
+        }
 
         @media screen and (max-width: 480px) {
             
@@ -94,6 +98,11 @@ $wing = $row['interest'];
                 display: flex;
                 flex-direction: column-reverse !important;
             }
+        }
+        @keyframes op {
+            0%{opacity: 1;}
+            60%{opacity: 1;}
+            100%{opacity: 0;}
         }
     </style>
 </head>
@@ -153,7 +162,7 @@ $wing = $row['interest'];
                     <h4>Update your Profile</h4>
                 </div>
                 <div class="col-md ">
-                    <form action=" <?php echo $_SERVER['PHP_SELF'] . "?phoneNumber=" . $phoneNumber; ?>" method="POST"
+                    <form action=" <?php echo $_SERVER['PHP_SELF'] . "?member=" . $memberId; ?>" method="POST"
                         enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md my-2 ">
@@ -172,7 +181,7 @@ $wing = $row['interest'];
                                 <label for="pic">Upload Profile Photo</label>
                                 <input onchange="fileValidation()" type="file" id="pic" name="pic" class="form-control"
                                     aria-label="picture">
-                                <span class="text-danger">
+                                <span class="text-danger op">
                                     <?php echo $statusMsg; ?>
                                 </span>
                             </div>

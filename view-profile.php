@@ -1,3 +1,10 @@
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $member = md5($_POST['phoneNumber']);
+    header('location:member.php?member='.$member);
+    // echo $member;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +89,7 @@
                 </div>
                 <div class="col-md-8 d-flex align-items-center">
                     <div class="card-body  ">
-                        <form action="member.php" method="GET">
+                        <form action="" method="POST">
                             <h5 class="text-center mb-2">View your Profile</h5>
                             <div class="form-floating mb-3">
                                 <input name="phoneNumber" type="number"  class="form-control" id="floatingInput" placeholder="name@example.com" required>
