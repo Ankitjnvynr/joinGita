@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2023 at 09:16 AM
+-- Generation Time: Nov 14, 2023 at 04:01 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,11 +24,12 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `users2`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `users2` (
   `id` bigint(20) NOT NULL,
+  `hash_id` varchar(255) NOT NULL,
   `country` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -55,20 +56,21 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `users2`
 --
-ALTER TABLE `users`
+ALTER TABLE `users2`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `phone` (`phone`);
+  ADD UNIQUE KEY `phone` (`phone`),
+  ADD UNIQUE KEY `hash_id` (`hash_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `users2`
 --
-ALTER TABLE `users`
+ALTER TABLE `users2`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
