@@ -20,6 +20,16 @@
     .form-floating>label {
       left: 10px;
     }
+
+    
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
@@ -43,7 +53,7 @@
     </div>
   </div>
 
-  <div class="container p-md-4 shadow-lg my-3 rounded " style="padding-bottom: 1%;">
+  <div class="container p-2 p-md-4  shadow-lg  my-3 rounded " style="padding-bottom: 1%;">
     <div class="text-center">
       <h4>
         Already a member - <a href="view-profile.php" class="btn btn-danger p-4 py-2 p"><b>View Profile</b></a>
@@ -68,7 +78,7 @@
 
 
         <div class="form-floating mb-3 col-md ">
-          <input type="text" class="form-control" onchange="onlynumber()" id="phone" name="phone" placeholder="name@example.com" required>
+          <input type="number" class="form-control" id="phone" name="phone"  maxlength="20" placeholder="name@example.com" required>
           <label for="floatingInput">Phone No(without country code)</label>
         </div>
 
@@ -79,7 +89,7 @@
           <label for="floatingInput">Email </label>
         </div>
         <div class="form-floating mb-3 col-md">
-          <input type="text" class="form-control" name="whatsapp" placeholder="name@example.com" required>
+          <input type="number" class="form-control" name="whatsapp" placeholder="name@example.com" required>
           <label for="floatingInput">WhatsApp Number</label>
         </div>
       </div>
@@ -198,10 +208,10 @@
       <div class="row">
 
         <div id="aniversry" class="form-floating mb-3 col-md">
-          
+
         </div>
         <div class="form-floating mb-3 col-md">
-          
+
         </div>
       </div>
       <div class="form-floating mb-3 col-md ">
@@ -222,6 +232,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script src="statelist.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script src="js/script.js"></script>

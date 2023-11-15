@@ -8,24 +8,10 @@ function aniver() {
     var AniverLabel = document.createElement('label');
     var AniverDate = document.createElement('input');
     if (Svalue === "Married") {
-        
-        AniverDate.type = 'date';
-        AniverDate.name='AniverDate';
-        AniverDate.id='AniverDate';
-        AniverDate.classList.add('form-control')
-        console.log(AniverDate)
-        
-        AniverLabel.innerText="Aniversary Date"
-        AniverLabel.setAttribute('for','AniverDate')
-        console.log(AniverLabel)
-        aniversry.appendChild(AniverDate)
-        aniversry.appendChild(AniverLabel)
+        let AniverDate = '<input name="aniver_date" id="anniversary" type="date" class="form-control" required> <label for="anniversary">Anniversary Date</label>';
+        aniversry.innerHTML = AniverDate;
     }else{
-        
-        aniversry.removeChild(AniverLabel)
-        aniversry.removeChild(AniverDate)
-
-        
+        aniversry.innerHTML = "";
     }
 }
 

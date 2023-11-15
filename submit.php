@@ -1,23 +1,22 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "join-gieo";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-// echo "Connected successfully";
+include("partials/_db.php");
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
     // echo "btn is pressed";
+    $phone = $_POST["phone"];
+
+    $checksql = "SELECT phone FROM `users` WHERE `phone` = '$phone' ";
+    $res = mysqli_query($conn,$checksql);
+    $row = mysqli_fetch_assoc($res);
+    $numrows = mysqli_num_rows($res);
+    if($numrows>0){
+      header("location:index.php?dphoneExiit=true");
+      exit;
+    }
+    
+    
     $country = $_POST["country"];
     $name = $_POST["name"];
-    $phone = $_POST["phone"];
     $email = $_POST["email"];
     $whatsapp = $_POST["whatsapp"];
     $dikshit = $_POST["dikshit"];
@@ -31,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     $education = $_POST["education"];
     $dob = $_POST["dob"];
     $message = $_POST["message"];
-    
-
+    $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
+    $hash_id = md5($phone);
     
     
 
     // Use prepared statements to insert data
-    $sql = "INSERT INTO `users`( `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `message`) VALUES ('$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$district','$state','$tehsil','$address','$intrest','$occupation','$education','$dob','$message')";
+    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
 
     try{
         $result = mysqli_query($conn,$sql);
@@ -50,11 +49,14 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     } catch(Exception $err){
       if($err){
+        echo $err;
+        echo "hii";
         header("location:index.php?dphoneExiit=true");
         exit;
       }
     }
 }
 header("location:index.php");
+echo "cher";
 
 $conn->close();

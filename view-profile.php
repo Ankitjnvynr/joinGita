@@ -1,3 +1,10 @@
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $member = md5($_POST['phoneNumber']);
+    header('location:member.php?member='.$member);
+    // echo $member;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,13 +23,21 @@
             position: relative;
 
         }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
-    
+
     <link rel="stylesheet" href="style.css" />
 
-    <title>Document</title>
+    <title>View</title>
 </head>
 
 <body>
@@ -61,7 +76,7 @@
 
 
     <div class="container p-md-4 shadow-lg my-3 rounded " style="padding-bottom: 1%;">
-        <div class="text-center">
+        <div class="text-center pt-2">
             <h4>
                 Not a member - <a href="index.php" class="btn btn-danger p-4 py-2 p"><b>Join Now</b></a>
             </h4>
@@ -69,15 +84,15 @@
         <hr>
         <div class="card mb-3 ">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4 d-flex justify-content-center">
                     <img src="imgs/guruji.webp" class="img-fluid rounded-start m-auto" alt="...">
                 </div>
                 <div class="col-md-8 d-flex align-items-center">
                     <div class="card-body  ">
-                        <form action="member.php" method="GET">
+                        <form action="" method="POST">
                             <h5 class="text-center mb-2">View your Profile</h5>
                             <div class="form-floating mb-3">
-                                <input name="phoneNumber" type="tel" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                                <input name="phoneNumber" type="number"  class="form-control" id="floatingInput" placeholder="name@example.com" required>
                                 <label for="floatingInput">Phone Number</label>
                             </div>
                             <div class="text-center"><button name="submit" type="submit" class="btn btn-danger p-4 py-2 p"><b>View</b></button></div>
