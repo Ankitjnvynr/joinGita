@@ -26,7 +26,7 @@ if (isset($_POST['Update'])) {
             $row = mysqli_fetch_array($result);
             $statusMsg = 'Please select a file to upload.';
             $fileNameUnlink = $row['pic'];
-            if ($fileNameUnlink != 'defaultuser.png') {
+            if ($fileNameUnlink != 'defaultusers.png') {
                 unlink($targetDir . $fileNameUnlink);
             }
             if (move_uploaded_file($_FILES["pic"]["tmp_name"], $targetFilePath)) {
@@ -187,7 +187,7 @@ $wing = $row['interest'];
                             </div>
 
                         </div>
-                        <button type="submit" name="Update" class="btn btn-primary my-1">Update</button>
+                        <button type="submit" name="Update" class="btn btn-danger my-1">Update</button>
                     </form>
                 </div>
             </div>

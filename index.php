@@ -237,13 +237,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/another.js"></script>
-  <style>
-    console.log("jrllo soid");
-    function onlynumber(){
-    let phone = document.getElementById('phone');
-    console.log(phone)
-}
-  </style>
+  
 
   <?php
   if (isset($_GET['dphoneExiit'])) {
