@@ -61,6 +61,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
             width: 900px !important;
             margin-top: 0px !important;
         }
+        .tab1 , .tab2{
+            display: none;
+        }
+        #tab1:checked ~ .tab1{
+            display: flex;
+        }
+        #tab2:checked ~ .tab2{
+            display: flex;
+        }
     </style>
 </head>
 
@@ -68,7 +77,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
-    <div class="container ove my-3 " style="overflow-x:scroll">
+    <input type="radio" name="tabs" id="tab1" checked><input type="radio" name="tabs" id="tab2">
+
+    <div class="container">
+        <div class="row bg-danger-subtle py-2 my-2 rounded " >
+            <div class="col d-flex justify-content-end"><label for="tab1"><span class="btn btn-danger">All Members</span></label></div>
+            <div class="col"><label for="tab2"><span class="btn btn-danger">Masik Parwas</span></label></div>
+        </div>
+    </div>
+    <div class="container ove my-3 tab1" style="overflow-x:scroll">
         <table class="table caption-top shadow rounded" id="myTable">
             <caption>List of users</caption>
             <thead>
@@ -149,6 +166,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
             </tbody>
         </table>
+    </div>
+    <div class="container tab2">
+        Masik Parwas Entry
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
