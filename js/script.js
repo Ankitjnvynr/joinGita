@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('js/countries.json')
       .then((response) => response.json())
       .then((data) => {
-        
         data.countries.forEach((country) => {
           if(ourcountry.includes(country.name)){
               // console.log(country.name)
@@ -19,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
               option.value = country.name;
               option.textContent = country.name;
               option.setAttribute("dataValue", country.id)
+              option.setAttribute("sortname", country.sortname)
               // option.dataValue = country.id;
               countrySelect.appendChild(option);
             }
@@ -26,18 +26,23 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch((error) => console.error('Error:', error));
 
+var url = 'http://www.geoplugin.net/json.gp?jsoncallback=?';
+$.getJSON(url)
+            .success(function(data){
+                var country_code = data.geoplugin_countryCode;
+                var $country = $('#countrySelect');
+                $country.find('option[sortname="'+country_code+'"]').prependTo($country);
+                $country.find('option[sortname=""]').text('--------------');
+                $country.val(country_code);
+            });
   // On country selection change, load respective states
   countrySelect.addEventListener('change', function () {
       stateSelect.disabled = false;
       citySelect.disabled = true;
       stateSelect.innerHTML = '<option value="">-- Select State --</option>';
-
       var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute('dataValue');
       // console.log(selectedCountry);
-
-
       // console.log("hii");
-
       // Fetch states based on the selected country
       fetch('js/states.json')
           .then((response) => response.json())
