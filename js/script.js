@@ -26,14 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch((error) => console.error('Error:', error));
 
-    var url = 'http://www.geoplugin.net/json.gp?jsoncallback=?';
-    $.getJSON(url)
-        .success(function (data) {
-            var country_code = data.geoplugin_countryCode;
-            var $country = $('#countrySelect');
-            $country.find('option[sortname="' + country_code + '"]').prependTo($country);
-            $country.find('option[sortname=""]').text('--------------');
-            $country.val(country_code);
+        countrySelect.addEventListener('change', function () {
 
 
             var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute('dataValue');
