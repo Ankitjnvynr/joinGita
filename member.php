@@ -228,7 +228,12 @@ $wing = $row['interest'];
                     <h3 class="fw-bold">​मासिक प्रवास</h3>
                     <div class="my-2">
                         <img height="400px" class="rounded-3 shadow-lg"
-                            src="imgs/पूज्य महाराज जी के आगामी कार्यकृम_edited.webp" alt="">
+                            src="masik_parwas/<?php 
+                            $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC "; 
+                            $result = mysqli_query($conn, $sql); 
+                            $row = mysqli_fetch_array($result);
+                            echo $row['pic'];
+                            ?>" alt="hjt">
                     </div>
                 </div>
                 <div class="col-md d-flex flex-column justify-content-center align-items-center">

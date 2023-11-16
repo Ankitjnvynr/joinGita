@@ -6,22 +6,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 }
 // ====================creating masik parwas tabel if not exist================
 include("../partials/_db.php");
-$val = mysqli_query($conn, 'select 1 from `masik_parvas`');
-
-if (!$val) {
+try{
     $sql = "CREATE TABLE masik_parvas (
-                    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    pic VARCHAR(30) NOT NULL,
-                    stat VARCHAR(50) DEFAULT '0',
-                    dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                    )";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        echo "table created succesfully";
-    } else {
-        echo "not created ";
-    }
+        id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        pic VARCHAR(30) NOT NULL,
+        stat VARCHAR(50) DEFAULT '0',
+        dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )";
+$result = mysqli_query($conn, $sql);
+if ($result) {
+// echo "table created succesfully";
+} else {
+echo "not created ";
 }
+}catch(exception $err){
+    
+}
+
 $statusMsg = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $targetDir = '../masik_parwas/';
