@@ -272,6 +272,9 @@ try {
                 </div>
             </div>
         </div>
+        <button id="refres" class="btn btn-primary">Refresh
+
+        </button>
         <div id="imgsdiv">
             <div class="row " id="allPics">
                 <?php
@@ -282,7 +285,7 @@ try {
                     <div class="grid-item p-2 position-relative">
                         <input type="hidden" value = ' . $row['id'] . '  >
                         <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
-                        <button data-imgid = "' . $row['id'] . '"  type="button" class="btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
+                        <button id = "del' . $row['id'] . '"  type="button" class="btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
                     </div>
                     ';
                 }
@@ -328,42 +331,45 @@ try {
             let closes = document.getElementsByClassName('btn-close');
             Array.from(closes).forEach((e)=>{
                 e.addEventListener('click',(e)=>{
-                    let iid = e.data("imgid") 
+                    let iid = e.parentNode; 
                     console.log(iid)
                 })
             })
 
 
+            $('#refres').click(function(){
+                console.log("cli")
+                $("#imgsdiv").load(location.href + " #allPics");
+            })
 
-
-            // $.each(closes,function(e,item){
-            //     // console.log(item)
-            //     $(item).click(function() {
-            //         imgid = $(this).data('imgid')
-            //         // console.log(imgid)
-            //         if (confirm("Are you sure to Delete ?")) {
-            //             console.log("yes")
-            //             let imgd = {
-            //                 img: imgid
-            //             }
-            //             $.ajax({
-            //                 url: "_delete.php",
-            //                 type: "GET",
-            //                 data: imgd,
-            //                 success: function(data) {
-            //                     console.log(data)
-            //                     $('#toastmsg').text(data)
-            //                     $("#imgsdiv").load(location.href + " #allPics");
-            //                     toastBootstrap.show()
-            //                 }
-            //             })
-            //         } else {
-            //             console.log("no")
-            //         }
+            $.each(closes,function(e,item){
+                // console.log(item)
+                $(item).click(function() {
+                    imgid = $(this).data('imgid')
+                    // console.log(imgid)
+                    if (confirm("Are you sure to Delete ?")) {
+                        console.log("yes")
+                        let imgd = {
+                            img: imgid
+                        }
+                        $.ajax({
+                            url: "_delete.php",
+                            type: "GET",
+                            data: imgd,
+                            success: function(data) {
+                                console.log(data)
+                                $('#toastmsg').text(data)
+                                // $("#imgsdiv").load(location.href + " #allPics");
+                                toastBootstrap.show()
+                            }
+                        })
+                    } else {
+                        console.log("no")
+                    }
         
     
-            //     })
-            // })
+                })
+            })
 
         })
     </script>
