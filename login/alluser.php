@@ -6,54 +6,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 }
 // ====================creating masik parwas tabel if not exist================
 include("../partials/_db.php");
-try{
+try {
     $sql = "CREATE TABLE masik_parvas (
         id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        pic VARCHAR(30) NOT NULL,
+        pic VARCHAR(100) NOT NULL,
         stat VARCHAR(50) DEFAULT '0',
         dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
-$result = mysqli_query($conn, $sql);
-if ($result) {
-// echo "table created succesfully";
-} else {
-echo "not created ";
-}
-}catch(exception $err){
-    
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        // echo "table created succesfully";
+    } else {
+        // echo "not created ";
+    }
+} catch (exception $err) {
 }
 
-$statusMsg = false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $targetDir = '../masik_parwas/';
-    if (!empty($_FILES["masikimage"]["name"])) {
-        $fileName = basename($_FILES["masikimage"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
-        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-        // Allow certain file formats 
-        $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
-        if (in_array($fileType, $allowTypes)) {
-            // Upload file to server 
-            $statusMsg = 'Please select a file to upload.';
-            if (move_uploaded_file($_FILES["masikimage"]["tmp_name"], $targetFilePath)) {
-                $updateImg = true;
-                if ($updateImg) {
-                    $statusMsg = "Picture Uploaded successfully.";
-                    // Insert image file name into database 
-                    $usql = "INSERT INTO `masik_parvas`( `pic`, `stat`) VALUES ('$fileName','1')";
-                    $update = mysqli_query($conn, $usql);
-                    $update = true;
-                } else {
-                    $statusMsg = "File upload failed, please try again.";
-                }
-            } else {
-                $statusMsg = "Sorry, there was an error uploading your file.";
-            }
-        } else {
-            $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.';
-        }
-    }
-}
+
 
 
 ?>
@@ -145,16 +114,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 scale: 1;
             }
         }
-        .imgs{
-            max-width: 300px;
-            min-width: 200px;
+
+        #allPics {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(150px, 500px));
+            gap: 5px;
+        }
+
+        .imgs {
             width: 100%;
-            margin: auto;
+        }
+
+        .btn-close {
+            top: 5%;
+            right: 5%;
+        }
+
+        .custom-tooltip {
+            --bs-tooltip-bg: rgb(213, 0, 0);
+            --bs-tooltip-color: var(--bs-white);
         }
     </style>
 </head>
 
 <body>
+    <!-- =============================toast=============================== -->
+    <div class="toast align-items-center position-absolute " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div id="toastmsg" class="toast-body">
+                Deleted successfully!
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+
+
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
@@ -260,13 +255,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="card-body  ">
                                 <h3 class="card-title">Upload Masik Parwas Calender</h3>
                                 <p class="card-text">
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form id="imgUpload" action="" method="POST" enctype="multipart/form-data">
                                     <div class="form-floating mb-3">
                                         <input type="file" class="form-control" id="masikimage" name="masikimage" placeholder="name@example.com">
                                         <label for="floatingInput">Upload image</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <button type="submit" class="btn btn-danger">Upload</button> <span class="ml-3 text-danger"><?php echo $statusMsg;  ?></span>
+                                        <button type="submit" class="btn btn-danger">Upload</button> <span id="imguploadStatus" class="ml-3 text-danger fs-6"> </span>
                                     </div>
                                 </form>
                                 </p>
@@ -277,22 +272,100 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         </div>
-        
-        <div class="row ">
-            <?php
-            $sql = "SELECT * FROM `masik_parvas` ";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($result)) {
-                echo '<img class="imgs rounded bg-white m-md-1 my-1" " src="../masik_parwas/'.$row['pic'].'" alt="hello">';
-            }
-            ?>
+        <div id="imgsdiv">
+            <div class="row " id="allPics">
+                <?php
+                $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_array($result)) {
+                    echo '
+                    <div class="grid-item p-2 position-relative">
+                        <input type="hidden" value = ' . $row['id'] . '  >
+                        <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
+                        <button data-imgid = "' . $row['id'] . '"  type="button" class="btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
+                    </div>
+                    ';
+                }
+                ?>
+
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script>
         let table = new DataTable('#myTable');
+    </script>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        const toastElList = document.querySelectorAll('.toast')[0]
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList)
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#imgUpload').on("submit", function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "_masik-upload.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        $('#imguploadStatus').html(data);
+                        $('#masikimage').val('');
+                        $("#imgsdiv").load(location.href + " #allPics");
+                    }
+                })
+            })
+
+            let closes = document.getElementsByClassName('btn-close');
+            Array.from(closes).forEach((e)=>{
+                e.addEventListener('click',(e)=>{
+                    let iid = e.data("imgid") 
+                    console.log(iid)
+                })
+            })
+
+
+
+
+            // $.each(closes,function(e,item){
+            //     // console.log(item)
+            //     $(item).click(function() {
+            //         imgid = $(this).data('imgid')
+            //         // console.log(imgid)
+            //         if (confirm("Are you sure to Delete ?")) {
+            //             console.log("yes")
+            //             let imgd = {
+            //                 img: imgid
+            //             }
+            //             $.ajax({
+            //                 url: "_delete.php",
+            //                 type: "GET",
+            //                 data: imgd,
+            //                 success: function(data) {
+            //                     console.log(data)
+            //                     $('#toastmsg').text(data)
+            //                     $("#imgsdiv").load(location.href + " #allPics");
+            //                     toastBootstrap.show()
+            //                 }
+            //             })
+            //         } else {
+            //             console.log("no")
+            //         }
+        
+    
+            //     })
+            // })
+
+        })
     </script>
 </body>
 
