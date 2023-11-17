@@ -5,7 +5,9 @@ echo false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $targetDir = '../masik_parwas/';
     if (!empty($_FILES["masikimage"]["name"])) {
+        $t=time();
         $fileName = basename($_FILES["masikimage"]["name"]);
+        $fileName = $t.$fileName;
         
         $targetFilePath = $targetDir . $fileName;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);

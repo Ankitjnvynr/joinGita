@@ -9,7 +9,7 @@ include("../partials/_db.php");
 try {
     $sql = "CREATE TABLE masik_parvas (
         id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        pic VARCHAR(100) NOT NULL,
+        pic TEXT NOT NULL,
         stat VARCHAR(50) DEFAULT '0',
         dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
@@ -161,60 +161,80 @@ try {
             <div class="col"><label for="tab2"><span class="btn btn-danger">Masik Parwas</span></label></div>
         </div>
     </div>
-    <div class="container ove my-3 tab1 intro" style="overflow-x:scroll">
-        <table class="table caption-top shadow rounded" id="myTable">
-            <caption>List of users</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Sr.</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Whatsapp</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Dikshit</th>
-                    <th scope="col">Marital_Status</th>
-                    <th scope="col">State</th>
-                    <th scope="col">District</th>
-                    <th scope="col">Tehsil</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Intrest_Field</th>
-                    <th scope="col">Occupation</th>
-                    <th scope="col">Education</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Aniversary</th>
-                    <th scope="col">Message</th>
-
-                </tr>
-            </thead>
-            <tbody>
+    <div class="container ove my-3 tab1 intro">
+        <div class="row">
+            <div class="col-md-12 my-4">
 
                 <?php
+                if (isset($_SESSION['message'])) {
+                    echo "<h4>" . $_SESSION['message'] . "</h4>";
+                    unset($_SESSION['message']);
+                }
+                ?>
+                <div class="card">
+                    <form action="code.php" method="POST" enctype="multipart/form-data">
+                    <div class="card-body d-flex ">
+                            <input type="file" name="import_file" class="form-control m-2 " />
+                            <button type="submit" name="save_excel_data" class="btn btn-primary m-2">Import</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div style="overflow-x:scroll">
+            <table class="table caption-top shadow rounded" id="myTable">
+                <caption>List of users</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Sr.</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Whatsapp</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Dikshit</th>
+                        <th scope="col">Marital_Status</th>
+                        <th scope="col">State</th>
+                        <th scope="col">District</th>
+                        <th scope="col">Tehsil</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Intrest_Field</th>
+                        <th scope="col">Occupation</th>
+                        <th scope="col">Education</th>
+                        <th scope="col">DOB</th>
+                        <th scope="col">Aniversary</th>
+                        <th scope="col">Message</th>
 
-                $sr = 0;
+                    </tr>
+                </thead>
+                <tbody>
 
-                $sql = "SELECT * FROM `users` ";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($result)) {
-                    $sr++;
-                    $country = $row['country'];
-                    $name = $row['name'];
-                    $phone = $row['phone'];
-                    $whatsapp = $row['whtsapp'];
-                    $email = $row['email'];
-                    $dikshit = $row['dikshit'];
-                    $marital_status = $row['marital_status'];
-                    $state = $row['state'];
-                    $district = $row['district'];
-                    $tehsil = $row['tehsil'];
-                    $address = $row['address'];
-                    $wing = $row['interest'];
-                    $occupation = $row['occupation'];
-                    $education = $row['education'];
-                    $dob = $row['dob'];
-                    $aniver_date = $row['aniver_date'];
-                    $message = $row['message'];
-                    echo '
+                    <?php
+
+                    $sr = 0;
+
+                    $sql = "SELECT * FROM `users` ";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_array($result)) {
+                        $sr++;
+                        $country = $row['country'];
+                        $name = $row['name'];
+                        $phone = $row['phone'];
+                        $whatsapp = $row['whtsapp'];
+                        $email = $row['email'];
+                        $dikshit = $row['dikshit'];
+                        $marital_status = $row['marital_status'];
+                        $state = $row['state'];
+                        $district = $row['district'];
+                        $tehsil = $row['tehsil'];
+                        $address = $row['address'];
+                        $wing = $row['interest'];
+                        $occupation = $row['occupation'];
+                        $education = $row['education'];
+                        $dob = $row['dob'];
+                        $aniver_date = $row['aniver_date'];
+                        $message = $row['message'];
+                        echo '
                             <tr>
                             <th scope="row">' . $sr . '</th>
                             <td>' . $country . '</td>
@@ -236,12 +256,13 @@ try {
                             <td class="w-150" >' . $message . '</td>
                             </tr>
                             ';
-                }
-                ?>
+                    }
+                    ?>
 
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="container tab2 intro  ">
         <div class="row m-auto">
@@ -272,9 +293,7 @@ try {
                 </div>
             </div>
         </div>
-        <button id="refres" class="btn btn-primary">Refresh
 
-        </button>
         <div id="imgsdiv">
             <div class="row " id="allPics">
                 <?php
@@ -285,7 +304,7 @@ try {
                     <div class="grid-item p-2 position-relative">
                         <input type="hidden" value = ' . $row['id'] . '  >
                         <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
-                        <button id = "del' . $row['id'] . '"  type="button" class="btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
+                        <button id = "' . $row['id'] . '"  type="button" class="btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
                     </div>
                     ';
                 }
@@ -329,24 +348,20 @@ try {
             })
 
             let closes = document.getElementsByClassName('btn-close');
-            Array.from(closes).forEach((e)=>{
-                e.addEventListener('click',(e)=>{
-                    let iid = e.parentNode; 
-                    console.log(iid)
-                })
-            })
+            // Array.from(closes).forEach((e)=>{
+            //     e.addEventListener('click',(e)=>{
+            //         let iid = e.parentNode; 
+            //         console.log(iid)
+            //     })
+            // })
 
 
-            $('#refres').click(function(){
-                console.log("cli")
-                $("#imgsdiv").load(location.href + " #allPics");
-            })
 
-            $.each(closes,function(e,item){
-                // console.log(item)
-                $(item).click(function() {
-                    imgid = $(this).data('imgid')
-                    // console.log(imgid)
+            $.each(closes, function(e, item) {
+                console.log(item)
+                $(item).click(function(e) {
+                    imgid = $(this).attr('id');
+                    console.log(imgid)
                     if (confirm("Are you sure to Delete ?")) {
                         console.log("yes")
                         let imgd = {
@@ -359,15 +374,15 @@ try {
                             success: function(data) {
                                 console.log(data)
                                 $('#toastmsg').text(data)
-                                // $("#imgsdiv").load(location.href + " #allPics");
-                                toastBootstrap.show()
+                                toastBootstrap.show();
+                                location.reload(true);
                             }
                         })
                     } else {
                         console.log("no")
                     }
-        
-    
+
+
                 })
             })
 
