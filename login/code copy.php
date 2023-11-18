@@ -1,4 +1,13 @@
-
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
         <?php
 
         use SimpleExcel\SimpleExcel;
@@ -15,14 +24,19 @@
                 $excel->parser->loadFile($_FILES['import_file']['name']);
 
                 $foo = $excel->parser->getField();
-                // echo var_dump($foo);
-                $datalen = sizeof($foo);
-                // echo $datalen;
-                echo count($foo)-1;
+                echo var_dump(md5($foo[1][4]));
+
                 $count = 1;
-                while (count($foo)-1 > $count) {
-                    echo "<br>".$count ."<br>";
-                    $country = $foo[$count][2];
+
+
+
+
+                while (count($foo) > $count) {
+                    echo "<tr>";
+                    echo "<td>";
+                    echo ($roll = $foo[$count][0]);
+
+                    $country = $foo[$count][2] ;
                     $name = $foo[$count][3];
                     $phone = $foo[$count][4];
                     $email = $foo[$count][5];
@@ -40,8 +54,8 @@
                     $message = $foo[$count][17];
                     $aniver_date = $foo[$count][18];
                     $hash_id = md5($phone);
-                    echo $name;
-                    $count++;
+
+
 
                     $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
 
@@ -53,20 +67,25 @@
                             // exit;
                         }
                     } catch (Exception $err) {
-                        echo var_dump($err);
-                        echo "not uploaded";
-
                         if ($err) {
+                            echo $err;
                             echo "hii";
                             // header("location:index.php?dphoneExiit=true");
                             exit;
                         }
                     }
-                    
+                    $count++;
                 }
 
                 // echo "<script>window.location.href='index.php';</script>";
 
+
+
+
+
+
             }
         }
         ?>
+    </tbody>
+</table>

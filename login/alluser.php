@@ -161,7 +161,7 @@ try {
             <div class="col"><label for="tab2"><span class="btn btn-danger">Masik Parwas</span></label></div>
         </div>
     </div>
-    <div class="container ove my-3 tab1 intro">
+    <div class="container ove my-3 tab1 <?php if($_SESSION['intro']){echo "intro";} ?> ">
         <div class="row">
             <div class="col-md-12 my-4">
 
@@ -264,7 +264,7 @@ try {
             </table>
         </div>
     </div>
-    <div class="container tab2 intro  ">
+    <div class="container tab2  <?php if($_SESSION['intro']){echo "intro";} ?> ">
         <div class="row m-auto">
             <div class="col-md m-auto">
                 <div class="card mb-3 ">
@@ -342,11 +342,22 @@ try {
                     success: function(data) {
                         $('#imguploadStatus').html(data);
                         $('#masikimage').val('');
-                        $("#imgsdiv").load(location.href + " #allPics");
+                        // $("#imgsdiv").load(location.href + " #allPics");
+                        $.ajax({
+                            url:'_loadimgs.php',
+                            success:function(data){
+                                $('#allPics').html(data);
+                                let loaded = true;
+                            },
+                        });
                     }
-                })
-            })
+                });
+            });
 
+            
+
+        })
+        if(loaded){
             let closes = document.getElementsByClassName('btn-close');
             // Array.from(closes).forEach((e)=>{
             //     e.addEventListener('click',(e)=>{
@@ -385,9 +396,11 @@ try {
 
                 })
             })
+            
+        }
 
-        })
     </script>
 </body>
 
 </html>
+<?php $_SESSION['intro'] = false; ?> 

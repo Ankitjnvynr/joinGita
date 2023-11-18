@@ -7,8 +7,8 @@ while ($row = mysqli_fetch_array($result)) {
     echo '
                     <div class="grid-item p-2 position-relative">
                         <!-- <input type="disable" value = "' . $row['id'] . '"> -->
-                        <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
                         <button id = '. $row["id"] . '"  type="button" class="btn-close myacisdjfs;l position-absolute" data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Close"></button>
+                        <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
                     </div>
                     ';
 }
