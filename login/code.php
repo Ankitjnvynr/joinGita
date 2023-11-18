@@ -20,7 +20,7 @@
                 // echo $datalen;
                 echo count($foo)-1;
                 $count = 1;
-                while (count($foo)-1 > $count) {
+                while (count($foo) > $count) {
                     echo "<br>".$count ."<br>";
                     $country = $foo[$count][2];
                     $name = $foo[$count][3];

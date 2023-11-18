@@ -1,2 +1,0 @@
-"id";"hash_id";"country";"name";"phone";"whtsapp";"email";"dikshit";"marital_status";"state";"district";"tehsil";"address";"interest";"occupation";"education";"dob";"aniver_date";"message";"pic";"dt"
-<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> TypeError: PhpMyAdmin\Encoding::convertString(): Return value must be of type string, bool returned</div></body></html>
