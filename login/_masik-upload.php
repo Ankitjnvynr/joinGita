@@ -20,19 +20,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                 $updateImg = true;
                 if ($updateImg) {
-                    echo "Picture Uploaded successfully.";
+                    echo "<span class='op'> Picture Uploaded successfully.</span>";
                     // Insert image file name into database 
                     $usql = "INSERT INTO `masik_parvas`( `pic`, `stat`) VALUES ('$fileName','1')";
                     $update = mysqli_query($conn, $usql);
                     $update = true;
                 } else {
-                    echo "File upload failed, please try again.";
+                    echo "<span class='op'> File upload failed, please try again. </span>";
                 }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                echo "<span class='op'> Sorry, there was an error uploading your file. </span>";
             }
         } else {
-            echo 'Sorry, it is not JPG, JPEG, PNG, or GIF files.';
+            echo '<span class="op"> Sorry, it is not JPG, JPEG, PNG, or GIF files. </span>';
         }
     }
 }

@@ -116,8 +116,9 @@ try {
         }
 
         #allPics {
+            /* border: 2px solid purple; */
             display: grid;
-            grid-template-columns: repeat(5, minmax(150px, 500px));
+            grid-template-columns: repeat(5, minmax(20%, 350px));
             gap: 5px;
         }
 
@@ -134,17 +135,26 @@ try {
             --bs-tooltip-bg: rgb(213, 0, 0);
             --bs-tooltip-color: var(--bs-white);
         }
+        .op{
+            opacity: 0;
+            animation: op 5s;
+        }
+        @keyframes op {
+            0%{opacity: 1;}
+            60%{opacity: 1;}
+            100%{opacity: 0;}
+        }
     </style>
 </head>
 
 <body>
     <!-- =============================toast=============================== -->
-    <div class="toast align-items-center position-absolute " role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div id="toastmsg" class="toast-body">
-                Deleted successfully!
+                Deleted Successfully!
             </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 
@@ -287,7 +297,7 @@ try {
                                         <label for="floatingInput">Upload image</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <button type="submit" class="btn btn-danger">Upload</button> <span id="imguploadStatus" class="ml-3 text-danger fs-6"> </span>
+                                        <button type="submit" class="btn btn-danger">Upload</button> <span id="imguploadStatus" class="ml-3 text-danger fs-6 "> </span>
                                     </div>
                                 </form>
                                 </p>
@@ -326,14 +336,54 @@ try {
         let table = new DataTable('#myTable');
     </script>
     <script>
+        function tt(){
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-
+            }
+        tt();
         const toastElList = document.querySelectorAll('.toast')[0]
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList)
     </script>
     <script>
+        function deleteScript() {
+            let closes = document.getElementsByClassName('btn-close');
+            // console.log(closes)
+            
+            $.each(closes, function(e, item) {
+                // console.log(item)
+                $(item).click(function(e) {
+                    imgid = $(this).attr('id');
+                    // console.log(imgid)
+                    if (confirm("Are you sure to Delete ?")) {
+                        // console.log("yes")
+                        let imgd = {
+                            img: imgid
+                        }
+                        $.ajax({
+                            url: "_delete.php",
+                            type: "GET",
+                            data: imgd,
+                            success: function(data) {
+                                console.log(data)
+                                $('#toastmsg').text(data)
+                                toastBootstrap.show();
+                                $('#imgsdiv').load(' #allPics',function(){
+                                
+                                    // Code to run after content is loaded
+                                    tt();
+                                    deleteScript();
+                                });
+                            }
+                        })
+                    } else {
+                        console.log("no")
+                    }
+                })
+            })
+        }
+
         $(document).ready(function() {
+            deleteScript()
             $('#imgUpload').on("submit", function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
@@ -352,7 +402,12 @@ try {
                             url: '_loadimgs.php',
                             success: function(data) {
                                 $('#allPics').html(data);
-                                let loaded = true;
+                                $('#imgsdiv').load(' #allPics',function() {
+                                    // Code to run after content is loaded
+                                    tt();
+                                    deleteScript();
+                                });
+
                             },
                         });
                     }
@@ -362,47 +417,16 @@ try {
 
 
         })
-        if (loaded) {
-            let closes = document.getElementsByClassName('btn-close');
-            // Array.from(closes).forEach((e)=>{
-            //     e.addEventListener('click',(e)=>{
-            //         let iid = e.parentNode; 
-            //         console.log(iid)
-            //     })
-            // })
+
+        // Array.from(closes).forEach((e)=>{
+        //     e.addEventListener('click',(e)=>{
+        //         let iid = e.parentNode; 
+        //         console.log(iid)
+        //     })
+        // })
 
 
-
-            $.each(closes, function(e, item) {
-                console.log(item)
-                $(item).click(function(e) {
-                    imgid = $(this).attr('id');
-                    console.log(imgid)
-                    if (confirm("Are you sure to Delete ?")) {
-                        console.log("yes")
-                        let imgd = {
-                            img: imgid
-                        }
-                        $.ajax({
-                            url: "_delete.php",
-                            type: "GET",
-                            data: imgd,
-                            success: function(data) {
-                                console.log(data)
-                                $('#toastmsg').text(data)
-                                toastBootstrap.show();
-                                location.reload(true);
-                            }
-                        })
-                    } else {
-                        console.log("no")
-                    }
-
-
-                })
-            })
-
-        }
+        
     </script>
 </body>
 
