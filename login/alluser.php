@@ -319,7 +319,7 @@ try {
                     <div class="grid-item p-2 position-relative">
                         <input type="hidden" value = ' . $row['id'] . '  >
                         <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
-                        <button id = "' . $row['id'] . '"  type="button" class="btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
+                        <button id = "' . $row['id'] . '"  type="button" class="cls btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
                     </div>
                     ';
                 }
@@ -346,7 +346,7 @@ try {
     </script>
     <script>
         function deleteScript() {
-            let closes = document.getElementsByClassName('btn-close');
+            let closes = document.getElementsByClassName('cls');
             // console.log(closes)
             
             $.each(closes, function(e, item) {
