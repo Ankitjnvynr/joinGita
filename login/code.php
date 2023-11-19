@@ -1,72 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+  
 
-        <?php
+<?php
+use SimpleExcel\SimpleExcel;
 
-        use SimpleExcel\SimpleExcel;
+if(isset($_POST['import'])){
 
-        include("../partials/_db.php");
+if(move_uploaded_file($_FILES['excel_file']['tmp_name'],$_FILES['excel_file']['name'])){
+    require_once('SimpleExcel/SimpleExcel.php'); 
+    
+    $excel = new SimpleExcel('csv');                  
+    
+    $excel->parser->loadFile($_FILES['excel_file']['name']);           
+    
+    $foo = $excel->parser->getField(); 
 
-        if (isset($_POST['save_excel_data'])) {
+    $count = 1;
+  
+    include("../partials/_db.php");
 
-            if (move_uploaded_file($_FILES['import_file']['tmp_name'], $_FILES['import_file']['name'])) {
-                require_once('SimpleExcel/SimpleExcel.php');
+//echo "Connected successfully";
 
-                $excel = new SimpleExcel('csv');
 
-                $excel->parser->loadFile($_FILES['import_file']['name']);
+    while(count($foo)>$count){
+        $country = $foo[$count][2];
+        $name = $foo[$count][3];
+        $phone = $foo[$count][4];
+        $whatsapp = $foo[$count][5];
+        $email = $foo[$count][6];
+        $dikshit = $foo[$count][7];
+        $married = $foo[$count][8];
+        $state = $foo[$count][9];
+        $district = $foo[$count][10];
+        $tehsil = $foo[$count][11];
+        $address = $foo[$count][12];
+        $intrest = $foo[$count][13];
+        $occupation = $foo[$count][14];
+        $education = $foo[$count][15];
+        $dob = $foo[$count][16];
+        $aniver_date = $foo[$count][17];
+        $message = $foo[$count][18];
+        
+        $hash_id = md5($phone);
 
-                $foo = $excel->parser->getField();
-                // echo var_dump($foo);
-                $datalen = sizeof($foo);
-                // echo $datalen;
-                echo count($foo)-1;
-                $count = 1;
-                while (count($foo) > $count) {
-                    echo "<br>".$count ."<br>";
-                    $country = $foo[$count][2];
-                    $name = $foo[$count][3];
-                    $phone = $foo[$count][4];
-                    $email = $foo[$count][5];
-                    $whatsapp = $foo[$count][6];
-                    $dikshit = $foo[$count][7];
-                    $married = $foo[$count][8];
-                    $state = $foo[$count][9];
-                    $district = $foo[$count][10];
-                    $tehsil = $foo[$count][11];
-                    $address = $foo[$count][12];
-                    $intrest = $foo[$count][13];
-                    $occupation = $foo[$count][14];
-                    $education = $foo[$count][15];
-                    $dob = $foo[$count][16];
-                    $message = $foo[$count][17];
-                    $aniver_date = $foo[$count][18];
-                    $hash_id = md5($phone);
-                    echo $name;
-                    $count++;
+        $query = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
+        
+        $result = mysqli_query($conn,$query);
+        
+        $count++;
+    }
+    if($result){
+        echo "Done, $count rows inserted";
+    }
 
-                    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
+    // echo "<script>window.location.href='index.php';</script>";
+}
+}
+?>
 
-                    try {
-                        $result = mysqli_query($conn, $sql);
-                        if ($result) {
-                            echo "Please Wait..........";
-                            // header("location:view-profile.php?joined=true");
-                            // exit;
-                        }
-                    } catch (Exception $err) {
-                        echo var_dump($err);
-                        echo "not uploaded";
-
-                        if ($err) {
-                            echo "hii";
-                            // header("location:index.php?dphoneExiit=true");
-                            exit;
-                        }
-                    }
-                    
-                }
-
-                // echo "<script>window.location.href='index.php';</script>";
-
-            }
-        }
-        ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

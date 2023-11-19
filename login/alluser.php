@@ -161,7 +161,9 @@ try {
             <div class="col"><label for="tab2"><span class="btn btn-danger">Masik Parwas</span></label></div>
         </div>
     </div>
-    <div class="container ove my-3 tab1 <?php if($_SESSION['intro']){echo "intro";} ?> ">
+    <div class="container ove my-3 tab1 <?php if ($_SESSION['intro']) {
+                                            echo "intro";
+                                        } ?> ">
         <div class="row">
             <div class="col-md-12 my-4">
 
@@ -173,9 +175,10 @@ try {
                 ?>
                 <div class="card">
                     <form action="code.php" method="POST" enctype="multipart/form-data">
-                    <div class="card-body d-flex ">
-                            <input type="file" name="import_file" class="form-control m-2 " />
-                            <button type="submit" name="save_excel_data" class="btn btn-primary m-2">Import</button>
+                        <div class="card-body d-flex ">
+                            <input type="file" name="excel_file" class="form-control" accept=".csv">
+                            <input type="submit" name="import" class="btn btn-success mx-2" value="Import">
+                            <a href="GIEO_member_upload_format.csv" class="btn btn-primary">Download_format</a>
                         </div>
                     </form>
                 </div>
@@ -213,7 +216,7 @@ try {
 
                     $sr = 0;
 
-                    $sql = "SELECT * FROM `users` ";
+                    $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_array($result)) {
                         $sr++;
@@ -264,7 +267,9 @@ try {
             </table>
         </div>
     </div>
-    <div class="container tab2  <?php if($_SESSION['intro']){echo "intro";} ?> ">
+    <div class="container tab2  <?php if ($_SESSION['intro']) {
+                                    echo "intro";
+                                } ?> ">
         <div class="row m-auto">
             <div class="col-md m-auto">
                 <div class="card mb-3 ">
@@ -344,8 +349,8 @@ try {
                         $('#masikimage').val('');
                         // $("#imgsdiv").load(location.href + " #allPics");
                         $.ajax({
-                            url:'_loadimgs.php',
-                            success:function(data){
+                            url: '_loadimgs.php',
+                            success: function(data) {
                                 $('#allPics').html(data);
                                 let loaded = true;
                             },
@@ -354,10 +359,10 @@ try {
                 });
             });
 
-            
+
 
         })
-        if(loaded){
+        if (loaded) {
             let closes = document.getElementsByClassName('btn-close');
             // Array.from(closes).forEach((e)=>{
             //     e.addEventListener('click',(e)=>{
@@ -396,11 +401,10 @@ try {
 
                 })
             })
-            
-        }
 
+        }
     </script>
 </body>
 
 </html>
-<?php $_SESSION['intro'] = false; ?> 
+<?php $_SESSION['intro'] = false; ?>
