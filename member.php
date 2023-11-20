@@ -91,6 +91,11 @@ $wing = $row['interest'];
             opacity: 0;
             animation: op 5s;
         }
+        @keyframes op {
+            0%{opacity: 1;}
+            60%{opacity: 1;}
+            100%{opacity: 0;}
+        }
 
         @media screen and (max-width: 480px) {
             
@@ -98,11 +103,6 @@ $wing = $row['interest'];
                 display: flex;
                 flex-direction: column-reverse !important;
             }
-        }
-        @keyframes op {
-            0%{opacity: 1;}
-            60%{opacity: 1;}
-            100%{opacity: 0;}
         }
     </style>
 </head>

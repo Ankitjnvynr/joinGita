@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 session_start();
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
+                $_SESSION['intro'] = true;
                 header("location: alluser.php");
                 exit;
             } else {
