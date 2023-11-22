@@ -1,4 +1,5 @@
-
+anotherJs =()=>{
+    
 
 
 let smarried = document.querySelector('#married');
@@ -15,3 +16,5 @@ function aniver() {
     }
 }
 
+
+}
