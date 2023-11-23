@@ -1,40 +1,50 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    #lan-eng::selection~#main {
+      background: red;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="container">
-    <select name="country" id="country" class="inputCombo">
-        <option sortname="">Select an item...</option>
-        <option sortname="AF">Afghanistan</option>
-        <option sortname="AL">Albania</option>
-        <option sortname="DZ">Algeria</option>
-        <option sortname="GB">United Kingdom</option>
-        <option sortname="US">United States</option>
-        <option sortname="IN">India</option>
+  <div class="container" id="main">
+    <select width="50px" class="form-control" id="lang">
+      <option value="ENG" selected>ENG</option>
+      <option value="HIN">HIN</option>
     </select>
   </div>
+  
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+
+
+
+<div class="container">
+  <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php"></form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="js/formLang.js"></script>
   <script>
-    var url = 'http://www.geoplugin.net/json.gp?jsoncallback=?';
-
-    $(document).ready(function() {
-        $.getJSON(url)
-            .success(function(data){
-                var country_code = data.geoplugin_countryCode;
-                console.log()
-                var $country = $('#country');
-                $country.find('option[sortname="'+country_code+'"]').prependTo($country);
-                $country.find('option[sortname=""]').text('--------------');
-                $country.val(country_code);
-            });
-    });
     
   </script>
-
 </body>
-</html> 
+
+</html>
