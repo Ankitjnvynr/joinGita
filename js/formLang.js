@@ -74,7 +74,7 @@ var lang = document.getElementById("lang");
 var hin = document.getElementById("hin");
 var eng = document.getElementById("eng");
 var joinForm = document.getElementById("joinForm");
-let body = document.body
+
 
 
 if (lang.value == 'ENG') {
