@@ -433,6 +433,7 @@ try {
             deleteMember = () => {
                 $.each(delList, function(e, item) {
                     $(item).click(function(e) {
+                        console.log(item)
                         mid = $(this).attr('id');
                         mid = parseInt(mid.slice(4))
                         data = {
@@ -448,7 +449,9 @@ try {
                                     alert(data)
                                     $('#tble').load(' #myTable', function() {
                                     // Code to run after content is loaded
+                                    
                                     deleteMember()
+                                    console.log("hello world");
                                 });
                                     
                                 }
