@@ -1,4 +1,4 @@
-scs = ()=>{
+
   let ourcountry = [
     "Australia",
     "Canada",
@@ -87,4 +87,4 @@ scs = ()=>{
       .catch((error) => console.error("Error:", error));
   });
   
-}
+

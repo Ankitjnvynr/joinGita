@@ -1,4 +1,4 @@
-anotherJs =()=>{
+
     
 
 
@@ -17,4 +17,3 @@ function aniver() {
 }
 
 
-}
