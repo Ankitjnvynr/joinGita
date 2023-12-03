@@ -135,14 +135,24 @@ try {
             --bs-tooltip-bg: rgb(213, 0, 0);
             --bs-tooltip-color: var(--bs-white);
         }
-        .op{
+
+        .op {
             opacity: 0;
             animation: op 5s;
         }
+
         @keyframes op {
-            0%{opacity: 1;}
-            60%{opacity: 1;}
-            100%{opacity: 0;}
+            0% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -163,7 +173,7 @@ try {
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
-    <input type="radio" name="tabs" id="tab1"><input type="radio" name="tabs" id="tab2" checked>
+    <input type="radio" name="tabs" id="tab1" checked><input type="radio" name="tabs" id="tab2">
 
     <div class="container">
         <div class="row bg-danger-subtle py-2 my-2 rounded ">
@@ -194,7 +204,7 @@ try {
                 </div>
             </div>
         </div>
-        <div style="overflow-x:scroll">
+        <div id="tble" style="overflow-x:scroll">
             <table class="table caption-top shadow rounded" id="myTable">
                 <caption>List of users</caption>
                 <thead>
@@ -217,6 +227,7 @@ try {
                         <th scope="col">DOB</th>
                         <th scope="col">Aniversary</th>
                         <th scope="col">Message</th>
+                        <th scope="col">Action</th>
 
                     </tr>
                 </thead>
@@ -267,6 +278,7 @@ try {
                             <td>' . $dob . '</td>
                             <td>' . $aniver_date . '</td>
                             <td class="w-150" >' . $message . '</td>
+                            <td><span id="list' . $row['id'] . ' " class="listdel btn btndanger"><img width="20px" src="https://icon-library.com/images/delete-icon/delete-icon-13.jpg" alt="delete"></span></td>
                             </tr>
                             ';
                     }
@@ -276,6 +288,7 @@ try {
                 </tbody>
             </table>
         </div>
+
     </div>
     <div class="container tab2  <?php if ($_SESSION['intro']) {
                                     echo "intro";
@@ -336,10 +349,10 @@ try {
         let table = new DataTable('#myTable');
     </script>
     <script>
-        function tt(){
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-            }
+        function tt() {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        }
         tt();
         const toastElList = document.querySelectorAll('.toast')[0]
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList)
@@ -348,7 +361,7 @@ try {
         function deleteScript() {
             let closes = document.getElementsByClassName('cls');
             // console.log(closes)
-            
+
             $.each(closes, function(e, item) {
                 // console.log(item)
                 $(item).click(function(e) {
@@ -367,8 +380,8 @@ try {
                                 console.log(data)
                                 $('#toastmsg').text(data)
                                 toastBootstrap.show();
-                                $('#imgsdiv').load(' #allPics',function(){
-                                
+                                $('#imgsdiv').load(' #allPics', function() {
+
                                     // Code to run after content is loaded
                                     tt();
                                     deleteScript();
@@ -402,7 +415,7 @@ try {
                             url: '_loadimgs.php',
                             success: function(data) {
                                 $('#allPics').html(data);
-                                $('#imgsdiv').load(' #allPics',function() {
+                                $('#imgsdiv').load(' #allPics', function() {
                                     // Code to run after content is loaded
                                     tt();
                                     deleteScript();
@@ -415,18 +428,42 @@ try {
             });
 
 
-
+            let delList = document.querySelectorAll('.listdel')
+            // console.log(delList)
+            deleteMember = () => {
+                $.each(delList, function(e, item) {
+                    $(item).click(function(e) {
+                        console.log(item)
+                        mid = $(this).attr('id');
+                        mid = parseInt(mid.slice(4))
+                        data = {
+                            'mid': mid
+                        }
+                        if (confirm("Are you sure to delete ?")) {
+                            $.ajax({
+                                url: '_delmember.php',
+                                type: 'POST',
+                                data: data,
+                                success: (data) => {
+                                    // console.log(data)
+                                    alert(data)
+                                    $('#tble').load(' #myTable', function() {
+                                    // Code to run after content is loaded
+                                    
+                                    deleteMember()
+                                    console.log("hello world");
+                                });
+                                    
+                                }
+                            })
+                        } else {
+                            console.log("no")
+                        }
+                    })
+                })
+            }
+            deleteMember()
         })
-
-        // Array.from(closes).forEach((e)=>{
-        //     e.addEventListener('click',(e)=>{
-        //         let iid = e.parentNode; 
-        //         console.log(iid)
-        //     })
-        // })
-
-
-        
     </script>
 </body>
 

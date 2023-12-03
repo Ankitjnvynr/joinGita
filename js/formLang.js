@@ -7,7 +7,7 @@ let hindiForm = [`
           </select>
 `, `
             <select name="intrest" class="form-control" data-testid="select-trigger" required="" aria-required="true" aria-invalid="false" required>
-            <option value="" disabled="" selected="">Interested Field</option>
+            <option value="" disabled="" selected="">--- इंट्रेस्टेड फ़ील्ड्स ---</option>
             <option value="श्री कृष्ण कृपा सेवा समिति" aria-selected="false">श्री कृष्ण कृपा सेवा समिति</option>
             <option value="जीओ गीता" aria-selected="false">जीओ गीता</option>
             <option value="सेवा समूह" aria-selected="false">सेवा समूह</option>
@@ -74,7 +74,7 @@ var lang = document.getElementById("lang");
 var hin = document.getElementById("hin");
 var eng = document.getElementById("eng");
 var joinForm = document.getElementById("joinForm");
-let body = document.body
+
 
 
 if (lang.value == 'ENG') {
