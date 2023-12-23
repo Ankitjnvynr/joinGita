@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to load a track based on its index
     function loadTrack(index) {
       const selectedTrack = musicItemsData[index];
-      audioPlayer.src = selectedTrack.src;
+      // audioPlayer.src = selectedTrack.src;
       trackArt.style.backgroundImage = `url(${selectedTrack.cover})`;
       trackName.textContent = selectedTrack.name;
       trackArtist.textContent = "Track Artist"; // Replace with actual track artist
@@ -108,14 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Event listeners
-    audioPlayer.addEventListener('timeupdate', function () {
-      updateTimers();
-      updateSeekSlider();
-    });
+    // audioPlayer.addEventListener('timeupdate', function () {
+    //   updateTimers();
+    //   updateSeekSlider();
+    // });
 
-    audioPlayer.addEventListener('ended', function () {
-      nextTrack();
-    });
+    // audioPlayer.addEventListener('ended', function () {
+    //   nextTrack();
+    // });
 
     playPauseBtn.addEventListener('click', playpauseTrack);
     seekSlider.addEventListener('input', seekTo);
