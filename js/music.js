@@ -60,7 +60,7 @@ function seekTo() {
     // Calculate the seek position by the
     // percentage of the seek slider 
     // and get the relative duration to the track
-    seekto = currentAudio.duration * (seek_slider.value / 100);
+    let seekto = currentAudio.duration * (seek_slider.value / 100);
 
     // Set the current track position to the calculated seek position
     currentAudio.currentTime = seekto;

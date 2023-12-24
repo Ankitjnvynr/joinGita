@@ -124,6 +124,9 @@ $wing = $row['interest'];
         .music-item:hover {
             background-color: var(--bs-warning-bg-subtle)!important;;
         }
+        .contrls{
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -251,27 +254,27 @@ $wing = $row['interest'];
                     </div>
                     <!-- Define the section for displaying track buttons -->
                     <div class="buttons d-flex justify-content-around align-items-center mt-4 gap-3">
-                        <div class="prev-track" onclick="prevTrack()">
+                        <div class="prev-track contrls" onclick="prevTrack()">
                             <i class="fa fa-step-backward fa-2x"></i>
                         </div>
-                        <div class="playpause-track" onclick="playpauseTrack()">
+                        <div class="playpause-track contrls" onclick="playpauseTrack()">
                             <i class="fa fa-play-circle fa-5x"></i>
                         </div>
-                        <div class="next-track" onclick="nextTrack()">
+                        <div class="next-track contrls" onclick="nextTrack()">
                             <i class="fa fa-step-forward fa-2x"></i>
                         </div>
                     </div>
                     <!-- Define the section for displaying the seek slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3 ">
                         <div class="current-time">00:00</div>
-                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider"
+                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider contrls"
                             onchange="seekTo()">
                         <div class="total-duration">00:00</div>
                     </div>
                     <!-- Define the section for displaying the volume slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3">
                         <i class="fa fa-volume-down"></i>
-                        <input style="width: 50%;" type="range" min="1" max="100" value="99" class="volume_slider"
+                        <input style="width: 50%;" type="range" min="1" max="100" value="99" class="volume_slider contrls"
                             onchange="setVolume()">
                         <i class="fa fa-volume-up"></i>
                     </div>
