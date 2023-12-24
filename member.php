@@ -234,8 +234,10 @@ $wing = $row['interest'];
 
 
     </div>
-    <!-- ------------------musicplayer start------------- -->
-    <div class="container-fluid py-5 bg-white ">
+    
+    
+        <!-- ------------------musicplayer start------------- -->
+        <div class="container-fluid py-5 bg-white ">
         <div class="container">
             <div class="row bg-white rounded-5 shadow-lg mx-2">
                 <div class="col-md bg-warning-subtle rounded-5 py-4 bg-white">
@@ -243,8 +245,9 @@ $wing = $row['interest'];
                     <div class="details d-flex flex-column justify-content-center align-items-center">
                         <div class="now-playing">PLAYING x OF y</div>
                         <div class="track-art"></div>
-                        <div class="track-name">Track Name</div>
-                        <div class="track-artist">Track Artist</div>
+                        <div class="track-name">Song 1</div>
+
+                        <audio src="audio/song1.mp3" id="currentAudio"></audio>
                     </div>
                     <!-- Define the section for displaying track buttons -->
                     <div class="buttons d-flex justify-content-around align-items-center mt-4 gap-3">
@@ -261,13 +264,15 @@ $wing = $row['interest'];
                     <!-- Define the section for displaying the seek slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3 ">
                         <div class="current-time">00:00</div>
-                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
+                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider"
+                            onchange="seekTo()">
                         <div class="total-duration">00:00</div>
                     </div>
                     <!-- Define the section for displaying the volume slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3">
                         <i class="fa fa-volume-down"></i>
-                        <input style="width: 50%;" type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
+                        <input style="width: 50%;" type="range" min="1" max="100" value="99" class="volume_slider"
+                            onchange="setVolume()">
                         <i class="fa fa-volume-up"></i>
                     </div>
                 </div>
@@ -276,10 +281,13 @@ $wing = $row['interest'];
                     <div style=" height:100%;  " class="music-player mx-2 ">
                         <ul style="max-height: 200px;" class="list-group overflow-y-scroll">
                             <!-- Replace the following list items with your actual music data -->
-                            <li class="list-group-item music-item" data-src="audio/song1.mp3" data-cover="images/cover1.jpg">Song 1</li>
-                            <li class="list-group-item music-item" data-src="audio/song2.mp3" data-cover="images/cover2.jpg">Song 2</li>
-                            <li class="list-group-item music-item" data-src="audio/song3.mp3" data-cover="images/cover3.jpg">Song 3</li>
-                            
+                            <li class="list-group-item music-item" data-src="audio/song1.mp3"
+                                data-cover="images/cover1.jpg">Song 1</li>
+                            <li class="list-group-item music-item" data-src="audio/song2.mp3"
+                                data-cover="images/cover2.jpg">Song 2</li>
+                            <li class="list-group-item music-item" data-src="audio/song3.mp3"
+                                data-cover="images/cover3.jpg">Song 3</li>
+
                         </ul>
                     </div>
                 </div>
@@ -287,6 +295,7 @@ $wing = $row['interest'];
         </div>
     </div>
     <!-- ------------------musicplayer end------------- -->
+
 
 
     <div class="container-fluid  py-3 my-2">
@@ -371,7 +380,7 @@ $wing = $row['interest'];
         }
         
     </script>
-    <script src="js/music.js"></script>s
+    <script src="js/music.js"></script>
 </body>
 
 </html>

@@ -288,7 +288,7 @@ try {
                 </tbody>
             </table>
         </div>
-
+                    
     </div>
     <div class="container tab2  <?php if ($_SESSION['intro']) {
                                     echo "intro";
