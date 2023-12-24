@@ -15,7 +15,7 @@
 
     .picbg {
       background: rgb(34, 193, 195);
-      background: linear-gradient(0deg, rgba(34, 193, 195, 0) 52%, rgba(255, 0, 0, 1) 53%);
+      background: linear-gradient(0deg, rgba(34, 193, 195, 0) 52%, rgba(255, 0, 0, 0.2) 53%);
     }
   </style>
 </head>
@@ -26,15 +26,16 @@
     <div class="row mt-3">
       <div class="card p-0 overflow-hidden" style="width: 18rem;">
         <div class="d-flex picbg">
-          <div style="width:30%" class="pic relative m-2">
-            <img class="absolute rounded-circle bg-white border-white" width="70px" src="imgs\defaultusergh.png" alt="Profile">
+          <div style="width:32%" class="pic relative m-2">
+            <img style="border:2px solid white" class="absolute rounded-circle bg-white border-white" width="90px" src="imgs\defaultusergh.png" alt="Profile">
           </div>
-          <div class="name">
-            <h2 class="card-title">Ankit</h2>
-            <div class="phone d-flex gap-3 text-danger"> 8888888888 <a href=""><i class="fa-solid fa-phone text-success fs-4"></i> </a><a href="#"><i class="fa-solid fs-3 fa-brands fa-whatsapp text-success "></i></a></div>
+          <div class="name d-flex flex-column justify-content-center">
+            <h2 class="card-title py-2">Ankit</h2>
+            <div class="phone d-flex gap-2 text-danger align-items-center"> 8888888888 <a href=""><i class="fa-solid fa-phone rounded-circle shadow p-2 text-success fs-5"></i> </a><a href="#"><i class="fa-solid fs-5 rounded-circle shadow p-2 fa-brands fa-whatsapp text-success "></i></a></div>
           </div>
         </div>
-        <div class="d-flex flex-column">
+        <hr class="m-2 mx-3 ">
+        <div class="d-flex flex-column p-3">
           buttom
         </div>
       </div>
