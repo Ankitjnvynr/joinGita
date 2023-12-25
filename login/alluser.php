@@ -196,7 +196,7 @@ try {
                 <div class="card">
                     <form action="code.php" method="POST" enctype="multipart/form-data">
                         <div class="card-body d-flex ">
-                            <input type="file" name="excel_file" class="form-control" accept=".csv">
+                            <input type="file" name="excel_file" class="form-control" required accept=".csv">
                             <input type="submit" name="import" class="btn btn-success mx-2" value="Import">
                             <a href="GIEO_member_upload_format.csv" class="btn btn-primary">Download_format</a>
                         </div>
@@ -288,7 +288,7 @@ try {
                 </tbody>
             </table>
         </div>
-
+                    
     </div>
     <div class="container tab2  <?php if ($_SESSION['intro']) {
                                     echo "intro";

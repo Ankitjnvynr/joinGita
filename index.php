@@ -35,9 +35,44 @@
 
   <link rel="stylesheet" href="style.css" />
   <title>Join GIEO Gita</title>
+  <style>
+    .loading{
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      /* overflow: hidden; */
+      position: absolute;
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      top: 0;
+      scroll-behavior: none;
+    }
+    .l-box{
+      height: 100px;
+      width: 100px;
+      border-top: 5px solid green ;
+      /* border-right: 5px solid red ; */
+      border-radius: 50%;
+      /* transition: all 0.1s ease-in-out; */
+      animation: rotation 1s infinite;
+    }
+    @keyframes rotation {
+      /* from{transform: rotate(0deg);} */
+      to{transform: rotate(360deg);}
+    }
+    .ov{
+      /* overflow: hidden; */
+    }
+  </style>
 </head>
 
-<body>
+<body class="ov">
+  <!-- <div class="loading">
+    <div class="l-box"></div>
+  </div> -->
   <!-- ================Toast =========== -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="phtoast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -271,6 +306,10 @@
     }
   }
   ?>
+  <script>
+    
+
+  </script>
 
 </body>
 
