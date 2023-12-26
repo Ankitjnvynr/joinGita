@@ -39,11 +39,14 @@
       width: 100%;
       transition: all 1s;
     }
-    .table td, .table{
+
+    .table td,
+    .table {
       padding: 0;
       margin: 0;
     }
-    .table{
+
+    .table {
       width: 100%;
     }
   </style>
@@ -51,6 +54,24 @@
 
 
 <body>
+  <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="row mt-3 cardbox">
       <!-- <div class="profile">
@@ -70,7 +91,7 @@
           <div style="width:67%" class="name d-flex flex-column justify-content-around">
             <h2 class="card-title m-0 p-0">Ankit</h2>
             <div class="phone d-flex flex-column-reverse text-danger  align-items-around">
-              <table  class="table">
+              <table class="table">
                 <tbody>
                   <tr>
                     <td>Samuh:</td>
@@ -93,7 +114,7 @@
         </div>
         <hr class="m-0 mx-3 ">
         <div class="d-flex gap-2 p-3">
-          <div class="btn btn-danger">Edit</div>
+          <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</div>
           <div class="btn btn-danger">Delete</div>
         </div>
       </div>
@@ -111,7 +132,7 @@
           <div style="width:67%" class="name d-flex flex-column justify-content-around">
             <h2 class="card-title m-0 p-0">Ankit</h2>
             <div class="phone d-flex flex-column-reverse text-danger  align-items-around">
-              <table  class="table">
+              <table class="table">
                 <tbody>
                   <tr>
                     <td>Samuh:</td>
@@ -134,7 +155,7 @@
         </div>
         <hr class="m-0 mx-3 ">
         <div class="d-flex gap-2 p-3">
-          <div class="btn btn-danger">Edit</div>
+          <div class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</div>
           <div class="btn btn-danger">Delete</div>
         </div>
       </div>
@@ -153,7 +174,7 @@
           <div style="width:67%" class="name d-flex flex-column justify-content-around">
             <h2 class="card-title m-0 p-0">Ankit</h2>
             <div class="phone d-flex flex-column-reverse text-danger  align-items-around">
-              <table  class="table text-muted">
+              <table class="table text-muted">
                 <tbody>
                   <tr>
                     <td>Samuh:</td>
@@ -176,11 +197,11 @@
         </div>
         <hr class="m-0 mx-3 ">
         <div class="d-flex gap-2 p-3">
-          <div class="btn btn-danger">Edit</div>
+          <div class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</div>
           <div class="btn btn-danger">Delete</div>
         </div>
       </div>
-      
+
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
