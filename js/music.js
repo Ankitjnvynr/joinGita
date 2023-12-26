@@ -6,6 +6,8 @@ var currentTimeDisplay = document.querySelector(".current-time");
 var totalTimeDisplay = document.querySelector(".total-duration");
 var seek_slider = document.querySelector(".seek_slider");
 var volume_slider = document.querySelector(".volume_slider");
+var next_track = document.querySelector(".next-track");
+var prev_track = document.querySelector(".prev-track");
 
 function playpauseTrack() {
   if (currentAudio.paused) {
@@ -70,19 +72,49 @@ function seekTo() {
   // Set the current track position to the calculated seek position
   currentAudio.currentTime = seekto;
 }
-function nextTrack() {
-  let music = Number(currentAudio.dataset.music) + 1;
-  let a = document.getElementById(music);
-  console.log(a)
-  currentAudio.src = a.dataset.src;
-  playTrackName.innerHTML = a.innerHTML;
-  currentAudio.dataset.music = music
-}
+// function nextTrack() {
+//   let music = Number(currentAudio.dataset.music) + 1;
+//   let a = document.getElementById(music);
+//   console.log(a)
+//   currentAudio.src = a.dataset.src;
+//   playTrackName.innerHTML = a.innerHTML;
+//   currentAudio.dataset.music = music
+// }
 function prevTrack() {
-  let music = Number(currentAudio.dataset.music) - 1;
-  let a = document.getElementById(music);
-  console.log(a)
-  currentAudio.src = a.dataset.src;
-  playTrackName.innerHTML = a.innerHTML;
-  currentAudio.dataset.music = music
+  let music = Number(currentAudio.dataset.music);
+  console.log(music)
+  if (music= 0) {
+    let a = document.getElementById(music);
+    console.log(a);
+    currentAudio.src = a.dataset.src;
+    playTrackName.innerHTML = a.innerHTML;
+    currentAudio.dataset.music = music;
+  } else {
+    console.log("No next track available");
+    prev_track.style.opacity = "0.3";
+  }
+}
+
+function nextTrack() {
+  let totalMusicCount = document.querySelectorAll(".music-item");
+  totalMusicCount = Array.from(totalMusicCount).length - 1;
+  console.log(totalMusicCount);
+  let music = Number(currentAudio.dataset.music) + 1;
+
+  // Check if the next music is within the total count
+  if (music <= totalMusicCount) {
+    let a = document.getElementById(music);
+    //   console.log(a);
+    currentAudio.src = a.dataset.src;
+    playTrackName.innerHTML = a.innerHTML;
+    currentAudio.dataset.music = music;
+  } else {
+    // If there is no next music, you can add a message or perform any other action
+    console.log("No next track available");
+    next_track.style.opacity = "0.3";
+    // Optionally, you can stop playback or loop back to the first track
+    // currentAudio.src = document.getElementById(1).dataset.src;
+    // playTrackName.innerHTML = document.getElementById(1).innerHTML;
+    // currentAudio.dataset.music = 1;
+  }
 }
