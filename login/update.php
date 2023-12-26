@@ -33,7 +33,7 @@
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
   <title>Join GIEO Gita</title>
   <style>
     .loading{
@@ -89,12 +89,7 @@
   </div>
   <!-- ====================Toast End======================================== -->
   <div class="container p-2 p-md-4  shadow-lg  my-3 rounded " style="padding-bottom: 1%;">
-    <div class="text-center">
-      <h4>
-        Already a member - <a href="view-profile.php" class="btn btn-danger p-4 py-2 p"><b>View Profile</b></a>
-      </h4>
-    </div>
-    <hr>
+    
 
 
 
@@ -111,7 +106,7 @@
 
 
     <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
-      <h2 class="text-center text-danger mb-4">Join GIEO Gita</h2>
+      <h2 class="text-center text-danger mb-4">Updating Profile</h2>
       <div class="form-group col-md mb-3 d-flex justify-content-center ">
         <select max-width="600px" id="countrySelect" name="country" class='form-control'>
           <option value="">-- Country --</option>
@@ -283,9 +278,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script src="statelist.js"></script>
+  <script src="../statelist.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script src="../js/script.js"></script>
+
+  <script src="select.js"></script>
   <script src="../js/another.js"></script>
   <script src="../js/formLang.js"></script>
 
