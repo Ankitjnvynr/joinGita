@@ -70,24 +70,7 @@
 </head>
 
 <body class="ov">
-  <!-- <div class="loading">
-    <div class="l-box"></div>
-  </div> -->
-  <!-- ================Toast =========== -->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="phtoast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img width="20px" src="https://static.vecteezy.com/system/resources/thumbnails/017/172/379/small/warning-message-concept-represented-by-exclamation-mark-icon-exclamation-symbol-in-triangle-png.png" class="rounded me-2" alt="...">
-        <strong class="me-auto text-danger">Phone No Error!</strong>
-        <small>1 mins ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        Mobile Number Already Exist.
-      </div>
-    </div>
-  </div>
-  <!-- ====================Toast End======================================== -->
+  
   <div class="container p-2 p-md-4  shadow-lg  my-3 rounded " style="padding-bottom: 1%;">
     
 
@@ -108,8 +91,8 @@
     <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
       <h2 class="text-center text-danger mb-4">Updating Profile</h2>
       <div class="form-group col-md mb-3 d-flex justify-content-center ">
-        <select max-width="600px" id="countrySelect" name="country" class='form-control'>
-          <option value="">-- Country --</option>
+        <select value="india" max-width="600px" id="countrySelect" name="country" class='form-control'>
+          <option >-- Country --</option>
         </select>
       </div>
       <div class="row">
