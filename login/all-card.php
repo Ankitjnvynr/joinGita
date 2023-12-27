@@ -33,11 +33,12 @@ try {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIEO Gita : All users</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             margin: 10px;
@@ -197,21 +198,25 @@ try {
 
 <body>
     <!-- =============================toast=============================== -->
-    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert"
+        aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div id="toastmsg" class="toast-body">
                 Deleted Successfully!
             </div>
-            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
     </div>
+
+    <!-- =============================toast end =============================== -->
 
 
 
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
-    
+
 
     <div class="container">
         <div class=" bg-danger-subtle py-2 my-2 rounded d-flex gap-2 justify-content-center">
@@ -220,86 +225,22 @@ try {
             <a class="btn btn-danger" href="alluser.php">Report</a>
         </div>
     </div>
+
+    <div class="container cardbox">
         
-        <div class="container cardbox">
-            <?php
-            $sr = 0;
-            $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($result)) {
-                $sr++;
-                $user_id = $row['id'];
-                $country = $row['country'];
-                $name = $row['name'];
-                $phone = $row['phone'];
-                $whatsapp = $row['whtsapp'];
-                $email = $row['email'];
-                $dikshit = $row['dikshit'];
-                $marital_status = $row['marital_status'];
-                $state = $row['state'];
-                $district = $row['district'];
-                $tehsil = $row['tehsil'];
-                $address = $row['address'];
-                $wing = $row['interest'];
-                $occupation = $row['occupation'];
-                $education = $row['education'];
-                $dob = $row['dob'];
-                $aniver_date = $row['aniver_date'];
-                $message = $row['message'];
-                $pic = $row['pic'];
-                echo '
-                            <div class="card p-0 overflow-hidden">
-                                <div class="d-flex picbg">
-                                <div style="width:25%" class="pic relative m-2">
-                                    <img style="border:2px solid white" class="absolute rounded-circle bg-white border-white" width="100%"
-                                    src="../imgs/'.$pic.'" alt="'.$pic.'">
-                                    <p class="d-flex gap-2 flex-items-center justify-content-center px-2 m-0">
-                                    <a href=""><i class="fa-solid fa-phone text-success fs-4"></i> </a>
-                                    <a href="#"><i class="fa-solid fs-4  fa-brands fa-whatsapp text-success "></i></a>
-                                    <a href="#"><i class="fa-solid fs-4   fa-envelope text-success "></i></a>
-                                    </p>
-                                </div>
-                                <div style="width:67%" class="name d-flex flex-column justify-content-around">
-                                    <h2 class="card-title m-0 p-0 fs-4" style="text-transform: lowercase; text-transform: capitalize;">'.$name.'</h2>
-                                    <div class="phone d-flex flex-column-reverse text-danger  align-items-around">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr>
-                                            <td>Wing:</td>
-                                            <td>'.$wing.'</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Phone:</td>
-                                            <td>'.$phone.'</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email:</td>
-                                            <td>'.$email.'</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    
-                                    </div>
-                                </div>
-                                </div>
-                                <hr class="m-0 mx-3 ">
-                                <div class="d-flex gap-2 p-3">
-                                <a href="update.php?user='.$user_id.'" class="btn btn-danger">Edit</a>
-                                <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</div>
-                                </div>
-                            </div>
-                            ';
-            }
-            ?>
-    
-        </div>
+
 
     </div>
 
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script>
@@ -316,33 +257,29 @@ try {
     </script>
     <script>
         function deleteScript() {
-            let closes = document.getElementsByClassName('cls');
-            // console.log(closes)
+            let dels = document.getElementsByClassName('del');
+            // console.log(dels)
 
-            $.each(closes, function(e, item) {
-                // console.log(item)
-                $(item).click(function(e) {
-                    imgid = $(this).attr('id');
-                    // console.log(imgid)
+            $.each(dels, function (e, item) {
+                console.log(item)
+                $(item).click(function (e) {
+                    cardid = $(this).attr('data-id');
+                    // console.log(cardid)
                     if (confirm("Are you sure to Delete ?")) {
                         // console.log("yes")
                         let imgd = {
-                            img: imgid
+                            img: cardid
                         }
                         $.ajax({
-                            url: "_delete.php",
+                            url: "_deletecard.php",
                             type: "GET",
                             data: imgd,
-                            success: function(data) {
-                                console.log(data)
+                            success: function (data) {
+                                // console.log(data)
                                 $('#toastmsg').text(data)
                                 toastBootstrap.show();
-                                $('#imgsdiv').load(' #allPics', function() {
-
-                                    // Code to run after content is loaded
-                                    tt();
-                                    deleteScript();
-                                });
+                                loadpics()
+                                
                             }
                         })
                     } else {
@@ -352,74 +289,19 @@ try {
             })
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             deleteScript()
-            $('#imgUpload').on("submit", function(e) {
-                e.preventDefault();
-                var formData = new FormData(this);
-
+            loadpics=()=>{
                 $.ajax({
-                    url: "_masik-upload.php",
-                    type: "POST",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(data) {
-                        $('#imguploadStatus').html(data);
-                        $('#masikimage').val('');
-                        // $("#imgsdiv").load(location.href + " #allPics");
-                        $.ajax({
-                            url: '_loadimgs.php',
-                            success: function(data) {
-                                $('#allPics').html(data);
-                                $('#imgsdiv').load(' #allPics', function() {
-                                    // Code to run after content is loaded
-                                    tt();
-                                    deleteScript();
-                                });
-
-                            },
-                        });
+                    url:'_loadcard.php',
+                    success:function(response){
+                        console.log(response)
+                        $('.cardbox').html(response)
+                        deleteScript()
                     }
-                });
-            });
-
-
-            let delList = document.querySelectorAll('.listdel')
-            // console.log(delList)
-            deleteMember = () => {
-                $.each(delList, function(e, item) {
-                    $(item).click(function(e) {
-                        console.log(item)
-                        mid = $(this).attr('id');
-                        mid = parseInt(mid.slice(4))
-                        data = {
-                            'mid': mid
-                        }
-                        if (confirm("Are you sure to delete ?")) {
-                            $.ajax({
-                                url: '_delmember.php',
-                                type: 'POST',
-                                data: data,
-                                success: (data) => {
-                                    // console.log(data)
-                                    alert(data)
-                                    $('#tble').load(' #myTable', function() {
-                                        // Code to run after content is loaded
-
-                                        deleteMember()
-                                        console.log("hello world");
-                                    });
-
-                                }
-                            })
-                        } else {
-                            console.log("no")
-                        }
-                    })
                 })
             }
-            deleteMember()
+            loadpics()
         })
     </script>
 </body>
