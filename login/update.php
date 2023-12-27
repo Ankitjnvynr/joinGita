@@ -162,6 +162,7 @@ while ($row = mysqli_fetch_array($result)) {
             <option value="Yes" aria-selected="false">Yes</option>
             <option value="No" aria-selected="false">No</option>
             <option value="No, but interested" aria-selected="false">No, but interested</option>
+            <option value="<?php echo $dikshit ?>" selected><?php echo $dikshit ?></option>
           </select>
         </div>
         <div class="form-group col-md mb-3">
