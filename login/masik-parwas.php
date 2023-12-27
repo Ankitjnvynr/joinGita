@@ -51,7 +51,7 @@ try {
             font-size: 13px;
             width: fit-content;
             max-width: 200px;
-            text-align: center;
+            text-align: left;
             /* border: 1px solid red; */
             /* border-radius: 5px; */
             background-color: transparent !important;
@@ -83,10 +83,7 @@ try {
             margin-top: 0px !important;
         }
 
-        .tab1,
-        .tab2 {
-            display: none;
-        }
+        
 
         #tab1:checked~.tab1 {
             display: flex;
@@ -154,6 +151,41 @@ try {
                 opacity: 0;
             }
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .picbg {
+            background: rgb(34, 193, 195);
+            background: linear-gradient(0deg, rgba(34, 193, 195, 0) 65%, rgba(255, 0, 0, 0.1) 35%);
+        }
+
+        .cardbox {
+            transition: all 1s;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+            gap: 20px;
+            /* grid-template-columns: repeat( auto-fill, minmax(300px, auto) ); */
+            grid-template-columns: repeat(auto-fill, minmax(max-content, auto));
+            justify-content: center;
+            /* grid-template-columns: repeat(auto-fill, 40px);   */
+        }
+
+        .card {
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .table td,
+        .table {
+            padding: 0;
+            margin: 0;
+        }
+
+        .table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -173,7 +205,7 @@ try {
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
-    <input type="radio" name="tabs" id="tab1" checked><input type="radio" name="tabs" id="tab2">
+
 
     <div class="container">
         <div class=" bg-danger-subtle py-2 my-2 rounded d-flex gap-2 justify-content-center">
@@ -182,115 +214,7 @@ try {
             <a class="btn btn-danger" href="alluser.php">Report</a>
         </div>
     </div>
-    <div class="container ove my-3 tab1 <?php if ($_SESSION['intro']) {
-                                            echo "intro";
-                                        } ?> ">
-        <div class="row">
-            <div class="col-md-12 my-4">
 
-                <?php
-                if (isset($_SESSION['message'])) {
-                    echo "<h4>" . $_SESSION['message'] . "</h4>";
-                    unset($_SESSION['message']);
-                }
-                ?>
-                <div class="card">
-                    <form action="code.php" method="POST" enctype="multipart/form-data">
-                        <div class="card-body d-flex ">
-                            <input type="file" name="excel_file" class="form-control" required accept=".csv">
-                            <input type="submit" name="import" class="btn btn-success mx-2" value="Import">
-                            <a href="GIEO_member_upload_format.csv" class="btn btn-primary">Download_format</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="tble" style="overflow-x:scroll">
-            <table class="table caption-top shadow rounded" id="myTable">
-                <caption>List of users</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Sr.</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Whatsapp</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Dikshit</th>
-                        <th scope="col">Marital_Status</th>
-                        <th scope="col">State</th>
-                        <th scope="col">District</th>
-                        <th scope="col">Tehsil</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Intrest_Field</th>
-                        <th scope="col">Occupation</th>
-                        <th scope="col">Education</th>
-                        <th scope="col">DOB</th>
-                        <th scope="col">Aniversary</th>
-                        <th scope="col">Message</th>
-                        <th scope="col">Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php
-
-                    $sr = 0;
-
-                    $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
-                    $result = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_array($result)) {
-                        $sr++;
-                        $country = $row['country'];
-                        $name = $row['name'];
-                        $phone = $row['phone'];
-                        $whatsapp = $row['whtsapp'];
-                        $email = $row['email'];
-                        $dikshit = $row['dikshit'];
-                        $marital_status = $row['marital_status'];
-                        $state = $row['state'];
-                        $district = $row['district'];
-                        $tehsil = $row['tehsil'];
-                        $address = $row['address'];
-                        $wing = $row['interest'];
-                        $occupation = $row['occupation'];
-                        $education = $row['education'];
-                        $dob = $row['dob'];
-                        $aniver_date = $row['aniver_date'];
-                        $message = $row['message'];
-                        echo '
-                            <tr>
-                            <th scope="row">' . $sr . '</th>
-                            <td>' . $country . '</td>
-                            <td>' . $name . '</td>
-                            <td>' . $phone . '</td>
-                            <td>' . $whatsapp . '</td>
-                            <td>' . $email . '</td>
-                            <td>' . $dikshit . '</td>
-                            <td>' . $marital_status . '</td>
-                            <td>' . $state . '</td>
-                            <td>' . $district . '</td>
-                            <td>' . $tehsil . '</td>
-                            <td class="w-150" >' . $address . '</td>
-                            <td>' . $wing . '</td>
-                            <td>' . $occupation . '</td>
-                            <td>' . $education . '</td>
-                            <td>' . $dob . '</td>
-                            <td>' . $aniver_date . '</td>
-                            <td class="w-150" >' . $message . '</td>
-                            <td><span id="list' . $row['id'] . ' " class="listdel btn btndanger"><img width="20px" src="https://icon-library.com/images/delete-icon/delete-icon-13.jpg" alt="delete"></span></td>
-                            </tr>
-                            ';
-                    }
-                    ?>
-
-
-                </tbody>
-            </table>
-        </div>
-
-    </div>
     <div class="container tab2  <?php if ($_SESSION['intro']) {
                                     echo "intro";
                                 } ?> ">
@@ -342,6 +266,11 @@ try {
             </div>
         </div>
     </div>
+
+    </div>
+
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

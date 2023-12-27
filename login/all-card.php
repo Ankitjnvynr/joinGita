@@ -51,7 +51,7 @@ try {
             font-size: 13px;
             width: fit-content;
             max-width: 200px;
-            text-align: center;
+            text-align: left;
             /* border: 1px solid red; */
             /* border-radius: 5px; */
             background-color: transparent !important;
@@ -154,6 +154,41 @@ try {
                 opacity: 0;
             }
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .picbg {
+            background: rgb(34, 193, 195);
+            background: linear-gradient(0deg, rgba(34, 193, 195, 0) 65%, rgba(255, 0, 0, 0.1) 35%);
+        }
+
+        .cardbox {
+            transition: all 1s;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+            gap: 20px;
+            /* grid-template-columns: repeat( auto-fill, minmax(300px, auto) ); */
+            grid-template-columns: repeat(auto-fill, minmax(max-content, auto));
+            justify-content: center;
+            /* grid-template-columns: repeat(auto-fill, 40px);   */
+        }
+
+        .card {
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .table td,
+        .table {
+            padding: 0;
+            margin: 0;
+        }
+
+        .table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -173,7 +208,7 @@ try {
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
-    <input type="radio" name="tabs" id="tab1" checked><input type="radio" name="tabs" id="tab2">
+    
 
     <div class="container">
         <div class=" bg-danger-subtle py-2 my-2 rounded d-flex gap-2 justify-content-center">
@@ -182,166 +217,84 @@ try {
             <a class="btn btn-danger" href="alluser.php">Report</a>
         </div>
     </div>
-    <div class="container ove my-3 tab1 <?php if ($_SESSION['intro']) {
-                                            echo "intro";
-                                        } ?> ">
-        <div class="row">
-            <div class="col-md-12 my-4">
-
-                <?php
-                if (isset($_SESSION['message'])) {
-                    echo "<h4>" . $_SESSION['message'] . "</h4>";
-                    unset($_SESSION['message']);
-                }
-                ?>
-                <div class="card">
-                    <form action="code.php" method="POST" enctype="multipart/form-data">
-                        <div class="card-body d-flex ">
-                            <input type="file" name="excel_file" class="form-control" required accept=".csv">
-                            <input type="submit" name="import" class="btn btn-success mx-2" value="Import">
-                            <a href="GIEO_member_upload_format.csv" class="btn btn-primary">Download_format</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="tble" style="overflow-x:scroll">
-            <table class="table caption-top shadow rounded" id="myTable">
-                <caption>List of users</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Sr.</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Whatsapp</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Dikshit</th>
-                        <th scope="col">Marital_Status</th>
-                        <th scope="col">State</th>
-                        <th scope="col">District</th>
-                        <th scope="col">Tehsil</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Intrest_Field</th>
-                        <th scope="col">Occupation</th>
-                        <th scope="col">Education</th>
-                        <th scope="col">DOB</th>
-                        <th scope="col">Aniversary</th>
-                        <th scope="col">Message</th>
-                        <th scope="col">Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php
-
-                    $sr = 0;
-
-                    $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
-                    $result = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_array($result)) {
-                        $sr++;
-                        $country = $row['country'];
-                        $name = $row['name'];
-                        $phone = $row['phone'];
-                        $whatsapp = $row['whtsapp'];
-                        $email = $row['email'];
-                        $dikshit = $row['dikshit'];
-                        $marital_status = $row['marital_status'];
-                        $state = $row['state'];
-                        $district = $row['district'];
-                        $tehsil = $row['tehsil'];
-                        $address = $row['address'];
-                        $wing = $row['interest'];
-                        $occupation = $row['occupation'];
-                        $education = $row['education'];
-                        $dob = $row['dob'];
-                        $aniver_date = $row['aniver_date'];
-                        $message = $row['message'];
-                        echo '
-                            <tr>
-                            <th scope="row">' . $sr . '</th>
-                            <td>' . $country . '</td>
-                            <td>' . $name . '</td>
-                            <td>' . $phone . '</td>
-                            <td>' . $whatsapp . '</td>
-                            <td>' . $email . '</td>
-                            <td>' . $dikshit . '</td>
-                            <td>' . $marital_status . '</td>
-                            <td>' . $state . '</td>
-                            <td>' . $district . '</td>
-                            <td>' . $tehsil . '</td>
-                            <td class="w-150" >' . $address . '</td>
-                            <td>' . $wing . '</td>
-                            <td>' . $occupation . '</td>
-                            <td>' . $education . '</td>
-                            <td>' . $dob . '</td>
-                            <td>' . $aniver_date . '</td>
-                            <td class="w-150" >' . $message . '</td>
-                            <td><span id="list' . $row['id'] . ' " class="listdel btn btndanger"><img width="20px" src="https://icon-library.com/images/delete-icon/delete-icon-13.jpg" alt="delete"></span></td>
-                            </tr>
-                            ';
-                    }
-                    ?>
-
-
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-    <div class="container tab2  <?php if ($_SESSION['intro']) {
-                                    echo "intro";
-                                } ?> ">
-        <div class="row m-auto">
-            <div class="col-md m-auto">
-                <div class="card mb-3 ">
-                    <div class="row g-0">
-                        <div class="col-md-4 d-flex justify-content-center">
-                            <img src="../imgs/guruji.webp" class="img-fluid rounded-start m-auto" alt="...">
-                        </div>
-                        <div class="col-md-8 d-flex align-items-center">
-                            <div class="card-body  ">
-                                <h3 class="card-title">Upload Masik Parwas Calender</h3>
-                                <p class="card-text">
-                                <form id="imgUpload" action="" method="POST" enctype="multipart/form-data">
-                                    <div class="form-floating mb-3">
-                                        <input type="file" class="form-control" id="masikimage" name="masikimage" placeholder="name@example.com">
-                                        <label for="floatingInput">Upload image</label>
+        
+        <div class="container cardbox">
+            <?php
+            $sr = 0;
+            $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
+            $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_array($result)) {
+                $sr++;
+                $user_id = $row['id'];
+                $country = $row['country'];
+                $name = $row['name'];
+                $phone = $row['phone'];
+                $whatsapp = $row['whtsapp'];
+                $email = $row['email'];
+                $dikshit = $row['dikshit'];
+                $marital_status = $row['marital_status'];
+                $state = $row['state'];
+                $district = $row['district'];
+                $tehsil = $row['tehsil'];
+                $address = $row['address'];
+                $wing = $row['interest'];
+                $occupation = $row['occupation'];
+                $education = $row['education'];
+                $dob = $row['dob'];
+                $aniver_date = $row['aniver_date'];
+                $message = $row['message'];
+                $pic = $row['pic'];
+                echo '
+                            <div class="card p-0 overflow-hidden">
+                                <div class="d-flex picbg">
+                                <div style="width:25%" class="pic relative m-2">
+                                    <img style="border:2px solid white" class="absolute rounded-circle bg-white border-white" width="100%"
+                                    src="../imgs/'.$pic.'" alt="'.$pic.'">
+                                    <p class="d-flex gap-2 flex-items-center justify-content-center px-2 m-0">
+                                    <a href=""><i class="fa-solid fa-phone text-success fs-4"></i> </a>
+                                    <a href="#"><i class="fa-solid fs-4  fa-brands fa-whatsapp text-success "></i></a>
+                                    <a href="#"><i class="fa-solid fs-4   fa-envelope text-success "></i></a>
+                                    </p>
+                                </div>
+                                <div style="width:67%" class="name d-flex flex-column justify-content-around">
+                                    <h2 class="card-title m-0 p-0 fs-4" style="text-transform: lowercase; text-transform: capitalize;">'.$name.'</h2>
+                                    <div class="phone d-flex flex-column-reverse text-danger  align-items-around">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td>Wing:</td>
+                                            <td>'.$wing.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:</td>
+                                            <td>'.$phone.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td>'.$email.'</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    
                                     </div>
-                                    <div class="form-floating mb-3">
-                                        <button type="submit" class="btn btn-danger">Upload</button> <span id="imguploadStatus" class="ml-3 text-danger fs-6 "> </span>
-                                    </div>
-                                </form>
-                                </p>
-                                <p class="card-text"><small class="text-body-secondary">Please upload a image of size 388 X 400 in px</small></p>
+                                </div>
+                                </div>
+                                <hr class="m-0 mx-3 ">
+                                <div class="d-flex gap-2 p-3">
+                                <a href="update.php?user='.$user_id.'" class="btn btn-danger">Edit</a>
+                                <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            ';
+            }
+            ?>
+    
         </div>
 
-        <div id="imgsdiv">
-            <div class="row " id="allPics">
-                <?php
-                $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($result)) {
-                    echo '
-                    <div class="grid-item p-2 position-relative">
-                        <input type="hidden" value = ' . $row['id'] . '  >
-                        <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
-                        <button id = "' . $row['id'] . '"  type="button" class="cls btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
-                    </div>
-                    ';
-                }
-                ?>
-
-            </div>
-        </div>
     </div>
+
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
