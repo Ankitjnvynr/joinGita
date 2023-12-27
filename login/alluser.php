@@ -61,9 +61,7 @@ try {
             min-width: 150px;
         }
 
-        input[type=radio] {
-            display: none;
-        }
+       
 
         @media (min-width: 1400px) {
 
@@ -83,21 +81,9 @@ try {
             margin-top: 0px !important;
         }
 
-        .tab1,
-        .tab2 {
-            display: none;
-        }
+        
 
-        #tab1:checked~.tab1 {
-            display: flex;
-            flex-direction: column;
-
-        }
-
-        #tab2:checked~.tab2 {
-            display: flex;
-            flex-direction: column;
-        }
+      
 
         .intro {
             animation: opacityani 0.5s cubic-bezier(0, 0, 0.02, 0.95);
@@ -173,9 +159,9 @@ try {
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
-    <input type="radio" name="tabs" id="tab1" checked><input type="radio" name="tabs" id="tab2">
+   
 
-    <div class="container">
+    <div class="container sticky-top">
         <div class=" bg-danger-subtle py-2 my-2 rounded d-flex gap-2 justify-content-center">
             <a class="btn btn-danger" href="all-card.php">All Profiles</a>
             <a class="btn btn-danger" href="masik-parwas.php">Masik Parwas</a>
@@ -291,57 +277,7 @@ try {
         </div>
 
     </div>
-    <div class="container tab2  <?php if ($_SESSION['intro']) {
-                                    echo "intro";
-                                } ?> ">
-        <div class="row m-auto">
-            <div class="col-md m-auto">
-                <div class="card mb-3 ">
-                    <div class="row g-0">
-                        <div class="col-md-4 d-flex justify-content-center">
-                            <img src="../imgs/guruji.webp" class="img-fluid rounded-start m-auto" alt="...">
-                        </div>
-                        <div class="col-md-8 d-flex align-items-center">
-                            <div class="card-body  ">
-                                <h3 class="card-title">Upload Masik Parwas Calender</h3>
-                                <p class="card-text">
-                                <form id="imgUpload" action="" method="POST" enctype="multipart/form-data">
-                                    <div class="form-floating mb-3">
-                                        <input type="file" class="form-control" id="masikimage" name="masikimage" placeholder="name@example.com">
-                                        <label for="floatingInput">Upload image</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <button type="submit" class="btn btn-danger">Upload</button> <span id="imguploadStatus" class="ml-3 text-danger fs-6 "> </span>
-                                    </div>
-                                </form>
-                                </p>
-                                <p class="card-text"><small class="text-body-secondary">Please upload a image of size 388 X 400 in px</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="imgsdiv">
-            <div class="row " id="allPics">
-                <?php
-                $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($result)) {
-                    echo '
-                    <div class="grid-item p-2 position-relative">
-                        <input type="hidden" value = ' . $row['id'] . '  >
-                        <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
-                        <button id = "' . $row['id'] . '"  type="button" class="cls btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
-                    </div>
-                    ';
-                }
-                ?>
-
-            </div>
-        </div>
-    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
