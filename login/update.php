@@ -1,3 +1,32 @@
+<?php
+include("../partials/_db.php");
+$user_id = $_GET['user'];
+$sr = 0;
+
+$sql = "SELECT * FROM `users` WHERE `id` = '$user_id' ";
+$result = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_array($result)) {
+  $sr++;
+  $country = $row['country'];
+  $name = $row['name'];
+  $phone = $row['phone'];
+  $whatsapp = $row['whtsapp'];
+  $email = $row['email'];
+  $dikshit = $row['dikshit'];
+  $marital_status = $row['marital_status'];
+  $state = $row['state'];
+  $district = $row['district'];
+  $tehsil = $row['tehsil'];
+  $address = $row['address'];
+  $wing = $row['interest'];
+  $occupation = $row['occupation'];
+  $education = $row['education'];
+  $dob = $row['dob'];
+  $aniver_date = $row['aniver_date'];
+  $message = $row['message'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +65,7 @@
   <link rel="stylesheet" href="../style.css" />
   <title>Join GIEO Gita</title>
   <style>
-    .loading{
+    .loading {
       height: 100vh;
       width: 100%;
       display: flex;
@@ -50,29 +79,35 @@
       top: 0;
       scroll-behavior: none;
     }
-    .l-box{
+
+    .l-box {
       height: 100px;
       width: 100px;
-      border-top: 5px solid green ;
+      border-top: 5px solid green;
       /* border-right: 5px solid red ; */
       border-radius: 50%;
       /* transition: all 0.1s ease-in-out; */
       animation: rotation 1s infinite;
     }
+
     @keyframes rotation {
+
       /* from{transform: rotate(0deg);} */
-      to{transform: rotate(360deg);}
+      to {
+        transform: rotate(360deg);
+      }
     }
-    .ov{
+
+    .ov {
       /* overflow: hidden; */
     }
   </style>
 </head>
 
 <body class="ov">
-  
+
   <div class="container p-2 p-md-4  shadow-lg  my-3 rounded " style="padding-bottom: 1%;">
-    
+
 
 
 
@@ -91,31 +126,31 @@
     <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
       <h2 class="text-center text-danger mb-4">Updating Profile</h2>
       <div class="form-group col-md mb-3 d-flex justify-content-center ">
-        <select value="india" max-width="600px" id="countrySelect" name="country" class='form-control'>
-          <option >-- Country --</option>
+        <select value="india" max-width="600px" id="countrySelect" value = <?php echo $country; ?> name="country" class='form-control'>
+          <option>-- Country --</option>
         </select>
       </div>
       <div class="row">
         <div class="form-floating mb-3 col-md ">
-          <input type="text" class="form-control" name="name" placeholder="name@example.com" required>
+          <input type="text" class="form-control" name="name" placeholder="name@example.com" value="<?php echo $name ?>" required>
           <label for="floatingInput">Name</label>
         </div>
 
 
 
         <div class="form-floating mb-3 col-md ">
-          <input type="number" class="form-control" id="phone" name="phone" maxlength="20" placeholder="name@example.com" required>
+          <input type="number" class="form-control" id="phone" name="phone" maxlength="20" placeholder="name@example.com" value="<?php echo $phone ?>" required>
           <label for="floatingInput">Phone No(without country code)</label>
         </div>
 
       </div>
       <div class="row">
         <div class="form-floating mb-3 col-md">
-          <input type="email" class="form-control" name="email" placeholder="name@example.com" required>
+          <input type="email" class="form-control" name="email" placeholder="name@example.com" value="<?php echo $email ?>" required>
           <label for="floatingInput">Email </label>
         </div>
         <div class="form-floating mb-3 col-md">
-          <input type="number" class="form-control" name="whatsapp" placeholder="name@example.com" required>
+          <input type="number" class="form-control" name="whatsapp" placeholder="name@example.com" value="<?php echo $whatsapp ?>" required>
           <label for="floatingInput">WhatsApp Number</label>
         </div>
       </div>
@@ -156,11 +191,11 @@
       <div class="row">
 
         <div class="form-floating mb-3 col-md">
-          <input name="tehsil" type="text" class="form-control" placeholder="name@example.com" required>
+          <input name="tehsil" type="text" class="form-control" placeholder="name@example.com" value="<?php echo $tehsil ?>" required>
           <label for="floatingInput">Tehsil</label>
         </div>
         <div class="form-floating mb-3 col-md">
-          <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com" required>
+          <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com" value="<?php echo $address ?>" required>
           <label for="Village">Address</label>
         </div>
       </div>
@@ -227,7 +262,7 @@
           </select>
         </div>
         <div class="form-floating mb-3 col-md ">
-          <input name="dob" type="date" class="form-control" required>
+          <input name="dob" type="date" class="form-control" value="<?php echo $dob ?>" required>
           <label for="dob">Birth Date</label>
         </div>
       </div>
@@ -241,10 +276,10 @@
         </div>
       </div>
       <div class="form-floating mb-3 col-md ">
-        <textarea name="message" class="form-control" name="message" id="" col-mds="30" rows="30"></textarea>
+        <textarea name="message" class="form-control" name="message" id="" col-mds="30" rows="30" ><?php echo $message ?></textarea>
         <label for="floatingInput">Message(if any)</label>
       </div>
-      <div class="d-flex justify-content-center"><button name="submit" type="submit" class="btn btn-danger p-4 py-2 p"><b>Join Now</b></button></div>
+      <div class="d-flex justify-content-center"><button name="submit" type="submit" class="btn btn-danger p-4 py-2 p"><b>Update Profile</b></button></div>
   </div>
   </form>
 
@@ -286,7 +321,7 @@
   }
   ?>
   <script>
-    
+
 
   </script>
 
