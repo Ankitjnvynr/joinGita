@@ -333,7 +333,7 @@ include("../partials/_db.php");
                 })
             }
             loadpics()
-            $('filterPhone').on('input')
+            
 
         })
     </script>
