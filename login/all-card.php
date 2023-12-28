@@ -196,7 +196,8 @@ include("../partials/_db.php");
 
 
     <div class="container d-flex justify-content-between">
-        <div class="border border-danger rounded-3 bg-white fw-3 fs-5 text-danger fw-bold p-2 py-1"> Total Profiles : <span class="totalCount"></span></div>
+        <div class="border border-danger rounded-3 bg-white fw-3 fs-5 text-danger fw-bold p-2 py-1"> Total Profiles :
+            <span class="totalCount"></span></div>
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
 
@@ -307,6 +308,9 @@ include("../partials/_db.php");
 
         $(document).ready(function () {
             $('.totalCount').load('_totalProfiles.php');
+            setInterval(() => {
+                $('.totalCount').load('_totalProfiles.php');
+            }, 3000);
             deleteScript()
             loadpics = () => {
                 // byPhone = document.getElementById('filterPhone');
