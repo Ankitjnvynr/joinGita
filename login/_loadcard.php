@@ -41,7 +41,7 @@ if($byPhone){
     array_push($filters,$byPhone);
 }
 if($byEmail){
-    $byEmail = " email LIKE '".$byEmail."%'";
+    $byEmail = " email LIKE '%".$byEmail."%'";
     array_push($filters,$byEmail);
 }
 
