@@ -260,9 +260,7 @@ include("../partials/_db.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="filterselect.js"></script>
-    <script>
-        let table = new DataTable('#myTable');
-    </script>
+   
     <script>
         function tt() {
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -342,4 +340,3 @@ include("../partials/_db.php");
 </body>
 
 </html>
-<?php $_SESSION['intro'] = false; ?>
