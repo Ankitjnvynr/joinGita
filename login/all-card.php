@@ -6,21 +6,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 }
 // ====================creating masik parwas tabel if not exist================
 include("../partials/_db.php");
-try {
-    $sql = "CREATE TABLE masik_parvas (
-        id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        pic TEXT NOT NULL,
-        stat VARCHAR(50) DEFAULT '0',
-        dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        )";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        // echo "table created succesfully";
-    } else {
-        // echo "not created ";
-    }
-} catch (exception $err) {
-}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,9 +15,12 @@ try {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIEO Gita : All users</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             margin: 10px;
@@ -191,12 +180,14 @@ try {
 
 <body>
     <!-- =============================toast=============================== -->
-    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert"
+        aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div id="toastmsg" class="toast-body">
                 Deleted Successfully!
             </div>
-            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
     </div>
 
@@ -204,7 +195,8 @@ try {
 
 
 
-    <div class="container d-flex flex-row-reverse">
+    <div class="container d-flex justify-content-between">
+        <div class="border border-danger rounded-3 bg-white fw-3 fs-5 text-danger fw-bold p-2 py-1"> Total Profiles : <span class="totalCount"></span></div>
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
 
@@ -217,31 +209,41 @@ try {
         </div>
     </div>
     <div class="container">
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
             <div class="form-floating mb-3 ">
-                <select   id="countrySelect" name="country" class="form-control filterInput" onchange="loadpics()">
-                   
+                <select onclick="fillCountry()" id="countrySelect" style="min-width: 100px;" name="country"
+                    class="form-control filterInput" onchange="loadpics()">
+
                 </select>
                 <label for="countrySelect">Country</label>
             </div>
             <div class="form-floating mb-3 ">
-                <select id="stateSelect" style="min-width: 100px;"  name="state" class='form-control' onchange="loadpics()"> 
-                    
+                <select id="stateSelect" style="min-width: 100px;" name="state" class='form-control'
+                    onchange="loadpics()">
+
                 </select>
                 <label for="stateSelect">State</label>
             </div>
             <div class="form-floating mb-3 ">
-                <select id="citySelect" style="min-width: 100px;" name="district" class='form-control' onchange="loadpics()" >
-                    
+                <select id="citySelect" style="min-width: 100px;" name="district" class='form-control'
+                    onchange="loadpics()">
+
                 </select>
                 <label for="citySelect">city</label>
             </div>
             <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter" oninput="loadpics()">
-                <label for="phone">Phone</label>
+                <input type="text" class="form-control filterInput" id="filterName" placeholder="Enter"
+                    oninput="loadpics()">
+                <label for="filterName">Name</label>
+            </div>
+            <div class="form-floating mb-3 ">
+                <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter"
+                    oninput="loadpics()">
+                <label for="filterPhone">Phone</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control filterInput" id="filterEmail" placeholder="name@example.com" oninput="loadpics()">
+                <input type="text" class="form-control filterInput" id="filterEmail" placeholder="name@example.com"
+                    oninput="loadpics()">
                 <label for="filterEmail">Email address</label>
             </div>
         </div>
@@ -249,11 +251,14 @@ try {
 
     <div class="container cardbox mt-4"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="select.js"></script>
+    <script src="filterselect.js"></script>
     <script>
         let table = new DataTable('#myTable');
     </script>
@@ -271,9 +276,9 @@ try {
             let dels = document.getElementsByClassName('del');
             // console.log(dels)
 
-            $.each(dels, function(e, item) {
+            $.each(dels, function (e, item) {
 
-                $(item).click(function(e) {
+                $(item).click(function (e) {
                     cardid = $(this).attr('data-id');
                     // console.log(cardid)
                     if (confirm("Are you sure to Delete ?")) {
@@ -285,7 +290,7 @@ try {
                             url: "_deletecard.php",
                             type: "GET",
                             data: imgd,
-                            success: function(data) {
+                            success: function (data) {
                                 // console.log(data)
                                 $('#toastmsg').text(data)
                                 toastBootstrap.show();
@@ -300,12 +305,14 @@ try {
             })
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
+            $('.totalCount').load('_totalProfiles.php');
             deleteScript()
             loadpics = () => {
                 // byPhone = document.getElementById('filterPhone');
                 console.log($('#filterPhone').val())
                 var fltr = {
+                    filterName: $('#filterName').val(),
                     phone: $('#filterPhone').val(),
                     filterEmail: $('#filterEmail').val(),
                     filterCountry: $('#countrySelect').val(),
@@ -316,7 +323,7 @@ try {
                     url: '_loadcard.php',
                     type: 'POST',
                     data: fltr,
-                    success: function(response) {
+                    success: function (response) {
 
                         $('.cardbox').html(response)
                         deleteScript()
