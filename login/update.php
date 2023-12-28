@@ -98,9 +98,7 @@ while ($row = mysqli_fetch_array($result)) {
       }
     }
 
-    .ov {
-      /* overflow: hidden; */
-    }
+   
   </style>
 </head>
 
