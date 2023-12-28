@@ -29,12 +29,9 @@ try {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIEO Gita : All users</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             margin: 10px;
@@ -194,14 +191,12 @@ try {
 
 <body>
     <!-- =============================toast=============================== -->
-    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert"
-        aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div id="toastmsg" class="toast-body">
                 Deleted Successfully!
             </div>
-            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast"
-                aria-label="Close"></button>
+            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 
@@ -224,25 +219,41 @@ try {
     <div class="container">
         <div class="d-flex gap-2">
             <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter">
+                <select   id="countrySelect" name="country" class="form-control filterInput" onchange="loadpics()">
+                   
+                </select>
+                <label for="countrySelect">Country</label>
+            </div>
+            <div class="form-floating mb-3 ">
+                <select id="stateSelect" style="min-width: 100px;"  name="state" class='form-control' onchange="loadpics()"> 
+                    
+                </select>
+                <label for="stateSelect">State</label>
+            </div>
+            <div class="form-floating mb-3 ">
+                <select id="citySelect" style="min-width: 100px;" name="district" class='form-control' onchange="loadpics()" >
+                    
+                </select>
+                <label for="citySelect">city</label>
+            </div>
+            <div class="form-floating mb-3 ">
+                <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter" oninput="loadpics()">
                 <label for="phone">Phone</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control filterInput" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="text" class="form-control filterInput" id="filterEmail" placeholder="name@example.com" oninput="loadpics()">
+                <label for="filterEmail">Email address</label>
             </div>
         </div>
     </div>
 
     <div class="container cardbox mt-4"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="select.js"></script>
     <script>
         let table = new DataTable('#myTable');
     </script>
@@ -260,9 +271,9 @@ try {
             let dels = document.getElementsByClassName('del');
             // console.log(dels)
 
-            $.each(dels, function (e, item) {
-                console.log(item)
-                $(item).click(function (e) {
+            $.each(dels, function(e, item) {
+
+                $(item).click(function(e) {
                     cardid = $(this).attr('data-id');
                     // console.log(cardid)
                     if (confirm("Are you sure to Delete ?")) {
@@ -274,7 +285,7 @@ try {
                             url: "_deletecard.php",
                             type: "GET",
                             data: imgd,
-                            success: function (data) {
+                            success: function(data) {
                                 // console.log(data)
                                 $('#toastmsg').text(data)
                                 toastBootstrap.show();
@@ -289,13 +300,24 @@ try {
             })
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             deleteScript()
             loadpics = () => {
+                // byPhone = document.getElementById('filterPhone');
+                console.log($('#filterPhone').val())
+                var fltr = {
+                    phone: $('#filterPhone').val(),
+                    filterEmail: $('#filterEmail').val(),
+                    filterCountry: $('#countrySelect').val(),
+                    filterState: $('#stateSelect').val(),
+                    filterCity: $('#citySelect').val(),
+                }
                 $.ajax({
                     url: '_loadcard.php',
-                    success: function (response) {
-                        console.log(response)
+                    type: 'POST',
+                    data: fltr,
+                    success: function(response) {
+
                         $('.cardbox').html(response)
                         deleteScript()
                     }

@@ -1,10 +1,50 @@
 <?php
 include("../partials/_db.php");
-$sr = 0;
+
 $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
+
+$filters = array();
+$byPhone = $_POST['phone'];
+
+$byEmail = $_POST['filterEmail'];
+$byCountry = $_POST['filterCountry'];
+$byState = $_POST['filterState'];
+$byCity = $_POST['filterCity'];
+
+if($byPhone || $byEmail || $byCountry || $byState || $byCity){
+    array_push($filters," WHERE ");
+}
+
+if($byCountry){
+    // unset($filters[1]);
+    // unset($filters[2]);
+    $filters = array(" WHERE ");
+    // array_splice($filters, 1, 2);  
+    array_push($filters,$byCountry);
+}
+if($byState){
+    array_push($filters,$byState);
+}
+if($byCity){
+    array_push($filters,$byCity);
+}
+if($byPhone){
+    $byPhone = " phone LIKE '".$byPhone."%'";
+    array_push($filters,$byPhone);
+}
+if($byEmail){
+    array_push($filters,$byEmail);
+}
+
+// echo var_dump($filters);
+$newStr = implode(" `% AND %", $filters);
+echo ($newStr);
+
+
+// SELECT * FROM `users` WHERE phone LIKE '89%' AND name LIKE '%an%' ORDER BY `id` DESC LIMIT 3;
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_array($result)) {
-    $sr++;
+    
     $user_id = $row['id'];
     $country = $row['country'];
     $name = $row['name'];
