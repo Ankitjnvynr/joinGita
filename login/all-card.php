@@ -252,6 +252,7 @@ include("../partials/_db.php");
     </div>
 
     <div class="container cardbox mt-4"></div>
+    <div class="container text-center my-3" id="load_data_message" ></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -274,15 +275,15 @@ include("../partials/_db.php");
     <script>
         function deleteScript() {
             let dels = document.getElementsByClassName('del');
-            // console.log(dels)
+            
 
             $.each(dels, function (e, item) {
 
                 $(item).click(function (e) {
                     cardid = $(this).attr('data-id');
-                    // console.log(cardid)
+                    
                     if (confirm("Are you sure to Delete ?")) {
-                        // console.log("yes")
+                        
                         let imgd = {
                             img: cardid
                         }
@@ -315,8 +316,7 @@ include("../partials/_db.php");
             }, 3000);
             deleteScript()
             loadpics = () => {
-                // byPhone = document.getElementById('filterPhone');
-                // console.log($('#filterPhone').val())
+                
                 var fltr = {
                     filterName: $('#filterName').val(),
                     phone: $('#filterPhone').val(),
@@ -362,11 +362,11 @@ include("../partials/_db.php");
                     success: function (data) {
                         $('.cardbox').append(data);
                         if (data == '') {
-                            $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
+                            $('#load_data_message').html("<button type='button' class='btn btn-secondary'>No More Data Found</button>");
                             action = 'active';
                         }
                         else {
-                            $('#load_data_message').html("<button type='button' class='btn btn-warning'>Please Wait....</button>");
+                            $('#load_data_message').html("<button type='button' class='btn btn-danger'>Please Wait....</button>");
                             action = "inactive";
                         }
                     }
