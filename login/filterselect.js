@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
                 data.countries.forEach((country) => {
                     if (ourcountry.includes(country.name)) {
-                        // console.log(country.name)
+                        
                         const option = document.createElement("option");
                         option.value = country.name;
                         option.textContent = country.name;
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     countrySelect.addEventListener("change", function () {
         var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute("dataValue"
         );
-        console.log(selectedCountry);
+        // console.log(selectedCountry);
 
         // Fetch states based on the selected country
         fetch("../js/states.json")
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 stateSelect.innerHTML = "<option value>---state----</option>";
                 data1.states.forEach((state) => {
                     if (state.country_id == selectedCountry) {
-                        console.log(state);
+                        // console.log(state);
                         const option = document.createElement("option");
                         option.value = state.name;
                         option.setAttribute("dataValue", state.id);
