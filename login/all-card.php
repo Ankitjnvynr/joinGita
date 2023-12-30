@@ -306,6 +306,9 @@ include("../partials/_db.php");
         }
 
         $(document).ready(function () {
+            var limit = 7;
+            var start = 0;
+            
             $('.totalCount').load('_totalProfiles.php');
             setInterval(() => {
                 $('.totalCount').load('_totalProfiles.php');
@@ -321,6 +324,8 @@ include("../partials/_db.php");
                     filterCountry: $('#countrySelect').val(),
                     filterState: $('#stateSelect').val(),
                     filterCity: $('#citySelect').val(),
+                    limit: limit,
+                    start: start,
                 }
                 $.ajax({
                     url: '_loadcard.php',
@@ -335,8 +340,7 @@ include("../partials/_db.php");
             }
             loadpics()
 
-            var limit = 7;
-            var start = 0;
+           
             var action = 'inactive';
             function load_country_data(limit, start) {
                 let data1 = {
@@ -346,15 +350,15 @@ include("../partials/_db.php");
                     filterCountry: $('#countrySelect').val(),
                     filterState: $('#stateSelect').val(),
                     filterCity: $('#citySelect').val(),
-                    limit: 'limit',
-                    start: 'start', 
+                    limit: limit,
+                    start: start, 
                 }
                 console.log(data1)
                 $.ajax({
                     url: "_loadcard.php",
                     method: "POST",
                     data: data1,
-                    cache: false,
+                    // cache: false,
                     success: function (data) {
                         $('.cardbox').append(data);
                         if (data == '') {
