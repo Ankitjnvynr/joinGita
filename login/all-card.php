@@ -197,7 +197,8 @@ include("../partials/_db.php");
 
     <div class="container d-flex justify-content-between">
         <div class="border border-danger rounded-3 bg-white fw-3 fs-5 text-danger fw-bold p-2 py-1"> Total Profiles :
-            <span class="totalCount"></span></div>
+            <span class="totalCount"></span>
+        </div>
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
 
@@ -260,7 +261,7 @@ include("../partials/_db.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="filterselect.js"></script>
-   
+
     <script>
         function tt() {
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -312,7 +313,7 @@ include("../partials/_db.php");
             deleteScript()
             loadpics = () => {
                 // byPhone = document.getElementById('filterPhone');
-                console.log($('#filterPhone').val())
+                // console.log($('#filterPhone').val())
                 var fltr = {
                     filterName: $('#filterName').val(),
                     phone: $('#filterPhone').val(),
@@ -324,16 +325,63 @@ include("../partials/_db.php");
                 $.ajax({
                     url: '_loadcard.php',
                     type: 'POST',
+                    cache: false,
                     data: fltr,
                     success: function (response) {
-
                         $('.cardbox').html(response)
                         deleteScript()
                     }
                 })
             }
             loadpics()
-            
+
+            var limit = 7;
+            var start = 0;
+            var action = 'inactive';
+            function load_country_data(limit, start) {
+                let data1 = {
+                    filterName: $('#filterName').val(),
+                    phone: $('#filterPhone').val(),
+                    filterEmail: $('#filterEmail').val(),
+                    filterCountry: $('#countrySelect').val(),
+                    filterState: $('#stateSelect').val(),
+                    filterCity: $('#citySelect').val(),
+                    limit: 'limit',
+                    start: 'start', 
+                }
+                console.log(data1)
+                $.ajax({
+                    url: "_loadcard.php",
+                    method: "POST",
+                    data: data1,
+                    cache: false,
+                    success: function (data) {
+                        $('.cardbox').append(data);
+                        if (data == '') {
+                            $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
+                            action = 'active';
+                        }
+                        else {
+                            $('#load_data_message').html("<button type='button' class='btn btn-warning'>Please Wait....</button>");
+                            action = "inactive";
+                        }
+                    }
+                });
+            }
+
+            if (action == 'inactive') {
+                action = 'active';
+                load_country_data(limit, start);
+            }
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() > $(".cardbox").height() && action == 'inactive') {
+                    action = 'active';
+                    start = start + limit;
+                    setTimeout(function () {
+                        load_country_data(limit, start);
+                    }, 1000);
+                }
+            });
 
         })
     </script>

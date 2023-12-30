@@ -11,6 +11,8 @@ $byEmail = $_POST['filterEmail'];
 $byCountry = $_POST['filterCountry'];
 $byState = $_POST['filterState'];
 $byCity = $_POST['filterCity'];
+$limit =  $_POST['limit'] ;
+$start = $_POST['start'] ;
 
 if($byPhone || $byEmail || $byCountry || $byState || $byCity || $byName){
     $newStr = ' WHERE ';
@@ -49,9 +51,9 @@ if($byEmail){
 $newStr = $newStr.implode(" AND ", $filters);
 // echo ($newStr);
 
-$sql = "SELECT * FROM `users`  ".$newStr."  ORDER BY `id` DESC ";
+$sql = "SELECT * FROM `users`  ".$newStr."  ORDER BY `id` DESC LIMIT ".$start." , ".$limit." ";
 
-
+echo $sql;
 // SELECT * FROM `users` WHERE phone LIKE '89%' AND name LIKE '%an%' ORDER BY `id` DESC LIMIT 3;
 $result = mysqli_query($conn, $sql);
 if(($conn->num_rows = mysqli_num_rows($result)) == 0) echo "<div class='card p-3 text-center overflow-hidden'><h2 class = 'text-muted' > No result Found </h2> </div>";
