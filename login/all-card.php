@@ -252,7 +252,7 @@ include("../partials/_db.php");
     </div>
 
     <div class="container cardbox mt-4"></div>
-    <div class="container text-center my-3" id="load_data_message" ></div>
+    <div class="container text-center my-3" id="load_data_message"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -275,15 +275,15 @@ include("../partials/_db.php");
     <script>
         function deleteScript() {
             let dels = document.getElementsByClassName('del');
-            
+
 
             $.each(dels, function (e, item) {
 
                 $(item).click(function (e) {
                     cardid = $(this).attr('data-id');
-                    
+
                     if (confirm("Are you sure to Delete ?")) {
-                        
+
                         let imgd = {
                             img: cardid
                         }
@@ -307,16 +307,20 @@ include("../partials/_db.php");
         }
 
         $(document).ready(function () {
-            var limit = 7;
+            var limit = 5;
             var start = 0;
-            
+
             $('.totalCount').load('_totalProfiles.php');
             setInterval(() => {
                 $('.totalCount').load('_totalProfiles.php');
             }, 3000);
+
+
             deleteScript()
+
+            var action = 'inactive';
             loadpics = () => {
-                
+
                 var fltr = {
                     filterName: $('#filterName').val(),
                     phone: $('#filterPhone').val(),
@@ -333,15 +337,27 @@ include("../partials/_db.php");
                     cache: false,
                     data: fltr,
                     success: function (response) {
-                        $('.cardbox').html(response)
+                        if (action == 'active') {
+                            $('.cardbox').append(response);
+                        } else {
+                            $('.cardbox').html(response)
+                        }
                         deleteScript()
+                        if (response == '') {
+                            $('#load_data_message').html("<button type='button' class='btn btn-secondary'>No More Data Found</button>");
+                            action = 'active';
+                        }
+                        else {
+                            $('#load_data_message').html("<button type='button' class='btn btn-danger'>Please Wait....</button>");
+                            action = "inactive";
+                        }
                     }
                 })
             }
-            loadpics()
+            // loadpics()
 
-           
-            var action = 'inactive';
+
+
             function load_country_data(limit, start) {
                 let data1 = {
                     filterName: $('#filterName').val(),
@@ -351,7 +367,7 @@ include("../partials/_db.php");
                     filterState: $('#stateSelect').val(),
                     filterCity: $('#citySelect').val(),
                     limit: limit,
-                    start: start, 
+                    start: start,
                 }
                 console.log(data1)
                 $.ajax({
@@ -375,14 +391,15 @@ include("../partials/_db.php");
 
             if (action == 'inactive') {
                 action = 'active';
-                load_country_data(limit, start);
+                loadpics();
             }
             $(window).scroll(function () {
                 if ($(window).scrollTop() + $(window).height() > $(".cardbox").height() && action == 'inactive') {
                     action = 'active';
                     start = start + limit;
                     setTimeout(function () {
-                        load_country_data(limit, start);
+                        loadpics();
+                        console.log(start,limit)
                     }, 1000);
                 }
             });
