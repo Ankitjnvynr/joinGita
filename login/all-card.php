@@ -214,38 +214,38 @@ include("../partials/_db.php");
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
             <div class="form-floating mb-3 ">
                 <select onclick="fillCountry()" id="countrySelect" style="min-width: 100px;" name="country"
-                    class="form-control filterInput" onchange="loadpics()">
+                    class="form-control filterInput" onchange="loadpics(5,0)">
 
                 </select>
                 <label for="countrySelect">Country</label>
             </div>
             <div class="form-floating mb-3 ">
                 <select id="stateSelect" style="min-width: 100px;" name="state" class='form-control'
-                    onchange="loadpics()">
+                    onchange="loadpics(5,0)">
 
                 </select>
                 <label for="stateSelect">State</label>
             </div>
             <div class="form-floating mb-3 ">
                 <select id="citySelect" style="min-width: 100px;" name="district" class='form-control'
-                    onchange="loadpics()">
+                    onchange="loadpics(5,0)">
 
                 </select>
                 <label for="citySelect">city</label>
             </div>
             <div class="form-floating mb-3 ">
                 <input type="text" class="form-control filterInput" id="filterName" placeholder="Enter"
-                    oninput="loadpics()">
+                    oninput="loadpics(5,0)">
                 <label for="filterName">Name</label>
             </div>
             <div class="form-floating mb-3 ">
                 <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter"
-                    oninput="loadpics()">
+                    oninput="loadpics(5,0)">
                 <label for="filterPhone">Phone</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control filterInput" id="filterEmail" placeholder="name@example.com"
-                    oninput="loadpics()">
+                    oninput="loadpics(5,0)">
                 <label for="filterEmail">Email address</label>
             </div>
         </div>
@@ -319,7 +319,7 @@ include("../partials/_db.php");
             deleteScript()
 
             var action = 'inactive';
-            loadpics = () => {
+            loadpics = (start,limit) => {
 
                 var fltr = {
                     filterName: $('#filterName').val(),
@@ -391,14 +391,14 @@ include("../partials/_db.php");
 
             if (action == 'inactive') {
                 action = 'active';
-                loadpics();
+                loadpics(start,limit);
             }
             $(window).scroll(function () {
                 if ($(window).scrollTop() + $(window).height() > $(".cardbox").height() && action == 'inactive') {
                     action = 'active';
                     start = start + limit;
                     setTimeout(function () {
-                        loadpics();
+                        loadpics(start,limit);
                         console.log(start,limit)
                     }, 1000);
                 }
