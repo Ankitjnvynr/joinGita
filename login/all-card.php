@@ -214,38 +214,38 @@ include("../partials/_db.php");
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
             <div class="form-floating mb-3 ">
                 <select onclick="fillCountry()" id="countrySelect" style="min-width: 100px;" name="country"
-                    class="form-control filterInput" onchange="loadpics(5,0)">
+                    class="form-control filterInput" onchange="loadpics(0,5)">
 
                 </select>
                 <label for="countrySelect">Country</label>
             </div>
             <div class="form-floating mb-3 ">
                 <select id="stateSelect" style="min-width: 100px;" name="state" class='form-control'
-                    onchange="loadpics(5,0)">
+                    onchange="loadpics(0,5)">
 
                 </select>
                 <label for="stateSelect">State</label>
             </div>
             <div class="form-floating mb-3 ">
                 <select id="citySelect" style="min-width: 100px;" name="district" class='form-control'
-                    onchange="loadpics(5,0)">
+                    onchange="loadpics(0,5)">
 
                 </select>
                 <label for="citySelect">city</label>
             </div>
             <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterName" placeholder="Enter"
-                    oninput="loadpics(5,0)">
+                <input type="text" class="form-control filterInput" id="filterName" data-limit="5" data-start="5"
+                    placeholder="Enter" oninput="loadpics(0,5)">
                 <label for="filterName">Name</label>
             </div>
             <div class="form-floating mb-3 ">
                 <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter"
-                    oninput="loadpics(5,0)">
+                    oninput="loadpics(0,5)">
                 <label for="filterPhone">Phone</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control filterInput" id="filterEmail" placeholder="name@example.com"
-                    oninput="loadpics(5,0)">
+                    oninput="loadpics(0,5)">
                 <label for="filterEmail">Email address</label>
             </div>
         </div>
@@ -273,38 +273,7 @@ include("../partials/_db.php");
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList)
     </script>
     <script>
-        function deleteScript() {
-            let dels = document.getElementsByClassName('del');
 
-
-            $.each(dels, function (e, item) {
-
-                $(item).click(function (e) {
-                    cardid = $(this).attr('data-id');
-
-                    if (confirm("Are you sure to Delete ?")) {
-
-                        let imgd = {
-                            img: cardid
-                        }
-                        $.ajax({
-                            url: "_deletecard.php",
-                            type: "GET",
-                            data: imgd,
-                            success: function (data) {
-                                // console.log(data)
-                                $('#toastmsg').text(data)
-                                toastBootstrap.show();
-                                loadpics()
-
-                            }
-                        })
-                    } else {
-                        console.log("no")
-                    }
-                })
-            })
-        }
 
         $(document).ready(function () {
             var limit = 5;
@@ -315,12 +284,69 @@ include("../partials/_db.php");
                 $('.totalCount').load('_totalProfiles.php');
             }, 3000);
 
+            // function deleteScript() {
+            //     let dels = document.getElementsByClassName('del');
+            //     $.each(dels, function (e, item) {
+            //         $(item).click(function (e) {
+            //             cardid = $(this).attr('data-id');
+            //             console.log("jhdlkl")
+            //             if (confirm("Are you sure to Delete ?")) {
+            //                 let imgd = {
+            //                     img: cardid
+            //                 }
+            //                 $.ajax({
+            //                     url: "_deletecard.php",
+            //                     type: "GET",
+            //                     data: imgd,
+            //                     success: function (data) {
+            //                         // console.log(data)
+            //                         $('#toastmsg').text(data)
+            //                         toastBootstrap.show();
+            //                         loadpics(start, limit);
+            //                     }
+            //                 })
+            //             } else {
+            //                 console.log("no")
+            //             }
+            //         })
+            //     })
+            // }
+
+            function deleteScript() {
+                let dels = document.getElementsByClassName('del');
+                $.each(dels, function (e, item) {
+                    $(item).off('click').on('click', function (e) {
+                        cardid = $(this).attr('data-id');
+                        console.log(item)
+                        if (confirm("Are you sure to Delete ?")) {
+                            let imgd = {
+                                img: cardid
+                            }
+                            $.ajax({
+                                url: "_deletecard.php",
+                                type: "GET",
+                                data: imgd,
+                                success: function (data) {
+                                    // console.log(data)
+                                    $('#toastmsg').text(data)
+                                    toastBootstrap.show();
+                                    loadpics(start, limit);
+                                    
+                                }
+                            })
+                        } else {
+                            console.log("no")
+                        }
+                    })
+                })
+            }
+
 
             deleteScript()
 
             var action = 'inactive';
-            loadpics = (start,limit) => {
-
+            loadpics = (start, limit) => {
+                console.log(start, limit)
                 var fltr = {
                     filterName: $('#filterName').val(),
                     phone: $('#filterPhone').val(),
@@ -334,9 +360,10 @@ include("../partials/_db.php");
                 $.ajax({
                     url: '_loadcard.php',
                     type: 'POST',
-                    cache: false,
+                    // cache: false,
                     data: fltr,
                     success: function (response) {
+                        // console.log(response)
                         if (action == 'active') {
                             $('.cardbox').append(response);
                         } else {
@@ -357,49 +384,17 @@ include("../partials/_db.php");
             // loadpics()
 
 
-
-            function load_country_data(limit, start) {
-                let data1 = {
-                    filterName: $('#filterName').val(),
-                    phone: $('#filterPhone').val(),
-                    filterEmail: $('#filterEmail').val(),
-                    filterCountry: $('#countrySelect').val(),
-                    filterState: $('#stateSelect').val(),
-                    filterCity: $('#citySelect').val(),
-                    limit: limit,
-                    start: start,
-                }
-                console.log(data1)
-                $.ajax({
-                    url: "_loadcard.php",
-                    method: "POST",
-                    data: data1,
-                    // cache: false,
-                    success: function (data) {
-                        $('.cardbox').append(data);
-                        if (data == '') {
-                            $('#load_data_message').html("<button type='button' class='btn btn-secondary'>No More Data Found</button>");
-                            action = 'active';
-                        }
-                        else {
-                            $('#load_data_message').html("<button type='button' class='btn btn-danger'>Please Wait....</button>");
-                            action = "inactive";
-                        }
-                    }
-                });
-            }
-
             if (action == 'inactive') {
                 action = 'active';
-                loadpics(start,limit);
+                loadpics(start, limit);
             }
             $(window).scroll(function () {
                 if ($(window).scrollTop() + $(window).height() > $(".cardbox").height() && action == 'inactive') {
                     action = 'active';
                     start = start + limit;
                     setTimeout(function () {
-                        loadpics(start,limit);
-                        console.log(start,limit)
+                        loadpics(start, limit);
+                        console.log(start, limit)
                     }, 1000);
                 }
             });
