@@ -273,37 +273,6 @@ include("../partials/_db.php");
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList)
     </script>
     <script>
-<<<<<<< HEAD
-        function deleteScript() {
-            let dels = document.getElementsByClassName('del');
-            $.each(dels, function (e, item) {
-                $(item).click(function (e) {
-                    cardid = $(this).attr('data-id');
-                    if (confirm("Are you sure to Delete ?")) {
-                        let imgd = {
-                            img: cardid
-                        }
-                        $.ajax({
-                            url: "_deletecard.php",
-                            type: "GET",
-                            data: imgd,
-                            success: function (data) {
-                                // console.log(data)
-                                $('#toastmsg').text(data)
-                                toastBootstrap.show();
-                                loadpics(0,limit)
-
-                            }
-                        })
-                    } else {
-                        console.log("no")
-                    }
-                })
-            })
-        }
-=======
-
->>>>>>> feabbbc748aa3d3b8092356941e8c799d45ad2b6
 
         $(document).ready(function () {
             var limit = 5;
