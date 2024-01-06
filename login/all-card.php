@@ -26,6 +26,7 @@ include("../partials/_db.php");
             margin: 10px;
             background: #f7e092;
             overflow-x: hidden;
+            cursor: url('imgs/cursor_PNG61.png') !important;
         }
 
         table {
@@ -124,20 +125,21 @@ include("../partials/_db.php");
 
         .op {
             opacity: 0;
-            animation: op 5s;
+            animation: op 1s;
         }
 
         @keyframes op {
             0% {
                 opacity: 1;
+                transform: scale(1);
             }
 
-            60% {
-                opacity: 1;
-            }
+            
 
             100% {
                 opacity: 0;
+                transform: scale(0);
+                
             }
         }
 
@@ -302,7 +304,11 @@ include("../partials/_db.php");
                                     // console.log(data)
                                     $('#toastmsg').text(data)
                                     toastBootstrap.show();
-                                    a.style.display='none';
+                                    
+                                    a.classList.add('op')
+                                    setTimeout(() => {
+                                        a.style.display='none';
+                                    }, 1000);
                                     // loadpics(start, limit);
                                     
                                 }
