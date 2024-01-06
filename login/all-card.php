@@ -283,41 +283,14 @@ include("../partials/_db.php");
                 $('.totalCount').load('_totalProfiles.php');
             }, 3000);
 
-            // function deleteScript() {
-            //     let dels = document.getElementsByClassName('del');
-            //     $.each(dels, function (e, item) {
-            //         $(item).click(function (e) {
-            //             cardid = $(this).attr('data-id');
-            //             console.log("jhdlkl")
-            //             if (confirm("Are you sure to Delete ?")) {
-            //                 let imgd = {
-            //                     img: cardid
-            //                 }
-            //                 $.ajax({
-            //                     url: "_deletecard.php",
-            //                     type: "GET",
-            //                     data: imgd,
-            //                     success: function (data) {
-            //                         // console.log(data)
-            //                         $('#toastmsg').text(data)
-            //                         toastBootstrap.show();
-            //                         loadpics(start, limit);
-            //                     }
-            //                 })
-            //             } else {
-            //                 console.log("no")
-            //             }
-            //         })
-            //     })
-            // }
-
+            
             function deleteScript() {
                 let dels = document.getElementsByClassName('del');
                 $.each(dels, function (e, item) {
                     $(item).off('click').on('click', function (e) {
                         cardid = $(this).attr('data-id');
-                        console.log(item)
                         if (confirm("Are you sure to Delete ?")) {
+                            a=item.parentElement.parentElement.parentElement
                             let imgd = {
                                 img: cardid
                             }
@@ -329,7 +302,8 @@ include("../partials/_db.php");
                                     // console.log(data)
                                     $('#toastmsg').text(data)
                                     toastBootstrap.show();
-                                    loadpics(start, limit);
+                                    a.style.display='none';
+                                    // loadpics(start, limit);
                                     
                                 }
                             })
