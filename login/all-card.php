@@ -275,15 +275,10 @@ include("../partials/_db.php");
     <script>
         function deleteScript() {
             let dels = document.getElementsByClassName('del');
-
-
             $.each(dels, function (e, item) {
-
                 $(item).click(function (e) {
                     cardid = $(this).attr('data-id');
-
                     if (confirm("Are you sure to Delete ?")) {
-
                         let imgd = {
                             img: cardid
                         }
@@ -295,7 +290,7 @@ include("../partials/_db.php");
                                 // console.log(data)
                                 $('#toastmsg').text(data)
                                 toastBootstrap.show();
-                                loadpics()
+                                loadpics(0,limit)
 
                             }
                         })
