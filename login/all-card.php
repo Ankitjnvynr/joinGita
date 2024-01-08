@@ -250,9 +250,10 @@ include("../partials/_db.php");
                 <label for="filterEmail">Email address</label>
             </div>
         </div>
-        <div class="showing"></div>
+        
     </div>
 
+    <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing<span class="showing"></span>/<span class="totalCount"></span></span></div>
     <div class="container cardbox mt-4"></div>
     <div class="container text-center my-3"><button class="btn btn-success" onclick="loadMore(5,5)" id="loadMore">Load
             More</button></div>

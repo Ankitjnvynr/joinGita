@@ -11,54 +11,54 @@ $byEmail = $_POST['filterEmail'];
 $byCountry = $_POST['filterCountry'];
 $byState = $_POST['filterState'];
 $byCity = $_POST['filterCity'];
-$limit =  $_POST['limit'] ;
-$start = $_POST['start'] ;
+$limit = $_POST['limit'];
+$start = $_POST['start'];
 
-if($byPhone || $byEmail || $byCountry || $byState || $byCity || $byName){
+if ($byPhone || $byEmail || $byCountry || $byState || $byCity || $byName) {
     $newStr = ' WHERE ';
 }
 
-if($byCountry){
+if ($byCountry) {
     // unset($filters[1]);
     // unset($filters[2]);
     $filters = array();
-    $byCountry = " country LIKE '".$byCountry."%'";
+    $byCountry = " country LIKE '" . $byCountry . "%'";
     // array_splice($filters, 1, 2);  
-    array_push($filters,$byCountry);
+    array_push($filters, $byCountry);
 }
-if($byName){
-    $byName = " name LIKE '".$byName."%'";
-    array_push($filters,$byName);
+if ($byName) {
+    $byName = " name LIKE '" . $byName . "%'";
+    array_push($filters, $byName);
 }
-if($byState){
-    $byState = " state LIKE '".$byState."%'";
-    array_push($filters,$byState);
+if ($byState) {
+    $byState = " state LIKE '" . $byState . "%'";
+    array_push($filters, $byState);
 }
-if($byCity){
-    $byCity = " district LIKE '".$byCity."%'";
-    array_push($filters,$byCity);
+if ($byCity) {
+    $byCity = " district LIKE '" . $byCity . "%'";
+    array_push($filters, $byCity);
 }
-if($byPhone){
-    $byPhone = " phone LIKE '".$byPhone."%'";
-    array_push($filters,$byPhone);
+if ($byPhone) {
+    $byPhone = " phone LIKE '" . $byPhone . "%'";
+    array_push($filters, $byPhone);
 }
-if($byEmail){
-    $byEmail = " email LIKE '%".$byEmail."%'";
-    array_push($filters,$byEmail);
+if ($byEmail) {
+    $byEmail = " email LIKE '%" . $byEmail . "%'";
+    array_push($filters, $byEmail);
 }
 
 // echo var_dump($filters);
-$newStr = $newStr.implode(" AND ", $filters);
+$newStr = $newStr . implode(" AND ", $filters);
 // echo ($newStr);
 
-$sql = "SELECT * FROM `users`  ".$newStr."  ORDER BY `id` DESC LIMIT ".$start." , ".$limit." ";
+$sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY `id` DESC LIMIT " . $start . " , " . $limit . " ";
 
 // echo $sql;
 // SELECT * FROM `users` WHERE phone LIKE '89%' AND name LIKE '%an%' ORDER BY `id` DESC LIMIT 3;
 $result = mysqli_query($conn, $sql);
 // if(($conn->num_rows = mysqli_num_rows($result)) == 0) echo "<div class='card p-3 text-center overflow-hidden'><h2 class = 'text-muted' > No result Found </h2> </div>";
 while ($row = mysqli_fetch_array($result)) {
-    
+
     $user_id = $row['id'];
     $country = $row['country'];
     $name = $row['name'];
@@ -78,12 +78,25 @@ while ($row = mysqli_fetch_array($result)) {
     $aniver_date = $row['aniver_date'];
     $message = $row['message'];
     $pic = $row['pic'];
+
+    $country_code = array(
+        "Australia"=>"61",
+        "Canada"=>"1",
+        "United Kingdom"=>"44",
+        "india"=>"91",
+        "Japan"=>"81",
+        "New Zealand"=>"64",
+        "United Arab Emirates"=>"971",
+        "United States"=>"1",
+    );
+    
+    $code = $country_code->$country;
+
     echo '
                             <div class="card p-0 overflow-hidden">
                                 <div class="d-flex picbg">
                                 <div style="width:25%" class="pic relative m-2">
-                                    <img style="border:2px solid white" class="absolute rounded-circle bg-white border-danger p-1" width="100%"
-                                    src="../imgs/' . $pic . '" alt="' . $pic . '">
+                                    <img style="border:2px solid white" class="absolute rounded-circle bg-white border-danger p-1" width="100%" style="aspect-ratio:1/1;" src="../imgs/' . $pic . '" alt="' . $pic . '">
                                     
                                 </div>
                                 <div style="width:67%" class="name d-flex flex-column justify-content-around">
@@ -97,7 +110,7 @@ while ($row = mysqli_fetch_array($result)) {
                                         </tr>
                                         <tr>
                                             <td>Phone:</td>
-                                            <td>' . $phone . '</td>
+                                            <td>('.$code.')' . $phone . '</td>
                                         </tr>
                                         <tr>
                                             <td>Email:</td>
