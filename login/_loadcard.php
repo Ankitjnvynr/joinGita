@@ -83,14 +83,14 @@ while ($row = mysqli_fetch_array($result)) {
         "Australia"=>"61",
         "Canada"=>"1",
         "United Kingdom"=>"44",
-        "india"=>"91",
+        "India"=>"91",
         "Japan"=>"81",
         "New Zealand"=>"64",
         "United Arab Emirates"=>"971",
         "United States"=>"1",
     );
     
-    $code = $country_code->$country;
+    $code = $country_code[$country];
 
     echo '
                             <div class="card p-0 overflow-hidden">
