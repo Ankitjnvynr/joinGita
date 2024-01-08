@@ -134,12 +134,12 @@ include("../partials/_db.php");
                 transform: scale(1);
             }
 
-            
+
 
             100% {
                 opacity: 0;
                 transform: scale(0);
-                
+
             }
         }
 
@@ -237,24 +237,25 @@ include("../partials/_db.php");
             </div>
             <div class="form-floating mb-3 ">
                 <input type="text" class="form-control filterInput" id="filterName" data-limit="5" data-start="5"
-                    placeholder="Enter" oninput="loadpics(0,5)">
+                    oninput="loadpics(0,5)">
                 <label for="filterName">Name</label>
             </div>
             <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter"
-                    oninput="loadpics(0,5)">
+                <input type="text" class="form-control filterInput" id="filterPhone" oninput="loadpics(0,5)"
+                    onchange="restwindowtop()">
                 <label for="filterPhone">Phone</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control filterInput" id="filterEmail" placeholder="name@example.com"
-                    oninput="loadpics(0,5)">
+                <input type="text" class="form-control filterInput" id="filterEmail" oninput="loadpics(0,5)">
                 <label for="filterEmail">Email address</label>
             </div>
         </div>
+        <div class="showing"></div>
     </div>
 
     <div class="container cardbox mt-4"></div>
-    <div class="container text-center my-3" id="load_data_message"></div>
+    <div class="container text-center my-3"><button class="btn btn-success" onclick="loadMore(5,5)" id="loadMore">Load
+            More</button></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -285,14 +286,14 @@ include("../partials/_db.php");
                 $('.totalCount').load('_totalProfiles.php');
             }, 3000);
 
-            
+
             function deleteScript() {
                 let dels = document.getElementsByClassName('del');
                 $.each(dels, function (e, item) {
                     $(item).off('click').on('click', function (e) {
                         cardid = $(this).attr('data-id');
                         if (confirm("Are you sure to Delete ?")) {
-                            a=item.parentElement.parentElement.parentElement
+                            a = item.parentElement.parentElement.parentElement
                             let imgd = {
                                 img: cardid
                             }
@@ -304,13 +305,13 @@ include("../partials/_db.php");
                                     // console.log(data)
                                     $('#toastmsg').text(data)
                                     toastBootstrap.show();
-                                    
+
                                     a.classList.add('op')
                                     setTimeout(() => {
-                                        a.style.display='none';
+                                        a.style.display = 'none';
                                     }, 1000);
                                     // loadpics(start, limit);
-                                    
+
                                 }
                             })
                         } else {
@@ -343,42 +344,79 @@ include("../partials/_db.php");
                     data: fltr,
                     success: function (response) {
                         // console.log(response)
-                        if (action == 'active') {
-                            $('.cardbox').append(response);
-                        } else {
-                            $('.cardbox').html(response)
-                        }
+                        $('.cardbox').html(response);
                         deleteScript()
+
+                    }
+                })
+                $.ajax({
+                    url: '_filteredCardsNumber.php',
+                    type: 'POST',
+                    // cache: false,
+                    data: fltr,
+                    success: function (response) {
+                        // console.log(response)
+                        $('.showing').html(response)
+
+                    }
+                })
+
+            }
+            loadMore = (start, limit) => {
+                let dels = document.getElementsByClassName('del');
+                start = dels.length;
+
+                var fltr = {
+                    filterName: $('#filterName').val(),
+                    phone: $('#filterPhone').val(),
+                    filterEmail: $('#filterEmail').val(),
+                    filterCountry: $('#countrySelect').val(),
+                    filterState: $('#stateSelect').val(),
+                    filterCity: $('#citySelect').val(),
+                    limit: limit,
+                    start: start,
+                }
+                $.ajax({
+                    url: '_loadcard.php',
+                    type: 'POST',
+                    // cache: false,
+                    data: fltr,
+                    success: function (response) {
                         if (response == '') {
-                            $('#load_data_message').html("<button type='button' class='btn btn-secondary'>No More Data Found</button>");
-                            action = 'active';
-                        }
-                        else {
-                            $('#load_data_message').html("<button type='button' class='btn btn-danger'>Please Wait....</button>");
-                            action = "inactive";
+                            $('#loadMore').html("No More Data")
+                        } else {
+                            $('.cardbox').append(response);
+                            deleteScript()
                         }
                     }
                 })
+
+
             }
             // loadpics()
-
+            resetTop = false;
+            restwindowtop = () => {
+                resetTop = true;
+            }
 
             if (action == 'inactive') {
                 action = 'active';
                 loadpics(start, limit);
             }
-            $(window).scroll(function () {
-                if ($(window).scrollTop() + $(window).height() > $(".cardbox").height() && action == 'inactive') {
-                    action = 'active';
-                    start = start + limit;
-                    setTimeout(function () {
-                        loadpics(start, limit);
-                        console.log(start, limit)
-                    }, 1000);
-                }
-            });
+            // $(window).scroll(function () {
+            //     if ($(window).scrollTop() + $(window).height() > $(".cardbox").height() && action == 'inactive') {
+            //         action = 'active';
+            //         if(resetTop){window. scrollTo(0,0), resetTop=false;}
+            //         start = start + limit;
+            //         setTimeout(function () {
+            //             loadpics(start, limit);
+            //             console.log(start, limit)
+            //         }, 1000);
+            //     }
+            // });
 
         })
+
     </script>
 </body>
 
