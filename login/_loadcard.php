@@ -110,7 +110,7 @@ while ($row = mysqli_fetch_array($result)) {
                                         </tr>
                                         <tr>
                                             <td>Phone:</td>
-                                            <td>('.$code.')' . $phone . '</td>
+                                            <td>' . $phone . '</td>
                                         </tr>
                                         <tr>
                                             <td>Email:</td>
@@ -130,7 +130,7 @@ while ($row = mysqli_fetch_array($result)) {
                                     </div>
                                     <p class="d-flex gap-3 flex-items-center justify-content-beteen px-2 m-0">
                                         <a href="tel:' . $phone . '"><i class="fa-solid fa-phone text-success fs-2"></i> </a>
-                                        <a href="https://wa.me/' . $phone . '?text=hello world!&file=../imgs/' . $pic . '
+                                        <a href="https://wa.me/'.$code . $phone . '?text=hello world!&file=../imgs/' . $pic . '
                                         " target="_blank"><i class="fa-solid fs-2  fa-brands fa-whatsapp text-success "></i></a>
                                         <a href="mailto:' . $email . '"><i class="fa-solid fs-2   fa-envelope text-success "></i></a>
                                     </p>
