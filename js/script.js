@@ -65,7 +65,7 @@
   // On state selection change, load respective cities
   stateSelect.addEventListener("change", function () {
     citySelect.disabled = false;
-    citySelect.innerHTML = '<option value="">-- Select City --</option>';
+    citySelect.innerHTML = '<option value="">-- Select District --</option>';
   
     var selectedState =
       stateSelect.options[stateSelect.selectedIndex].getAttribute("dataValue");

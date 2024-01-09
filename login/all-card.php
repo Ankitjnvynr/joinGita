@@ -250,10 +250,11 @@ include("../partials/_db.php");
                 <label for="filterEmail">Email address</label>
             </div>
         </div>
-        
+
     </div>
 
-    <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing<span class="showing"></span>/<span class="totalCount"></span></span></div>
+    <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing <span class="showing"></span>/<span
+                class="totalCount"></span></span></div>
     <div class="container cardbox mt-4"></div>
     <div class="container text-center my-3"><button class="btn btn-success" onclick="loadMore(5,5)" id="loadMore">Load
             More</button></div>
@@ -312,6 +313,27 @@ include("../partials/_db.php");
                                         a.style.display = 'none';
                                     }, 1000);
                                     // loadpics(start, limit);
+                                    var fltr = {
+                                        filterName: $('#filterName').val(),
+                                        phone: $('#filterPhone').val(),
+                                        filterEmail: $('#filterEmail').val(),
+                                        filterCountry: $('#countrySelect').val(),
+                                        filterState: $('#stateSelect').val(),
+                                        filterCity: $('#citySelect').val(),
+                                        limit: limit,
+                                        start: start,
+                                    }
+                                    $.ajax({
+                                        url: '_filteredCardsNumber.php',
+                                        type: 'POST',
+                                        // cache: false,
+                                        data: fltr,
+                                        success: function (response) {
+                                            // console.log(response)
+                                            $('.showing').html(response)
+
+                                        }
+                                    })
 
                                 }
                             })

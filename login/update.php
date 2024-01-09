@@ -156,13 +156,13 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="form-group col-md mb-3 fill">
           <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example" required>
             <option value="" disabled="" >--दीक्षित परिवार--</option>
-            <option value="<?php echo $dikshit ?> " aria-selected="false" selected=""><?php echo $dikshit ?> </option>
             <option value="Yes" aria-selected="false">Yes</option>
             <option value="No" aria-selected="false">No</option>
             <option value="No, but interested" aria-selected="false">No, but interested</option>
             <option value="<?php echo $dikshit ?>" selected><?php echo $dikshit ?></option>
           </select>
         </div>
+        <?php echo $dikshit ?>
         <div class="form-group col-md mb-3">
           <select name="married" id="married" class="form-control" onchange="aniver()" required>
             <option value="">-- select Marital Status --</option>
@@ -321,11 +321,24 @@ while ($row = mysqli_fetch_array($result)) {
     }
   }
   ?>
-  <script>
 
-
+ 
+  <?php
+    echo '
+    <script>
+      let cnntry = document.getElementById("countrySelect")
+      const newOption = new Option("'.$country.'","'.$country.'");
+      newOption.setAttribute("selected", "true");
+      cnntry.add(newOption,undefined);
+      
+      // let cnntry = document.getElementById("countrySelect")
+      // const newOption = new Option("'.$country.'","'.$country.'");
+      // newOption.setAttribute("selected", "true");
+      // cnntry.add(newOption,undefined);
   </script>
-
+    ';
+  ?>
+  
 </body>
 
 </html>
