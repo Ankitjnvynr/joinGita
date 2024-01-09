@@ -161,13 +161,13 @@
       <div class="row">
         <div class=" mb-3 col-md">
           <select id="stateSelect" name="state" class='form-control' required>
-            <option value="">-- Region --</option>
+            <option value="">-- State --</option>
           </select>
 
         </div>
         <div class=" mb-3 col-md">
           <select id="citySelect" name="district" class='form-control' required>
-            <option value="">-- City --</option>
+            <option value="">-- District --</option>
           </select>
 
         </div>
@@ -179,7 +179,7 @@
 
         <div class="form-floating mb-3 col-md">
           <input name="tehsil" type="text" class="form-control" placeholder="name@example.com" required>
-          <label for="floatingInput">Tehsil</label>
+          <label for="floatingInput">City</label>
         </div>
         <div class="form-floating mb-3 col-md">
           <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com" required>
