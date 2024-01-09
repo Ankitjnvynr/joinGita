@@ -127,19 +127,19 @@
 
         <div class="form-floating mb-3 col-md ">
           <input type="number" class="form-control" id="phone" name="phone" maxlength="20" placeholder="name@example.com" required>
-          <label for="floatingInput">Phone No(without country code)</label>
+          <label for="floatingInput">WhatsApp Number(without country code)</label>
         </div>
 
       </div>
       <div class="row">
         <div class="form-floating mb-3 col-md">
-          <input type="email" class="form-control" name="email" placeholder="name@example.com" required>
+          <input type="email" class="form-control" name="email" placeholder="name@example.com">
           <label for="floatingInput">Email </label>
         </div>
-        <div class="form-floating mb-3 col-md">
+        <!-- <div class="form-floating mb-3 col-md">
           <input type="number" class="form-control" name="whatsapp" placeholder="name@example.com" required>
           <label for="floatingInput">WhatsApp Number</label>
-        </div>
+        </div> -->
       </div>
       <div class="row">
         <div class="form-group col-md mb-3 fill">
@@ -262,10 +262,10 @@
 
         </div>
       </div>
-      <div class="form-floating mb-3 col-md ">
+      <!-- <div class="form-floating mb-3 col-md ">
         <textarea name="message" class="form-control" name="message" id="" col-mds="30" rows="30"></textarea>
         <label for="floatingInput">Message(if any)</label>
-      </div>
+      </div> -->
       <div class="d-flex justify-content-center"><button name="submit" type="submit" class="btn btn-danger p-4 py-2 p"><b>Join Now</b></button></div>
   </div>
   </form>
