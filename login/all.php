@@ -160,9 +160,18 @@ include("../partials/_db.php");
                 <tr>
                     <th>sr</th>
                     <th>Name</th>
-                    <th>Name</th>
-                    <th>Name</th>
-                    
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Dikshit</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Interest</th>
+                    <th>Occupation</th>
+                    <th>Education</th>
+                    <th>DOB</th>
+                    <th>Anniversary</th>
+
                     <!-- Add more columns based on your table structure -->
                 </tr>
             </thead>
@@ -207,6 +216,15 @@ include("../partials/_db.php");
                     { "data": "name" },
                     { "data": "phone" },
                     { "data": "email" },
+                    { "data": "dikshit" },
+                    { "data": "country" },
+                    { "data": "state" },
+                    { "data": "district" },
+                    { "data": "interest" },
+                    { "data": "occupation" },
+                    { "data": "education" },
+                    { "data": "dob" },
+                    { "data": "aniver_date" },
                     // Add more columns based on your table structure
                 ],
                 // "columnDefs": [
@@ -216,6 +234,10 @@ include("../partials/_db.php");
                 //         "searchable": false
                 //     }
                 // ]
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
 
