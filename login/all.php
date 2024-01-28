@@ -205,41 +205,107 @@ include("../partials/_db.php");
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <!-- ------------------data table end -------------- -->
     <script>
+        
         $(document).ready(function () {
-            $('#myTable').DataTable({
-                "ajax": {
-                    "url": "_loadTable.php",
-                    "dataSrc": ""
-                },
-                "columns": [
-                    { "data": "id" },
-                    { "data": "name" },
-                    { "data": "phone" },
-                    { "data": "email" },
-                    { "data": "dikshit" },
-                    { "data": "country" },
-                    { "data": "state" },
-                    { "data": "district" },
-                    { "data": "interest" },
-                    { "data": "occupation" },
-                    { "data": "education" },
-                    { "data": "dob" },
-                    { "data": "aniver_date" },
-                    // Add more columns based on your table structure
-                ],
-                // "columnDefs": [
-                //     {
-                //         "targets": [0, 2], // Indexes of columns to hide (starting from 0)
-                //         "visible": false,
-                //         "searchable": false
-                //     }
-                // ]
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            });
+            // $('#myTable').DataTable({
+            //     "ajax": {
+            //         "url": "_loadTable.php",
+
+            //         "dataSrc": ""
+            //     },
+            //     "columns": [
+            //         { "data": "id" },
+            //         { "data": "name" },
+            //         { "data": "phone" },
+            //         { "data": "email" },
+            //         { "data": "dikshit" },
+            //         { "data": "country" },
+            //         { "data": "state" },
+            //         { "data": "district" },
+            //         { "data": "interest" },
+            //         { "data": "occupation" },
+            //         { "data": "education" },
+            //         { "data": "dob" },
+            //         { "data": "aniver_date" },
+            //         // Add more columns based on your table structure
+            //     ],
+            //     // "columnDefs": [
+            //     //     {
+            //     //         "targets": [0, 2], // Indexes of columns to hide (starting from 0)
+            //     //         "visible": false,
+            //     //         "searchable": false
+            //     //     }
+            //     // ]
+            //     dom: 'Bfrtip',
+            //     buttons: [
+            //         'copy', 'csv', 'excel', 'pdf', 'print'
+            //     ]
+            // });
         });
+
+    </script>
+    <script>
+        loadpics = () => {
+    var fltr = {
+        filterName: $('#filterName').val(),
+        phone: $('#filterPhone').val(),
+        filterEmail: $('#filterEmail').val(),
+        filterCountry: $('#countrySelect').val(),
+        filterState: $('#stateSelect').val(),
+        filterCity: $('#citySelect').val(),
+    };
+
+    // Clear existing data in the DataTable
+    $('#myTable').DataTable().clear();
+
+    // Fetch new data using AJAX and add it to the DataTable
+    $.ajax({
+        url: "_loadTable.php",
+        type: "GET",
+        data: fltr,
+        dataType: "json",
+        success: function (data) {
+            // Add the fetched data to the DataTable
+            $('#myTable').DataTable().rows.add(data);
+
+            // Draw the updated DataTable
+            $('#myTable').DataTable().draw();
+        }
+    });
+};
+
+$(document).ready(function () {
+    // Initialize DataTable with initial data
+    $('#myTable').DataTable({
+        "ajax": {
+            "url": "_loadTable.php",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "phone" },
+            { "data": "email" },
+            { "data": "dikshit" },
+            { "data": "country" },
+            { "data": "state" },
+            { "data": "district" },
+            { "data": "interest" },
+            { "data": "occupation" },
+            { "data": "education" },
+            { "data": "dob" },
+            { "data": "aniver_date" },
+            // Add more columns based on your table structure
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+
+    // Call loadpics function when the page is loaded
+    loadpics();
+});
 
     </script>
 
