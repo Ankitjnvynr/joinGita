@@ -1,5 +1,6 @@
 {
-  "cities": [{
+  "cities": [
+    {
       "id": "1",
       "name": "Bombuflat",
       "state_id": "1"
@@ -5480,73 +5481,8 @@
       "state_id": "13"
     },
     {
-      "id": "1097",
-      "name": "Ambala Cantt",
-      "state_id": "13"
-    },
-    {
-      "id": "1098",
-      "name": "Asan Khurd",
-      "state_id": "13"
-    },
-    {
-      "id": "1099",
-      "name": "Asandh",
-      "state_id": "13"
-    },
-    {
-      "id": "1100",
-      "name": "Ateli",
-      "state_id": "13"
-    },
-    {
-      "id": "1101",
-      "name": "Babiyal",
-      "state_id": "13"
-    },
-    {
-      "id": "1102",
-      "name": "Bahadurgarh",
-      "state_id": "13"
-    },
-    {
-      "id": "1103",
-      "name": "Ballabgarh",
-      "state_id": "13"
-    },
-    {
-      "id": "1104",
-      "name": "Barwala",
-      "state_id": "13"
-    },
-    {
-      "id": "1105",
-      "name": "Bawal",
-      "state_id": "13"
-    },
-    {
-      "id": "1106",
-      "name": "Bawani Khera",
-      "state_id": "13"
-    },
-    {
-      "id": "1107",
-      "name": "Beri",
-      "state_id": "13"
-    },
-    {
       "id": "1108",
       "name": "Bhiwani",
-      "state_id": "13"
-    },
-    {
-      "id": "1109",
-      "name": "Bilaspur",
-      "state_id": "13"
-    },
-    {
-      "id": "1110",
-      "name": "Buria",
       "state_id": "13"
     },
     {
@@ -5555,98 +5491,13 @@
       "state_id": "13"
     },
     {
-      "id": "1112",
-      "name": "Chhachhrauli",
-      "state_id": "13"
-    },
-    {
-      "id": "1113",
-      "name": "Chita",
-      "state_id": "13"
-    },
-    {
-      "id": "1114",
-      "name": "Dabwali",
-      "state_id": "13"
-    },
-    {
-      "id": "1115",
-      "name": "Dharuhera",
-      "state_id": "13"
-    },
-    {
-      "id": "1116",
-      "name": "Dundahera",
-      "state_id": "13"
-    },
-    {
-      "id": "1117",
-      "name": "Ellenabad",
-      "state_id": "13"
-    },
-    {
-      "id": "1118",
-      "name": "Farakhpur",
-      "state_id": "13"
-    },
-    {
       "id": "1119",
       "name": "Faridabad",
       "state_id": "13"
     },
     {
-      "id": "1120",
-      "name": "Farrukhnagar",
-      "state_id": "13"
-    },
-    {
       "id": "1121",
       "name": "Fatehabad",
-      "state_id": "13"
-    },
-    {
-      "id": "1122",
-      "name": "Firozpur Jhirka",
-      "state_id": "13"
-    },
-    {
-      "id": "1123",
-      "name": "Gannaur",
-      "state_id": "13"
-    },
-    {
-      "id": "1124",
-      "name": "Ghraunda",
-      "state_id": "13"
-    },
-    {
-      "id": "1125",
-      "name": "Gohana",
-      "state_id": "13"
-    },
-    {
-      "id": "1126",
-      "name": "Gurgaon",
-      "state_id": "13"
-    },
-    {
-      "id": "1127",
-      "name": "Haileymandi",
-      "state_id": "13"
-    },
-    {
-      "id": "1128",
-      "name": "Hansi",
-      "state_id": "13"
-    },
-    {
-      "id": "1129",
-      "name": "Hasanpur",
-      "state_id": "13"
-    },
-    {
-      "id": "1130",
-      "name": "Hathin",
       "state_id": "13"
     },
     {
@@ -5656,27 +5507,7 @@
     },
     {
       "id": "1132",
-      "name": "Hissar",
-      "state_id": "13"
-    },
-    {
-      "id": "1133",
-      "name": "Hodal",
-      "state_id": "13"
-    },
-    {
-      "id": "1134",
-      "name": "Indri",
-      "state_id": "13"
-    },
-    {
-      "id": "1135",
-      "name": "Jagadhri",
-      "state_id": "13"
-    },
-    {
-      "id": "1136",
-      "name": "Jakhal Mandi",
+      "name": "Gurugram",
       "state_id": "13"
     },
     {
@@ -5690,48 +5521,8 @@
       "state_id": "13"
     },
     {
-      "id": "1139",
-      "name": "Julana",
-      "state_id": "13"
-    },
-    {
       "id": "1140",
       "name": "Kaithal",
-      "state_id": "13"
-    },
-    {
-      "id": "1141",
-      "name": "Kalanur",
-      "state_id": "13"
-    },
-    {
-      "id": "1142",
-      "name": "Kalanwali",
-      "state_id": "13"
-    },
-    {
-      "id": "1143",
-      "name": "Kalayat",
-      "state_id": "13"
-    },
-    {
-      "id": "1144",
-      "name": "Kalka",
-      "state_id": "13"
-    },
-    {
-      "id": "1145",
-      "name": "Kanina",
-      "state_id": "13"
-    },
-    {
-      "id": "1146",
-      "name": "Kansepur",
-      "state_id": "13"
-    },
-    {
-      "id": "1147",
-      "name": "Kardhan",
       "state_id": "13"
     },
     {
@@ -5740,83 +5531,13 @@
       "state_id": "13"
     },
     {
-      "id": "1149",
-      "name": "Kharkhoda",
-      "state_id": "13"
-    },
-    {
-      "id": "1150",
-      "name": "Kheri Sampla",
-      "state_id": "13"
-    },
-    {
-      "id": "1151",
-      "name": "Kundli",
-      "state_id": "13"
-    },
-    {
       "id": "1152",
       "name": "Kurukshetra",
       "state_id": "13"
     },
     {
-      "id": "1153",
-      "name": "Ladrawan",
-      "state_id": "13"
-    },
-    {
-      "id": "1154",
-      "name": "Ladwa",
-      "state_id": "13"
-    },
-    {
-      "id": "1155",
-      "name": "Loharu",
-      "state_id": "13"
-    },
-    {
-      "id": "1156",
-      "name": "Maham",
-      "state_id": "13"
-    },
-    {
       "id": "1157",
       "name": "Mahendragarh",
-      "state_id": "13"
-    },
-    {
-      "id": "1158",
-      "name": "Mustafabad",
-      "state_id": "13"
-    },
-    {
-      "id": "1159",
-      "name": "Nagai Chaudhry",
-      "state_id": "13"
-    },
-    {
-      "id": "1160",
-      "name": "Narayangarh",
-      "state_id": "13"
-    },
-    {
-      "id": "1161",
-      "name": "Narnaul",
-      "state_id": "13"
-    },
-    {
-      "id": "1162",
-      "name": "Narnaund",
-      "state_id": "13"
-    },
-    {
-      "id": "1163",
-      "name": "Narwana",
-      "state_id": "13"
-    },
-    {
-      "id": "1164",
-      "name": "Nilokheri",
       "state_id": "13"
     },
     {
@@ -5840,61 +5561,6 @@
       "state_id": "13"
     },
     {
-      "id": "1169",
-      "name": "Panipat Taraf Ansar",
-      "state_id": "13"
-    },
-    {
-      "id": "1170",
-      "name": "Panipat Taraf Makhdum Zadgan",
-      "state_id": "13"
-    },
-    {
-      "id": "1171",
-      "name": "Panipat Taraf Rajputan",
-      "state_id": "13"
-    },
-    {
-      "id": "1172",
-      "name": "Pehowa",
-      "state_id": "13"
-    },
-    {
-      "id": "1173",
-      "name": "Pinjaur",
-      "state_id": "13"
-    },
-    {
-      "id": "1174",
-      "name": "Punahana",
-      "state_id": "13"
-    },
-    {
-      "id": "1175",
-      "name": "Pundri",
-      "state_id": "13"
-    },
-    {
-      "id": "1176",
-      "name": "Radaur",
-      "state_id": "13"
-    },
-    {
-      "id": "1177",
-      "name": "Raipur Rani",
-      "state_id": "13"
-    },
-    {
-      "id": "1178",
-      "name": "Rania",
-      "state_id": "13"
-    },
-    {
-      "id": "1179",
-      "name": "Ratiya",
-      "state_id": "13"
-    },
-    {
       "id": "1180",
       "name": "Rewari",
       "state_id": "13"
@@ -5905,113 +5571,13 @@
       "state_id": "13"
     },
     {
-      "id": "1182",
-      "name": "Ropar",
-      "state_id": "13"
-    },
-    {
-      "id": "1183",
-      "name": "Sadauri",
-      "state_id": "13"
-    },
-    {
-      "id": "1184",
-      "name": "Safidon",
-      "state_id": "13"
-    },
-    {
-      "id": "1185",
-      "name": "Samalkha",
-      "state_id": "13"
-    },
-    {
-      "id": "1186",
-      "name": "Sankhol",
-      "state_id": "13"
-    },
-    {
-      "id": "1187",
-      "name": "Sasauli",
-      "state_id": "13"
-    },
-    {
-      "id": "1188",
-      "name": "Shahabad",
-      "state_id": "13"
-    },
-    {
       "id": "1189",
       "name": "Sirsa",
       "state_id": "13"
     },
     {
-      "id": "1190",
-      "name": "Siwani",
-      "state_id": "13"
-    },
-    {
-      "id": "1191",
-      "name": "Sohna",
-      "state_id": "13"
-    },
-    {
       "id": "1192",
       "name": "Sonipat",
-      "state_id": "13"
-    },
-    {
-      "id": "1193",
-      "name": "Sukhrali",
-      "state_id": "13"
-    },
-    {
-      "id": "1194",
-      "name": "Taoru",
-      "state_id": "13"
-    },
-    {
-      "id": "1195",
-      "name": "Taraori",
-      "state_id": "13"
-    },
-    {
-      "id": "1196",
-      "name": "Tauru",
-      "state_id": "13"
-    },
-    {
-      "id": "1197",
-      "name": "Thanesar",
-      "state_id": "13"
-    },
-    {
-      "id": "1198",
-      "name": "Tilpat",
-      "state_id": "13"
-    },
-    {
-      "id": "1199",
-      "name": "Tohana",
-      "state_id": "13"
-    },
-    {
-      "id": "1200",
-      "name": "Tosham",
-      "state_id": "13"
-    },
-    {
-      "id": "1201",
-      "name": "Uchana",
-      "state_id": "13"
-    },
-    {
-      "id": "1202",
-      "name": "Uklana Mandi",
-      "state_id": "13"
-    },
-    {
-      "id": "1203",
-      "name": "Uncha Siwana",
       "state_id": "13"
     },
     {

@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="style.css" />
   <title>Join GIEO Gita</title>
   <style>
-    .loading{
+    .loading {
       height: 100vh;
       width: 100%;
       display: flex;
@@ -50,20 +50,26 @@
       top: 0;
       scroll-behavior: none;
     }
-    .l-box{
+
+    .l-box {
       height: 100px;
       width: 100px;
-      border-top: 5px solid green ;
+      border-top: 5px solid green;
       /* border-right: 5px solid red ; */
       border-radius: 50%;
       /* transition: all 0.1s ease-in-out; */
       animation: rotation 1s infinite;
     }
+
     @keyframes rotation {
+
       /* from{transform: rotate(0deg);} */
-      to{transform: rotate(360deg);}
+      to {
+        transform: rotate(360deg);
+      }
     }
-    .ov{
+
+    .ov {
       /* overflow: hidden; */
     }
   </style>
@@ -136,18 +142,38 @@
           <input type="email" class="form-control" name="email" placeholder="name@example.com">
           <label for="floatingInput">Email </label>
         </div>
-        <!-- <div class="form-floating mb-3 col-md">
-          <input type="number" class="form-control" name="whatsapp" placeholder="name@example.com" required>
-          <label for="floatingInput">WhatsApp Number</label>
-        </div> -->
-      </div>
-      <div class="row">
         <div class="form-group col-md mb-3 fill">
           <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example" required>
             <option value="" disabled="" selected="">--दीक्षित परिवार--</option>
             <option value="Yes" aria-selected="false">Yes</option>
             <option value="No" aria-selected="false">No</option>
             <option value="No, but interested" aria-selected="false">No, but interested</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+
+
+      </div>
+      <div class="row">
+        <div class=" mb-3 col-md">
+          <select id="stateSelect" name="state" class='form-control'>
+            <option value="">-- State --</option>
+          </select>
+
+        </div>
+        <div class=" mb-3 col-md">
+          <select id="citySelect" name="district" class='form-control'>
+            <option value="">-- District --</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class=" mb-3 col-md">
+          <select name="tehsil" id="tehsilSelect" class="form-control">
+            <option value="">-- Tehsil --</option>
           </select>
         </div>
         <div class="form-group col-md mb-3">
@@ -157,34 +183,20 @@
             <option value="Unmarried" aria-selected="false">Unmarried</option>
           </select>
         </div>
+        
       </div>
-      <div class="row">
-        <div class=" mb-3 col-md">
-          <select id="stateSelect" name="state" class='form-control' required>
-            <option value="">-- State --</option>
-          </select>
-
-        </div>
-        <div class=" mb-3 col-md">
-          <select id="citySelect" name="district" class='form-control' required>
-            <option value="">-- District --</option>
-          </select>
-
-        </div>
-      </div>
-
-
-
       <div class="row">
 
         <div class="form-floating mb-3 col-md">
-          <input name="tehsil" type="text" class="form-control" placeholder="name@example.com" required>
-          <label for="floatingInput">City</label>
+          <input name="city" type="text" class="form-control" id="city" placeholder="name@example.com" required>
+          <label for="city">City</label>
         </div>
+        
         <div class="form-floating mb-3 col-md">
           <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com" required>
           <label for="Village">Address</label>
         </div>
+
       </div>
 
       <div class="row">
@@ -252,7 +264,9 @@
           <input name="dob" type="date" class="form-control" required>
           <label for="dob">Birth Date</label>
         </div>
+
       </div>
+
       <div class="row">
 
         <div id="aniversry" class="form-floating mb-3 col-md">
@@ -307,7 +321,7 @@
   }
   ?>
   <script>
-    
+
 
   </script>
 
