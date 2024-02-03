@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_array($result)) {
     $country = $row['country'];
     $name = $row['name'];
     $phone = $row['phone'];
-    $whatsapp = $row['whtsapp'];
+    $designation = $row['designation'];
     $email = $row['email'];
     $dikshit = $row['dikshit'];
     $marital_status = $row['marital_status'];
@@ -80,16 +80,17 @@ while ($row = mysqli_fetch_array($result)) {
     $pic = $row['pic'];
 
     $country_code = array(
-        "Australia"=>"61",
-        "Canada"=>"1",
-        "United Kingdom"=>"44",
-        "India"=>"91",
-        "Japan"=>"81",
-        "New Zealand"=>"64",
-        "United Arab Emirates"=>"971",
-        "United States"=>"1",
+        "Australia" => "61",
+        "Canada" => "1",
+        "United Kingdom" => "44",
+        "India" => "91",
+        "Japan" => "81",
+        "New Zealand" => "64",
+        "United Arab Emirates" => "971",
+        "United States" => "1",
+        "UK" => "1",
     );
-    
+
     $code = $country_code[$country];
 
     echo '
@@ -130,7 +131,7 @@ while ($row = mysqli_fetch_array($result)) {
                                     </div>
                                     <p class="d-flex gap-3 flex-items-center justify-content-beteen px-2 m-0">
                                         <a href="tel:' . $phone . '"><i class="fa-solid fa-phone text-success fs-2"></i> </a>
-                                        <a href="https://wa.me/'.$code . $phone . '?text=hello world!&file=../imgs/' . $pic . '
+                                        <a href="https://wa.me/' . $code . $phone . '?text=hello world!&file=../imgs/' . $pic . '
                                         " target="_blank"><i class="fa-solid fs-2  fa-brands fa-whatsapp text-success "></i></a>
                                         <a href="mailto:' . $email . '"><i class="fa-solid fs-2   fa-envelope text-success "></i></a>
                                     </p>
@@ -138,5 +139,3 @@ while ($row = mysqli_fetch_array($result)) {
                             </div>
                             ';
 }
-
-?>

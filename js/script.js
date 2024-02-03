@@ -31,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
           option.textContent = country.name;
           option.setAttribute("dataValue", country.id);
           option.setAttribute("sortname", country.sortname);
+          if(country.id=='101'){
+            
+            option.setAttribute("selected", "true");
+          }
           // option.dataValue = country.id;
           countrySelect.appendChild(option);
         }
@@ -47,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let AllSelect = document.querySelectorAll('select');
       Array.from(Allinput).forEach((e)=>{
         e.setAttribute('required', '');
-        console.log(e)
+        // console.log(e)
       })
       Array.from(AllSelect).forEach((e)=>{
         e.setAttribute('required', '');

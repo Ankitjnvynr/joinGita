@@ -176,20 +176,14 @@
             <option value="">-- Tehsil --</option>
           </select>
         </div>
-        <div class="form-group col-md mb-3">
-          <select name="married" id="married" class="form-control" onchange="aniver()" required>
-            <option value="">-- select Marital Status --</option>
-            <option value="Married" aria-selected="false">Married</option>
-            <option value="Unmarried" aria-selected="false">Unmarried</option>
-          </select>
-        </div>
+        
         
       </div>
       <div class="row">
 
         <div class="form-floating mb-3 col-md">
           <input name="city" type="text" class="form-control" id="city" placeholder="name@example.com" required>
-          <label for="city">City</label>
+          <label for="city">City/Village</label>
         </div>
         
         <div class="form-floating mb-3 col-md">
@@ -235,6 +229,18 @@
           </select>
         </div>
 
+      </div>
+      <div class="row">
+        
+      <div class="form-group col-md mb-3">
+          <select name="married" id="married" class="form-control" onchange="aniver()" required>
+            <option value="">-- select Marital Status --</option>
+            <option value="Married" aria-selected="false">Married</option>
+            <option value="Unmarried" aria-selected="false">Unmarried</option>
+          </select>
+        </div>
+        <div  class="form-floating mb-3 col-md">
+        </div>
       </div>
       <div class="row">
         

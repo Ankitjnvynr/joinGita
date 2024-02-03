@@ -68,6 +68,7 @@ $name = $row['name'];
 $district = $row['district'];
 $phone = $row['phone'];
 $wing = $row['interest'];
+$designation = $row['designation'];
 
 ?>
 <!doctype html>
@@ -173,7 +174,10 @@ $wing = $row['interest'];
                             </tr>
                             <tr>
                                 <th scope="row">Designation</th>
-                                <td colspan="2">सदस्य</td>
+                                <td colspan="2">
+                                    
+                                    <?php echo $designation; ?>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
