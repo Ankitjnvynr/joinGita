@@ -36,7 +36,7 @@
               $country = $foo[$count][2];
               $name = $foo[$count][3];
               $phone = $foo[$count][4];
-              $whatsapp = $foo[$count][5];
+              $designation = ($foo[$count][5]=='') ? 'Member':$foo[$count][5];
               $email = $foo[$count][6];
               $dikshit = $foo[$count][7];
               $married = $foo[$count][8];
@@ -53,7 +53,7 @@
 
               $hash_id = md5($phone);
 
-              $query = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
+              $query = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `designation`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$designation','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
 
               try {
                 $sr++;

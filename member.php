@@ -62,7 +62,7 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 if (!$row) {
     echo "not";
-    header("location:view-profile.php?pnot=true");
+    // header("location:view-profile.php?pnot=true");
 }
 $name = $row['name'];
 $district = $row['district'];
@@ -320,7 +320,7 @@ $designation = $row['designation'];
                 <div class="col-md d-flex justify-content-center flex-column align-items-center">
                     <h3 class="fw-bold">​मासिक प्रवास</h3>
                     <div class="my-2">
-                        <img height="400px" class="rounded-3 shadow-lg" src="masik_parwas/<?php
+                        <img width="100%" class="rounded-3 shadow-lg" src="masik_parwas/<?php
                         $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_array($result);
@@ -330,7 +330,7 @@ $designation = $row['designation'];
                 </div>
                 <div class="col-md d-flex flex-column justify-content-center align-items-center">
                     <h3 class="fw-bold">VIDEOS</h3>
-                    <video src="imgs/file.mp4" height="400px" class="object-fit-cover rounded-3 shadow-lg"
+                    <video src="imgs/file.mp4" width="100%" class="object-fit-cover rounded-3 shadow-lg"
                         controls></video>
                 </div>
             </div>
