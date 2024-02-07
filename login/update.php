@@ -10,7 +10,7 @@ while ($row = mysqli_fetch_array($result)) {
   $country = $row['country'];
   $name = $row['name'];
   $phone = $row['phone'];
-  $whatsapp = $row['whtsapp'];
+  $designation = $row['designation'];
   $email = $row['email'];
   $dikshit = $row['dikshit'];
   $marital_status = $row['marital_status'];
@@ -155,7 +155,7 @@ while ($row = mysqli_fetch_array($result)) {
       <div class="row">
         <div class="form-group col-md mb-3 fill">
           <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example" required>
-            <option value="" disabled="" >--दीक्षित परिवार--</option>
+            <option value=" " >--दीक्षित परिवार--</option>
             <option value="Yes" aria-selected="false">Yes</option>
             <option value="No" aria-selected="false">No</option>
             <option value="No, but interested" aria-selected="false">No, but interested</option>
@@ -168,7 +168,7 @@ while ($row = mysqli_fetch_array($result)) {
             <option value="">-- select Marital Status --</option>
             <option value="Married" aria-selected="false">Married</option>
             <option value="Unmarried" aria-selected="false">Unmarried</option>
-            <option value="<?php echo$marital_status ?>" aria-selected="false" selected><?php echo$marital_status ?></option>
+            <option value="<?php echo $marital_status ?>" aria-selected="false" selected><?php echo $marital_status ?></option>
           </select>
         </div>
       </div>

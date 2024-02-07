@@ -88,7 +88,9 @@ while ($row = mysqli_fetch_array($result)) {
         "New Zealand" => "64",
         "United Arab Emirates" => "971",
         "United States" => "1",
-        "UK" => "1",
+        "USA" => "1",
+        "UK" => "+44",
+        "England" => "+44",
     );
 
     $code = $country_code[$country];

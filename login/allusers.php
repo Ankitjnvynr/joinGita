@@ -97,6 +97,7 @@ include("../partials/_db.php");
             <a class="btn btn-danger" href="alluser.php">Report</a>
         </div>
     </div>
+    <?php include'_options.php'; ?>
     <div class="container">
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
             <div class="form-floating mb-3 ">
