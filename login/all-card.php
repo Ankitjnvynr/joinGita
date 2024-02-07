@@ -280,7 +280,7 @@ include("../partials/_db.php");
     <script>
 
         $(document).ready(function () {
-            var limit = 5;
+            var limit = 50;
             var start = 0;
 
             $('.totalCount').load('_totalProfiles.php');

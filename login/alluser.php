@@ -153,16 +153,38 @@ include("../partials/_db.php");
                 </div>
             </div>
         </div>
-        <div id="tble" class="allList" style="overflow-x:scroll">
+        <!-- <div id="tble" class="allList" style="overflow-x:scroll"> -->
+
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>sr</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Dikshit</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Interest</th>
+                    <th>Occupation</th>
+                    <th>Education</th>
+                    <th>DOB</th>
+                    <th>Anniversary</th>
+
+                    <!-- Add more columns based on your table structure -->
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
 
 
 
-            
 
 
-                
-        </div>
+
+    </div>
 
     </div>
 
@@ -174,47 +196,50 @@ include("../partials/_db.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="filterselect.js"></script>
     <!-- ------------------data table cdn -------------- -->
-     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+
+
     <!-- ------------------data table end -------------- -->
     <script>
-        loadpics = () => {
-            // byPhone = document.getElementById('filterPhone');
-            console.log($('#filterPhone').val())
-            var fltr = {
-                filterName: $('#filterName').val(),
-                phone: $('#filterPhone').val(),
-                filterEmail: $('#filterEmail').val(),
-                filterCountry: $('#countrySelect').val(),
-                filterState: $('#stateSelect').val(),
-                filterCity: $('#citySelect').val(),
-            }
-            $.ajax({
-                url: '_loaduser.php',
-                type: 'POST',
-                data: fltr,
-                success: function (response) {
-                    $('.allList').html(response)
-                    $('#myTable').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: [
-                            'copy', 'csv', 'excel', 'pdf', 'print'
-                        ]
-                    });
-                }
-            })
-        }
         $(document).ready(function () {
-            loadpics();
-
-
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "_loadTable.php",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "phone" },
+                    { "data": "email" },
+                    { "data": "dikshit" },
+                    { "data": "country" },
+                    { "data": "state" },
+                    { "data": "district" },
+                    { "data": "interest" },
+                    { "data": "occupation" },
+                    { "data": "education" },
+                    { "data": "dob" },
+                    { "data": "aniver_date" }
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                select: true, 
+                searchBuilder: true,
+            });
         });
+
     </script>
+
 
 
 </body>
