@@ -18,25 +18,25 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     $country = $_POST["country"];
     $name = $_POST["name"];
     $email = $_POST["email"];
-    $whatsapp = $_POST["whatsapp"];
+   
     $dikshit = $_POST["dikshit"];
     $married = $_POST["married"];
     $state = $_POST["state"];
     $district = $_POST["district"];
     $tehsil = $_POST["tehsil"];
     $address = $_POST["address"];
-    $intrest = $_POST["intrest"];
+
     $occupation = $_POST["occupation"];
     $education = $_POST["education"];
     $dob = $_POST["dob"];
-    $message = $_POST["message"];
+
     $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
     $hash_id = md5($phone);
     
     
 
     // Use prepared statements to insert data
-    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `whtsapp`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$whatsapp','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
+    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`,  `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `occupation`, `education`, `dob`, `aniver_date`) VALUES ('$hash_id','$country','$name','$phone','$email','$dikshit','$married','$state','$district','$tehsil','$address','$occupation','$education','$dob','$aniver_date')";
 
     try{
         $result = mysqli_query($conn,$sql);
@@ -51,12 +51,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
       if($err){
         echo $err;
         echo "hii";
-        header("location:index.php?dphoneExiit=true");
+        // header("location:index.php?dphoneExiit=true");
         exit;
       }
     }
 }
-header("location:index.php");
+// header("location:index.php");
 echo "cher";
 
 $conn->close();
