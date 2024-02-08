@@ -89,7 +89,7 @@
             $country = $row['country'];
             $name = $row['name'];
             $phone = $row['phone'];
-            $whatsapp = $row['whtsapp'];
+            $designation = $row['designation'];
             $email = $row['email'];
             $dikshit = $row['dikshit'];
             $marital_status = $row['marital_status'];
@@ -109,7 +109,7 @@
                             <td>' . $country . '</td>
                             <td>' . $name . '</td>
                             <td>' . $phone . '</td>
-                            <td>' . $whatsapp . '</td>
+                            <td>' . $designation . '</td>
                             <td>' . $email . '</td>
                             <td>' . $dikshit . '</td>
                             <td>' . $marital_status . '</td>
