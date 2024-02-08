@@ -11,10 +11,11 @@ $birthday = null;
 
 
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['bdaySubmit'])) {
+    echo "bday";
     $birthday = true;
-    $birthDate = $_POST['birthDate'];
-    $birthMonth = $_POST['birthMonth'];
+    $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
+    $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
 
     $query = "SELECT * FROM users WHERE MONTH(dob) = $birthDate AND DAY(dob) = $birthMonth";
     $result = mysqli_query($conn, $query);
@@ -24,8 +25,8 @@ if (isset($_POST['submit'])) {
     $msgresult = mysqli_query($conn, $msgsql);
     $msgrow = mysqli_fetch_assoc($msgresult);
     $message = $msgrow['msg'];
-
 }
+
 if (isset($_POST['aniSubmit'])) {
     $birthday = false;
     $birthDate = $_POST['aniDate'];
@@ -146,16 +147,81 @@ $country_code = array(
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Messages</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
+                <div class="modal-body d-flex flex-column gap-2">
+
+                    <?php
+                    $sql = "SELECT * FROM `messages`";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo '
+                                <div class="card">
+                                    <h5 class="card-header">' . $row['title'] . '</h5>
+                                    <div class="card-body">
+                                        <div class="form-floating">
+                                            <textarea onkeyup="updateContent(this, ' . $row['sr'] . ')"  class="form-control" style="height: 100px">' . $row['msg'] . '</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            ';
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    ?>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+
                 </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    if (isset($_POST['newmsgSubmit'])) {
+        $newmsgtitle = $_POST['newmsgtitle'];
+        $newmsg = $_POST['newmsg'];
+
+        // Establish database connection (assuming $conn is your database connection object)
+    
+        $sql = "INSERT INTO `messages` (`title`, `msg`) VALUES ('$newmsgtitle', '$newmsg')";
+        $result = $conn->query($sql); // Execute the SQL query using $conn->query()
+        if ($result) {
+            echo "added";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+    ?>
+
+    <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="" method="POST">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Messages</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-2">
+                        <div class="form-control">
+                            <input class="form-control" name="newmsgtitle" placeholder="Title" type="text">
+                        </div>
+                        <div class="form-control">
+                            <textarea class="form-control" name="newmsg" id="" placeholder=" Enter Message" cols="10"
+                                rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="newmsgSubmit" class="btn btn-danger">Add</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -178,41 +244,47 @@ $country_code = array(
     <div class="container">
         <div class="row my-3 ">
             <div class="col-md ">
-                <form class="mt-3 bg-warning-subtle p-2 rounded shadow-sm" action="" method="POST">
-                    <div class="row">
-                        <div class="col">
+                <form class="mt-3 bg-warning-subtle px-2 rounded shadow-sm" action="" method="POST">
+                    <div class="row d-flex flex-wrap ">
+                        <div class="col my-2">
                             <input type="number" name="birthDate" class="form-control" placeholder="Enter Date"
                                 aria-label="First name" oninput="validateDate(this)" required>
                         </div>
-                        <div class="col">
+                        <div class="col my-2">
                             <input type="number" name="birthMonth" class="form-control" placeholder="Enter Month"
                                 aria-label="Last name" oninput="validateMonth(this)" required>
                         </div>
-                        <div class="col">
-                            <button name="submit" class="btn btn-danger">View all Birthday</button>
+                        <div class="col-md my-2  text-center">
+                            <button name="bdaySubmit" class="btn btn-danger">View all Birthday</button>
                         </div>
                     </div>
                 </form>
-                <form class="mt-3 bg-warning-subtle p-2 rounded shadow-sm" action="" method="POST">
+                <form class="mt-3 bg-warning-subtle px-2 rounded shadow-sm" action="" method="POST">
                     <div class="row">
-                        <div class="col">
+                        <div class="col my-2">
                             <input type="number" name="aniDate" class="form-control" placeholder="Enter Date"
                                 aria-label="First name" oninput="validateDate(this)" required>
                         </div>
-                        <div class="col">
+                        <div class="col my-2">
                             <input type="number" name="aniMonth" class="form-control" placeholder="Enter Month"
                                 aria-label="Last name" oninput="validateMonth(this)" required>
                         </div>
-                        <div class="col">
+                        <div class="col-md my-2  text-center">
                             <button name="aniSubmit" class="btn btn-danger">View all Aniversary</button>
                         </div>
                     </div>
                 </form>
-                <div class="mt-3 text-center bg-warning-subtle p-2 rounded shadow-sm"> 
+                <div class="mt-3 text-center bg-warning-subtle p-2 rounded shadow-sm d-flex gap-2 justify-center">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        View All Messages
-                    </button>
+                    <div class="m-auto">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            View All Messages
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#newModal">
+                            Add New
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="col-md">
@@ -272,17 +344,37 @@ $country_code = array(
 
         function validateDate(input) {
             if (input.value < 1) {
-                input.value = 1; // Reset to 1 if the value is negative or 0
+                input.value = 1;
             } else if (input.value > 31) {
-                input.value = 31; // Reset to 31 if the value exceeds 31
+                input.value = 31;
             }
         }
         function validateMonth(input) {
             if (input.value < 1) {
-                input.value = 1; // Reset to 1 if the value is negative or 0
-            } else if (input.value > 31) {
-                input.value = 31; // Reset to 31 if the value exceeds 31
+                input.value = 1;
+            } else if (input.value > 12) {
+                input.value = 12;
             }
+        }
+
+        function updateContent(textarea, sr) {
+            var newText = textarea.value;
+            $.ajax({
+                url: '_update_message.php',
+                method: 'POST',
+                data: {
+                    sr: sr,
+                    msg: newText
+                },
+                success: function (response) {
+                    // Handle success
+                    console.log('Content updated successfully');
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error('Error updating content:', error);
+                }
+            });
         }
 
     </script>

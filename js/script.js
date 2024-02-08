@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Replace this URL with the correct path to your JSON file containing countries, states, and cities
 
   // Fetch countries from the JSON
+  
   fetch("js/countries.json")
     .then((response) => response.json())
     .then((data) => {
@@ -31,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
           option.textContent = country.name;
           option.setAttribute("dataValue", country.id);
           option.setAttribute("sortname", country.sortname);
-          if(country.id=='101'){
-            
+          if (country.id == '101') {
+
             option.setAttribute("selected", "true");
           }
           // option.dataValue = country.id;
@@ -45,15 +46,17 @@ document.addEventListener("DOMContentLoaded", function () {
   countrySelect.addEventListener("change", function () {
     var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute("dataValue"
     );
-    console.log( typeof selectedCountry);
-    if (selectedCountry=='101') {
-      let Allinput = document.querySelectorAll('input ');
+    console.log(typeof selectedCountry);
+    if (selectedCountry == '101') {
+      let Allinput = document.querySelectorAll('input');
       let AllSelect = document.querySelectorAll('select');
-      Array.from(Allinput).forEach((e)=>{
+      Array.from(Allinput).forEach((e) => {
+
         e.setAttribute('required', '');
         // console.log(e)
+
       })
-      Array.from(AllSelect).forEach((e)=>{
+      Array.from(AllSelect).forEach((e) => {
         e.setAttribute('required', '');
       })
     }
@@ -78,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //   });
   });
 });
+
 
 // On state selection change, load respective cities
 
