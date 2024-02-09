@@ -12,14 +12,15 @@ $birthday = null;
 
 
 if (isset($_POST['bdaySubmit'])) {
-    echo "bday";
+    
     $birthday = true;
     $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
     $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
 
     $query = "SELECT * FROM users WHERE MONTH(dob) = $birthDate AND DAY(dob) = $birthMonth";
-    $result = mysqli_query($conn, $query);
-    $totalBday = mysqli_num_rows($result);
+    $resultb = mysqli_query($conn, $query);
+    
+    $totalBday = mysqli_num_rows($resultb);
 
     $msgsql = "SELECT * FROM `messages` WHERE `title` = 'Birthday'";
     $msgresult = mysqli_query($conn, $msgsql);
@@ -33,8 +34,8 @@ if (isset($_POST['aniSubmit'])) {
     $birthMonth = $_POST['aniMonth'];
 
     $query = "SELECT * FROM users WHERE MONTH(aniver_date) = $birthDate AND DAY(aniver_date) = $birthMonth";
-    $result = mysqli_query($conn, $query);
-    $totalBday = mysqli_num_rows($result);
+    $resultb = mysqli_query($conn, $query);
+    $totalBday = mysqli_num_rows($resultb);
 
     $msgsql = "SELECT * FROM `messages` WHERE `title` = 'Aniversary'";
     $msgresult = mysqli_query($conn, $msgsql);
@@ -116,11 +117,13 @@ $country_code = array(
             }
         }
 
-        /* div.dt-button-collection {
-            position: fixed;
-            width: 900px !important;
-            margin-top: 0px !important;
-        } */
+        .deleteditem{
+            animation: op 1s ease-in-out;
+        }
+        @keyframes op {
+            from{transform: scale(1);}
+            to{transform:scale(0)}
+        }
     </style>
 </head>
 
@@ -161,11 +164,11 @@ $country_code = array(
                         while ($row = $result->fetch_assoc()) {
                             echo '
                                 <div class="card">
-                                    <h5 class="card-header">' . $row['title'] . '</h5>
+                                    <h5 class="card-header d-flex justify-content-between"><span>' . $row['title'] . '</span><i onclick="deleteMsg(this,' . $row['sr'] . ',)" class="fa-solid fa-trash text-danger btn"></i></h5> 
                                     <div class="card-body">
-                                        <div class="form-floating">
+                                        
                                             <textarea onkeyup="updateContent(this, ' . $row['sr'] . ')"  class="form-control" style="height: 100px">' . $row['msg'] . '</textarea>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             ';
@@ -193,7 +196,7 @@ $country_code = array(
         $sql = "INSERT INTO `messages` (`title`, `msg`) VALUES ('$newmsgtitle', '$newmsg')";
         $result = $conn->query($sql); // Execute the SQL query using $conn->query()
         if ($result) {
-            echo "added";
+            $messageAdded = true;
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -210,11 +213,12 @@ $country_code = array(
                     </div>
                     <div class="modal-body d-flex flex-column gap-2">
                         <div class="form-control">
-                            <input class="form-control" name="newmsgtitle" placeholder="Title" type="text">
+                            <input class="form-control" name="newmsgtitle" placeholder="Title" type="text" required>
                         </div>
                         <div class="form-control">
                             <textarea class="form-control" name="newmsg" id="" placeholder=" Enter Message" cols="10"
-                                rows="5"></textarea>
+                                rows="5">
+                            </textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -305,7 +309,7 @@ $country_code = array(
                         <?php
                         if ($totalBday > 0) {
                             $sr = 0;
-                            while ($row = mysqli_fetch_assoc($result)) {
+                            while ($row = mysqli_fetch_assoc($resultb)) {
                                 $sr++;
                                 $code = $country_code[$row['country']];
                                 echo '
@@ -369,6 +373,27 @@ $country_code = array(
                 success: function (response) {
                     // Handle success
                     console.log('Content updated successfully');
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error('Error updating content:', error);
+                }
+            });
+        }
+        let deleteMsg = (e,sr)=>{
+            let card = e.parentNode.parentNode;
+            $.ajax({
+                url: '_deletemsg.php',
+                method: 'POST',
+                data: {
+                    sr: sr,
+                },
+                success: function (response) {
+                    card.classList.add("deleteditem");
+                    setInterval(() => {
+                        card.style.display = "none";
+                    }, 1000);
+                    console.log(response);
                 },
                 error: function (xhr, status, error) {
                     // Handle error
