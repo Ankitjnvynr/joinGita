@@ -115,8 +115,9 @@ try {
         #allPics {
             /* border: 2px solid purple; */
             display: grid;
-            grid-template-columns: repeat(5, minmax(20%, 350px));
+            grid-template-columns: repeat(4, minmax(20%, 350px));
             gap: 5px;
+           
         }
 
         .imgs {
@@ -185,6 +186,12 @@ try {
 
         .table {
             width: 100%;
+        }
+        @media only screen and (max-width: 768px) {
+            #allPics {
+            grid-template-columns: repeat(1, minmax(20%, 350px));
+           
+        }
         }
     </style>
 </head>

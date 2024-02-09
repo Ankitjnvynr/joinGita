@@ -9,17 +9,15 @@ include("../partials/_db.php");
 $totalBday = 0;
 $birthday = null;
 
-
-
 if (isset($_POST['bdaySubmit'])) {
-    
+
     $birthday = true;
     $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
     $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
 
     $query = "SELECT * FROM users WHERE MONTH(dob) = $birthDate AND DAY(dob) = $birthMonth";
     $resultb = mysqli_query($conn, $query);
-    
+
     $totalBday = mysqli_num_rows($resultb);
 
     $msgsql = "SELECT * FROM `messages` WHERE `title` = 'Birthday'";
@@ -117,12 +115,18 @@ $country_code = array(
             }
         }
 
-        .deleteditem{
+        .deleteditem {
             animation: op 1s ease-in-out;
         }
+
         @keyframes op {
-            from{transform: scale(1);}
-            to{transform:scale(0)}
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(0)
+            }
         }
     </style>
 </head>
@@ -213,11 +217,10 @@ $country_code = array(
                     </div>
                     <div class="modal-body d-flex flex-column gap-2">
                         <div class="form-control">
-                            <input class="form-control" name="newmsgtitle" placeholder="Title" type="text" required>
+                            <input class="form-control" maxlength="10" name="newmsgtitle" placeholder="Title" type="text" required>
                         </div>
                         <div class="form-control">
-                            <textarea class="form-control" name="newmsg" id="" placeholder=" Enter Message" cols="10"
-                                rows="5">
+                            <textarea class="form-control" name="newmsg"  placeholder="Enter Message"  rows="5">
                             </textarea>
                         </div>
                     </div>
@@ -320,14 +323,13 @@ $country_code = array(
                             <td>' . $row['phone'] . '</td>
                             <td>
                             
-                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=' . $message . '&file=../imgs/' . $row['pic'] . '
-                            " target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
+                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
                             </td>
                             </tr>
                             ';
                             }
                         } else {
-
+                            
                         }
 
                         ?>
@@ -343,7 +345,7 @@ $country_code = array(
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="filterselect.js"></script>
+
     <script>
 
         function validateDate(input) {
@@ -380,7 +382,7 @@ $country_code = array(
                 }
             });
         }
-        let deleteMsg = (e,sr)=>{
+        let deleteMsg = (e, sr) => {
             let card = e.parentNode.parentNode;
             $.ajax({
                 url: '_deletemsg.php',
