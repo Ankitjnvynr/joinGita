@@ -114,10 +114,10 @@
       </div>
     </div>
 
-
+    <h2 class="text-center text-danger mb-4">Join GIEO Gita</h2>
 
     <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
-      <h2 class="text-center text-danger mb-4">Join GIEO Gita</h2>
+      
       <div class="form-group col-md mb-3 d-flex justify-content-center ">
         <select max-width="600px" id="countrySelect" name="country" class='form-control'>
           <option value="">-- Country --</option>
@@ -125,7 +125,7 @@
       </div>
       <div class="row">
         <div class="form-floating mb-3 col-md ">
-          <input type="text" class="form-control" name="name" placeholder="name@example.com" required>
+          <input type="text" class="form-control" name="name" placeholder="name@example.com" >
           <label for="floatingInput">Name</label>
         </div>
 
@@ -143,7 +143,7 @@
           <label for="floatingInput">Email </label>
         </div>
         <div class="form-group col-md mb-3 fill">
-          <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example" required>
+          <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example" >
             <option value="" disabled="" selected="">--दीक्षित परिवार--</option>
             <option value="Yes" aria-selected="false">Yes</option>
             <option value="No" aria-selected="false">No</option>
@@ -182,12 +182,12 @@
       <div class="row">
 
         <div class="form-floating mb-3 col-md">
-          <input name="city" type="text" class="form-control" id="city" placeholder="name@example.com" required>
+          <input name="city" type="text" class="form-control" id="city" placeholder="name@example.com" >
           <label for="city">City/Village</label>
         </div>
         
         <div class="form-floating mb-3 col-md">
-          <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com" required>
+          <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com" >
           <label for="Village">Address</label>
         </div>
 
@@ -197,7 +197,7 @@
         
         <div class="form-group col-md mb-3">
 
-          <select name="occupation" class="form-control" data-testid="select-trigger" required="" aria-required="true" aria-invalid="false" required>
+          <select name="occupation" class="form-control" data-testid="select-trigger"  aria-required="true" aria-invalid="false" >
             <option value="" disabled="" selected="">Occupation</option>
             <option value="Business" aria-selected="false">Business</option>
             <option value="Home Maker" aria-selected="false">Home Maker</option>
@@ -213,7 +213,7 @@
           </select>
         </div>
         <div class="form-group col-md mb-3">
-          <select name="education" class="form-control" data-testid="select-trigger" required="" aria-required="true" aria-invalid="false" required>
+          <select name="education" class="form-control" data-testid="select-trigger"  aria-required="true" aria-invalid="false" >
             <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">Education</option>
             <option value="B.Com" aria-selected="false">B.Com</option>
             <option value="M.Com" aria-selected="false">M.Com</option>
@@ -233,7 +233,7 @@
       <div class="row">
         
       <div class="form-group col-md mb-3">
-          <select name="married" id="married" class="form-control" onchange="aniver()" required>
+          <select name="married" id="married" class="form-control" onchange="aniver()" >
             <option value="">-- select Marital Status --</option>
             <option value="Married" aria-selected="false">Married</option>
             <option value="Unmarried" aria-selected="false">Unmarried</option>
@@ -263,7 +263,7 @@
         <textarea name="message" class="form-control" name="message" id="" col-mds="30" rows="30"></textarea>
         <label for="floatingInput">Message(if any)</label>
       </div> -->
-      <div class="d-flex justify-content-center"><button name="submit" type="submit" class="btn btn-danger p-4 py-2 p"><b>Join Now</b></button></div>
+      <div class="d-flex justify-content-center"><button name="joinsubmit" type="submit" class="btn btn-danger p-4 py-2 p"><b>Join Now</b></button></div>
   </div>
   </form>
 

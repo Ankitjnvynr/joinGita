@@ -1,5 +1,22 @@
 <?php
 include("../partials/_db.php");
+
+
+$msgs = array();
+$defaultmsg = array();
+$msgsql = "SELECT title, msg FROM `messages` ";
+$allmsg = $conn->query($msgsql);
+while ($allmsgs = mysqli_fetch_assoc($allmsg)) {
+    array_push($msgs, '<option value="' . $allmsgs['msg'] . '">' . $allmsgs['title'] . '</option>');
+    array_push($defaultmsg, $allmsgs['msg'] );
+
+}
+$msgStr = '<select name="message" onchange="selectMessage(this)" id="message">' . implode("", $msgs) . '</select>';
+
+
+
+
+
 $newStr = null;
 
 $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
@@ -79,6 +96,9 @@ while ($row = mysqli_fetch_array($result)) {
     $message = $row['message'];
     $pic = $row['pic'];
 
+
+
+
     $country_code = array(
         "Australia" => "61",
         "Canada" => "1",
@@ -132,12 +152,14 @@ while ($row = mysqli_fetch_array($result)) {
                                         <div data-id = "' . $user_id . '" class="del btn btn-danger" >Delete</div>
                                     </div>
                                     <p class="d-flex gap-3 flex-items-center justify-content-beteen px-2 m-0">
-                                        <a href="tel:' . $phone . '"><i class="fa-solid fa-phone text-success fs-2"></i> </a>
-                                        <a href="https://wa.me/' . $code . $phone . '?text=hello world!&file=../imgs/' . $pic . '
+                                        '.$msgStr.'
+                                        <a href="https://wa.me/' . $code . $phone . '?file=../imgs/' . $pic . '&text=' . $defaultmsg[0] . '
                                         " target="_blank"><i class="fa-solid fs-2  fa-brands fa-whatsapp text-success "></i></a>
+                                        <a href="tel:' . $phone . '"><i class="fa-solid fa-phone text-success fs-2"></i> </a>
                                         <a href="mailto:' . $email . '"><i class="fa-solid fs-2   fa-envelope text-success "></i></a>
                                     </p>
                                 </div>
                             </div>
                             ';
 }
+

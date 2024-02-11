@@ -320,7 +320,7 @@ $country_code = array(
                             <tr>
                             <th scope="row">' . $sr . '</th>
                             <td>' . $row['name'] . '</td>
-                            <td>' . $row['phone'] . '</td>
+                            <td><a href="tel:' . $row['phone'] . '">' . $row['phone'] . ' </a></td>
                             <td>
                             
                             <a href="https://wa.me/' . $code . $row['phone'] . '?text=' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>

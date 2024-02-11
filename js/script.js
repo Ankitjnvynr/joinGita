@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Replace this URL with the correct path to your JSON file containing countries, states, and cities
 
   // Fetch countries from the JSON
-  
+
   fetch("js/countries.json")
     .then((response) => response.json())
     .then((data) => {
@@ -44,20 +44,28 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Error:", error));
 
   countrySelect.addEventListener("change", function () {
-    var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute("dataValue"
-    );
-    console.log(typeof selectedCountry);
+    var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute("dataValue");
+
     if (selectedCountry == '101') {
       let Allinput = document.querySelectorAll('input');
       let AllSelect = document.querySelectorAll('select');
-      Array.from(Allinput).forEach((e) => {
-
-        e.setAttribute('required', '');
-        // console.log(e)
-
+      Array.from(Allinput).forEach((e, indx) => {
+        console.log(e, indx, "hii");
+        // e.setAttribute('required', '');
       })
       Array.from(AllSelect).forEach((e) => {
         e.setAttribute('required', '');
+      })
+    }
+    else {
+      let Allinput = document.querySelectorAll('input');
+      let AllSelect = document.querySelectorAll('select');
+      Array.from(Allinput).forEach((e, indx) => {
+        // e.setAttribute('required', '');
+        e.setAttribute('required', 'false');
+      })
+      Array.from(AllSelect).forEach((e) => {
+        e.setAttribute('required', 'false');
       })
     }
 
@@ -134,4 +142,44 @@ citySelect.addEventListener("change", function () {
     })
     .catch((error) => console.error("Error:", error));
 });
+
+
+
+
+
+setTimeout(() => {
+
+  var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute("dataValue");
+  var selectedCountry = countrySelect.options[countrySelect.selectedIndex].getAttribute("dataValue");
+
+  fetch("js/states.json")
+    .then((response) => response.json())
+    .then((data1) => {
+      stateSelect.innerHTML = "<option value>---state----</option>";
+      data1.states.forEach((state) => {
+        if (state.country_id == selectedCountry) {
+          // console.log(state);
+          const option = document.createElement("option");
+          option.value = state.name;
+          option.setAttribute("dataValue", state.id);
+          option.textContent = state.name;
+          stateSelect.appendChild(option);
+        }
+      });
+    })
+    .catch((error) => console.error("Error:", error));
+  if (selectedCountry == '101') {
+    let Allinput = document.querySelectorAll('input');
+    let AllSelect = document.querySelectorAll('select');
+    Array.from(Allinput).forEach((e, indx) => {
+      console.log(e, indx, "hii");
+      if (indx != 2) {
+        e.setAttribute('required', '');
+      }
+    })
+    Array.from(AllSelect).forEach((e) => {
+      e.setAttribute('required', '');
+    })
+  }
+}, 1000);
 

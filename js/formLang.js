@@ -80,11 +80,10 @@ var joinForm = document.getElementById("joinForm");
 
 if (lang.value == 'ENG') {
   fill[0].innerHTML = englishForm[0];
-  fill[1].innerHTML = englishForm[1];
+
 
 } else {
   fill[0].innerHTML = hindiForm[0];
-  fill[1].innerHTML = hindiForm[1];
 
 }
 lang.addEventListener("change", () => {

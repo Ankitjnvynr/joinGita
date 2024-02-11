@@ -200,6 +200,7 @@ include("../partials/_db.php");
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
 
 
     <!-- ------------------data table end -------------- -->
@@ -231,6 +232,7 @@ include("../partials/_db.php");
                 ],
                 select: true,
                 searchBuilder: true,
+                
             });
         });
 
