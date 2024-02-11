@@ -10,12 +10,11 @@ $totalBday = 0;
 $birthday = null;
 
 if (isset($_POST['bdaySubmit'])) {
-
     $birthday = true;
     $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
     $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
 
-    $query = "SELECT * FROM users WHERE MONTH(dob) = $birthDate AND DAY(dob) = $birthMonth";
+    $query = "SELECT * FROM users WHERE MONTH(dob) = $birthMonth AND DAY(dob) =$birthDate ";
     $resultb = mysqli_query($conn, $query);
 
     $totalBday = mysqli_num_rows($resultb);
@@ -31,7 +30,7 @@ if (isset($_POST['aniSubmit'])) {
     $birthDate = $_POST['aniDate'];
     $birthMonth = $_POST['aniMonth'];
 
-    $query = "SELECT * FROM users WHERE MONTH(aniver_date) = $birthDate AND DAY(aniver_date) = $birthMonth";
+    $query = "SELECT * FROM users WHERE MONTH(dob) = $birthMonth AND DAY(dob) = $birthDate ";
     $resultb = mysqli_query($conn, $query);
     $totalBday = mysqli_num_rows($resultb);
 
@@ -39,7 +38,6 @@ if (isset($_POST['aniSubmit'])) {
     $msgresult = mysqli_query($conn, $msgsql);
     $msgrow = mysqli_fetch_assoc($msgresult);
     $message = $msgrow['msg'];
-
 }
 
 $country_code = array(
@@ -144,10 +142,7 @@ $country_code = array(
         </div>
     </div>
 
-
     <!-- ---------------------modal start--------------------------- -->
-
-
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -170,8 +165,7 @@ $country_code = array(
                                 <div class="card">
                                     <h5 class="card-header d-flex justify-content-between"><span>' . $row['title'] . '</span><i onclick="deleteMsg(this,' . $row['sr'] . ',)" class="fa-solid fa-trash text-danger btn"></i></h5> 
                                     <div class="card-body">
-                                        
-                                            <textarea onkeyup="updateContent(this, ' . $row['sr'] . ')"  class="form-control" style="height: 100px">' . $row['msg'] . '</textarea>
+                                            <textarea onkeyup="updateContent(this, ' . htmlspecialchars_decode($row['sr']) . ')"  class="form-control" style="height: 100px">' . $row['msg'] . '</textarea>
                                         
                                     </div>
                                 </div>
@@ -194,6 +188,7 @@ $country_code = array(
     if (isset($_POST['newmsgSubmit'])) {
         $newmsgtitle = $_POST['newmsgtitle'];
         $newmsg = $_POST['newmsg'];
+        $newmsg = htmlspecialchars($newmsg, ENT_QUOTES, 'UTF-8');
 
         // Establish database connection (assuming $conn is your database connection object)
     
@@ -323,10 +318,12 @@ $country_code = array(
                             <td><a href="tel:' . $row['phone'] . '">' . $row['phone'] . ' </a></td>
                             <td>
                             
-                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
+                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] .' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A
+                            ' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
                             </td>
                             </tr>
                             ';
+                            
                             }
                         } else {
                             
@@ -338,6 +335,8 @@ $country_code = array(
             </div>
         </div>
     </div>
+    <a href="https://wa.me/918930840560?text=%F0%9F%8C%B9%20%E0%A4%9C%E0%A4%A8%E0%A5%8D%E0%A4%AE%E0%A4%A6%E0%A4%BF%E0%A4%B5%E0%A4%B8%20%E0%A4%95%E0%A5%80%20%E0%A4%B9%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A6%E0%A4%BF%E0%A4%95%20%E0%A4%AC%E0%A4%A7%E0%A4%BE%E0%A4%88%F0%9F%8C%B9%0D%0A%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A5%80%20%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A5%80%20%E0%A4%95%E0%A5%83%E0%A4%AA%E0%A4%BE%20%E0%A4%AC%E0%A4%BF%E0%A4%B9%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%9C%E0%A5%80%20%E0%A4%86%E0%A4%AA%E0%A4%95%E0%A5%8B%E0%A4%B0%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%E0%A4%BF%20%E0%A4%A6%E0%A5%87%E0%A4%82%2C%20%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%E0%A4%BF%20%E0%A4%A6%E0%A5%87%E0%A4%82%2C%E0%A4%97%E0%A5%80%E0%A4%A4%E0%A4%BE%20%E0%A4%95%E0%A5%8B%20%E0%A4%B8%E0%A4%82%E0%A4%AA%E0%A5%82%E0%A4%B0%E0%A5%8D%E0%A4%A3%20%E0%A4%95%E0%A4%B0%2C%E0%A4%AE%E0%A4%BE%E0%A4%A8-%E0%A4%B8%E0%A4%AE%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%A8%20%E0%A4%A6%E0%A5%87%E0%A4%82%2C%20%E0%A4%B8%E0%A5%81%E0%A4%96%20%E0%A4%B8%E0%A4%AE%E0%A5%83%E0%A4%A6%E0%A5%8D%E0%A4%A7%E0%A4%BF%20%E0%A4%A6%E0%A5%87%E0%A4%82%2C%E0%A4%B6%E0%A4%BE%E0%A4%A8%E0%A5%8D%E0%A4%A4%E0%A4%BF%20%E0%A4%A6%E0%A5%87%2C%20%E0%A4%B6%E0%A4%95%E0%A5%8D%E0%A4%A4%E0%A4%BF%20%E0%A4%A6%E0%A5%87%2C%20%E0%A4%AD%E0%A4%95%E0%A5%8D%E0%A4%A4%E0%A4%BF%20%E0%A4%AD%E0%A4%B0%E0%A4%AA%E0%A5%82%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%82...
+">link</a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -350,14 +349,14 @@ $country_code = array(
 
         function validateDate(input) {
             if (input.value < 1) {
-                input.value = 1;
+                input.value = "";
             } else if (input.value > 31) {
                 input.value = 31;
             }
         }
         function validateMonth(input) {
             if (input.value < 1) {
-                input.value = 1;
+                input.value = "";
             } else if (input.value > 12) {
                 input.value = 12;
             }

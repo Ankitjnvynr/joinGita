@@ -101,9 +101,6 @@
       </h4>
     </div>
     <hr>
-
-
-
     <div class="container " id="main">
       <div class="d-flex align-items-center justify-content-end float-end" style="width: 500px;">
         <span class="mr-2">Language:</span>
@@ -113,9 +110,12 @@
         </select>
       </div>
     </div>
+<<<<<<< HEAD
 
     <h2 class="text-center text-danger mb-4">Join GIEO Gita</h2>
 
+=======
+>>>>>>> 1b45064cab45439829f8707266834ecc85a329a8
     <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
       
       <div class="form-group col-md mb-3 d-flex justify-content-center ">
@@ -128,9 +128,6 @@
           <input type="text" class="form-control" name="name" placeholder="name@example.com" >
           <label for="floatingInput">Name</label>
         </div>
-
-
-
         <div class="form-floating mb-3 col-md ">
           <input type="number" class="form-control" id="phone" name="phone" maxlength="20" placeholder="name@example.com" required>
           <label for="floatingInput">WhatsApp Number(without country code)</label>
