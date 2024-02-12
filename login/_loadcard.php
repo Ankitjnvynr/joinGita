@@ -158,6 +158,9 @@ while ($row = mysqli_fetch_array($result)) {
 =======
                                         <a href="tel:' . $phone . '"><i class="fa-solid fa-phone text-success fs-2"></i> </a>
                                         <a href="https://wa.me/' . $code . $phone . '?text=hello world!&attachment=../imgs/' . $pic . '
+<<<<<<< HEAD
+>>>>>>> 1b45064cab45439829f8707266834ecc85a329a8
+=======
 >>>>>>> 1b45064cab45439829f8707266834ecc85a329a8
                                         " target="_blank"><i class="fa-solid fs-2  fa-brands fa-whatsapp text-success "></i></a>
                                         <a href="tel:' . $phone . '"><i class="fa-solid fa-phone text-success fs-2"></i> </a>

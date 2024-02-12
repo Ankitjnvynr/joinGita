@@ -111,9 +111,12 @@
       </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <h2 class="text-center text-danger mb-4">Join GIEO Gita</h2>
 
+=======
+>>>>>>> 1b45064cab45439829f8707266834ecc85a329a8
 =======
 >>>>>>> 1b45064cab45439829f8707266834ecc85a329a8
     <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
