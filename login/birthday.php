@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     $birthDate = $_POST['birthDate'];
     $birthMonth = $_POST['birthMonth'];
 
-    $query = "SELECT * FROM users WHERE MONTH(dob) = $birthDate AND DAY(dob) = $birthMonth";
+    $query = "SELECT * FROM users WHERE DAY(dob) = $birthDate AND MONTH(dob) = $birthMonth";
     $result = mysqli_query($conn, $query);
     $totalBday = mysqli_num_rows($result);
 
@@ -31,7 +31,7 @@ if (isset($_POST['aniSubmit'])) {
     $birthDate = $_POST['aniDate'];
     $birthMonth = $_POST['aniMonth'];
 
-    $query = "SELECT * FROM users WHERE MONTH(aniver_date) = $birthDate AND DAY(aniver_date) = $birthMonth";
+    $query = "SELECT * FROM users WHERE MONTH(aniver_date) = $birthMonth  AND DAY(aniver_date) = $birthDate";
     $result = mysqli_query($conn, $query);
     $totalBday = mysqli_num_rows($result);
 
@@ -225,6 +225,7 @@ $country_code = array(
                             <th scope="col">sr</th>
                             <th scope="col">Name</th>
                             <th scope="col">Phone</th>
+                            <th scope="col">DOB</th>
                             <th scope="col">Send</th>
                         </tr>
                     </thead>
@@ -242,6 +243,7 @@ $country_code = array(
                             <th scope="row">' . $sr . '</th>
                             <td>' . $row['name'] . '</td>
                             <td>' . $row['phone'] . '</td>
+                            <td>' . $row['dob'] . '</td>
                             <td>
                             
                             <a href="https://wa.me/' . $code . $row['phone'] . '?text=' . $message . '&file=../imgs/' . $row['pic'] . '
