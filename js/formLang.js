@@ -74,17 +74,16 @@ var lang = document.getElementById("lang");
 var hin = document.getElementById("hin");
 var eng = document.getElementById("eng");
 var joinForm = document.getElementById("joinForm");
-console.log(fill)
+// console.log(fill)
 
 
 
 if (lang.value == 'ENG') {
   fill[0].innerHTML = englishForm[0];
-  fill[1].innerHTML = englishForm[1];
+
 
 } else {
   fill[0].innerHTML = hindiForm[0];
-  fill[1].innerHTML = hindiForm[1];
 
 }
 lang.addEventListener("change", () => {

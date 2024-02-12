@@ -90,7 +90,7 @@ include("../partials/_db.php");
     </div>
 
 
-    <?php include'_options.php'; ?>
+    <?php include '_options.php'; ?>
     <div class="container">
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
             <div class="form-floating mb-3 ">
@@ -149,28 +149,30 @@ include("../partials/_db.php");
         </div>
         <!-- <div id="tble" class="allList" style="overflow-x:scroll"> -->
 
-        <table id="myTable">
-            <thead>
-                <tr>
-                    <th>sr</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Dikshit</th>
-                    <th>Country</th>
-                    <th>State</th>
-                    <th>City</th>
-                    <th>Interest</th>
-                    <th>Occupation</th>
-                    <th>Education</th>
-                    <th>DOB</th>
-                    <th>Anniversary</th>
+        <div style="overflow-x:scroll" >
+            <table style=" overflow-x:scroll;" id="myTable">
+                <thead>
+                    <tr>
+                        <th>sr</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Dikshit</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Interest</th>
+                        <th>Occupation</th>
+                        <th>Education</th>
+                        <th>DOB</th>
+                        <th>Anniversary</th>
 
-                    <!-- Add more columns based on your table structure -->
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+                        <!-- Add more columns based on your table structure -->
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
 
 
@@ -198,6 +200,7 @@ include("../partials/_db.php");
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
 
 
     <!-- ------------------data table end -------------- -->
@@ -227,8 +230,9 @@ include("../partials/_db.php");
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ],
-                select: true, 
+                select: true,
                 searchBuilder: true,
+                
             });
         });
 

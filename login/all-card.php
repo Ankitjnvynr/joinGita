@@ -205,8 +205,8 @@ include("../partials/_db.php");
     </div>
 
 
-    <?php include'_options.php'; ?>
-    
+    <?php include '_options.php'; ?>
+
     <div class="container">
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
             <div class="form-floating mb-3 ">
@@ -262,6 +262,25 @@ include("../partials/_db.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="filterselect.js"></script>
+
+    <script>
+        selectMessage = (e) => {
+            const secondChild = e.parentNode.childNodes[3];
+            const newText = e.value;
+            let src = secondChild.getAttribute('href');
+            let link = src.split('&');
+            for (let i = 0; i < link.length; i++) {
+                if (link[i].startsWith('text=')) {
+                    link[i] = 'text=' + encodeURIComponent(newText); 
+                    break;
+                }
+            }
+            href = link.join('&');
+            secondChild.setAttribute('href', href);
+            
+        }
+
+    </script>
 
     <script>
         function tt() {
@@ -436,6 +455,7 @@ include("../partials/_db.php");
         })
 
     </script>
+
 </body>
 
 </html>
