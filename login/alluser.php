@@ -22,6 +22,8 @@ include("../partials/_db.php");
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.0.1/css/searchBuilder.dataTables.min.css">
+
     <style>
         body {
             margin: 10px;
@@ -149,14 +151,14 @@ include("../partials/_db.php");
         </div>
         <!-- <div id="tble" class="allList" style="overflow-x:scroll"> -->
 
-        <div style="overflow-x:scroll" >
+        <div style="overflow-x:scroll">
             <table style=" overflow-x:scroll;" id="myTable">
                 <thead>
                     <tr>
                         <th>sr</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
+                        <th>Name <input type="text" class="form-control filter-input" data-column="1"></th>
+                        <th>Phone <input type="text" class="form-control filter-input" data-column="2"></th>
+                        <th>Email <input type="text" class="form-control filter-input" data-column="3"></th>
                         <th>Dikshit</th>
                         <th>Country</th>
                         <th>State</th>
@@ -201,6 +203,7 @@ include("../partials/_db.php");
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/searchbuilder/1.0.1/js/dataTables.searchBuilder.min.js"></script>
 
 
     <!-- ------------------data table end -------------- -->
@@ -231,15 +234,31 @@ include("../partials/_db.php");
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ],
                 select: true,
-                searchBuilder: true,
-                
+                searchBuilder: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Indexes of columns to be included in search
+                    conditions: {
+                        string: {
+                            '=': 'Equals',
+                            '!=': 'Not equal',
+                            '<': 'Less than',
+                            '>': 'Greater than',
+                            '<=': 'Less than or equal to',
+                            '>=': 'Greater than or equal to'
+                        }
+                        // Define conditions for other data types as needed
+                    }
+                }
+            });
+            $('.filter-input').keyup(function () {
+                var columnIndex = $(this).data('column'); // Get column index from data attribute
+                var searchText = $(this).val().toLowerCase(); // Get value entered in the input box
+
+                // Perform filtering on the DataTable
+                $('#myTable').DataTable().column(columnIndex).search(searchText).draw();
             });
         });
 
     </script>
-
-
-
 </body>
 
 </html>

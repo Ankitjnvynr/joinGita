@@ -172,7 +172,7 @@ $country_code = array(
                             ';
                         }
                     } else {
-                        echo "0 results";
+                        echo 'No Messages Found. Add message to see. <span><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#newModal">Add New</button></span>';
                     }
                     ?>
 
