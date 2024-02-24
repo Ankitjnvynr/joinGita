@@ -5,7 +5,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve data from the AJAX request
     $sr = $_POST['sr'];
     $msg = $_POST['msg'];
-    $msg = htmlentities($msg, ENT_QUOTES, 'UTF-8');
+    // $msg = htmlentities($msg, ENT_QUOTES, 'UTF-8');
+    $msg = urlencode($msg);
 
     // Update content in the database
     // Assume you have a database connection established already

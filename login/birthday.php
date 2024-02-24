@@ -22,7 +22,8 @@ if (isset($_POST['bdaySubmit'])) {
     $msgsql = "SELECT * FROM `messages` WHERE `title` = 'Birthday'";
     $msgresult = mysqli_query($conn, $msgsql);
     $msgrow = mysqli_fetch_assoc($msgresult);
-    $message = $msgrow['msg'];
+    // $message = $msgrow['msg'];
+    $message = urldecode($msgrow['msg']);
 }
 
 if (isset($_POST['aniSubmit'])) {
@@ -30,7 +31,7 @@ if (isset($_POST['aniSubmit'])) {
     $birthDate = $_POST['aniDate'];
     $birthMonth = $_POST['aniMonth'];
 
-    $query = "SELECT * FROM users WHERE MONTH(dob) = $birthMonth AND DAY(dob) = $birthDate ";
+    $query = "SELECT * FROM users WHERE MONTH(aniver_date) = $birthMonth AND DAY(aniver_date) = $birthDate ";
     $resultb = mysqli_query($conn, $query);
     $totalBday = mysqli_num_rows($resultb);
 
@@ -188,7 +189,8 @@ $country_code = array(
     if (isset($_POST['newmsgSubmit'])) {
         $newmsgtitle = $_POST['newmsgtitle'];
         $newmsg = $_POST['newmsg'];
-        $newmsg = htmlspecialchars($newmsg, ENT_QUOTES, 'UTF-8');
+        // $newmsg = htmlspecialchars($newmsg, ENT_QUOTES, 'UTF-8');
+        $newmsg = urlencode($newmsg);
 
         // Establish database connection (assuming $conn is your database connection object)
     
@@ -212,10 +214,11 @@ $country_code = array(
                     </div>
                     <div class="modal-body d-flex flex-column gap-2">
                         <div class="form-control">
-                            <input class="form-control" maxlength="10" name="newmsgtitle" placeholder="Title" type="text" required>
+                            <input class="form-control" maxlength="10" name="newmsgtitle" placeholder="Title"
+                                type="text" required>
                         </div>
                         <div class="form-control">
-                            <textarea class="form-control" name="newmsg"  placeholder="Enter Message"  rows="5">
+                            <textarea class="form-control" name="newmsg" placeholder="Enter Message" rows="5">
                             </textarea>
                         </div>
                     </div>
@@ -229,20 +232,10 @@ $country_code = array(
     </div>
 
     <!-- ---------------------modal end--------------------------- -->
-
-
-
     <div class="container d-flex flex-row-reverse">
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
-
-
     <?php include '_options.php'; ?>
-
-
-
-
-
     <div class="container">
         <div class="row my-3 ">
             <div class="col-md ">
@@ -299,7 +292,9 @@ $country_code = array(
                             <th scope="col">sr</th>
                             <th scope="col">Name</th>
                             <th scope="col">Phone</th>
-                            <th scope="col">DOB</th>
+                            <th scope="col">
+                                <?php echo $birthday ? "DOB" : "Aniversary" ?>
+                            </th>
                             <th scope="col">Send</th>
                         </tr>
                     </thead>
@@ -311,24 +306,25 @@ $country_code = array(
                             while ($row = mysqli_fetch_assoc($resultb)) {
                                 $sr++;
                                 $code = $country_code[$row['country']];
+                                $targetDate = $birthday ? $row['dob'] : $row['aniver_date'];
                                 echo '
                             
                             <tr>
                             <th scope="row">' . $sr . '</th>
                             <td>' . $row['name'] . '</td>
                             <td>' . $row['phone'] . '</td>
-                            <td>' . $row['dob'] . '</td>
+                            <td>' . $targetDate . '</td>
                             <td>
                             
-                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] .' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A
+                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A
                             ' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
                             </td>
                             </tr>
                             ';
-                            
+
                             }
                         } else {
-                            
+
                         }
 
                         ?>
