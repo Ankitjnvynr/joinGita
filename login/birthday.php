@@ -166,7 +166,7 @@ $country_code = array(
                                 <div class="card">
                                     <h5 class="card-header d-flex justify-content-between"><span>' . $row['title'] . '</span><i onclick="deleteMsg(this,' . $row['sr'] . ',)" class="fa-solid fa-trash text-danger btn"></i></h5> 
                                     <div class="card-body">
-                                            <textarea onkeyup="updateContent(this, ' . htmlspecialchars_decode($row['sr']) . ')"  class="form-control" style="height: 100px">' . $row['msg'] . '</textarea>
+                                            <textarea onkeyup="updateContent(this, ' . ($row['sr']) . ')"  class="form-control" style="height: 100px">' . urldecode($row['msg']) . '</textarea>
                                         
                                     </div>
                                 </div>

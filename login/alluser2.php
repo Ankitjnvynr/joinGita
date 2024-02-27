@@ -96,17 +96,13 @@ include("../partials/_db.php");
     <div class="container">
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
             <div class="form-floating mb-3 ">
-                <select onclick="fillCountry()" id="countrySelect" style="min-width: 100px;" name="country"
-                    class="form-control filterInput" onchange="loadpics()">
+
 
                 </select>
                 <label for="countrySelect">Country</label>
             </div>
             <div class="form-floating mb-3 ">
-                <select id="stateSelect" style="min-width: 100px;" name="state" class='form-control'
-                    onchange="loadpics()">
 
-                </select>
                 <label for="stateSelect">State</label>
             </div>
             <div class="form-floating mb-3 ">
@@ -159,9 +155,25 @@ include("../partials/_db.php");
                         <th>Name <input type="text" class="form-control filter-input" data-column="1"></th>
                         <th>Phone <input type="text" class="form-control filter-input" data-column="2"></th>
                         <th>Email <input type="text" class="form-control filter-input" data-column="3"></th>
-                        <th>Dikshit</th>
-                        <th>Country</th>
-                        <th>State</th>
+                        <th>
+                            Dikshit
+                            <select id="dikshitfilter" style="min-width: 100px" name="country" class="filterInput">
+                                <option value=""></option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </th>
+                        <th>
+                            Country
+                            <select onclick="fillCountry()" id="countrySelect" style="min-width: 100px" name="country"
+                                class=" filterInput">
+                            </select>
+                        </th>
+                        <th>
+                            State
+                            <select id="stateSelect" style="min-width: 100px;" name="state" >
+                            </select>
+                        </th>
                         <th>City</th>
                         <th>Interest</th>
                         <th>Occupation</th>
@@ -250,13 +262,24 @@ include("../partials/_db.php");
                 }
             });
             $('.filter-input').keyup(function () {
-                
+
                 // Perform filtering on the DataTable
-                if(searchText != ""){
-                    var columnIndex = $(this).data('column'); // Get column index from data attribute
-                    var searchText = $(this).val().toLowerCase(); // Get value entered in the input box
-                    $('#myTable').DataTable().column(columnIndex).search(searchText).draw();
-                }
+                var columnIndex = $(this).data('column'); // Get column index from data attribute
+                var searchText = $(this).val().toLowerCase(); // Get value entered in the input box
+                $('#myTable').DataTable().column(columnIndex).search(searchText).draw();
+
+            });
+            $('#dikshitfilter').change(function () {
+                var searchText = $(this).val(); // Get selected country
+                $('#myTable').DataTable().column(4).search(searchText).draw(); // Column index 5 is for the country column
+            });
+            $('#countrySelect').change(function () {
+                var searchText = $(this).val(); // Get selected country
+                $('#myTable').DataTable().column(5).search(searchText).draw(); // Column index 5 is for the country column
+            });
+            $('#stateSelect').change(function () {
+                var searchText = $(this).val(); // Get selected country
+                $('#myTable').DataTable().column(6).search(searchText).draw(); // Column index 5 is for the country column
             });
         });
 
