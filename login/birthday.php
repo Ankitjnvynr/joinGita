@@ -38,7 +38,7 @@ if (isset($_POST['aniSubmit'])) {
     $msgsql = "SELECT * FROM `messages` WHERE `title` = 'Aniversary'";
     $msgresult = mysqli_query($conn, $msgsql);
     $msgrow = mysqli_fetch_assoc($msgresult);
-    $message = $msgrow['msg'];
+    $message = urldecode($msgrow['msg']);
 }
 
 $country_code = array(
