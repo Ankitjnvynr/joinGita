@@ -153,29 +153,9 @@ $country_code = array(
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Messages</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-flex flex-column gap-2">
+                <div id="allMessage" class=" modal-body d-flex flex-column gap-2">
 
-                    <?php
-                    $sql = "SELECT * FROM `messages`";
-                    $result = $conn->query($sql);
 
-                    if ($result->num_rows > 0) {
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo '
-                                <div class="card">
-                                    <h5 class="card-header d-flex justify-content-between"><span>' . $row['title'] . '</span><i onclick="deleteMsg(this,' . $row['sr'] . ',)" class="fa-solid fa-trash text-danger btn"></i></h5> 
-                                    <div class="card-body">
-                                            <textarea onkeyup="updateContent(this, ' . ($row['sr']) . ')"  class="form-control" style="height: 100px">' . urldecode($row['msg']) . '</textarea>
-                                        
-                                    </div>
-                                </div>
-                            ';
-                        }
-                    } else {
-                        echo 'No Messages Found. Add message to see. <span><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#newModal">Add New</button></span>';
-                    }
-                    ?>
 
                 </div>
                 <div class="modal-footer">
@@ -218,8 +198,8 @@ $country_code = array(
                                 type="text" required>
                         </div>
                         <div class="form-control">
-                            <textarea class="form-control" name="newmsg" placeholder="Enter Message" rows="5">
-                            </textarea>
+                            <textarea class="form-control" name="newmsg" placeholder="Enter Message"
+                                rows="5"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -358,7 +338,20 @@ $country_code = array(
                 input.value = 12;
             }
         }
+        let loadMessages = () => {
 
+            $.ajax({
+                url: '_viewAllMessages.php',
+                method: 'POST',
+                success: function (response) {
+                    $('#allMessage').html(response)
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error('Error updating content:', error);
+                }
+            });
+        }
         function updateContent(textarea, sr) {
             var newText = textarea.value;
             $.ajax({
@@ -370,6 +363,7 @@ $country_code = array(
                 },
                 success: function (response) {
                     // Handle success
+                   
                     console.log('Content updated successfully');
                 },
                 error: function (xhr, status, error) {
@@ -400,6 +394,7 @@ $country_code = array(
             });
         }
 
+        loadMessages()
     </script>
 
 

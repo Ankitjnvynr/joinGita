@@ -56,19 +56,7 @@ setTimeout(() => {
       });
     })
     .catch((error) => console.error("Error:", error));
-  if (selectedCountry == '101') {
-    let Allinput = document.querySelectorAll('input');
-    let AllSelect = document.querySelectorAll('select');
-    Array.from(Allinput).forEach((e, indx) => {
-      console.log(e, indx, "hii");
-      if (indx != 2) {
-        e.setAttribute('required', '');
-      }
-    })
-    Array.from(AllSelect).forEach((e) => {
-      e.setAttribute('required', '');
-    })
-  }
+
 }, 1000);
 
 

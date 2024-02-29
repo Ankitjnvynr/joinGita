@@ -42,8 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Check if the query was successful
         if ($result) {
             // Redirect to the profile view page
-            // header("location:view-profile.php?updated=true");
-            echo "update success!";
+            header("location:all-card.php?updated=true");
+            echo "update success! <br>";
+            echo $sql;
+
             exit;
         } else {
             // Handle errors if the query fails

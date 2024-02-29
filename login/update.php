@@ -120,8 +120,8 @@ while ($row = mysqli_fetch_array($result)) {
           <label for="floatingInput">Name</label>
         </div>
         <div class="form-floating mb-3 col-md ">
-          <input type="number" class="form-control" id="phone" name="phone" maxlength="20" disabled
-            placeholder="name@example.com" value="<?php echo $phone ?>" >
+          <input type="number" class="form-control" id="phone"  maxlength="20" disabled placeholder="name@example.com" value="<?php echo $phone ?>" >
+          <input type="number" class="form-control" id="" name="phone" maxlength="20" hidden placeholder="name@example.com" value="<?php echo $phone ?>" >
           <label for="floatingInput">Phone No(without country code)</label>
         </div>
 

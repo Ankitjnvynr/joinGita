@@ -7,15 +7,11 @@ $defaultmsg = array();
 $msgsql = "SELECT title, msg FROM `messages` ";
 $allmsg = $conn->query($msgsql);
 while ($allmsgs = mysqli_fetch_assoc($allmsg)) {
-    array_push($msgs, '<option value="' . $allmsgs['msg'] . '">' . $allmsgs['title'] . '</option>');
+    array_push($msgs, '<option value="' . urldecode($allmsgs['msg']) . '">' . $allmsgs['title'] . '</option>');
     array_push($defaultmsg, $allmsgs['msg'] );
 
 }
 $msgStr = '<select name="message" onchange="selectMessage(this)" id="message">' . implode("", $msgs) . '</select>';
-
-
-
-
 
 $newStr = null;
 
