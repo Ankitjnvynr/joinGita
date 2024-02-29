@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tehsil = $_POST["tehsil"];
         $address = $_POST["address"];
         $occupation = $_POST["occupation"];
+        $intrest = $_POST["intrest"];
         $education = $_POST["education"];
         $dob = $_POST["dob"];
         $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 `tehsil`='$tehsil', 
                 `address`='$address', 
                 `occupation`='$occupation', 
+                `interest`='$intrest', 
                 `education`='$education', 
                 `dob`='$dob', 
                 `aniver_date`='$aniver_date' 
