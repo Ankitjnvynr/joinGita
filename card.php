@@ -2,6 +2,9 @@
 header("Content-Type: image/jpeg");
 
 
+
+
+
 include("partials/_db.php");
 if (!isset($_GET['member'])) {
     // header('location:view-profile.php');
@@ -29,6 +32,9 @@ $phone =  $row['phone'];
 $wing = $row['interest'];
 $designation = $row['designation'];
 $star = "";
+
+header("Content-Disposition: attachment; filename=\"$name$phone.jpg\"");
+
 
 // Load the image
 $image = imagecreatefromjpeg('imgs/cards/template.jpg');
@@ -83,7 +89,7 @@ imagettftext($image, 17, 0,200, 845, $color, $font, $designation);
 imagettftext($image, 17, 0,200, 884, $color, $font, $star);
 
 // Output the image
-imagejpeg($image);
+imagejpeg($image,null,100);
 
 // Destroy the image resources to free memory
 imagedestroy($image);
