@@ -70,10 +70,10 @@ $mask = imagecreatefrompng('imgs/cards/mask.png'); // Replace 'mask.png' with th
 
 
 
-$profilePicture = imagescale($profilePicture, 340, 340);
+$profilePicture = imagescale($profilePicture, 345, 345);
 $mask = imagescale($mask, $imageWidth , $imageHeight);
 // Add the masked profile picture to the image
-imagecopy($image, $profilePicture, 120, 232 , 0, 0, 340, 340);
+imagecopy($image, $profilePicture, 120, 231 , 0, 0, 345, 345);
 imagecopy($image, $mask, 0, 0, 0, 0, $imageWidth, $imageHeight);
 imagettftext($image, 30, 0, $x_position, 640, $color, $font, $name);
 imagettftext($image, 17, 0,200, 727, $color, $font, $city);
