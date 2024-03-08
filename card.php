@@ -1,8 +1,34 @@
 <?php
 header("Content-Type: image/jpeg");
 
+
+include("partials/_db.php");
+if (!isset($_GET['member'])) {
+    // header('location:view-profile.php');
+    exit;
+}
+$memberId = false;
+$memberId = $_GET['member'];
+$sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+if (!$row) {
+    echo "not";
+    // header("location:view-profile.php?pnot=true");
+}
+
+
+
+
 // Path to your font file
 $font = 'imgs/cards/font.ttf';
+$profile = 'imgs/'. $row['pic'];
+$name = $row['name'];
+$city = $row['district'];
+$phone =  $row['phone'];
+$wing = $row['interest'];
+$designation = $row['designation'];
+$star = "";
 
 // Load the image
 $image = imagecreatefromjpeg('imgs/cards/template.jpg');
@@ -14,7 +40,7 @@ list($imageWidth, $imageHeight) = getimagesize('imgs/cards/template.jpg');
 $color = imagecolorallocate($image, 19, 21, 22);
 
 // Example name
-$name = "Ankit Ankit Ankit Ankit";
+
 $name = strtoupper($name);
 
 // Calculate the text bounding box
@@ -27,10 +53,9 @@ $x_position = ($imageWidth - $textWidth) / 2;
 $y_position = ($imageHeight + $textHeight) / 2;
 
 // Add text to the image
-imagettftext($image, 30, 0, $x_position, 640, $color, $font, $name);
 
 // Example profile picture (replace with your code to fetch image data from database)
-$profilePicture = imagecreatefromjpeg('imgs/defaultuser.png');
+$profilePicture = imagecreatefromjpeg($profile);
 
 // Get the width and height of the profile picture
 list($profileWidth, $profileHeight) = getimagesize('imgs/defaultuser.png');
@@ -42,21 +67,20 @@ $profileY = 100; // Y position of the profile picture
 // Create a transparent circular mask
 $mask = imagecreatefrompng('imgs/cards/mask.png'); // Replace 'mask.png' with the path to your circular mask image
 
-// Resize the mask to match the profile picture size
-// $mask = imagescale($mask, $profileWidth, $profileHeight);
 
-// Create a transparent image for the masked profile picture
-$maskedProfile = imagecreatetruecolor($profileWidth, $profileHeight);
-$transparent = imagecolorallocatealpha($maskedProfile, 0, 0, 0, 127);
-imagefill($maskedProfile, 0, 0, $transparent);
-imagesavealpha($maskedProfile, true);
 
-// Apply the mask to the profile picture
-imagecopy($maskedProfile, $profilePicture, 0, 0, 0, 0, $profileWidth, $profileHeight);
-imagecopy($maskedProfile, $mask, 0, 0, 0, 0, $profileWidth, $profileHeight);
 
+$profilePicture = imagescale($profilePicture, 340, 340);
+$mask = imagescale($mask, $imageWidth , $imageHeight);
 // Add the masked profile picture to the image
-imagecopy($image, $maskedProfile, $profileX, $profileY, 0, 0, $profileWidth, $profileHeight);
+imagecopy($image, $profilePicture, 120, 232 , 0, 0, 340, 340);
+imagecopy($image, $mask, 0, 0, 0, 0, $imageWidth, $imageHeight);
+imagettftext($image, 30, 0, $x_position, 640, $color, $font, $name);
+imagettftext($image, 17, 0,200, 727, $color, $font, $city);
+imagettftext($image, 17, 0,200, 768, $color, $font, $phone);
+imagettftext($image, 17, 0,200, 809, $color, $font, $wing);
+imagettftext($image, 17, 0,200, 845, $color, $font, $designation);
+imagettftext($image, 17, 0,200, 884, $color, $font, $star);
 
 // Output the image
 imagejpeg($image);

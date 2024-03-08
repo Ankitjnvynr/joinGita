@@ -181,6 +181,12 @@ $pic = $row['pic'];
                                     <?php echo $designation; ?>
                                 </td>
                             </tr>
+                            <tr>
+                                
+                                <td class="text-center bg-warning-subtle rounded-3" colspan="3">
+                                    <a download class="btn btn-danger" href="card.php?member=<?php echo $memberId ?>">Download your card</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
