@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $education = $_POST["education"];
         $dob = $_POST["dob"];
         $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
+        $star = isset($_POST['star']) ? $_POST['star'] : "";
         
         // Construct the UPDATE query
         $sql = "UPDATE `users` SET 
@@ -35,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 `interest`='$intrest', 
                 `education`='$education', 
                 `dob`='$dob', 
-                `aniver_date`='$aniver_date' 
+                `aniver_date`='$aniver_date', 
+                `star`='$star' 
                 WHERE `phone`='$phone'";
         
         // Execute the query

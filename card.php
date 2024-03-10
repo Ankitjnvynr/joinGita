@@ -31,7 +31,10 @@ $city = $row['district'];
 $phone =  $row['phone'];
 $wing = $row['interest'];
 $designation = $row['designation'];
-$star = "";
+$star = $row['star'] !== null ? $row['star']  : false;
+if($star == 'null'){
+    $star = "";
+}
 
 header("Content-Disposition: attachment; filename=\"$name$phone.jpg\"");
 

@@ -89,7 +89,7 @@ while ($row = mysqli_fetch_array($result)) {
     $education = $row['education'];
     $dob = $row['dob'];
     $aniver_date = $row['aniver_date'];
-    $message = $row['message'];
+    // $message = $row['message'];
     $pic = $row['pic'];
 
 

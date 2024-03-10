@@ -23,7 +23,7 @@ while ($row = mysqli_fetch_array($result)) {
   $education = $row['education'];
   $dob = $row['dob'];
   $aniver_date = $row['aniver_date'];
-  $message = $row['message'];
+  $star = $row['star'];
 }
 ?>
 
@@ -65,7 +65,9 @@ while ($row = mysqli_fetch_array($result)) {
     crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="../style.css" />
-  <title>GIEO Gita : Updating Profile <?php $name ?></title>
+  <title>GIEO Gita : Updating Profile
+    <?php $name ?>
+  </title>
   <style>
     .loading {
       height: 100vh;
@@ -115,13 +117,15 @@ while ($row = mysqli_fetch_array($result)) {
       </div>
       <div class="row">
         <div class="form-floating mb-3 col-md ">
-          <input type="text" class="form-control" name="name" placeholder="name@example.com" value="<?php echo $name ?>"
-            >
+          <input type="text" class="form-control" name="name" placeholder="name@example.com"
+            value="<?php echo $name ?>">
           <label for="floatingInput">Name</label>
         </div>
         <div class="form-floating mb-3 col-md ">
-          <input type="number" class="form-control" id="phone"  maxlength="20" disabled placeholder="name@example.com" value="<?php echo $phone ?>" >
-          <input type="number" class="form-control" id="" name="phone" maxlength="20" hidden placeholder="name@example.com" value="<?php echo $phone ?>" >
+          <input type="number" class="form-control" id="phone" maxlength="20" disabled placeholder="name@example.com"
+            value="<?php echo $phone ?>">
+          <input type="number" class="form-control" id="" name="phone" maxlength="20" hidden
+            placeholder="name@example.com" value="<?php echo $phone ?>">
           <label for="floatingInput">Phone No(without country code)</label>
         </div>
 
@@ -129,11 +133,11 @@ while ($row = mysqli_fetch_array($result)) {
       <div class="row">
         <div class="form-floating mb-3 col-md">
           <input type="email" class="form-control" name="email" placeholder="name@example.com"
-            value="<?php echo $email ?>" >
+            value="<?php echo $email ?>">
           <label for="floatingInput">Email </label>
         </div>
         <div class="form-group col-md mb-3 fill">
-          <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example" >
+          <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example">
 
             <option value="" aria-selected="false">--Dikshit--</option>
             <option value="Yes" aria-selected="false">Yes</option>
@@ -154,17 +158,17 @@ while ($row = mysqli_fetch_array($result)) {
       </div>
       <div class="row">
         <div class=" mb-3 col-md">
-          <input type="text" list="stateSelect" class="form-control" value=<?php echo $state; ?> >
+          <input name="state" type="text" list="stateSelect" class="form-control" value=<?php echo $state; ?>>
 
-          <datalist id="stateSelect" name="state"  >
+          <datalist id="stateSelect" >
             <option value="">-- Region --</option>
-            
+
           </datalist>
 
         </div>
         <div class=" mb-3 col-md">
-        <input type="text" list="citySelect" name="district" class="form-control" value=<?php echo $tehsil; ?> >
-          <datalist id="citySelect"  >
+          <input type="text" list="citySelect" name="district" class="form-control" value=<?php echo $tehsil; ?>>
+          <datalist id="citySelect">
             <option value="">-- City --</option>
           </datalist>
 
@@ -177,20 +181,20 @@ while ($row = mysqli_fetch_array($result)) {
 
         <div class="form-floating mb-3 col-md">
           <input name="tehsil" type="text" class="form-control" placeholder="name@example.com"
-            value="<?php echo $tehsil ?>" >
+            value="<?php echo $tehsil ?>">
           <label for="floatingInput">Tehsil</label>
         </div>
         <div class="form-floating mb-3 col-md">
           <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com"
-            value="<?php echo $address ?>" >
+            value="<?php echo $address ?>">
           <label for="Village">Address</label>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md mb-3 fill">
-          <select name="intrest" class="form-control" data-testid="select-trigger"  aria-required="true"
-            aria-invalid="false" >
+          <select name="intrest" class="form-control" data-testid="select-trigger" aria-required="true"
+            aria-invalid="false">
             <option value="" disabled="" selected="">Interested Field</option>
             <option value="श्री कृष्ण कृपा सेवा समिति" aria-selected="false">श्री कृष्ण कृपा सेवा समिति</option>
             <option value="जीओ गीता" aria-selected="false">जीओ गीता</option>
@@ -212,13 +216,15 @@ while ($row = mysqli_fetch_array($result)) {
             <option value="सोशल मीडिया समूह" aria-selected="false">सोशल मीडिया समूह</option>
             <option value="निधि समूह" aria-selected="false">निधि समूह</option>
             <option value="गौ सेवा समूह" aria-selected="false">गौ सेवा समूह</option>
-            <option value="<?php echo $wing ?>" aria-selected="false" selected><?php echo $wing ?></option>
+            <option value="<?php echo $wing ?>" aria-selected="false" selected>
+              <?php echo $wing ?>
+            </option>
           </select>
         </div>
         <div class="form-group col-md mb-3">
 
-          <select name="occupation" class="form-control" data-testid="select-trigger"  aria-required="true"
-            aria-invalid="false" >
+          <select name="occupation" class="form-control" data-testid="select-trigger" aria-required="true"
+            aria-invalid="false">
             <option value="" disabled="" selected="">Occupation</option>
             <option value="Business" aria-selected="false">Business</option>
             <option value="Home Maker" aria-selected="false">Home Maker</option>
@@ -231,15 +237,17 @@ while ($row = mysqli_fetch_array($result)) {
             <option value="Doctor" aria-selected="false">Doctor</option>
             <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
             <option value="Retired" aria-selected="false">Retired</option>
-            <option value="<?php echo $occupation ?>" aria-selected="false" selected><?php echo $occupation ?></option>
+            <option value="<?php echo $occupation ?>" aria-selected="false" selected>
+              <?php echo $occupation ?>
+            </option>
 
           </select>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md mb-3">
-          <select name="education" class="form-control" data-testid="select-trigger"  aria-required="true"
-            aria-invalid="false" >
+          <select name="education" class="form-control" data-testid="select-trigger" aria-required="true"
+            aria-invalid="false">
             <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">Education</option>
             <option value="B.Com" aria-selected="false">B.Com</option>
             <option value="M.Com" aria-selected="false">M.Com</option>
@@ -252,34 +260,54 @@ while ($row = mysqli_fetch_array($result)) {
             <option value="12th Pass" aria-selected="false">12th Pass</option>
             <option value="10th Pass" aria-selected="false">10th Pass</option>
             <option value="Others" aria-selected="false">Others</option>
-            <option value="<?php echo $education ?>" aria-selected="false" selected><?php echo $education ?></option>
+            <option value="<?php echo $education ?>" aria-selected="false" selected>
+              <?php echo $education ?>
+            </option>
 
           </select>
         </div>
         <div class="form-floating mb-3 col-md ">
-          <input name="dob" type="date" class="form-control" value="<?php echo $dob ?>" >
+          <input name="dob" type="date" class="form-control" value="<?php echo $dob ?>">
           <label for="dob">Birth Date</label>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md mb-3">
-          <select name="married" id="married" class="form-control" onchange="aniver()" >
+          <select name="married" id="married" class="form-control" onchange="aniver()">
             <option value="">-- select Marital Status --</option>
             <option value="Married" aria-selected="false">Married</option>
             <option value="Unmarried" aria-selected="false">Unmarried</option>
-            <option value="<?php echo $marital_status ?>" aria-selected="false" selected>
-              <?php echo $marital_status ?>
-            </option>
+            <option value="<?php echo $marital_status ?>" aria-selected="false" selected><?php echo $marital_status ?></option>
           </select>
         </div>
 
         <div id="aniversry" class="form-floating mb-3 col-md">
 
         </div>
-        
+
+      </div>
+      <div class="row">
+        <div class="form-group col-md mb-3">
+          <select name="star" class="form-control">
+            <option value="">-- Star --</option>
+            <option value="Trustee" aria-selected="false">Trustee</option>
+            <option value="Trustee2" aria-selected="false">Trustee2</option>
+            <?php
+              echo $star != "" ?
+              '<option value="'. $star .'" aria-selected="false" selected>'. $star .'</option>'
+              : "";
+            ?>
+            
+          </select>
+        </div>
+        <div class="form-group col-md mb-3">
+          
+        </div>
+
       </div>
 
-      <div class="d-flex justify-content-center"><button name="updatesubmit" type="submit" class="btn btn-danger p-4 py-2 p"><b>Update Profile</b></button></div>
+      <div class="d-flex justify-content-center"><button name="updatesubmit" type="submit"
+          class="btn btn-danger p-4 py-2 p"><b>Update Profile</b></button></div>
   </div>
   </form>
 

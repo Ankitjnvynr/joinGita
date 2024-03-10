@@ -70,6 +70,10 @@ $phone = $row['phone'];
 $wing = $row['interest'];
 $designation = $row['designation'];
 $pic = $row['pic'];
+$star = $row['star'] ;
+if($star == 'null'){
+    $star = "";
+}
 
 ?>
 <!doctype html>
@@ -78,7 +82,9 @@ $pic = $row['pic'];
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GIEO Gita | <?php echo $name; ?></title>
+    <title>GIEO Gita |
+        <?php echo $name; ?>
+    </title>
     <link rel="shortcut icon" href="imgs/<?php echo $row['pic'] ?>" type="image/x-icon">
     <!-- Load FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -177,14 +183,29 @@ $pic = $row['pic'];
                             <tr>
                                 <th scope="row">Designation</th>
                                 <td colspan="2">
-                                    
+
                                     <?php echo $designation; ?>
                                 </td>
                             </tr>
+                            
+                            <?php
+                                if ($star !== '') {
+                                    echo '
+                                        <tr>
+                                            <th scope="row">🔅</th>
+                                            <td colspan="2">
+                                                ' . $star . '
+                                            </td>
+                                        </tr>
+                                    ';
+                                }
+                            ?>
+
                             <tr>
-                                
+
                                 <td class="text-center bg-warning-subtle rounded-3" colspan="3">
-                                    <a download class="btn btn-danger" href="card.php?member=<?php echo $memberId ?>">Download your card</a>
+                                    <a download class="btn btn-danger"
+                                        href="card.php?member=<?php echo $memberId ?>">Download your card</a>
                                 </td>
                             </tr>
                         </tbody>
