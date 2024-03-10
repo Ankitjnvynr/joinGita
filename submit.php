@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Use prepared statements to insert data
   if (isset($_POST['joinsubmit'])) {
-    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`,  `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `occupation`, `education`, `dob`, `aniver_date`) VALUES ('$hash_id','$country','$name','$phone','$email','$dikshit','$married','$state','$district','$tehsil','$address','$occupation','$education','$dob','$aniver_date')";
+    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`,  `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `occupation`, `education`, `dob`,`dob`, `aniver_date`) VALUES ('$hash_id','$country','$name','$phone','$email','$dikshit','$married','$state','$district','$tehsil','$address','$occupation','$education','$dob','GIEO Gita','$aniver_date')";
   }
 
   
