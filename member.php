@@ -2,7 +2,7 @@
 $statusMsg = '';
 include("partials/_db.php");
 if (!isset($_GET['member'])) {
-    // header('location:view-profile.php');
+    header('location:view-profile.php');
     exit;
 }
 
@@ -62,7 +62,8 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 if (!$row) {
     echo "not";
-    // header("location:view-profile.php?pnot=true");
+    header("location:view-profile.php?pnot=true");
+    exit;
 }
 $name = $row['name'];
 $district = $row['district'];
