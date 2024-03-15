@@ -34,6 +34,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/header.css">
   <title>Join GIEO Gita</title>
   <style>
     .loading {
@@ -75,7 +76,9 @@
   </style>
 </head>
 
-<body class="ov">
+<body class="">
+  
+
   <!-- <div class="loading">
     <div class="l-box"></div>
   </div> -->
@@ -94,6 +97,11 @@
     </div>
   </div>
   <!-- ====================Toast End======================================== -->
+
+  
+
+
+
   <div class="container p-2 p-md-4  shadow-lg  my-3 rounded " style="padding-bottom: 1%;">
     <div class="text-center">
       <h4>
