@@ -1,5 +1,5 @@
 <?php
-// header("Content-Type: image/jpeg");
+header("Content-Type: image/jpeg");
 
 
 
@@ -36,7 +36,7 @@ if($star == 'null'){
     $star = "";
 }
 
-// header("Content-Disposition: attachment; filename=\"$name$phone.jpg\"");
+header("Content-Disposition: attachment; filename=\"$name$phone.jpg\"");
 
 
 // Load the image
@@ -64,8 +64,8 @@ $y_position = ($imageHeight + $textHeight) / 2;
 // Add text to the image
 
 // Example profile picture (replace with your code to fetch image data from database)
-echo $profile;
-$profilePicture = imagecreatefromjpeg($profile);
+// echo $profile;
+// $profilePicture = imagecreatefromjpeg($profile);
 $profilePicture = imagecreatefrompng($profile);
 
 // Get the width and height of the profile picture

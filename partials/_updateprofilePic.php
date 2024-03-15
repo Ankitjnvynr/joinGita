@@ -1,5 +1,5 @@
 <?php
-include("partials/_db.php");
+include("_db.php");
 
 // Check if the form is submitted via AJAX
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["croppedImage"])) {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["croppedImage"])) {
     $existingImage = $row['pic'];
 
     // Specify the directory where you want to save the uploaded image
-    $uploadDirectory = "imgs/";
+    $uploadDirectory = "../imgs/";
 
     // Generate a unique filename for the new image
     $newImageName = uniqid() . '.png'; // You can use any desired extension
