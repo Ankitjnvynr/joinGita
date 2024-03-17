@@ -1,18 +1,20 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
     header("location: index.php");
     exit;
 }
 // ====================creating masik parwas tabel if not exist================
-include("../partials/_db.php");
+include ("../partials/_db.php");
 $totalBday = 0;
 $birthday = null;
 
-if (isset($_POST['bdaySubmit'])) {
+if (isset ($_POST['bdaySubmit']))
+{
     $birthday = true;
-    $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
-    $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
+    $birthDate = isset ($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
+    $birthMonth = isset ($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
 
     $query = "SELECT * FROM users WHERE MONTH(dob) = $birthMonth AND DAY(dob) =$birthDate ";
     $resultb = mysqli_query($conn, $query);
@@ -22,11 +24,12 @@ if (isset($_POST['bdaySubmit'])) {
     $msgsql = "SELECT * FROM `messages` WHERE `title` = 'Birthday'";
     $msgresult = mysqli_query($conn, $msgsql);
     $msgrow = mysqli_fetch_assoc($msgresult);
-    // $message = $msgrow['msg'];
-    $message = urldecode($msgrow['msg']);
+    $message = $msgrow['msg'];
+    // $message = urldecode($msgrow['msg']);
 }
 
-if (isset($_POST['aniSubmit'])) {
+if (isset ($_POST['aniSubmit']))
+{
     $birthday = false;
     $birthDate = $_POST['aniDate'];
     $birthMonth = $_POST['aniMonth'];
@@ -38,7 +41,7 @@ if (isset($_POST['aniSubmit'])) {
     $msgsql = "SELECT * FROM `messages` WHERE `title` = 'Aniversary'";
     $msgresult = mysqli_query($conn, $msgsql);
     $msgrow = mysqli_fetch_assoc($msgresult);
-    $message = urldecode($msgrow['msg']);
+    $message = $msgrow['msg'];
 }
 
 $country_code = array(
@@ -147,7 +150,7 @@ $country_code = array(
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg   ">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Messages</h1>
@@ -166,7 +169,8 @@ $country_code = array(
         </div>
     </div>
     <?php
-    if (isset($_POST['newmsgSubmit'])) {
+    if (isset ($_POST['newmsgSubmit']))
+    {
         $newmsgtitle = $_POST['newmsgtitle'];
         $newmsg = $_POST['newmsg'];
         // $newmsg = htmlspecialchars($newmsg, ENT_QUOTES, 'UTF-8');
@@ -176,9 +180,11 @@ $country_code = array(
     
         $sql = "INSERT INTO `messages` (`title`, `msg`) VALUES ('$newmsgtitle', '$newmsg')";
         $result = $conn->query($sql); // Execute the SQL query using $conn->query()
-        if ($result) {
+        if ($result)
+        {
             $messageAdded = true;
-        } else {
+        } else
+        {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
@@ -281,9 +287,11 @@ $country_code = array(
                     <tbody>
 
                         <?php
-                        if ($totalBday > 0) {
+                        if ($totalBday > 0)
+                        {
                             $sr = 0;
-                            while ($row = mysqli_fetch_assoc($resultb)) {
+                            while ($row = mysqli_fetch_assoc($resultb))
+                            {
                                 $sr++;
                                 $code = $country_code[$row['country']];
                                 $targetDate = $birthday ? $row['dob'] : $row['aniver_date'];
@@ -296,14 +304,14 @@ $country_code = array(
                             <td>' . $targetDate . '</td>
                             <td>
                             
-                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A
-                            ' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
+                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
                             </td>
                             </tr>
                             ';
 
                             }
-                        } else {
+                        } else
+                        {
 
                         }
 
@@ -363,7 +371,7 @@ $country_code = array(
                 },
                 success: function (response) {
                     // Handle success
-                   
+
                     console.log('Content updated successfully');
                 },
                 error: function (xhr, status, error) {

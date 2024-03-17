@@ -1,11 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
     header("location: index.php");
     exit;
 }
 // ====================creating masik parwas tabel if not exist================
-include("../partials/_db.php");
+include ("../partials/_db.php");
 
 ?>
 <!doctype html>
@@ -18,6 +19,7 @@ include("../partials/_db.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -271,13 +273,13 @@ include("../partials/_db.php");
             let link = src.split('&');
             for (let i = 0; i < link.length; i++) {
                 if (link[i].startsWith('text=')) {
-                    link[i] = 'text=' + encodeURIComponent(newText); 
+                    link[i] = 'text=' + '🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' + encodeURIComponent(newText);
                     break;
                 }
             }
             href = link.join('&');
             secondChild.setAttribute('href', href);
-            
+
         }
 
     </script>
@@ -440,17 +442,7 @@ include("../partials/_db.php");
                 action = 'active';
                 loadpics(start, limit);
             }
-            // $(window).scroll(function () {
-            //     if ($(window).scrollTop() + $(window).height() > $(".cardbox").height() && action == 'inactive') {
-            //         action = 'active';
-            //         if(resetTop){window. scrollTo(0,0), resetTop=false;}
-            //         start = start + limit;
-            //         setTimeout(function () {
-            //             loadpics(start, limit);
-            //             console.log(start, limit)
-            //         }, 1000);
-            //     }
-            // });
+
 
         })
 

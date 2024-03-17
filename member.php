@@ -1,12 +1,14 @@
 <?php
 $statusMsg = '';
-include("partials/_db.php");
-if (!isset($_GET['member'])) {
+include ("partials/_db.php");
+if (!isset ($_GET['member']))
+{
     header('location:view-profile.php');
     exit;
 }
 
-if (isset($_POST['Update'])) {
+if (isset ($_POST['Update']))
+{
     $targetDir = "imgs/";
     $updateEmail = $_POST['updateEmail'];
     $memberId = $_GET['member'];
@@ -29,7 +31,8 @@ $memberId = $_GET['member'];
 $sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
-if (!$row) {
+if (!$row)
+{
     echo "not";
     header("location:view-profile.php?pnot=true");
     exit;
@@ -41,7 +44,8 @@ $wing = $row['interest'];
 $designation = $row['designation'];
 $pic = $row['pic'];
 $star = $row['star'];
-if ($star == 'null') {
+if ($star == 'null')
+{
     $star = "";
 }
 
@@ -58,7 +62,8 @@ if ($star == 'null') {
     <link rel="shortcut icon" href="imgs/<?php echo $row['pic'] ?>" type="image/x-icon">
     <!-- Load FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 
 
@@ -171,7 +176,9 @@ if ($star == 'null') {
     <div class="container my-5">
         <div class="row">
             <div class="col-md  d-flex justify-content-center align-items-center p-3">
-                <img style="width: 42%; aspect-ratio: 1/1; object-fit:cover;" class="rounded-circle shadow-lg border border-black" src="imgs/<?php echo $row['pic'] ?>" alt="user image" class="user">
+                <img style="width: 42%; aspect-ratio: 1/1; object-fit:cover;"
+                    class="rounded-circle shadow-lg border border-black" src="imgs/<?php echo $row['pic'] ?>"
+                    alt="user image" class="user">
             </div>
             <div class="col-md p-3">
                 <div class="shadow-lg bg-white rounded-5 p-4">
@@ -212,7 +219,8 @@ if ($star == 'null') {
                             </tr>
 
                             <?php
-                            if ($star !== '') {
+                            if ($star !== '')
+                            {
                                 echo '
                                         <tr>
                                             <th scope="row">🔅</th>
@@ -227,7 +235,8 @@ if ($star == 'null') {
                             <tr>
 
                                 <td class="text-center bg-warning-subtle rounded-3" colspan="3">
-                                    <a download class="btn btn-danger" href="card.php?member=<?php echo $memberId ?>">Download your card</a>
+                                    <a download class="btn btn-danger"
+                                        href="card.php?member=<?php echo $memberId ?>">Download your card</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -243,21 +252,25 @@ if ($star == 'null') {
                     <h4>Update your Profile</h4>
                 </div>
                 <div class="col-md ">
-                    <form action=" <?php echo $_SERVER['PHP_SELF'] . "?member=" . $memberId; ?>" method="POST" enctype="multipart/form-data">
+                    <form action=" <?php echo $_SERVER['PHP_SELF'] . "?member=" . $memberId; ?>" method="POST"
+                        enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md my-2 ">
                                 <label for="updatephone">Phone No</label>
-                                <input type="text" class="form-control" value="<?php echo $phone; ?>" id="updatephone" aria-label="First name" disabled>
+                                <input type="text" class="form-control" value="<?php echo $phone; ?>" id="updatephone"
+                                    aria-label="First name" disabled>
                             </div>
                             <div class="col-md my-2">
                                 <label for="updateEmail">Email address</label>
-                                <input type="text" value="<?php echo $row['email']; ?>" class="form-control" id="updateEmail" name="updateEmail" aria-label="Last name">
+                                <input type="text" value="<?php echo $row['email']; ?>" class="form-control"
+                                    id="updateEmail" name="updateEmail" aria-label="Last name">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md my-2">
                                 <label for="pic">Upload Profile Photo</label>
-                                <input onchange="fileValidation(this)" type="file" id="pic" name="pic" class="form-control" aria-label="picture">
+                                <input onchange="fileValidation(this)" type="file" id="pic" name="pic"
+                                    class="form-control" aria-label="picture">
                                 <span class="text-danger op">
                                     <?php echo $statusMsg; ?>
                                 </span>
@@ -327,13 +340,15 @@ if ($star == 'null') {
                     <!-- Define the section for displaying the seek slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3 ">
                         <div class="current-time">00:00</div>
-                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider contrls" onchange="seekTo()">
+                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider contrls"
+                            onchange="seekTo()">
                         <div class="total-duration">00:00</div>
                     </div>
                     <!-- Define the section for displaying the volume slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3">
                         <i class="fa fa-volume-down"></i>
-                        <input style="width: 50%;" type="range" min="1" max="100" value="99" class="volume_slider contrls" onchange="setVolume()">
+                        <input style="width: 50%;" type="range" min="1" max="100" value="99"
+                            class="volume_slider contrls" onchange="setVolume()">
                         <i class="fa fa-volume-up"></i>
                     </div>
                 </div>
@@ -342,9 +357,12 @@ if ($star == 'null') {
                     <div style=" height:100%;  " class="music-player mx-2 ">
                         <ul style="max-height: 200px;" class="list-group overflow-y-scroll">
                             <!-- Replace the following list items with your actual music data -->
-                            <li id="0" class="list-group-item music-item" data-src="audio/song1.mp3" data-cover="images/cover1.jpg">Song 1</li>
-                            <li id="1" class="list-group-item music-item" data-src="audio/song2.mp3" data-cover="images/cover2.jpg">Song 2</li>
-                            <li id="2" class="list-group-item music-item" data-src="audio/song3.mp3" data-cover="images/cover3.jpg">Song 3</li>
+                            <li id="0" class="list-group-item music-item" data-src="audio/song1.mp3"
+                                data-cover="images/cover1.jpg">Song 1</li>
+                            <li id="1" class="list-group-item music-item" data-src="audio/song2.mp3"
+                                data-cover="images/cover2.jpg">Song 2</li>
+                            <li id="2" class="list-group-item music-item" data-src="audio/song3.mp3"
+                                data-cover="images/cover3.jpg">Song 3</li>
                         </ul>
                     </div>
                 </div>
@@ -363,16 +381,17 @@ if ($star == 'null') {
                     <h3 class="fw-bold">​मासिक प्रवास</h3>
                     <div class="my-2">
                         <img width="100%" class="rounded-3 shadow-lg" src="masik_parwas/<?php
-                                                                                        $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
-                                                                                        $result = mysqli_query($conn, $sql);
-                                                                                        $row = mysqli_fetch_array($result);
-                                                                                        echo $row['pic'];
-                                                                                        ?>" alt="hjt">
+                        $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_array($result);
+                        echo $row['pic'];
+                        ?>" alt="hjt">
                     </div>
                 </div>
                 <div class="col-md d-flex flex-column justify-content-center align-items-center">
                     <h3 class="fw-bold">VIDEOS</h3>
-                    <video src="imgs/file.mp4" width="100%" class="object-fit-cover rounded-3 shadow-lg" controls></video>
+                    <video src="imgs/file.mp4" width="100%" class="object-fit-cover rounded-3 shadow-lg"
+                        controls></video>
                 </div>
             </div>
             <hr>
@@ -421,10 +440,14 @@ if ($star == 'null') {
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js" integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
+        integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script>
         const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'))
 
@@ -449,7 +472,7 @@ if ($star == 'null') {
     <script src="js/music.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
             let cropper;
             // Example function to rotate the Cropper canvas by a specified angle
@@ -459,9 +482,46 @@ if ($star == 'null') {
 
 
             // Show modal and initialize cropper when it is shown
-            $('#cropperModal').on('shown.bs.modal', function() {
+            $('#cropperModal').on('shown.bs.modal', function () {
                 const image = document.getElementById('cropperImage');
                 const cropperContainer = document.querySelector('.cropper-container');
+
+                // Create a new canvas element
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+
+                // Set the desired width and height for the resized image
+                var maxWidth = 2000; // Set your maximum width
+                var maxHeight = 2000; // Set your maximum height
+
+                // Ensure the image dimensions fit within the maximum dimensions while preserving aspect ratio
+                var width = image.width;
+                var height = image.height;
+
+                if (width > height) {
+                    if (width > maxWidth) {
+                        height *= maxWidth / width;
+                        width = maxWidth;
+                    }
+                } else {
+                    if (height > maxHeight) {
+                        width *= maxHeight / height;
+                        height = maxHeight;
+                    }
+                }
+
+                // Set the canvas dimensions to the resized image dimensions
+                canvas.width = width;
+                canvas.height = height;
+
+                // Draw the resized image onto the canvas
+                ctx.drawImage(image, 0, 0, width, height);
+
+                // Replace the original image source with the resized image data URL
+                image.src = canvas.toDataURL('image/jpeg'); // Change 'image/jpeg' to the desired image format if needed
+
+                // Initialize Cropper with the resized image
+
 
                 cropper = new Cropper(image, {
                     aspectRatio: 1, // Adjust aspect ratio as needed
@@ -469,10 +529,18 @@ if ($star == 'null') {
                     rotatable: true,
                     rotator: true,
                     checkOrientation: true, // Set to 1 to ensure the cropped image fits within the container
-                    crop: function(event) {
+                    crop: function (event) {
                         // Apply circular mask to cropper container
                         $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
                         $('.cropper-container').css('overflow', 'hidden');
+                    }
+                });
+                $('#cropperModal').on('hidden.bs.modal', function (e) {
+                    // Check if Cropper instance exists
+
+                    if (cropper !== undefined) {
+                        // Destroy Cropper instance
+                        cropper.destroy();
                     }
                 });
 
@@ -482,11 +550,11 @@ if ($star == 'null') {
             });
 
             // When user clicks the "Upload Profile Photo" button, show the modal
-            $('#pic').on('change', function(event) {
+            $('#pic').on('change', function (event) {
                 const input = event.target;
                 if (input.files && input.files[0]) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         $('#cropperImage').attr('src', e.target.result);
                         cropperModal.show();
                     }
@@ -496,7 +564,7 @@ if ($star == 'null') {
 
 
             // When user clicks the "Save" button, save the cropped image
-            $('#saveCroppedImage').on('click', function() {
+            $('#saveCroppedImage').on('click', function () {
                 if (cropper) {
                     const canvas = cropper.getCroppedCanvas();
                     const croppedImageDataURL = canvas.toDataURL("image/png");
@@ -507,6 +575,7 @@ if ($star == 'null') {
                     // Get the member ID
                     var memberId = <?php echo json_encode($_GET['member']); ?>; // Assuming you're passing member ID as a query parameter
 
+
                     // AJAX request to send cropped image data to PHP script
                     $.ajax({
                         type: 'POST',
@@ -516,7 +585,7 @@ if ($star == 'null') {
                             memberId: memberId
                         },
                         // dataType: 'json',
-                        success: function(response) {
+                        success: function (response) {
                             if (response.success) {
                                 // Display success message or perform any other actions
                                 // console.log(response.message);
@@ -527,7 +596,7 @@ if ($star == 'null') {
                                 console.log(response)
                             }
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             // Handle AJAX error
                             console.error(error);
                         }

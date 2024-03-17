@@ -67,6 +67,7 @@ $y_position = ($imageHeight + $textHeight) / 2;
 // echo $profile;
 // $profilePicture = imagecreatefromjpeg($profile);
 $profilePicture = imagecreatefrompng($profile);
+$profilePicture = imagecreatefrompng('imgs/cards/logo.png');
 
 // Get the width and height of the profile picture
 list($profileWidth, $profileHeight) = getimagesize($profile);

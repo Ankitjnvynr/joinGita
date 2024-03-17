@@ -1,7 +1,8 @@
 <?php
-include("partials/_db.php");
+include ("partials/_db.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
   // echo "btn is pressed";
   $phone = $_POST["phone"];
 
@@ -9,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $res = mysqli_query($conn, $checksql);
   $row = mysqli_fetch_assoc($res);
   $numrows = mysqli_num_rows($res);
-  if ($numrows > 0) {
+  if ($numrows > 0)
+  {
     header("location:index.php?dphoneExiit=true");
     exit;
 
@@ -31,29 +33,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $education = $_POST["education"];
   $dob = $_POST["dob"];
 
-  $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
+  $aniver_date = isset ($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
   $hash_id = md5($phone);
 
 
 
   // Use prepared statements to insert data
-  if (isset($_POST['joinsubmit'])) {
-    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`,  `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `occupation`, `education`, `dob`,`dob`, `aniver_date`) VALUES ('$hash_id','$country','$name','$phone','$email','$dikshit','$married','$state','$district','$tehsil','$address','$occupation','$education','$dob','GIEO Gita','$aniver_date')";
+  if (isset ($_POST['joinsubmit']))
+  {
+    $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`,  `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `occupation`, `education`, `dob`,`interest`, `aniver_date`) VALUES ('$hash_id','$country','$name','$phone','$email','$dikshit','$married','$state','$district','$tehsil','$address','$occupation','$education','$dob','GIEO Gita','$aniver_date')";
   }
 
-  
 
-  try {
+
+  try
+  {
     $result = mysqli_query($conn, $sql);
-    if ($result) {
+    if ($result)
+    {
       echo "Please Wait..........";
       header("location:view-profile.php?joined=true");
       exit;
 
     }
 
-  } catch (Exception $err) {
-    if ($err) {
+  } catch (Exception $err)
+  {
+    if ($err)
+    {
       echo $err;
       echo "hii";
       // header("location:index.php?dphoneExiit=true");

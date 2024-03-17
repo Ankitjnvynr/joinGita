@@ -1,14 +1,15 @@
 <?php
-include("../partials/_db.php");
+include ("../partials/_db.php");
 
 
 $msgs = array();
 $defaultmsg = array();
 $msgsql = "SELECT title, msg FROM `messages` ";
 $allmsg = $conn->query($msgsql);
-while ($allmsgs = mysqli_fetch_assoc($allmsg)) {
+while ($allmsgs = mysqli_fetch_assoc($allmsg))
+{
     array_push($msgs, '<option value="' . urldecode($allmsgs['msg']) . '">' . $allmsgs['title'] . '</option>');
-    array_push($defaultmsg, $allmsgs['msg'] );
+    array_push($defaultmsg, $allmsgs['msg']);
 
 }
 $msgStr = '<select name="message" onchange="selectMessage(this)" id="message">' . implode("", $msgs) . '</select>';
@@ -27,11 +28,13 @@ $byCity = $_POST['filterCity'];
 $limit = $_POST['limit'];
 $start = $_POST['start'];
 
-if ($byPhone || $byEmail || $byCountry || $byState || $byCity || $byName) {
+if ($byPhone || $byEmail || $byCountry || $byState || $byCity || $byName)
+{
     $newStr = ' WHERE ';
 }
 
-if ($byCountry) {
+if ($byCountry)
+{
     // unset($filters[1]);
     // unset($filters[2]);
     $filters = array();
@@ -39,23 +42,28 @@ if ($byCountry) {
     // array_splice($filters, 1, 2);  
     array_push($filters, $byCountry);
 }
-if ($byName) {
+if ($byName)
+{
     $byName = " name LIKE '" . $byName . "%'";
     array_push($filters, $byName);
 }
-if ($byState) {
+if ($byState)
+{
     $byState = " state LIKE '" . $byState . "%'";
     array_push($filters, $byState);
 }
-if ($byCity) {
+if ($byCity)
+{
     $byCity = " district LIKE '" . $byCity . "%'";
     array_push($filters, $byCity);
 }
-if ($byPhone) {
+if ($byPhone)
+{
     $byPhone = " phone LIKE '" . $byPhone . "%'";
     array_push($filters, $byPhone);
 }
-if ($byEmail) {
+if ($byEmail)
+{
     $byEmail = " email LIKE '%" . $byEmail . "%'";
     array_push($filters, $byEmail);
 }
@@ -70,7 +78,8 @@ $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY `id` DESC LIMIT " . $st
 // SELECT * FROM `users` WHERE phone LIKE '89%' AND name LIKE '%an%' ORDER BY `id` DESC LIMIT 3;
 $result = mysqli_query($conn, $sql);
 // if(($conn->num_rows = mysqli_num_rows($result)) == 0) echo "<div class='card p-3 text-center overflow-hidden'><h2 class = 'text-muted' > No result Found </h2> </div>";
-while ($row = mysqli_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result))
+{
 
     $user_id = $row['id'];
     $country = $row['country'];
@@ -129,7 +138,8 @@ while ($row = mysqli_fetch_array($result)) {
                                         </tr>
                                         <tr>
                                             <td>Phone:</td>
-                                            <td>' . $phone . '</td>
+                                            
+                                            <td><a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . '</span></a></td>
                                         </tr>
                                         <tr>
                                             <td>Email:</td>
@@ -142,15 +152,15 @@ while ($row = mysqli_fetch_array($result)) {
                                 </div>
                                 </div>
                                 <hr class="m-0 mx-3 ">
-                                <div class="d-flex gap-2 p-3 justify-content-between">
+                                <div class="d-flex gap-2 p-2 justify-content-between">
                                     <div class="d-flex gap-2 ">
-                                        <a href="update.php?user=' . $user_id . '" class="btn btn-danger">Edit</a>
-                                        <div data-id = "' . $user_id . '" class="del btn btn-danger" >Delete</div>
+                                        <a href="update.php?user=' . $user_id . '" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <div data-id = "' . $user_id . '" class="del btn btn-danger" ><i class="fa-solid fa-trash"></i></div>
                                     </div>
-                                    <p class="d-flex gap-3 flex-items-center justify-content-beteen px-2 m-0">
-                                        '.$msgStr.'
-                                        <a href="whatsapp://send?phone=' . $code . $phone . '?file=../imgs/' . $pic . '&text=' . $defaultmsg[0] . '"><i class="fa-solid fs-2 fa-brands fa-whatsapp text-success fs-2"></i></a>
-                                        <a href="tel:' . $phone . '"><i class="fa-solid fa-phone text-success fs-2"></i> </a>
+                                    <p class="d-flex flex-wrap gap-2 flex-items-center justify-content-between px-2 m-0">
+                                        ' . $msgStr . '
+                                        <a href="https://wa.me/' . $code . $phone . '?file=../imgs/' . $pic . '&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $defaultmsg[0] . '"><i class="fa-solid fs-2 fa-brands fa-whatsapp text-success fs-2"></i></a>
+                                        
                                         <a href="mailto:' . $email . '"><i class="fa-solid fs-2   fa-envelope text-success "></i></a>
                                     </p>
                                 </div>
