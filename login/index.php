@@ -77,11 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 <body>
     <div style="width:90%; max-width:400px "
-        class="container d-flex justify-content-center align-items-center shadow p-4 py-5 rounded bg-warning-subtle rounded-xl position-relative ">
+        class="container  d-flex justify-content-center align-items-center shadow p-4 py-5 rounded bg-warning-subtle rounded-xl position-relative ">
         <div class="logo position-absolute shadow">
             <img style="width:100%" src="../imgs/cards/logo.png" alt="GIEO gita logo">
         </div>
-        <form class="relative w-100 mt-5" method="POST" action="">
+        <form class="relative w-100 mt-5 overflow-hidden" method="POST" action="">
+
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="username" name="username" required
                     placeholder="name@example.com">
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 <button type="submit" class="btn btn-danger">Log In</button>
             </div>
 
-            <div style="height: 20px;" class="text-danger text-center mt-3 ">
+            <div style="height: 20px;" class="text-danger text-center mt-2 ">
                 <?php echo $msg; ?>
             </div>
         </form>
