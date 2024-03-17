@@ -123,8 +123,8 @@ while ($row = mysqli_fetch_array($result))
     echo '
                             <div class="card p-0 overflow-hidden">
                                 <div class="d-flex picbg">
-                                <div style="width:25%" class="pic relative m-2">
-                                    <img style="border:2px solid white" class="absolute rounded-circle bg-white border-danger p-1" width="100%" style="aspect-ratio:1/1;" src="../imgs/' . $pic . '" alt="' . $pic . '">
+                                <div style="width:100px; height:100px" class="pic relative m-2">
+                                    <img style="border:2px solid white; aspect-ratio:1/1;  width:100%;" class="absolute rounded-circle bg-white border-danger p-1" style=";" src="../imgs/' . $pic . '" alt="' . $pic . '">
                                     
                                 </div>
                                 <div style="width:67%" class="name d-flex flex-column justify-content-around">
