@@ -1,23 +1,28 @@
 <?php
 session_start();
-if (isset($_SESSION['loggedin'])) {
-//	header('location : dashboard.php');
-	header("location: alluser.php");
+if (isset ($_SESSION['loggedin']))
+{
+    //	header('location : dashboard.php');
+    header("location: alluser.php");
 
-	exit;
+    exit;
 }
-include("../partials/_db.php");
+include ("../partials/_db.php");
 $msg = false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $sql = "SELECT * FROM admin_user WHERE  username = '$username'";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
-    if ($num == 1) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            if (password_verify($password,  $row['password'])) {
+    if ($num == 1)
+    {
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            if (password_verify($password, $row['password']))
+            {
                 $logged = true;
                 session_start();
                 $_SESSION['loggedin'] = true;
@@ -25,54 +30,80 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['intro'] = true;
                 header("location: alluser.php");
                 exit;
-            } else {
+            } else
+            {
                 $msg = "Password not match";
             }
         }
-    } else {
+    } else
+    {
         $msg = "Wrong username";
     }
 }
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    
-    <title>GIEO Gita : Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 10px;
+            background: #f7e092;
+            overflow-x: hidden;
+        }
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.css">
-    <!--Stylesheet-->
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+        }
 
-
-    <style media="screen">
-
+        .logo {
+            top: -75px;
+            width: 150px;
+            /* border: 2px solid red; */
+            border-radius: 50%;
+            overflow: hidden;
+        }
     </style>
 </head>
 
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
+    <div style="width:90%; max-width:400px "
+        class="container d-flex justify-content-center align-items-center shadow p-4 py-5 rounded bg-warning-subtle rounded-xl position-relative ">
+        <div class="logo position-absolute shadow">
+            <img style="width:100%" src="../imgs/cards/logo.png" alt="GIEO gita logo">
+        </div>
+        <form class="relative w-100 mt-5" method="POST" action="">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" name="username" required
+                    placeholder="name@example.com">
+                <label for="username">Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="password" required
+                    placeholder="Password">
+                <label for="password">Password</label>
+            </div>
+            <div class="text-center pt-2">
+                <button type="submit" class="btn btn-danger">Log In</button>
+            </div>
+
+            <div style="height: 20px;" class="text-danger text-center mt-3 ">
+                <?php echo $msg; ?>
+            </div>
+        </form>
     </div>
-    <form method="POST" action="">
-        <h3>Login Here</h3>
-
-        <label for="username">Username</label>
-        <input type="text" placeholder="Email or Username" id="username" name="username" required>
-
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="password" required>
-
-        <div class="msg red"><?php echo $msg; ?></div>
-
-        <button type="submit">Log In</button>
-
-    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
