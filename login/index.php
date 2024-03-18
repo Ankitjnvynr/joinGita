@@ -3,7 +3,7 @@ session_start();
 if (isset ($_SESSION['loggedin']))
 {
     //	header('location : dashboard.php');
-    header("location: alluser.php");
+    header("location: all-card.php");
 
     exit;
 }
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
                 $_SESSION['intro'] = true;
-                header("location: alluser.php");
+                header("location: all-card.php");
                 exit;
             } else
             {

@@ -1,11 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
     header("location: index.php");
     exit;
 }
-// ====================creating masik parwas tabel if not exist================
-include("../partials/_db.php");
+
+include ("../partials/_db.php");
 
 
 
@@ -26,7 +27,7 @@ include("../partials/_db.php");
 
     <style>
         body {
-            margin: 10px;
+
             background: #f7e092;
             overflow-x: hidden;
         }
@@ -250,9 +251,9 @@ include("../partials/_db.php");
                 }
             });
             $('.filter-input').keyup(function () {
-                
+
                 // Perform filtering on the DataTable
-                if(searchText != ""){
+                if (searchText != "") {
                     var columnIndex = $(this).data('column'); // Get column index from data attribute
                     var searchText = $(this).val().toLowerCase(); // Get value entered in the input box
                     $('#myTable').DataTable().column(columnIndex).search(searchText).draw();
