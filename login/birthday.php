@@ -1,4 +1,7 @@
 <?php
+echo $currentURL = "http://$_SERVER[HTTP_HOST]/imgs/";
+
+
 session_start();
 if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 {
@@ -157,9 +160,6 @@ $country_code = array(
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="allMessage" class=" modal-body d-flex flex-column gap-2">
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -304,7 +304,7 @@ $country_code = array(
                             <td>' . $targetDate . '</td>
                             <td>
                             
-                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . '" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
+                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . '&attachment='.$currentURL.'65f7fc772d3bf.png" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i></a>
                             </td>
                             </tr>
                             ';

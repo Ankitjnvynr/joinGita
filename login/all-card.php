@@ -268,17 +268,21 @@ include ("../partials/_db.php");
     <script>
         selectMessage = (e) => {
             const secondChild = e.parentNode.childNodes[3];
+            const memberName = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].innerText;
+            console.log(memberName);
             const newText = e.value;
             let src = secondChild.getAttribute('href');
             let link = src.split('&');
+            
             for (let i = 0; i < link.length; i++) {
                 if (link[i].startsWith('text=')) {
-                    link[i] = 'text=' + '🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' + encodeURIComponent(newText);
+                    link[i] = 'text=' + 'गीता प्रिय '+memberName+' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText);
                     break;
                 }
             }
             href = link.join('&');
             secondChild.setAttribute('href', href);
+            
 
         }
 
