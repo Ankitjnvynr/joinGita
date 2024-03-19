@@ -27,7 +27,7 @@ if (!$row) {
 $font = 'imgs/cards/font.ttf';
 $profile = 'imgs/'. $row['pic'];
 $name = $row['name'];
-$city = $row['district'];
+$city = $row['tehsil'];
 $phone =  $row['phone'];
 $wing = $row['interest'];
 $designation = $row['designation'];

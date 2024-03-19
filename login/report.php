@@ -18,6 +18,7 @@ if (isset ($_POST['get-data']))
     $byCountry = $_POST['filterCountry'];
     $byState = $_POST['filterState'];
     $byCity = $_POST['filterCity'];
+    $bytehsil = $_POST['bytehsil'];
     $bydikshit = $_POST['filterDikshit'];
 
     if ($byCountry || $byState || $byCity || $bydikshit)
@@ -36,9 +37,14 @@ if (isset ($_POST['get-data']))
         $byState = " state LIKE '" . $byState . "%'";
         array_push($filters, $byState);
     }
+    if ($bytehsil)
+    {
+        $byCity = " district LIKE '" . $bytehsil . "%'";
+        array_push($filters, $bytehsil);
+    }
     if ($byCity)
     {
-        $byCity = " district LIKE '" . $byCity . "%'";
+        $byCity = " tehsil LIKE '" . $byCity . "%'";
         array_push($filters, $byCity);
     }
     if ($bydikshit)
@@ -114,7 +120,7 @@ if (isset ($_POST['get-data']))
                 id="districtSelect" onchange="selectingtehsil(this)">
                 <option value="" selected>---District---</option>
             </select>
-            <select class="form-select form-select-sm" aria-label="Small select example" id="tehsilSelect">
+            <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example" id="tehsilSelect">
                 <option value="" selected>---Tehsil---</option>
             </select>
             <select name="filterDikshit" class="form-select form-select-sm" aria-label="Small select example">
