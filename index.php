@@ -124,7 +124,7 @@
 
     <form id="joinForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
       
-      <div class="form-group col-md mb-3 d-flex justify-content-center ">
+      <div class="form-group col-md mb-3 d-flex justify-content-center">
         <select max-width="600px" id="countrySelect" name="country" class='form-control'>
           <option value="">-- Country --</option>
         </select>

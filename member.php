@@ -269,7 +269,7 @@ if ($star == 'null')
                         <div class="row">
                             <div class="col-md my-2">
                                 <label for="pic">Upload Profile Photo</label>
-                                <input onchange="fileValidation(this)" type="file" id="pic" name="pic"
+                                <input onchange="fileValidation(this)" type="file" id="pic" name="pic"  accept="image/*" capture="environment"
                                     class="form-control" aria-label="picture">
                                 <span class="text-danger op">
                                     <?php echo $statusMsg; ?>
