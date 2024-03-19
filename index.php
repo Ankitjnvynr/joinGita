@@ -239,7 +239,7 @@
           <select name="married" id="married" class="form-control" onchange="aniver()" >
             <option value="">-- select Marital Status --</option>
             <option value="Married" aria-selected="false">Married</option>
-            <option value="Unmarried" aria-selected="false">Unmarried</option>
+            <option value="Single" aria-selected="false">Single</option>
           </select>
         </div>
         <div  class="form-floating mb-3 col-md">

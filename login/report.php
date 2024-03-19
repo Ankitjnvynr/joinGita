@@ -153,7 +153,8 @@ if (isset ($_POST['get-data']))
                     <th scope="col">Dikshit</th>
                     <th scope="col">DOB</th>
                     <th scope="col">Anniversary</th>
-                    <th scope="col">Join On</th>
+                    <!-- <th scope="col">Join On</th> -->
+                    <!-- <td>' . substr($joinOn,0,10) . '</td> -->
                 </tr>
             </thead>
             <tbody>
@@ -190,6 +191,7 @@ if (isset ($_POST['get-data']))
                             $joinOn = $row['dt'];
                             // $message = $row['message'];
                             $pic = $row['pic'];
+                            
                             echo '
                             <tr>
                                 <th scope="row">' . $sr . '</th>
@@ -199,7 +201,7 @@ if (isset ($_POST['get-data']))
                                 <td>' . $dikshit . '</td>
                                 <td>' . $dob . '</td>
                                 <td>' . $aniver_date . '</td>
-                                <td>' . substr($joinOn,0,10) . '</td>
+                                
                             </tr>
                             ';
                         }
@@ -207,7 +209,7 @@ if (isset ($_POST['get-data']))
                     {
                         echo '
                     <tr>
-                        <td class="text-center" colspan="8"> No data found </td>
+                        <td class="text-center" colspan="7"> No data found </td>
                     </tr>
                     ';
                     }
@@ -217,7 +219,7 @@ if (isset ($_POST['get-data']))
                 {
                     echo '
                     <tr>
-                        <td class="text-center" colspan="8"> Select filter to view data</td>
+                        <td class="text-center" colspan="7"> Select filter to view data</td>
                     </tr>
                     ';
                 }
