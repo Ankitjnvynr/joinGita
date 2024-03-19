@@ -247,7 +247,8 @@ $country_code = array(
                                 $message_select_result = mysqli_query($conn, $message_select_sql);
                                 while ($message_select_row = mysqli_fetch_assoc($message_select_result))
                                 {
-                                    echo '<option value="' . $message_select_row['title'] . '"  >' . $message_select_row['title'] . '</option>';
+                                    $selected = $message_select_row['title'] == 'Birthday' ? "Selected" : "";
+                                    echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
                                 }
                                 ?>
                             </select>

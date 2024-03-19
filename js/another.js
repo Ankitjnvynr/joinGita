@@ -1,5 +1,5 @@
 
-    
+
 
 
 let smarried = document.querySelector('#married');
@@ -9,9 +9,9 @@ function aniver() {
     var AniverLabel = document.createElement('label');
     var AniverDate = document.createElement('input');
     if (Svalue === "Married") {
-        let AniverDate = '<input name="aniver_date" id="anniversary" type="date" class="form-control" required> <label for="anniversary">Anniversary Date</label>';
+        let AniverDate = '<div  class="bg-warning-subtle p-2 py-2 rounded mt-2"><label class="form-label " for="anniversary">Aniversary</label><input name="aniver_date" id="anniversary" type="date" class="form-control" required></div>';
         aniversry.innerHTML = AniverDate;
-    }else{
+    } else {
         aniversry.innerHTML = "";
     }
 }
