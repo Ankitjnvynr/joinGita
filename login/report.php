@@ -17,7 +17,7 @@ if (isset ($_POST['get-data']))
     $filters = array();
     $byCountry = $_POST['filterCountry'];
     $byState = $_POST['filterState'];
-    $byCity = $_POST['filterCity'];
+    $filterdistrict = $_POST['filterdistrict'];
     $bytehsil = $_POST['bytehsil'];
     $bydikshit = $_POST['filterDikshit'];
 
@@ -37,23 +37,24 @@ if (isset ($_POST['get-data']))
         $byState = " state LIKE '" . $byState . "%'";
         array_push($filters, $byState);
     }
+    if ($filterdistrict)
+    {
+        $filterdistrict = " district LIKE '" . $filterdistrict . "%'";
+        array_push($filters, $filterdistrict);
+    }
     if ($bytehsil)
     {
-        $byCity = " district LIKE '" . $bytehsil . "%'";
+        $bytehsil = " tehsil LIKE '" . $bytehsil . "%'";
         array_push($filters, $bytehsil);
     }
-    if ($byCity)
-    {
-        $byCity = " tehsil LIKE '" . $byCity . "%'";
-        array_push($filters, $byCity);
-    }
+   
     if ($bydikshit)
     {
         $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
         array_push($filters, $bydikshit);
     }
     $newStr = $newStr . implode(" AND ", $filters);
-     $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY 'name'";
+    $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY 'name'";
 
 }
 
@@ -116,8 +117,8 @@ if (isset ($_POST['get-data']))
                 id="stateSelect" onchange="selectingdistrict(this)">
                 <option value="" selected>---State---</option>
             </select>
-            <select required name="filterCity" class="form-select form-select-sm" aria-label="Small select example"
-                id="districtSelect" onchange="selectingtehsil(this)">
+            <select name="filterdistrict" required name="filterCity" class="form-select form-select-sm" aria-label="Small select example"
+                id="districtSelect" onchange="selectingtehsil(this)" >
                 <option value="" selected>---District---</option>
             </select>
             <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example" id="tehsilSelect">
