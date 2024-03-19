@@ -44,9 +44,11 @@
   <!-- ====================Toast End======================================== -->
 
 
-  <?php
-  include 'partials/_header.php';
-  ?>
+
+    <?php
+    include 'partials/_header.php';
+    ?>
+
 
   <div class="container shadow-sm py-3 rounded my-2">
     <div class="text-center">

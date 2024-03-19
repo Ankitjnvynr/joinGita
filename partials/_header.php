@@ -1,4 +1,4 @@
-<div class="container-fluid a-head">
+<div class="container-fluid a-head ">
   <div class="container ">
     <div class="head-bar d-flex d-flex justify-content-around ">
       <div class="d-flex justify-content-center gap-3 align-items-center ">
@@ -35,7 +35,7 @@
     </div>
   </div>
 </div>
-<div class="container-fluid bg-white p-3">
+<div class="container-fluid bg-white p-3 sticky-top shadow">
   <div class="container ">
     <div id="mynav" class="a-navbar">
       <div class="logo"><img width="70px" src="imgs/logo.png" alt=""></div>

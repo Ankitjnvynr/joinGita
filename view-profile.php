@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         .container {
             /* max-width: 900px; */
-             /* background: rgba(255, 255, 255, 0.9); */
-             position: relative; 
+            /* background: rgba(255, 255, 255, 0.9); */
+            /* position: relative;  */
 
         }
 
