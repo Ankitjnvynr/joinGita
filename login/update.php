@@ -1,11 +1,12 @@
 <?php
-include("../partials/_db.php");
+include ("../partials/_db.php");
 $user_id = $_GET['user'];
 $sr = 0;
 
 $sql = "SELECT * FROM `users` WHERE `id` = '$user_id' ";
 $result = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result))
+{
   $sr++;
   $country = $row['country'];
   $name = $row['name'];
@@ -160,7 +161,7 @@ while ($row = mysqli_fetch_array($result)) {
         <div class=" mb-3 col-md">
           <input name="state" type="text" list="stateSelect" class="form-control" value=<?php echo $state; ?>>
 
-          <datalist id="stateSelect" >
+          <datalist id="stateSelect">
             <option value="">-- Region --</option>
 
           </datalist>
@@ -277,7 +278,9 @@ while ($row = mysqli_fetch_array($result)) {
             <option value="">-- select Marital Status --</option>
             <option value="Married" aria-selected="false">Married</option>
             <option value="Unmarried" aria-selected="false">Unmarried</option>
-            <option value="<?php echo $marital_status ?>" aria-selected="false" selected><?php echo $marital_status ?></option>
+            <option value="<?php echo $marital_status ?>" aria-selected="false" selected>
+              <?php echo $marital_status ?>
+            </option>
           </select>
         </div>
 
@@ -290,18 +293,18 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="form-group col-md mb-3">
           <select name="star" class="form-control">
             <option value="">-- Star --</option>
-            <option value="Trustee" aria-selected="false">Trustee</option>
-            <option value="Trustee2" aria-selected="false">Trustee2</option>
+            <option value="Pattern Trustee" aria-selected="false">Pattern Trustee</option>
+            <option value="Corporate Trustee" aria-selected="false">Corporate Trustee</option>
             <?php
-              echo $star != "" ?
-              '<option value="'. $star .'" aria-selected="false" selected>'. $star .'</option>'
+            echo $star != "" ?
+              '<option value="' . $star . '" aria-selected="false" selected>' . $star . '</option>'
               : "";
             ?>
-            
+
           </select>
         </div>
         <div class="form-group col-md mb-3">
-          
+
         </div>
 
       </div>
@@ -347,11 +350,13 @@ while ($row = mysqli_fetch_array($result)) {
 
 
   <?php
-  if (isset($_GET['dphoneExiit'])) {
+  if (isset ($_GET['dphoneExiit']))
+  {
 
     $pnot = false;
     $pnot = $_GET['dphoneExiit'];
-    if ($pnot == true) {
+    if ($pnot == true)
+    {
       echo '
             <script>
                 const toastLiveExample = document.getElementById("phtoast")

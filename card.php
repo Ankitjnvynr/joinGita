@@ -5,8 +5,9 @@ header("Content-Type: image/jpeg");
 
 
 
-include("partials/_db.php");
-if (!isset($_GET['member'])) {
+include ("partials/_db.php");
+if (!isset ($_GET['member']))
+{
     // header('location:view-profile.php');
     exit;
 }
@@ -15,7 +16,8 @@ $memberId = $_GET['member'];
 $sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
-if (!$row) {
+if (!$row)
+{
     echo "not";
     // header("location:view-profile.php?pnot=true");
 }
@@ -25,14 +27,15 @@ if (!$row) {
 
 // Path to your font file
 $font = 'imgs/cards/font.ttf';
-$profile = 'imgs/'. $row['pic'];
+$profile = 'imgs/' . $row['pic'];
 $name = $row['name'];
 $city = $row['tehsil'];
-$phone =  $row['phone'];
+$phone = $row['phone'];
 $wing = $row['interest'];
 $designation = $row['designation'];
-$star = $row['star'] !== null ? $row['star']  : false;
-if($star == 'null'){
+$star = $row['star'] !== null ? $row['star'] : false;
+if ($star == 'null')
+{
     $star = "";
 }
 
@@ -83,19 +86,19 @@ $mask = imagecreatefrompng('imgs/cards/mask.png'); // Replace 'mask.png' with th
 
 
 $profilePicture = imagescale($profilePicture, 345, 345);
-$mask = imagescale($mask, $imageWidth , $imageHeight);
+$mask = imagescale($mask, $imageWidth, $imageHeight);
 // Add the masked profile picture to the image
-imagecopy($image, $profilePicture, 120, 231 , 0, 0, 345, 345);
+imagecopy($image, $profilePicture, 120, 231, 0, 0, 345, 345);
 imagecopy($image, $mask, 0, 0, 0, 0, $imageWidth, $imageHeight);
 imagettftext($image, 30, 0, $x_position, 640, $color, $font, $name);
-imagettftext($image, 17, 0,200, 727, $color, $font, $city);
-imagettftext($image, 17, 0,200, 768, $color, $font, $phone);
-imagettftext($image, 17, 0,200, 809, $color, $font, $wing);
-imagettftext($image, 17, 0,200, 845, $color, $font, $designation);
-imagettftext($image, 17, 0,200, 884, $color, $font, $star);
+imagettftext($image, 17, 0, 200, 727, $color, $font, $city);
+imagettftext($image, 17, 0, 200, 768, $color, $font, $phone);
+imagettftext($image, 17, 0, 200, 809, $color, $font, $wing);
+imagettftext($image, 17, 0, 200, 845, $color, $font, $designation);
+imagettftext($image, 17, 0, 200, 884, $color, $font, $star);
 
 // Output the image
-imagejpeg($image,null,100);
+imagejpeg($image, null, 100);
 
 // Destroy the image resources to free memory
 imagedestroy($image);
