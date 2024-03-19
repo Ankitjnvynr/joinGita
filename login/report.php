@@ -74,40 +74,11 @@ if (isset ($_POST['get-data']))
             flex: 1 0 100px;
         }
 
-        table {
+        .tablediv {
             overflow-x: scroll;
         }
 
-        .loader {
-            border: 16px solid #f3f3f3;
-            /* Light grey */
-            border-top: 16px solid #3498db;
-            /* Blue */
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -60px;
-            /* Half of the height */
-            margin-left: -60px;
-            /* Half of the width */
-            display: none;
-            /* Hide loader by default */
-        }
-
-        /* Loader animation */
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        
     </style>
 </head>
 
@@ -165,7 +136,7 @@ if (isset ($_POST['get-data']))
         <button class="btn btn-danger" onclick="downloadCSV()">Download CSV</button>
         <button class="btn btn-danger" onclick="downloadPDF()">Download PDF</button>
     </div>
-    <div class="container ">
+    <div class="container tablediv">
 
         <table id="myTable" class="table table-striped table-hover">
             <thead>
@@ -177,6 +148,7 @@ if (isset ($_POST['get-data']))
                     <th scope="col">Dikshit</th>
                     <th scope="col">DOB</th>
                     <th scope="col">Anniversary</th>
+                    <th scope="col">Join On</th>
                 </tr>
             </thead>
             <tbody>
@@ -210,6 +182,7 @@ if (isset ($_POST['get-data']))
                             $education = $row['education'];
                             $dob = $row['dob'];
                             $aniver_date = $row['aniver_date'];
+                            $joinOn = $row['dt'];
                             // $message = $row['message'];
                             $pic = $row['pic'];
                             echo '
@@ -221,6 +194,7 @@ if (isset ($_POST['get-data']))
                                 <td>' . $dikshit . '</td>
                                 <td>' . $dob . '</td>
                                 <td>' . $aniver_date . '</td>
+                                <td>' . substr($joinOn,0,10) . '</td>
                             </tr>
                             ';
                         }
