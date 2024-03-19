@@ -1,4 +1,4 @@
-<option value="" selected>---City---</option>
+<option value="" selected>---District---</option>
 <?php
 include ("../partials/_db.php");
 if (isset ($_POST['country']))

@@ -36,16 +36,18 @@ if (isset ($_POST['get-data']))
         $byState = " state LIKE '" . $byState . "%'";
         array_push($filters, $byState);
     }
+    if ($byCity)
+    {
+        $byCity = " district LIKE '" . $byCity . "%'";
+        array_push($filters, $byCity);
+    }
     if ($bydikshit)
     {
         $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
         array_push($filters, $bydikshit);
     }
     $newStr = $newStr . implode(" AND ", $filters);
-    $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY 'name'";
-
-
-
+     $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY 'name'";
 
 }
 
@@ -105,25 +107,28 @@ if (isset ($_POST['get-data']))
                 ?>
             </select>
             <select required name="filterState" class="form-select form-select-sm" aria-label="Small select example"
-                id="stateSelect" onchange="selectingCity(this)">
+                id="stateSelect" onchange="selectingdistrict(this)">
                 <option value="" selected>---State---</option>
             </select>
             <select required name="filterCity" class="form-select form-select-sm" aria-label="Small select example"
-                id="citySelect">
-                <option value="" selected>---City---</option>
+                id="districtSelect" onchange="selectingtehsil(this)">
+                <option value="" selected>---District---</option>
+            </select>
+            <select class="form-select form-select-sm" aria-label="Small select example" id="tehsilSelect">
+                <option value="" selected>---Tehsil---</option>
             </select>
             <select name="filterDikshit" class="form-select form-select-sm" aria-label="Small select example">
                 <option value="" selected>Dikshit</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                <option value="No, But Intrested">No, But Intrested</option>
+                <?php
+                $optionSql = "SELECT DISTINCT `dikshit` FROM `users` ";
+                $result = $conn->query($optionSql);
+                while ($row = mysqli_fetch_assoc($result))
+                {
+                    echo '<option value="' . $row['dikshit'] . '">' . $row['dikshit'] . '</option>';
+                }
+                ?>
             </select>
-            <select class="form-select form-select-sm" aria-label="Small select example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+            
 
             <button type="submit" name="get-data" class="btn btn-danger">Get Data ></button>
 
@@ -202,7 +207,7 @@ if (isset ($_POST['get-data']))
                     {
                         echo '
                     <tr>
-                        <td class="text-center" colspan="7"> No data found </td>
+                        <td class="text-center" colspan="8"> No data found </td>
                     </tr>
                     ';
                     }
@@ -212,7 +217,7 @@ if (isset ($_POST['get-data']))
                 {
                     echo '
                     <tr>
-                        <td class="text-center" colspan="7"> Select filter to view data</td>
+                        <td class="text-center" colspan="8"> Select filter to view data</td>
                     </tr>
                     ';
                 }
@@ -247,17 +252,32 @@ if (isset ($_POST['get-data']))
                 }
             })
         }
-        let selectingCity = (e) => {
+        let selectingdistrict = (e) => {
 
             $.ajax({
-                url: '_selectCity.php',
+                url: '_selectDistrict.php',
                 type: 'POST',
                 data: {
                     country: e.value
                 },
                 success: function (response) {
-                    let stateSelect = document.getElementById('citySelect')
+                    let stateSelect = document.getElementById('districtSelect')
                     // console.log(response)
+                    stateSelect.innerHTML = response;
+                }
+            })
+        }
+        let selectingtehsil = (e) => {
+
+            $.ajax({
+                url: '_selectTehsil.php',
+                type: 'POST',
+                data: {
+                    country: e.value
+                },
+                success: function (response) {
+                    let stateSelect = document.getElementById('tehsilSelect')
+                    console.log(response)
                     stateSelect.innerHTML = response;
                 }
             })
@@ -310,6 +330,7 @@ if (isset ($_POST['get-data']))
             }, 2000);
         });
     </script>
+ 
 
 
 </body>
