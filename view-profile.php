@@ -19,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             background: #f7e092;
         }
 
-        .container {
-            /* max-width: 900px; */
-            /* background: rgba(255, 255, 255, 0.9); */
-            /* position: relative;  */
+        .containermain {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.9);
+            position: relative; 
 
         }
 
@@ -32,6 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             -moz-appearance: none;
             appearance: none;
 
+        }
+        .plabel{
+            background: none;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -85,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 
 
-    <div class="container p-md-4 shadow-lg my-3 rounded " style="padding-bottom: 1%;">
+    <div class="container containermain p-md-4 shadow-lg my-3 rounded " style="padding-bottom: 1%;">
         <div class="text-center pt-2">
             <h4>
                 Not a member - <a href="index.php" class="btn btn-danger p-4 py-2 p"><b>Join Now</b></a>
@@ -101,10 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     <div class="card-body  ">
                         <form action="" method="POST">
                             <h5 class="text-center mb-2">View your Profile</h5>
-                            <div class="form-floating mb-3">
+                            <div class=" mb-3">
+                                
                                 <input name="phoneNumber" type="number" class="form-control" id="floatingInput"
-                                    placeholder="name@example.com" required>
-                                <label for="floatingInput">Phone Number</label>
+                                    placeholder="Enter Phone Number" required>
                             </div>
                             <div class="text-center"><button name="submit" type="submit"
                                     class="btn btn-danger p-4 py-2 p"><b>View</b></button></div>

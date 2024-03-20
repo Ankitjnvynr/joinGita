@@ -172,8 +172,8 @@ setTimeout(() => {
     let Allinput = document.querySelectorAll('input');
     let AllSelect = document.querySelectorAll('select');
     Array.from(Allinput).forEach((e, indx) => {
-      console.log(e, indx, "hii");
-      if (indx != 2) {
+      // console.log(e, indx, "hii");
+      if (indx != 3) {
         e.setAttribute('required', '');
       }
     })
