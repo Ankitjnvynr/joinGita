@@ -54,7 +54,7 @@ if (isset ($_POST['get-data']))
         array_push($filters, $bydikshit);
     }
     $newStr = $newStr . implode(" AND ", $filters);
-    $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY 'name'";
+    $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY name ASC;";
 
 }
 
