@@ -183,20 +183,20 @@ include ("../partials/_db.php");
 
     <div class="container">
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
-            <div class="form-floating mb-3 ">
+            <!-- <div class="form-floating mb-3 ">
                 <select onclick="fillCountry()" id="countrySelect" style="min-width: 100px;" name="country"
                     class="form-control filterInput" onchange="loadpics(0,5)">
 
                 </select>
                 <label for="countrySelect">Country</label>
-            </div>
-            <div class="form-floating mb-3 ">
+            </div> -->
+            <!-- <div class="form-floating mb-3 ">
                 <select id="stateSelect" style="min-width: 100px;" name="state" class='form-control'
                     onchange="loadpics(0,5)">
 
                 </select>
                 <label for="stateSelect">State</label>
-            </div>
+            </div> -->
             <div class="form-floating mb-3 ">
                 <select id="citySelect" style="min-width: 100px;" name="district" class='form-control'
                     onchange="loadpics(0,5)">
@@ -221,7 +221,8 @@ include ("../partials/_db.php");
     </div>
     <div class="container">
         <form action="" method="POST" class="filterform d-flex flex-wrap gap-1">
-            <select required class="form-select form-select-sm" aria-label="Small select example" name="filterCountry" id="countrySelect" onchange="SelectState(this)" >
+            <select required class="form-select form-select-sm" aria-label="Small select example" name="filterCountry"
+                id="countrySelect" onchange="SelectState(this)">
                 <option value="" selected>---Country---</option>
                 <?php
                 $optionSql = "SELECT DISTINCT `country` FROM `users` ";
@@ -471,7 +472,7 @@ include ("../partials/_db.php");
         })
 
     </script>
-        <script>
+    <script>
         let SelectState = (e) => {
             $.ajax({
                 url: '_selectState.php',
@@ -483,7 +484,7 @@ include ("../partials/_db.php");
                     let stateSelect = document.getElementById('stateSelect')
                     // console.log(response)
                     stateSelect.innerHTML = response;
-                    loadpics(0,5)
+                    loadpics(0, 5)
                 }
             })
         }
