@@ -24,11 +24,26 @@ $byName = $_POST['filterName'];
 $byEmail = $_POST['filterEmail'];
 $byCountry = $_POST['filterCountry'];
 $byState = $_POST['filterState'];
-$byCity = $_POST['filterCity'];
+$filterdistrict = $_POST['filterDistrict'];
+$bytehsil = $_POST['filterTehsil'];
 $limit = $_POST['limit'];
 $start = $_POST['start'];
 
-if ($byPhone || $byEmail || $byCountry || $byState || $byCity || $byName)
+// ----------------------from another --------------------
+
+
+// $bydikshit = $_POST['filterDikshit'];
+
+// if ($bydikshit)
+// {
+//     $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
+//     array_push($filters, $bydikshit);
+// }
+// ----------------------from another --------------------
+
+
+
+if ($byPhone || $byEmail || $byCountry || $byState || $bytehsil || $byName)
 {
     $newStr = ' WHERE ';
 }
@@ -52,10 +67,15 @@ if ($byState)
     $byState = " state LIKE '" . $byState . "%'";
     array_push($filters, $byState);
 }
-if ($byCity)
+if ($filterdistrict)
 {
-    $byCity = " district LIKE '" . $byCity . "%'";
-    array_push($filters, $byCity);
+    $filterdistrict = " district LIKE '" . $filterdistrict . "%'";
+    array_push($filters, $filterdistrict);
+}
+if ($bytehsil)
+{
+    $bytehsil = " tehsil LIKE '" . $bytehsil . "%'";
+    array_push($filters, $bytehsil);
 }
 if ($byPhone)
 {

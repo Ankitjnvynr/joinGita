@@ -197,13 +197,13 @@ include ("../partials/_db.php");
                 </select>
                 <label for="stateSelect">State</label>
             </div> -->
-            <div class="form-floating mb-3 ">
+            <!-- <div class="form-floating mb-3 ">
                 <select id="citySelect" style="min-width: 100px;" name="district" class='form-control'
                     onchange="loadpics(0,5)">
 
                 </select>
                 <label for="citySelect">city</label>
-            </div>
+            </div> -->
             <!-- <div class="form-floating mb-3 ">
                 <input type="text" class="form-control filterInput" id="filterName" oninput="loadpics(0,5)">
                 <label for="filterName">Name</label>
@@ -242,20 +242,20 @@ include ("../partials/_db.php");
                 <option value="" selected>---District---</option>
             </select>
             <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example"
-                id="tehsilSelect">
+                id="tehsilSelect" onchange="loadpics(0,5)">
                 <option value="" selected>---Tehsil---</option>
             </select>
-            <select name="filterDikshit" class="form-select form-select-sm" aria-label="Small select example">
+            <!-- <select name="filterDikshit" class="form-select form-select-sm" aria-label="Small select example">
                 <option value="" selected>Dikshit</option>
                 <?php
-                $optionSql = "SELECT DISTINCT `dikshit` FROM `users` ";
-                $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result))
-                {
-                    echo '<option value="' . $row['dikshit'] . '">' . $row['dikshit'] . '</option>';
-                }
+                // $optionSql = "SELECT DISTINCT `dikshit` FROM `users` ";
+                // $result = $conn->query($optionSql);
+                // while ($row = mysqli_fetch_assoc($result))
+                // {
+                //     echo '<option value="' . $row['dikshit'] . '">' . $row['dikshit'] . '</option>';
+                // }
                 ?>
-            </select>
+            </select> -->
             <input type="text" class="form-control form-control-sm" placeholder="Name" id="filterName"
                 oninput="loadpics(0,5)">
             <input type="text" class="form-control form-control-sm" placeholder="Phone" id="filterPhone"
@@ -360,8 +360,9 @@ include ("../partials/_db.php");
                                         filterEmail: $('#filterEmail').val(),
                                         filterCountry: $('#countrySelect').val(),
                                         filterState: $('#stateSelect').val(),
-                                        filterCity: $('#citySelect').val(),
-                                        limit: limit,
+                                        filterDistrict: $('#districtSelect').val(),
+                                        filterTehsil: $('#tehsilSelect').val(),
+                                        limit: "50",
                                         start: start,
                                     }
                                     $.ajax({
@@ -397,7 +398,8 @@ include ("../partials/_db.php");
                     filterEmail: $('#filterEmail').val(),
                     filterCountry: $('#countrySelect').val(),
                     filterState: $('#stateSelect').val(),
-                    filterCity: $('#citySelect').val(),
+                    filterDistrict: $('#districtSelect').val(),
+                    filterTehsil: $('#tehsilSelect').val(),
                     limit: "50",
                     start: start,
                 }
@@ -436,7 +438,8 @@ include ("../partials/_db.php");
                     filterEmail: $('#filterEmail').val(),
                     filterCountry: $('#countrySelect').val(),
                     filterState: $('#stateSelect').val(),
-                    filterCity: $('#citySelect').val(),
+                    filterDistrict: $('#districtSelect').val(),
+                    filterTehsil: $('#tehsilSelect').val(),
                     limit: "50",
                     start: start,
                 }
@@ -500,6 +503,7 @@ include ("../partials/_db.php");
                     let stateSelect = document.getElementById('districtSelect')
                     // console.log(response)
                     stateSelect.innerHTML = response;
+                    loadpics(0,5)
                 }
             })
         }
@@ -515,6 +519,7 @@ include ("../partials/_db.php");
                     let stateSelect = document.getElementById('tehsilSelect')
                     console.log(response)
                     stateSelect.innerHTML = response;
+                    loadpics(0,5)
                 }
             })
         }
