@@ -249,13 +249,17 @@ while ($row = mysqli_fetch_array($result))
         <div class="form-group col-md mb-3">
           <select name="education" class="form-control" data-testid="select-trigger" aria-required="true"
             aria-invalid="false">
-            <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">Education</option>
             <option value="B.Com" aria-selected="false">B.Com</option>
             <option value="M.Com" aria-selected="false">M.Com</option>
             <option value="LLB" aria-selected="false">LLB</option>
             <option value="MBBS" aria-selected="false">MBBS</option>
             <option value="CA" aria-selected="false">CA</option>
             <option value="CS" aria-selected="false">CS</option>
+            <option value="PhD" aria-selected="false">PhD</option>
+            <option value="M.Ed." aria-selected="false">M.Ed.</option>
+            <option value="B.Ed." aria-selected="false">B.Ed.</option>
+            <option value="MBA" aria-selected="false">MBA</option>
+            <option value="JBT" aria-selected="false">JBT</option>
             <option value="Post Graduation" aria-selected="false">Post Graduation</option>
             <option value="Graduation" aria-selected="false">Graduation</option>
             <option value="12th Pass" aria-selected="false">12th Pass</option>
