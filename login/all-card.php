@@ -19,7 +19,9 @@ include ("../partials/_db.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -31,27 +33,14 @@ include ("../partials/_db.php");
             cursor: url('imgs/cursor_PNG61.png') !important;
         }
 
-        table {
-            background: transparent;
+
+
+        .filterform select {
+            flex: 1 0 150px;
         }
 
-        td,
-        th {
-            font-size: 13px;
-            width: fit-content;
-            max-width: 200px;
-            text-align: left;
-            /* border: 1px solid red; */
-            /* border-radius: 5px; */
-            background-color: transparent !important;
-        }
-
-        .w-150 {
-            min-width: 150px;
-        }
-
-        input[type=radio] {
-            display: none;
+        .filterform input {
+            flex: 1 0 150px;
         }
 
         @media (min-width: 1400px) {
@@ -66,27 +55,10 @@ include ("../partials/_db.php");
             }
         }
 
-        div.dt-button-collection {
-            position: fixed;
-            width: 900px !important;
-            margin-top: 0px !important;
-        }
 
-        .tab1,
-        .tab2 {
-            display: none;
-        }
 
-        #tab1:checked~.tab1 {
-            display: flex;
-            flex-direction: column;
 
-        }
 
-        #tab2:checked~.tab2 {
-            display: flex;
-            flex-direction: column;
-        }
 
         .intro {
             animation: opacityani 0.5s cubic-bezier(0, 0, 0.02, 0.95);
@@ -232,22 +204,68 @@ include ("../partials/_db.php");
                 </select>
                 <label for="citySelect">city</label>
             </div>
-            <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterName" data-limit="5" data-start="5"
-                    oninput="loadpics(0,5)">
+            <!-- <div class="form-floating mb-3 ">
+                <input type="text" class="form-control filterInput" id="filterName" oninput="loadpics(0,5)">
                 <label for="filterName">Name</label>
-            </div>
-            <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterPhone" oninput="loadpics(0,5)"
-                    onchange="restwindowtop()">
+            </div> -->
+            <!-- <div class="form-floating mb-3 ">
+                <input type="text" class="form-control filterInput" id="filterPhone" oninput="loadpics(0,5)">
                 <label for="filterPhone">Phone</label>
-            </div>
-            <div class="form-floating mb-3">
+            </div> -->
+            <!-- <div class="form-floating mb-3">
                 <input type="text" class="form-control filterInput" id="filterEmail" oninput="loadpics(0,5)">
                 <label for="filterEmail">Email address</label>
-            </div>
+            </div> -->
         </div>
 
+    </div>
+    <div class="container">
+        <form action="" method="POST" class="filterform d-flex flex-wrap gap-1">
+            <select required class="form-select form-select-sm" aria-label="Small select example" name="filterCountry" id="countrySelect" onchange="SelectState(this)" >
+                <option value="" selected>---Country---</option>
+                <?php
+                $optionSql = "SELECT DISTINCT `country` FROM `users` ";
+                $result = $conn->query($optionSql);
+                while ($row = mysqli_fetch_assoc($result))
+                {
+                    echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
+                }
+                ?>
+            </select>
+            <select required name="filterState" class="form-select form-select-sm" aria-label="Small select example"
+                id="stateSelect" onchange="selectingdistrict(this)">
+                <option value="" selected>---State---</option>
+            </select>
+            <select name="filterdistrict" required name="filterCity" class="form-select form-select-sm"
+                aria-label="Small select example" id="districtSelect" onchange="selectingtehsil(this)">
+                <option value="" selected>---District---</option>
+            </select>
+            <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example"
+                id="tehsilSelect">
+                <option value="" selected>---Tehsil---</option>
+            </select>
+            <select name="filterDikshit" class="form-select form-select-sm" aria-label="Small select example">
+                <option value="" selected>Dikshit</option>
+                <?php
+                $optionSql = "SELECT DISTINCT `dikshit` FROM `users` ";
+                $result = $conn->query($optionSql);
+                while ($row = mysqli_fetch_assoc($result))
+                {
+                    echo '<option value="' . $row['dikshit'] . '">' . $row['dikshit'] . '</option>';
+                }
+                ?>
+            </select>
+            <input type="text" class="form-control form-control-sm" placeholder="Name" id="filterName"
+                oninput="loadpics(0,5)">
+            <input type="text" class="form-control form-control-sm" placeholder="Phone" id="filterPhone"
+                oninput="loadpics(0,5)">
+            <input type="text" class="form-control form-control-sm" placeholder="Email" id="filterEmail"
+                oninput="loadpics(0,5)">
+
+
+
+
+        </form>
     </div>
 
     <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing <span class="showing"></span>/<span
@@ -273,16 +291,16 @@ include ("../partials/_db.php");
             const newText = e.value;
             let src = secondChild.getAttribute('href');
             let link = src.split('&');
-            
+
             for (let i = 0; i < link.length; i++) {
                 if (link[i].startsWith('text=')) {
-                    link[i] = 'text=' + 'गीता प्रिय '+memberName+' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText);
+                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText);
                     break;
                 }
             }
             href = link.join('&');
             secondChild.setAttribute('href', href);
-            
+
 
         }
 
@@ -297,7 +315,9 @@ include ("../partials/_db.php");
         const toastElList = document.querySelectorAll('.toast')[0]
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList)
     </script>
+
     <script>
+
 
         $(document).ready(function () {
             var limit = 50;
@@ -450,6 +470,53 @@ include ("../partials/_db.php");
 
         })
 
+    </script>
+        <script>
+        let SelectState = (e) => {
+            $.ajax({
+                url: '_selectState.php',
+                type: 'POST',
+                data: {
+                    country: e.value
+                },
+                success: function (response) {
+                    let stateSelect = document.getElementById('stateSelect')
+                    // console.log(response)
+                    stateSelect.innerHTML = response;
+                    loadpics(0,5)
+                }
+            })
+        }
+        let selectingdistrict = (e) => {
+
+            $.ajax({
+                url: '_selectDistrict.php',
+                type: 'POST',
+                data: {
+                    country: e.value
+                },
+                success: function (response) {
+                    let stateSelect = document.getElementById('districtSelect')
+                    // console.log(response)
+                    stateSelect.innerHTML = response;
+                }
+            })
+        }
+        let selectingtehsil = (e) => {
+
+            $.ajax({
+                url: '_selectTehsil.php',
+                type: 'POST',
+                data: {
+                    country: e.value
+                },
+                success: function (response) {
+                    let stateSelect = document.getElementById('tehsilSelect')
+                    console.log(response)
+                    stateSelect.innerHTML = response;
+                }
+            })
+        }
     </script>
 
 </body>
