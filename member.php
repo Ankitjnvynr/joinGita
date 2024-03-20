@@ -38,7 +38,7 @@ if (!$row)
     exit;
 }
 $name = $row['name'];
-$district = $row['district'];
+$tehsil = $row['tehsil'];
 $phone = $row['phone'];
 $wing = $row['interest'];
 $designation = $row['designation'];
@@ -198,7 +198,7 @@ if ($star == 'null')
                             <tr>
                                 <th scope="row">City</th>
                                 <td colspan="2">
-                                    <?php echo $district; ?>
+                                    <?php echo $tehsil; ?>
                                 </td>
                             </tr>
                             <tr>
