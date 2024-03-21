@@ -8,7 +8,7 @@ if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 include ("../partials/_db.php");
 
 
-
+$currentURL = "http://$_SERVER[HTTP_HOST]/imgs/";
 // filtering data
 if (isset ($_POST['get-data']))
 {
@@ -19,9 +19,20 @@ if (isset ($_POST['get-data']))
     $byState = $_POST['filterState'];
     $filterdistrict = $_POST['filterdistrict'];
     $bytehsil = $_POST['bytehsil'];
-    $bydikshit = $_POST['filterDikshit'];
+    $messageSelect = $_POST['messageSelect'];
 
-    if ($byCountry || $byState || $byCity || $bydikshit)
+
+    $msgsql = "SELECT * FROM `messages` WHERE `title` = '$messageSelect'";
+    $msgresult = mysqli_query($conn, $msgsql);
+    $msgrow = mysqli_fetch_assoc($msgresult);
+    $message = $msgrow['msg'];
+
+
+
+
+    // $bydikshit = $_POST['filterDikshit'];
+
+    if ($byCountry || $byState || $byCity || $messageSelect)
     {
         $newStr = ' WHERE ';
     }
@@ -48,16 +59,24 @@ if (isset ($_POST['get-data']))
         array_push($filters, $bytehsil);
     }
 
-    if ($bydikshit)
-    {
-        $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
-        array_push($filters, $bydikshit);
-    }
+
     $newStr = $newStr . implode(" AND ", $filters);
     $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY name ASC;";
 }
 
-
+$country_code = array(
+    "Australia" => "61",
+    "Canada" => "1",
+    "United Kingdom" => "44",
+    "India" => "91",
+    "Japan" => "81",
+    "New Zealand" => "64",
+    "United Arab Emirates" => "971",
+    "United States" => "1",
+    "USA" => "1",
+    "UK" => "+44",
+    "England" => "+44",
+);
 ?>
 <!doctype html>
 <html lang="en">
@@ -65,9 +84,12 @@ if (isset ($_POST['get-data']))
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GIEO Gita : Members Reports</title>
+    <title>GIEO Gita : Custom message</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             background: #f7e092;
@@ -84,6 +106,9 @@ if (isset ($_POST['get-data']))
 
         .tablediv {
             overflow-x: scroll;
+            font-size: 1rem;
+        }
+        #myTable{
         }
     </style>
 </head>
@@ -119,14 +144,15 @@ if (isset ($_POST['get-data']))
                 id="tehsilSelect">
                 <option value="" selected>---Tehsil---</option>
             </select>
-            <select name="filterDikshit" class="form-select form-select-sm" aria-label="Small select example">
-                <option value="" selected>Dikshit</option>
+            <select class="form-select form-select-sm inputfields" name="messageSelect"
+                aria-label="Small select example" required>
                 <?php
-                $optionSql = "SELECT DISTINCT `dikshit` FROM `users` ";
-                $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result))
+                $message_select_sql = "SELECT * FROM `messages` ";
+                $message_select_result = mysqli_query($conn, $message_select_sql);
+                while ($message_select_row = mysqli_fetch_assoc($message_select_result))
                 {
-                    echo '<option value="' . $row['dikshit'] . '">' . $row['dikshit'] . '</option>';
+                    $selected = $message_select_row['title'] == 'Birthday' ? "Selected" : "";
+                    echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
                 }
                 ?>
             </select>
@@ -139,11 +165,8 @@ if (isset ($_POST['get-data']))
 
     <!-- -------output data list ------- -->
 
-    <div class="container mt-2">
-        <button class="btn btn-danger" onclick="downloadCSV()">Download CSV</button>
-        <button class="btn btn-danger" onclick="downloadPDFWithPDFMake()">Download PDF</button>
-    </div>
-    <div class="container tablediv">
+
+    <div class="container tablediv pt-3">
 
         <table id="myTable" class="table table-striped table-hover">
             <thead>
@@ -151,10 +174,10 @@ if (isset ($_POST['get-data']))
                     <th scope="col">Sr</th>
                     <th scope="col">Name</th>
                     <th scope="col">Mobile</th>
+                    <th scope="col">District</th>
                     <th scope="col">City</th>
-                    <th scope="col">Dikshit</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Anniversary</th>
+                    <th scope="col">Send</th>
+                    <!-- <th scope="col">Anniversary</th> -->
                     <!-- <th scope="col">Join On</th> -->
                     <!-- <td>' . substr($joinOn,0,10) . '</td> -->
                 </tr>
@@ -171,6 +194,7 @@ if (isset ($_POST['get-data']))
                     {
                         while ($row = mysqli_fetch_array($result))
                         {
+                            $code = $country_code[$row['country']];
                             $sr++;
                             $user_id = $row['id'];
                             $country = $row['country'];
@@ -199,11 +223,12 @@ if (isset ($_POST['get-data']))
                                 <th scope="row">' . $sr . '</th>
                                 <td>' . $name . '</td>
                                 <td><a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . '</span></a></td>
+                                <td>' . $district . '</td>
                                 <td>' . $tehsil . '</td>
-                                <td>' . $dikshit . '</td>
-                                <td>' . $dob . '</td>
-                                <td>' . $aniver_date . '</td>
-                                
+                                <td>
+                                    <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . '&attachment=' . $currentURL . '65f7fc772d3bf.png" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i>
+                                    </a>
+                                </td>
                             </tr>
                             ';
                         }
@@ -230,18 +255,12 @@ if (isset ($_POST['get-data']))
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
-        integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/vfs_fonts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/vfs_fonts.js"></script>
+
 
 
     <script>
@@ -289,162 +308,12 @@ if (isset ($_POST['get-data']))
                 }
             })
         }
-    </script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
-        integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-    <script>
-        function downloadPDF() {
-            const doc = new jsPDF();
-            doc.autoTable({
-                html: '#myTable'
-            });
-            doc.save('table.pdf');
-        }
-    </script>
-
-
-    <script>
-        // Create a new Date object which represents the current date and time
-        const currentDate = new Date();
-
-        // Get the current date components
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1; // Month is zero-based, so we add 1
-        const day = currentDate.getDate();
-
-        // Construct the date string
-        const dateString = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-
-        console.log(dateString); // Output format: YYYY-MM-DD
-
-        function downloadCSV() {
-            const table = document.getElementById('myTable');
-            const rows = table.querySelectorAll('tr');
-            let csv = [];
-            for (let i = 0; i < rows.length; i++) {
-                let row = [],
-                    cols = rows[i].querySelectorAll('td, th');
-                for (let j = 0; j < cols.length; j++) {
-                    row.push(cols[j].innerText);
-                }
-                csv.push(row.join(','));
-            }
-            const csvContent = 'data:text/csv;charset=utf-8,' + csv.join('\n');
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement('a');
-            link.setAttribute('href', encodedUri);
-            link.setAttribute('download', `GIEO GITA ${dateString}.csv`);
-            document.body.appendChild(link);
-            link.click();
-        }
-    </script>
-    <script>
-        // JavaScript to show/hide the loader
-        document.addEventListener("DOMContentLoaded", function (event) {
-            // When the DOM content is loaded
-            var loader = document.getElementById("loader");
-
-
-            // Hide loader and show content after 2 seconds (simulate loading time)
-            setTimeout(function () {
-                loader.style.display = "none";
-
-            }, 2000);
-        });
-    </script>
-
-    <!-- ////////// -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-    <button onclick="downloadPDFWithPDFMake()">Export PDF</button>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/vfs_fonts.js"></script>
-
-
-    <script>
-        function downloadPDFWithPDFMake() {
-            var rows = document.querySelectorAll("#myTable tr");
-            var data = [];
-            for (var i = 0; i < rows.length; i++) {
-                var rowData = [];
-                var cells = rows[i].querySelectorAll("td, th");
-                for (var j = 0; j < cells.length; j++) {
-                    const select = cells[j].querySelector("select");
-                    if (select) {
-                        rowData.push({
-                            text: select.value,
-                            style: 'tableData'
-                        });
-                    } else {
-                        rowData.push({
-                            text: cells[j].innerText,
-                            style: 'tableData'
-                        });
-                    }
-                }
-                data.push(rowData);
-            }
-
-
-            var docDefinition = {
-                header: {
-                    text: 'Your awesome table',
-                    alignment: 'center'
-                },
-                footer: function (currentPage, pageCount) {
-                    return ({
-                        text: `Page ${currentPage} of ${pageCount}`,
-                        alignment: 'center'
-                    });
-                },
-                content: [{
-                    style: 'tableExample',
-                    table: {
-                        headerRows: 1,
-                        body: [
-                            ...data
-                        ]
-                    },
-                    layout: {
-                        fillColor: function (rowIndex) {
-                            return (rowIndex % 2 === 0) ? '#E6E6FA' : null;
-                        }
-                    },
-                },],
-                styles: {
-                    tableExample: {
-                        // table style
-                    },
-                    tableData: {
-                        // table data style
-                    },
-                },
-            };
-            pdfMake.createPdf(docDefinition).download('Your awesome table');
-        }
         $('.totalCount').load('_totalProfiles.php');
         setInterval(() => {
             $('.totalCount').load('_totalProfiles.php');
         }, 3000);
     </script>
 
-
-
-
-
-    <!-- /. -->
 
 
 

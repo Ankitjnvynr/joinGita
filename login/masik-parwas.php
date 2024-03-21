@@ -1,12 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
     header("location: index.php");
     exit;
 }
 // ====================creating masik parwas tabel if not exist================
-include("../partials/_db.php");
-try {
+include ("../partials/_db.php");
+try
+{
     $sql = "CREATE TABLE masik_parvas (
         id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         pic TEXT NOT NULL,
@@ -14,12 +16,15 @@ try {
         dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
     $result = mysqli_query($conn, $sql);
-    if ($result) {
+    if ($result)
+    {
         // echo "table created succesfully";
-    } else {
+    } else
+    {
         // echo "not created ";
     }
-} catch (exception $err) {
+} catch (exception $err)
+{
 }
 
 
@@ -33,11 +38,12 @@ try {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIEO Gita : All users</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <style>
         body {
-            margin: 10px;
+
             background: #f7e092;
             overflow-x: hidden;
         }
@@ -83,7 +89,7 @@ try {
             margin-top: 0px !important;
         }
 
-        
+
 
         #tab1:checked~.tab1 {
             display: flex;
@@ -117,7 +123,7 @@ try {
             display: grid;
             grid-template-columns: repeat(4, minmax(20%, 350px));
             gap: 5px;
-           
+
         }
 
         .imgs {
@@ -187,38 +193,39 @@ try {
         .table {
             width: 100%;
         }
+
         @media only screen and (max-width: 768px) {
             #allPics {
-            grid-template-columns: repeat(1, minmax(20%, 350px));
-           
-        }
+                grid-template-columns: repeat(1, minmax(20%, 350px));
+
+            }
         }
     </style>
 </head>
 
 <body>
     <!-- =============================toast=============================== -->
-    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert"
+        aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div id="toastmsg" class="toast-body">
                 Deleted Successfully!
             </div>
-            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
     </div>
 
 
 
-    <div class="container d-flex flex-row-reverse">
-        <a href="logout.php" class="btn btn-danger">Logout</a>
-    </div>
 
 
-    <?php include'_options.php'; ?>
+    <?php include '_options.php'; ?>
 
-    <div class="container tab2  <?php if ($_SESSION['intro']) {
-                                    echo "intro";
-                                } ?> ">
+    <div class="container tab2  <?php if ($_SESSION['intro'])
+    {
+        echo "intro";
+    } ?> ">
         <div class="row m-auto">
             <div class="col-md m-auto">
                 <div class="card mb-3 ">
@@ -232,15 +239,18 @@ try {
                                 <p class="card-text">
                                 <form id="imgUpload" action="" method="POST" enctype="multipart/form-data">
                                     <div class="form-floating mb-3">
-                                        <input type="file" class="form-control" id="masikimage" name="masikimage" placeholder="name@example.com">
+                                        <input type="file" class="form-control" id="masikimage" name="masikimage"
+                                            placeholder="name@example.com">
                                         <label for="floatingInput">Upload image</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <button type="submit" class="btn btn-danger">Upload</button> <span id="imguploadStatus" class="ml-3 text-danger fs-6 "> </span>
+                                        <button type="submit" class="btn btn-danger">Upload</button> <span
+                                            id="imguploadStatus" class="ml-3 text-danger fs-6 "> </span>
                                     </div>
                                 </form>
                                 </p>
-                                <p class="card-text"><small class="text-body-secondary">Please upload a image of size 388 X 400 in px</small></p>
+                                <p class="card-text"><small class="text-body-secondary">Please upload a image of size
+                                        388 X 400 in px</small></p>
                             </div>
                         </div>
                     </div>
@@ -253,7 +263,8 @@ try {
                 <?php
                 $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
                 $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($result)) {
+                while ($row = mysqli_fetch_array($result))
+                {
                     echo '
                     <div class="grid-item p-2 position-relative">
                         <input type="hidden" value = ' . $row['id'] . '  >
@@ -272,8 +283,11 @@ try {
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script>
@@ -293,9 +307,9 @@ try {
             let closes = document.getElementsByClassName('cls');
             // console.log(closes)
 
-            $.each(closes, function(e, item) {
+            $.each(closes, function (e, item) {
                 // console.log(item)
-                $(item).click(function(e) {
+                $(item).click(function (e) {
                     imgid = $(this).attr('id');
                     // console.log(imgid)
                     if (confirm("Are you sure to Delete ?")) {
@@ -307,11 +321,11 @@ try {
                             url: "_delete.php",
                             type: "GET",
                             data: imgd,
-                            success: function(data) {
+                            success: function (data) {
                                 console.log(data)
                                 $('#toastmsg').text(data)
                                 toastBootstrap.show();
-                                $('#imgsdiv').load(' #allPics', function() {
+                                $('#imgsdiv').load(' #allPics', function () {
 
                                     // Code to run after content is loaded
                                     tt();
@@ -326,9 +340,9 @@ try {
             })
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             deleteScript()
-            $('#imgUpload').on("submit", function(e) {
+            $('#imgUpload').on("submit", function (e) {
                 e.preventDefault();
                 var formData = new FormData(this);
 
@@ -338,15 +352,15 @@ try {
                     data: formData,
                     contentType: false,
                     processData: false,
-                    success: function(data) {
+                    success: function (data) {
                         $('#imguploadStatus').html(data);
                         $('#masikimage').val('');
                         // $("#imgsdiv").load(location.href + " #allPics");
                         $.ajax({
                             url: '_loadimgs.php',
-                            success: function(data) {
+                            success: function (data) {
                                 $('#allPics').html(data);
-                                $('#imgsdiv').load(' #allPics', function() {
+                                $('#imgsdiv').load(' #allPics', function () {
                                     // Code to run after content is loaded
                                     tt();
                                     deleteScript();
@@ -362,8 +376,8 @@ try {
             let delList = document.querySelectorAll('.listdel')
             // console.log(delList)
             deleteMember = () => {
-                $.each(delList, function(e, item) {
-                    $(item).click(function(e) {
+                $.each(delList, function (e, item) {
+                    $(item).click(function (e) {
                         console.log(item)
                         mid = $(this).attr('id');
                         mid = parseInt(mid.slice(4))
@@ -378,7 +392,7 @@ try {
                                 success: (data) => {
                                     // console.log(data)
                                     alert(data)
-                                    $('#tble').load(' #myTable', function() {
+                                    $('#tble').load(' #myTable', function () {
                                         // Code to run after content is loaded
 
                                         deleteMember()
@@ -395,6 +409,10 @@ try {
             }
             deleteMember()
         })
+        $('.totalCount').load('_totalProfiles.php');
+        setInterval(() => {
+            $('.totalCount').load('_totalProfiles.php');
+        }, 3000);
     </script>
 </body>
 

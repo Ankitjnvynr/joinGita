@@ -172,12 +172,6 @@ header('Content-Type: text/html; charset=utf-8');
 
 
 
-    <div class="container d-flex justify-content-between mt-2">
-        <div class="border border-danger rounded-3 bg-white fw-3 fs-5 text-danger fw-bold p-2 py-1"> Total Profiles :
-            <span class="totalCount"></span>
-        </div>
-        <a href="logout.php" class="btn btn-danger">Logout</a>
-    </div>
 
 
     <?php include '_options.php'; ?>
