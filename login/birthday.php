@@ -103,10 +103,11 @@ $country_code = array(
             min-width: 150px;
         }
 
-        .inputfields{
+        .inputfields {
             flex: 1 0 130px;
         }
-        .mybtns{
+
+        .mybtns {
             flex: 1 0 130px;
         }
 
@@ -222,51 +223,46 @@ $country_code = array(
             <div class="col-md ">
                 <form class="mt-3 bg-warning-subtle px-2 rounded shadow-sm" action="" method="POST">
                     <div class="row selecting d-flex flex-wrap bg-warning-subtle gap-1 p-1">
-                        
-                            <input type="number" name="birthDate" class="form-control form-control-sm  inputfields" placeholder="Enter Date" aria-label="First name" oninput="validateDate(this)" required>
-                        
-                        
-                            <input type="number" name="birthMonth" class="form-control form-control-sm inputfields" placeholder="Enter Month" aria-label="Last name" oninput="validateMonth(this)" required>
-                        
-                        
-                            <select class="form-select form-select-sm inputfields" name="messageSelect" aria-label="Small select example">
-                                <?php
-                                $message_select_sql = "SELECT * FROM `messages` ";
-                                $message_select_result = mysqli_query($conn, $message_select_sql);
-                                while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
-                                    $selected = $message_select_row['title'] == 'Birthday' ? "Selected" : "";
-                                    echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        
-                        
-                            <button name="bdaySubmit" class="btn btn-danger mybtns">View all Birthday ></button>
-                        
+
+                        <input type="number" name="birthDate" class="form-control form-control-sm  inputfields" placeholder="Enter Date" aria-label="First name" oninput="validateDate(this)" required>
+
+
+                        <input type="number" name="birthMonth" class="form-control form-control-sm inputfields" placeholder="Enter Month" aria-label="Last name" oninput="validateMonth(this)" required>
+
+
+                        <select class="form-select form-select-sm inputfields" name="messageSelect" aria-label="Small select example">
+                            <?php
+                            $message_select_sql = "SELECT * FROM `messages` ";
+                            $message_select_result = mysqli_query($conn, $message_select_sql);
+                            while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
+                                $selected = $message_select_row['title'] == 'Birthday' ? "Selected" : "";
+                                echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
+                            }
+                            ?>
+                        </select>
+
+
+                        <button name="bdaySubmit" class="btn btn-danger mybtns">View all Birthday ></button>
+
                     </div>
                 </form>
                 <form class="mt-3 bg-warning-subtle px-2 rounded shadow-sm" action="" method="POST">
                     <div class="row selecting d-flex flex-wrap bg-warning-subtle gap-1 p-1">
-                        
-                            <input type="number" name="aniDate" class="form-control form-control-sm inputfields" placeholder="Enter Date" aria-label="First name" oninput="validateDate(this)" required>
-                        
-                            <input type="number" name="aniMonth" class="form-control form-control-sm inputfields" placeholder="Enter Month" aria-label="Last name" oninput="validateMonth(this)" required>
-                        
-                            <select class="form-select form-select-sm inputfields" name="messageSelect" aria-label="Small select example">
-                                <?php
-                                $message_select_sql = "SELECT * FROM `messages` ";
-                                $message_select_result = mysqli_query($conn, $message_select_sql);
-                                while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
+                        <input type="number" name="aniDate" class="form-control form-control-sm inputfields" placeholder="Enter Date" aria-label="First name" oninput="validateDate(this)" required>
 
-                                    $selected = $message_select_row['title'] == 'Aniversary' ? "Selected" : "";
+                        <input type="number" name="aniMonth" class="form-control form-control-sm inputfields" placeholder="Enter Month" aria-label="Last name" oninput="validateMonth(this)" required>
 
-                                    echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        
-                            <button name="aniSubmit" class="btn btn-danger mybtns">All Aniversary</button>
-                        
+                        <select class="form-select form-select-sm inputfields" name="messageSelect" aria-label="Small select example">
+                            <?php
+                            $message_select_sql = "SELECT * FROM `messages` ";
+                            $message_select_result = mysqli_query($conn, $message_select_sql);
+                            while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
+                                $selected = $message_select_row['title'] == 'Aniversary' ? "Selected" : "";
+                                echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
+                            }
+                            ?>
+                        </select>
+                        <button name="aniSubmit" class="btn btn-danger mybtns">All Aniversary ></button>
                     </div>
                 </form>
                 <div class="mt-3 text-center bg-warning-subtle p-2 rounded shadow-sm d-flex gap-2 justify-center">
@@ -390,24 +386,26 @@ $country_code = array(
         }
         let deleteMsg = (e, sr) => {
             let card = e.parentNode.parentNode;
-            $.ajax({
-                url: '_deletemsg.php',
-                method: 'POST',
-                data: {
-                    sr: sr,
-                },
-                success: function(response) {
-                    card.classList.add("deleteditem");
-                    setInterval(() => {
-                        card.style.display = "none";
-                    }, 1000);
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    console.error('Error updating content:', error);
-                }
-            });
+            if (confirm("Are You sure")) {
+                $.ajax({
+                    url: '_deletemsg.php',
+                    method: 'POST',
+                    data: {
+                        sr: sr,
+                    },
+                    success: function(response) {
+                        card.classList.add("deleteditem");
+                        setInterval(() => {
+                            card.style.display = "none";
+                        }, 1000);
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error('Error updating content:', error);
+                    }
+                });
+            }
         }
 
         loadMessages()
