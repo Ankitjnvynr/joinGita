@@ -19,13 +19,10 @@ if (isset ($_POST['get-data']))
     $byState = $_POST['filterState'];
     $filterdistrict = $_POST['filterdistrict'];
     $bytehsil = $_POST['bytehsil'];
-    $messageSelect = $_POST['messageSelect'];
 
 
-    $msgsql = "SELECT * FROM `messages` WHERE `title` = '$messageSelect'";
-    $msgresult = mysqli_query($conn, $msgsql);
-    $msgrow = mysqli_fetch_assoc($msgresult);
-    $message = $msgrow['msg'];
+
+
 
 
 
@@ -187,6 +184,14 @@ $country_code = array(
                 <?php
                 if (isset ($_POST['get-data']))
                 {
+                        $messageSelect = $_POST['messageSelect'];
+                        $msgsql = "SELECT * FROM `messages` WHERE `title` = '$messageSelect'";
+                        $msgresult = mysqli_query($conn, $msgsql);
+                        $msgrow = mysqli_fetch_assoc($msgresult);
+                        $message = $msgrow['msg'];
+                        // echo urldecode($message);
+    
+    
                     $sr = 0;
                     $result = $conn->query($sql);
                     echo $totalresult = mysqli_num_rows($result);

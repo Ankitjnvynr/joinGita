@@ -88,52 +88,9 @@ include ("../partials/_db.php");
 
 
 
-    <div class="container d-flex flex-row-reverse">
-        <a href="logout.php" class="btn btn-danger">Logout</a>
-    </div>
-
 
     <?php include '_options.php'; ?>
-    <div class="container">
-        <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
-            <div class="form-floating mb-3 ">
-                <select onclick="fillCountry()" id="countrySelect" style="min-width: 100px;" name="country"
-                    class="form-control filterInput" onchange="loadpics()">
 
-                </select>
-                <label for="countrySelect">Country</label>
-            </div>
-            <div class="form-floating mb-3 ">
-                <select id="stateSelect" style="min-width: 100px;" name="state" class='form-control'
-                    onchange="loadpics()">
-
-                </select>
-                <label for="stateSelect">State</label>
-            </div>
-            <div class="form-floating mb-3 ">
-                <select id="citySelect" style="min-width: 100px;" name="district" class='form-control'
-                    onchange="loadpics()">
-
-                </select>
-                <label for="citySelect">city</label>
-            </div>
-            <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterName" placeholder="Enter"
-                    oninput="loadpics()">
-                <label for="filterName">Name</label>
-            </div>
-            <div class="form-floating mb-3 ">
-                <input type="text" class="form-control filterInput" id="filterPhone" placeholder="Enter"
-                    oninput="loadpics()">
-                <label for="filterPhone">Phone</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control filterInput" id="filterEmail" placeholder="name@example.com"
-                    oninput="loadpics()">
-                <label for="filterEmail">Email address</label>
-            </div>
-        </div>
-    </div>
     <div class="container ove my-3 tab1 ">
         <div class="row">
             <div class="col-md-12 my-4">
