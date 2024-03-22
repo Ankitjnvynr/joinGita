@@ -165,13 +165,13 @@ $country_code = array(
 
     <div class="container tablediv pt-3">
 
-        <table id="myTable" class="table table-striped table-hover">
+        <table style="font-size: small;" id="myTable" class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th scope="col">Sr</th>
                     <th scope="col">Name</th>
                     <th scope="col">Mobile</th>
-                    <th scope="col">District</th>
+                    <!-- <th scope="col">District</th> -->
                     <th scope="col">City</th>
                     <th scope="col">Send</th>
                     <!-- <th scope="col">Anniversary</th> -->
@@ -228,7 +228,7 @@ $country_code = array(
                                 <th scope="row">' . $sr . '</th>
                                 <td>' . $name . '</td>
                                 <td><a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . '</span></a></td>
-                                <td>' . $district . '</td>
+                                
                                 <td>' . $tehsil . '</td>
                                 <td>
                                     <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . '&attachment=' . $currentURL . '65f7fc772d3bf.png" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i>

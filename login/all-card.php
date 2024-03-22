@@ -309,7 +309,13 @@ header('Content-Type: text/html; charset=utf-8');
         }
         tt();
         const toastElList = document.querySelectorAll('.toast')[0]
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList)
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList);
+
+        let toastmsg = document.getElementById('toastmsg');
+        toastmsg.innerHTML = "Updated Success!";
+        toastBootstrap.show();
+
+
     </script>
 
     <script>
