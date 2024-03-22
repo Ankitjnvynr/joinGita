@@ -158,6 +158,8 @@
           <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">---Education---</option>
           <option value="B.Com" aria-selected="false">B.Com</option>
           <option value="M.Com" aria-selected="false">M.Com</option>
+          <option value="M.Com" aria-selected="false">B.Tech</option>
+          <option value="M.Com" aria-selected="false">M.Tech</option>
           <option value="LLB" aria-selected="false">LLB</option>
           <option value="MBBS" aria-selected="false">MBBS</option>
           <option value="CA" aria-selected="false">CA</option>
