@@ -51,6 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <title>GIEO Gita : Admin login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             margin: 10px;
@@ -75,8 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     </style>
 </head>
 
-<body >
-    
+<body>
+
     <div style="width:90%; max-width:400px "
         class="container  d-flex justify-content-center align-items-center shadow p-4 py-5 rounded bg-warning-subtle rounded-xl position-relative ">
         <div class="logo position-absolute shadow">
@@ -90,8 +93,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 <label for="username">Email address</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" name="password" required
+                <input type="password" class="form-control " id="password" name="password" required
                     placeholder="Password">
+                <i id="passwordicon"
+                    class="fa-regular fa-eye position-absolute end-0 top-50 end-0 translate-middle-y fs-5 mr-3 translate-x-3 text-danger pr-3"
+                    style="margin-right: 10px; cursor: pointer;"></i>
                 <label for="password">Password</label>
             </div>
             <div class="text-center pt-2">
@@ -106,6 +112,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script>
+        let passwordicon = document.getElementById('passwordicon')
+        let password = document.getElementById('password')
+
+        passwordicon.addEventListener('click', (e) => {
+            e.target.classList.toggle("fa-eye-slash");
+            e.target.classList.toggle("fa-eye");
+            password.type = (password.type == 'text') ? 'password' : 'text';
+            console.log(e.target);
+        });
+
+    </script>
 </body>
 
 </html>

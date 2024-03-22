@@ -485,10 +485,7 @@ if ($star == 'null')
         document.addEventListener('DOMContentLoaded', function () {
             const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
             let cropper;
-            // Example function to rotate the Cropper canvas by a specified angle
-            function rotateImage(degrees) {
-                cropper.rotateTo(degrees);
-            }
+            
 
 
             // Show modal and initialize cropper when it is shown
