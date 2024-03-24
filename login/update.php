@@ -25,6 +25,7 @@ while ($row = mysqli_fetch_array($result))
   $dob = $row['dob'];
   $aniver_date = $row['aniver_date'];
   $star = $row['star'];
+  $pic = $row['pic'];
 }
 ?>
 
@@ -41,7 +42,7 @@ while ($row = mysqli_fetch_array($result))
     }
 
     .container {
-      max-width: 900px;
+      /* max-width: 900px; */
       background: rgba(255, 255, 255, 0.9);
       position: relative;
 
@@ -101,6 +102,17 @@ while ($row = mysqli_fetch_array($result))
       to {
         transform: rotate(360deg);
       }
+    }
+  </style>
+  <style>
+    #joinForm {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    #joinForm>div {
+      flex: 1 0 300px;
     }
   </style>
 </head>
@@ -319,7 +331,137 @@ while ($row = mysqli_fetch_array($result))
   </form>
 
 
-  </form>
+
+  </div>
+
+
+  <div class="container mb-3 rounded">
+    <div class="row ">
+      <div class="col-md-3 py-3 ">
+        <div class="d-flex flex-column bg-warning-subtle py-1 gap-2 rounded">
+          <p class="text-left mx-3">Photo:-</p>
+          <img class="m-auto shadow rounded-circle" width="150px" src="../imgs/<?php echo $pic ?>" alt="">
+          <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change Imgae</label></p>
+          <input id="changeImg" type="file" class="form-control " hidden>
+        </div>
+      </div>
+      <div class="col-md-9 py-3">
+        <form method="POST" action="submit.php" id="joinForm">
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="countrySelect">Select Country</label>
+            <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
+              <option selected>---Country---</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="name">Enter Name</label>
+            <input name="name" id="name" type="text" class="form-control">
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
+            <input id="phone" name="phone" type="text" class="form-control" required>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="email">Enter Email</label>
+            <input id="email" name="email" type="email" class="form-control">
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="dikshit">Dikshit</label>
+            <select id="dikshit" name="dikshit" class="form-select " aria-label="Small select example">
+              <option value="" selected>---Dikshit/दीक्षित परिवार---</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="No But Interested">No, But Intrested</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="stateSelect">Select State</label>
+            <select id="stateSelect" name="state" class="form-select " aria-label="Small select example">
+              <option selected>---State---</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="citySelect">Select District</label>
+            <select id="citySelect" name="district" class="form-select " aria-label="Small select example">
+              <option selected>---District---</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="tehsilSelect">Select Tehsil</label>
+            <select name="tehsil" id="tehsilSelect" class="form-select " aria-label="Small select example">
+              <option selected>---Tehsil---</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="city">City/Village</label>
+            <input name="city" id="city" type="text" class="form-control">
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="address">Address</label>
+            <input name="address" id="address" type="text" class="form-control">
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="occupation">Occupation</label>
+            <select name="occupation" id="occupation" class="form-select " aria-label="Small select example">
+              <option value="" disabled="" selected="">---Occupation---</option>
+              <option value="Business" aria-selected="false">Business</option>
+              <option value="Home Maker" aria-selected="false">Home Maker</option>
+              <option value="Private Job" aria-selected="false">Private Job</option>
+              <option value="Govt. Job" aria-selected="false">Govt. Job</option>
+              <option value="Student" aria-selected="false">Student</option>
+              <option value="Politician" aria-selected="false">Politician</option>
+              <option value="Farmer" aria-selected="false">Farmer</option>
+              <option value="Teacher" aria-selected="false">Teacher</option>
+              <option value="Doctor" aria-selected="false">Doctor</option>
+              <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
+              <option value="Retired" aria-selected="false">Retired</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="education">Education</label>
+            <select name="education" id="education" class="form-select " aria-label="Small select example">
+              <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">---Education---</option>
+              <option value="B.Com" aria-selected="false">B.Com</option>
+              <option value="M.Com" aria-selected="false">M.Com</option>
+              <option value="M.Com" aria-selected="false">B.Tech</option>
+              <option value="M.Com" aria-selected="false">M.Tech</option>
+              <option value="LLB" aria-selected="false">LLB</option>
+              <option value="MBBS" aria-selected="false">MBBS</option>
+              <option value="CA" aria-selected="false">CA</option>
+              <option value="CS" aria-selected="false">CS</option>
+              <option value="PhD" aria-selected="false">PhD</option>
+              <option value="M.Ed." aria-selected="false">M.Ed.</option>
+              <option value="B.Ed." aria-selected="false">B.Ed.</option>
+              <option value="MBA" aria-selected="false">MBA</option>
+              <option value="JBT" aria-selected="false">JBT</option>
+              <option value="Post Graduation" aria-selected="false">Post Graduation</option>
+              <option value="Graduation" aria-selected="false">Graduation</option>
+              <option value="12th Pass" aria-selected="false">12th Pass</option>
+              <option value="10th Pass" aria-selected="false">10th Pass</option>
+              <option value="Others" aria-selected="false">Others</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="married">Marital Status</label>
+            <select name="married" id="married" class="form-select " onchange="aniver()">
+              <option value="">-- select Marital Status --</option>
+              <option value="Married" aria-selected="false">Married</option>
+              <option value="Single" aria-selected="false">Single</option>
+            </select>
+          </div>
+          <div class="bg-warning-subtle p-2 py-2 rounded">
+            <label class="form-label form-label-sm" for="dob">Date of Birth</label>
+            <input name="dob" id="dob" type="date" class="form-control" required>
+          </div>
+          <span id="aniversry">
+
+          </span>
+          <div class="text-center mt-4 my-3">
+            <button type="submit" name="joinsubmit" class="btn btn-danger">Update ></button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -353,24 +495,6 @@ while ($row = mysqli_fetch_array($result))
   <script src="../js/another.js"></script>
 
 
-  <?php
-  if (isset ($_GET['dphoneExiit']))
-  {
-
-    $pnot = false;
-    $pnot = $_GET['dphoneExiit'];
-    if ($pnot == true)
-    {
-      echo '
-            <script>
-                const toastLiveExample = document.getElementById("phtoast")
-                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-                toastBootstrap.show()
-            </script>
-                ';
-    }
-  }
-  ?>
 
 
   <?php
