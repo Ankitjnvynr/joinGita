@@ -474,9 +474,6 @@ if ($star == 'null')
                 fileInput.value = '';
                 return false;
             }
-
-
-
         }
     </script>
     <script src="js/music.js"></script>

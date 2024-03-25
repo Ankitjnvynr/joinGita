@@ -46,7 +46,7 @@ setTimeout(() => {
       stateSelect.innerHTML = "<option value>state</option>";
       data1.states.forEach((state) => {
         if (state.country_id == selectedCountry) {
-          console.log(state);
+          // console.log(state);
           const option = document.createElement("option");
           option.value = state.name;
           // option.setAttribute("dataValue", state.id);

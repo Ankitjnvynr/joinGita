@@ -111,7 +111,8 @@ while ($row = mysqli_fetch_array($result))
       gap: 10px;
     }
 
-    #joinForm>div {
+    #joinForm>div,
+    span {
       flex: 1 0 300px;
     }
   </style>
@@ -119,347 +120,180 @@ while ($row = mysqli_fetch_array($result))
 
 <body class="ov">
 
-  <div class="container p-2 p-md-4  shadow-lg  my-3 rounded " style="padding-bottom: 1%;">
-    <form id="updateForm" class="" style="padding-bottom: 1%;" method="POST" action="submit.php">
-      <h2 class="text-center text-danger mb-4">Updating Profile</h2>
-      <div class="form-group col-md mb-3 d-flex justify-content-center ">
-        <select value="india" max-width="600px" id="countrySelect" value=<?php echo $country; ?> name="country"
-          class='form-control'>
-          <option>-- Country --</option>
-        </select>
-      </div>
-      <div class="row">
-        <div class="form-floating mb-3 col-md ">
-          <input type="text" class="form-control" name="name" placeholder="name@example.com"
-            value="<?php echo $name ?>">
-          <label for="floatingInput">Name</label>
+
+    <!-- Modal -->
+    <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crop Image</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body cropper-container">
+                    <img id="cropperImage" src="" alt="Image to crop">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="saveCroppedImage" class="btn btn-primary">Save</button>
+                </div>
+            </div>
         </div>
-        <div class="form-floating mb-3 col-md ">
-          <input type="number" class="form-control" id="phone" maxlength="20" disabled placeholder="name@example.com"
-            value="<?php echo $phone ?>">
-          <input type="number" class="form-control" id="" name="phone" maxlength="20" hidden
-            placeholder="name@example.com" value="<?php echo $phone ?>">
-          <label for="floatingInput">Phone No(without country code)</label>
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="form-floating mb-3 col-md">
-          <input type="email" class="form-control" name="email" placeholder="name@example.com"
-            value="<?php echo $email ?>">
-          <label for="floatingInput">Email </label>
-        </div>
-        <div class="form-group col-md mb-3 fill">
-          <select name="dikshit" class="form-control" id="inputDistrict" aria-label="Default select example">
-
-            <option value="" aria-selected="false">--Dikshit--</option>
-            <option value="Yes" aria-selected="false">Yes</option>
-            <option value="No" aria-selected="false">No</option>
-            <option value="No, but interested" aria-selected="false">No, but interested</option>
-            <option value="<?php echo $dikshit ?>" selected>
-              <?php echo $dikshit ?>
-            </option>
-
-          </select>
-        </div>
-
-      </div>
-      <div class="row">
+    </div>
 
 
+    <!-- ========================= -->
 
-      </div>
-      <div class="row">
-        <div class=" mb-3 col-md">
-          <input name="state" type="text" list="stateSelect" class="form-control" value=<?php echo $state; ?>>
-
-          <datalist id="stateSelect">
-            <option value="">-- Region --</option>
-
-          </datalist>
-
-        </div>
-        <div class=" mb-3 col-md">
-          <input type="text" list="citySelect" name="district" class="form-control" value=<?php echo $tehsil; ?>>
-          <datalist id="citySelect">
-            <option value="">-- City --</option>
-          </datalist>
-
-        </div>
-      </div>
-
-
-
-      <div class="row">
-
-        <div class="form-floating mb-3 col-md">
-          <input name="tehsil" type="text" class="form-control" placeholder="name@example.com"
-            value="<?php echo $tehsil ?>">
-          <label for="floatingInput">Tehsil</label>
-        </div>
-        <div class="form-floating mb-3 col-md">
-          <input name="address" type="text" class="form-control" id="Village" placeholder="name@example.com"
-            value="<?php echo $address ?>">
-          <label for="Village">Address</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-md mb-3 fill">
-          <select name="intrest" class="form-control" data-testid="select-trigger" aria-required="true"
-            aria-invalid="false">
-            <option value="" disabled="" selected="">Interested Field</option>
-            <option value="श्री कृष्ण कृपा सेवा समिति" aria-selected="false">श्री कृष्ण कृपा सेवा समिति</option>
-            <option value="जीओ गीता" aria-selected="false">जीओ गीता</option>
-            <option value="सेवा समूह" aria-selected="false">सेवा समूह</option>
-            <option value="सूचना समूह" aria-selected="false">सूचना समूह</option>
-            <option value="सत्संग समूह" aria-selected="false">सत्संग समूह</option>
-            <option value="प्रचार समूह" aria-selected="false">प्रचार समूह</option>
-            <option value="पत्रिका समूह" aria-selected="false">पत्रिका समूह</option>
-            <option value="यज्ञ समूह" aria-selected="false">यज्ञ समूह</option>
-            <option value="शिक्षा समूह" aria-selected="false">शिक्षा समूह</option>
-            <option value="चिकित्सा समूह" aria-selected="false">चिकित्सा समूह</option>
-            <option value="अधिवक्ता समूह" aria-selected="false">अधिवक्ता समूह</option>
-            <option value="युवा चेतना समूह" aria-selected="false">युवा चेतना समूह</option>
-            <option value="ग्राम संपर्क समूह" aria-selected="false">ग्राम संपर्क समूह</option>
-            <option value="विप्रजन समूह" aria-selected="false">विप्रजन समूह</option>
-            <option value="मन्दिर सेवा समूह" aria-selected="false">मन्दिर सेवा समूह</option>
-            <option value="महिला समूह" aria-selected="false">महिला समूह</option>
-            <option value="समन्वय समूह" aria-selected="false">समन्वय समूह</option>
-            <option value="सोशल मीडिया समूह" aria-selected="false">सोशल मीडिया समूह</option>
-            <option value="निधि समूह" aria-selected="false">निधि समूह</option>
-            <option value="गौ सेवा समूह" aria-selected="false">गौ सेवा समूह</option>
-            <option value="<?php echo $wing ?>" aria-selected="false" selected>
-              <?php echo $wing ?>
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-md mb-3">
-
-          <select name="occupation" class="form-control" data-testid="select-trigger" aria-required="true"
-            aria-invalid="false">
-            <option value="" disabled="" selected="">Occupation</option>
-            <option value="Business" aria-selected="false">Business</option>
-            <option value="Home Maker" aria-selected="false">Home Maker</option>
-            <option value="Private Job" aria-selected="false">Private Job</option>
-            <option value="Govt. Job" aria-selected="false">Govt. Job</option>
-            <option value="Student" aria-selected="false">Student</option>
-            <option value="Politician" aria-selected="false">Politician</option>
-            <option value="Farmer" aria-selected="false">Farmer</option>
-            <option value="Teacher" aria-selected="false">Teacher</option>
-            <option value="Doctor" aria-selected="false">Doctor</option>
-            <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
-            <option value="Retired" aria-selected="false">Retired</option>
-            <option value="<?php echo $occupation ?>" aria-selected="false" selected>
-              <?php echo $occupation ?>
-            </option>
-
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md mb-3">
-          <select name="education" class="form-control" data-testid="select-trigger" aria-required="true"
-            aria-invalid="false">
-            <option value="B.Com" aria-selected="false">B.Com</option>
-            <option value="M.Com" aria-selected="false">M.Com</option>
-            <option value="LLB" aria-selected="false">LLB</option>
-            <option value="MBBS" aria-selected="false">MBBS</option>
-            <option value="CA" aria-selected="false">CA</option>
-            <option value="CS" aria-selected="false">CS</option>
-            <option value="PhD" aria-selected="false">PhD</option>
-            <option value="M.Ed." aria-selected="false">M.Ed.</option>
-            <option value="B.Ed." aria-selected="false">B.Ed.</option>
-            <option value="MBA" aria-selected="false">MBA</option>
-            <option value="JBT" aria-selected="false">JBT</option>
-            <option value="Post Graduation" aria-selected="false">Post Graduation</option>
-            <option value="Graduation" aria-selected="false">Graduation</option>
-            <option value="12th Pass" aria-selected="false">12th Pass</option>
-            <option value="10th Pass" aria-selected="false">10th Pass</option>
-            <option value="Others" aria-selected="false">Others</option>
-            <option value="<?php echo $education ?>" aria-selected="false" selected>
-              <?php echo $education ?>
-            </option>
-
-          </select>
-        </div>
-        <div class="form-floating mb-3 col-md ">
-          <input name="dob" type="date" class="form-control" value="<?php echo $dob ?>">
-          <label for="dob">Birth Date</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md mb-3">
-          <select name="married" id="married" class="form-control" onchange="aniver()">
-            <option value="">-- select Marital Status --</option>
-            <option value="Married" aria-selected="false">Married</option>
-            <option value="Unmarried" aria-selected="false">Unmarried</option>
-            <option value="<?php echo $marital_status ?>" aria-selected="false" selected>
-              <?php echo $marital_status ?>
-            </option>
-          </select>
-        </div>
-
-        <div id="aniversry" class="form-floating mb-3 col-md">
-
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="form-group col-md mb-3">
-          <select name="star" class="form-control">
-            <option value="">-- Star --</option>
-            <option value="Pattern Trustee" aria-selected="false">Pattern Trustee</option>
-            <option value="Corporate Trustee" aria-selected="false">Corporate Trustee</option>
-            <?php
-            echo $star != "" ?
-              '<option value="' . $star . '" aria-selected="false" selected>' . $star . '</option>'
-              : "";
-            ?>
-
-          </select>
-        </div>
-        <div class="form-group col-md mb-3">
-
-        </div>
-
-      </div>
-
-      <div class="d-flex justify-content-center"><button name="updatesubmit" type="submit"
-          class="btn btn-danger p-4 py-2 p"><b>Update Profile</b></button></div>
-  </div>
-  </form>
-
-
-
-  </div>
-
-
-  <div class="container mb-3 rounded">
-    <div class="row ">
-      <div class="col-md-3 py-3 ">
-        <div class="d-flex flex-column bg-warning-subtle py-1 gap-2 rounded">
-          <p class="text-left mx-3">Photo:-</p>
-          <img class="m-auto shadow rounded-circle" width="150px" src="../imgs/<?php echo $pic ?>" alt="">
-          <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change Imgae</label></p>
-          <input id="changeImg" type="file" class="form-control " hidden>
-        </div>
-      </div>
-      <div class="col-md-9 py-3">
-        <form method="POST" action="submit.php" id="joinForm">
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="countrySelect">Select Country</label>
-            <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
-              <option selected>---Country---</option>
-            </select>
+  <div style="min-height:100vh" class="d-flex justify-content-center align-items-center">
+    <div class="container my-3 rounded ">
+      <div class="row ">
+        <div class="col-md-3 py-3 ">
+          <div class="d-flex flex-column bg-warning-subtle py-1 gap-2 rounded">
+            <p class="text-left mx-3">Photo:-</p>
+            <img class="m-auto shadow rounded-circle" width="150px" src="../imgs/<?php echo $pic ?>" alt="">
+            <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change Imgae</label></p>
+            <input id="changeImg" type="file" class="form-control " hidden>
           </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="name">Enter Name</label>
-            <input name="name" id="name" type="text" class="form-control">
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
-            <input id="phone" name="phone" type="text" class="form-control" required>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="email">Enter Email</label>
-            <input id="email" name="email" type="email" class="form-control">
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="dikshit">Dikshit</label>
-            <select id="dikshit" name="dikshit" class="form-select " aria-label="Small select example">
-              <option value="" selected>---Dikshit/दीक्षित परिवार---</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="No But Interested">No, But Intrested</option>
-            </select>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="stateSelect">Select State</label>
-            <select id="stateSelect" name="state" class="form-select " aria-label="Small select example">
-              <option selected>---State---</option>
-            </select>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="citySelect">Select District</label>
-            <select id="citySelect" name="district" class="form-select " aria-label="Small select example">
-              <option selected>---District---</option>
-            </select>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="tehsilSelect">Select Tehsil</label>
-            <select name="tehsil" id="tehsilSelect" class="form-select " aria-label="Small select example">
-              <option selected>---Tehsil---</option>
-            </select>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="city">City/Village</label>
-            <input name="city" id="city" type="text" class="form-control">
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="address">Address</label>
-            <input name="address" id="address" type="text" class="form-control">
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="occupation">Occupation</label>
-            <select name="occupation" id="occupation" class="form-select " aria-label="Small select example">
-              <option value="" disabled="" selected="">---Occupation---</option>
-              <option value="Business" aria-selected="false">Business</option>
-              <option value="Home Maker" aria-selected="false">Home Maker</option>
-              <option value="Private Job" aria-selected="false">Private Job</option>
-              <option value="Govt. Job" aria-selected="false">Govt. Job</option>
-              <option value="Student" aria-selected="false">Student</option>
-              <option value="Politician" aria-selected="false">Politician</option>
-              <option value="Farmer" aria-selected="false">Farmer</option>
-              <option value="Teacher" aria-selected="false">Teacher</option>
-              <option value="Doctor" aria-selected="false">Doctor</option>
-              <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
-              <option value="Retired" aria-selected="false">Retired</option>
-            </select>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="education">Education</label>
-            <select name="education" id="education" class="form-select " aria-label="Small select example">
-              <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">---Education---</option>
-              <option value="B.Com" aria-selected="false">B.Com</option>
-              <option value="M.Com" aria-selected="false">M.Com</option>
-              <option value="M.Com" aria-selected="false">B.Tech</option>
-              <option value="M.Com" aria-selected="false">M.Tech</option>
-              <option value="LLB" aria-selected="false">LLB</option>
-              <option value="MBBS" aria-selected="false">MBBS</option>
-              <option value="CA" aria-selected="false">CA</option>
-              <option value="CS" aria-selected="false">CS</option>
-              <option value="PhD" aria-selected="false">PhD</option>
-              <option value="M.Ed." aria-selected="false">M.Ed.</option>
-              <option value="B.Ed." aria-selected="false">B.Ed.</option>
-              <option value="MBA" aria-selected="false">MBA</option>
-              <option value="JBT" aria-selected="false">JBT</option>
-              <option value="Post Graduation" aria-selected="false">Post Graduation</option>
-              <option value="Graduation" aria-selected="false">Graduation</option>
-              <option value="12th Pass" aria-selected="false">12th Pass</option>
-              <option value="10th Pass" aria-selected="false">10th Pass</option>
-              <option value="Others" aria-selected="false">Others</option>
-            </select>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="married">Marital Status</label>
-            <select name="married" id="married" class="form-select " onchange="aniver()">
-              <option value="">-- select Marital Status --</option>
-              <option value="Married" aria-selected="false">Married</option>
-              <option value="Single" aria-selected="false">Single</option>
-            </select>
-          </div>
-          <div class="bg-warning-subtle p-2 py-2 rounded">
-            <label class="form-label form-label-sm" for="dob">Date of Birth</label>
-            <input name="dob" id="dob" type="date" class="form-control" required>
-          </div>
-          <span id="aniversry">
+        </div>
+        <div class="col-md-9 py-3">
+          <form method="POST" action="submit.php" id="joinForm">
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="countrySelect">Change Country</label>
+              <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
+                <option selected>---Country---</option>
+              </select>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="name"> Name</label>
+              <input value="<?php echo $name ?>" name="name" id="name" type="text" class="form-control">
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
+              <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control" disabled>
+              <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control" hidden>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="email">Enter Email</label>
+              <input id="email" name="email" type="email" value="<?php echo $email ?>" class="form-control">
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="dikshit">Dikshit</label>
+              <select id="dikshit" name="dikshit" class="form-control " aria-label="Small select example">
+                <option value="" selected>---Dikshit/दीक्षित परिवार---</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="No But Interested">No, But Intrested</option>
+                <option value="<?php echo $dikshit ?>" selected>
+                  <?php echo $dikshit ?>
+                </option>
+              </select>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="stateSelec">Change State</label>
+              <input list="stateSelect" id="stateSelec" name="state" class="form-select" value="<?php echo $state; ?>">
+              <datalist id="stateSelect">
+                <option value="">-- Region --</option>
+              </datalist>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="citySelec">Change District</label>
+              <input id="citySelec" list="citySelect" name="district" class="form-control"
+                value="<?php echo $district; ?>">
+              <datalist id="citySelect">
+                <option value="">-- District --</option>
+              </datalist>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="citySelec">Change Tehsil</label>
+              <input id="selecttehsil" list="citySelect" name="tehsil" class="form-control"
+                value="<?php echo $tehsil; ?>">
+              <datalist id="citySelect">
+                <option value="">-- tehsil --</option>
+              </datalist>
+            </div>
 
-          </span>
-          <div class="text-center mt-4 my-3">
-            <button type="submit" name="joinsubmit" class="btn btn-danger">Update ></button>
-          </div>
-        </form>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="city">Address</label>
+              <input value="<?php echo $address ?>" name="address" id="city" type="text" class="form-control">
+            </div>
+
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="occupation">Occupation</label>
+              <select name="occupation" id="occupation" class="form-select " aria-label="Small select example">
+                <option value="" disabled="" selected="">---Occupation---</option>
+                <option value="Business" aria-selected="false">Business</option>
+                <option value="Home Maker" aria-selected="false">Home Maker</option>
+                <option value="Private Job" aria-selected="false">Private Job</option>
+                <option value="Govt. Job" aria-selected="false">Govt. Job</option>
+                <option value="Student" aria-selected="false">Student</option>
+                <option value="Politician" aria-selected="false">Politician</option>
+                <option value="Farmer" aria-selected="false">Farmer</option>
+                <option value="Teacher" aria-selected="false">Teacher</option>
+                <option value="Doctor" aria-selected="false">Doctor</option>
+                <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
+                <option value="Retired" aria-selected="false">Retired</option>
+                <option value="<?php echo $occupation ?>" aria-selected="false" selected>
+                  <?php echo $occupation ?>
+                </option>
+              </select>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="education">Education</label>
+              <select name="education" id="education" class="form-select " aria-label="Small select example">
+                <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">---Education---</option>
+                <option value="B.Com" aria-selected="false">B.Com</option>
+                <option value="M.Com" aria-selected="false">M.Com</option>
+                <option value="M.Com" aria-selected="false">B.Tech</option>
+                <option value="M.Com" aria-selected="false">M.Tech</option>
+                <option value="LLB" aria-selected="false">LLB</option>
+                <option value="MBBS" aria-selected="false">MBBS</option>
+                <option value="CA" aria-selected="false">CA</option>
+                <option value="CS" aria-selected="false">CS</option>
+                <option value="PhD" aria-selected="false">PhD</option>
+                <option value="M.Ed." aria-selected="false">M.Ed.</option>
+                <option value="B.Ed." aria-selected="false">B.Ed.</option>
+                <option value="MBA" aria-selected="false">MBA</option>
+                <option value="JBT" aria-selected="false">JBT</option>
+                <option value="Post Graduation" aria-selected="false">Post Graduation</option>
+                <option value="Graduation" aria-selected="false">Graduation</option>
+                <option value="12th Pass" aria-selected="false">12th Pass</option>
+                <option value="10th Pass" aria-selected="false">10th Pass</option>
+                <option value="Others" aria-selected="false">Others</option>
+                <option value="<?php echo $education ?>" aria-selected="false" selected>
+                  <?php echo $education ?>
+                </option>
+              </select>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="married">Marital Status</label>
+              <select name="married" id="married" class="form-select " onchange="aniver()">
+                <option value="">-- select Marital Status --</option>
+                <option value="Married" aria-selected="false">Married</option>
+                <option value="Single" aria-selected="false">Single</option>
+                <option value="<?php echo $marital_status ?>" aria-selected="false" selected>
+                  <?php echo $marital_status ?>
+                </option>
+              </select>
+            </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="dob">Date of Birth</label>
+              <input name="dob" id="dob" type="date" class="form-control" value="<?php echo $dob ?>">
+            </div>
+            <span id="aniversry">
+              <?php
+              if ($aniver_date)
+              {
+                echo '
+                <div class="bg-warning-subtle p-2 py-2 rounded "><label class="form-label " for="anniversary">Aniversary</label><input name="aniver_date" value="'.$aniver_date.'" id="anniversary" type="date" class="form-control" ></div>
+                ';
+              } else
+
+              ?>
+            </span>
+            <div class="text-center mt-4 my-3">
+              <button type="submit" name="updatesubmit" class="btn btn-danger">Update ></button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
