@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         if ($result)
         {
             // Redirect to the profile view page
-            // header("location:all-card.php?updated=true");
+            header("location:all-card.php?updated=true");
             echo "update success! <br>";
             echo $sql;
 
@@ -66,4 +66,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 // Close the database connection
 
 $conn->close();
-?>

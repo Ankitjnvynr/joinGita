@@ -121,27 +121,27 @@ while ($row = mysqli_fetch_array($result))
 <body class="ov">
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crop Image</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body cropper-container">
-                    <img id="cropperImage" src="" alt="Image to crop">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="saveCroppedImage" class="btn btn-primary">Save</button>
-                </div>
-            </div>
+  <!-- Modal -->
+  <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Crop Image</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body cropper-container">
+          <img id="cropperImage" src="" alt="Image to crop">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="saveCroppedImage" class="btn btn-primary">Save</button>
+        </div>
+      </div>
     </div>
+  </div>
 
 
-    <!-- ========================= -->
+  <!-- ========================= -->
 
   <div style="min-height:100vh" class="d-flex justify-content-center align-items-center">
     <div class="container my-3 rounded ">
@@ -151,7 +151,8 @@ while ($row = mysqli_fetch_array($result))
             <p class="text-left mx-3">Photo:-</p>
             <img class="m-auto shadow rounded-circle" width="150px" src="../imgs/<?php echo $pic ?>" alt="">
             <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change Imgae</label></p>
-            <input id="changeImg" type="file" class="form-control " hidden>
+            <input id="changeImg" onchange="changingImage(this)" accept="images/*" type="file" class="form-control "
+              hidden>
           </div>
         </div>
         <div class="col-md-9 py-3">
@@ -283,7 +284,7 @@ while ($row = mysqli_fetch_array($result))
               if ($aniver_date)
               {
                 echo '
-                <div class="bg-warning-subtle p-2 py-2 rounded "><label class="form-label " for="anniversary">Aniversary</label><input name="aniver_date" value="'.$aniver_date.'" id="anniversary" type="date" class="form-control" ></div>
+                <div class="bg-warning-subtle p-2 py-2 rounded "><label class="form-label " for="anniversary">Aniversary</label><input name="aniver_date" value="' . $aniver_date . '" id="anniversary" type="date" class="form-control" ></div>
                 ';
               } else
 
@@ -344,6 +345,143 @@ while ($row = mysqli_fetch_array($result))
   </script>
     ';
   ?>
+
+  <script>
+    // let changingImage = (e) => {
+    //   console.log(e.value)
+    // }
+    $(document).ready(() => {
+      const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
+      let cropper;
+      // Show modal and initialize cropper when it is shown
+      $('#cropperModal').on('shown.bs.modal', function () {
+        const image = document.getElementById('cropperImage');
+        const cropperContainer = document.querySelector('.cropper-container');
+
+        // Create a new canvas element
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+
+        // Set the desired width and height for the resized image
+        var maxWidth = 2000; // Set your maximum width
+        var maxHeight = 2000; // Set your maximum height
+
+        // Ensure the image dimensions fit within the maximum dimensions while preserving aspect ratio
+        var width = image.width;
+        var height = image.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+
+        // Set the canvas dimensions to the resized image dimensions
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw the resized image onto the canvas
+        ctx.drawImage(image, 0, 0, width, height);
+
+        // Replace the original image source with the resized image data URL
+        image.src = canvas.toDataURL('image/jpeg'); // Change 'image/jpeg' to the desired image format if needed
+
+        // Initialize Cropper with the resized image
+
+
+        cropper = new Cropper(image, {
+          aspectRatio: 1, // Adjust aspect ratio as needed
+          viewMode: 1,
+          rotatable: true,
+          rotator: true,
+          checkOrientation: true, // Set to 1 to ensure the cropped image fits within the container
+          crop: function (event) {
+            // Apply circular mask to cropper container
+            $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
+            $('.cropper-container').css('overflow', 'hidden');
+          }
+        });
+        $('#cropperModal').on('hidden.bs.modal', function (e) {
+          // Check if Cropper instance exists
+
+          if (cropper !== undefined) {
+            // Destroy Cropper instance
+            cropper.destroy();
+          }
+        });
+
+        // Set the Cropper container's width and height explicitly
+        cropperContainer.style.width = '100%';
+        cropperContainer.style.height = '400px'; // Adjust height as needed
+      });
+
+      // When user clicks the "Upload Profile Photo" button, show the modal
+      $('#pic').on('change', function (event) {
+        const input = event.target;
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            $('#cropperImage').attr('src', e.target.result);
+            cropperModal.show();
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      });
+
+
+      // When user clicks the "Save" button, save the cropped image
+      $('#saveCroppedImage').on('click', function () {
+        if (cropper) {
+          const canvas = cropper.getCroppedCanvas();
+          const croppedImageDataURL = canvas.toDataURL("image/png");
+
+          // Update the original image with the cropped image
+          $('#image').attr('src', croppedImageDataURL);
+
+          // Get the member ID
+          var memberId = <?php echo json_encode($_GET['user']); ?>; // Assuming you're passing member ID as a query parameter
+
+
+          // AJAX request to send cropped image data to PHP script
+          $.ajax({
+            type: 'POST',
+            url: 'partials/_updateprofilePic.php', // Update with the correct PHP script path
+            data: {
+              croppedImage: croppedImageDataURL, // Use croppedImageDataURL instead of croppedImageData
+              memberId: memberId
+            },
+            // dataType: 'json',
+            success: function (response) {
+              if (response.success) {
+                // Display success message or perform any other actions
+                // console.log(response.message);
+                console.log(response)
+              } else {
+                // Display error message or handle error case
+                // console.error(response.message);
+                console.log(response)
+              }
+            },
+            error: function (xhr, status, error) {
+              // Handle AJAX error
+              console.error(error);
+            }
+          });
+
+          // Close the modal
+          cropperModal.hide();
+        } else {
+          console.error('Cropper is not initialized.');
+        }
+      });
+    })
+  </script>
 
 </body>
 
