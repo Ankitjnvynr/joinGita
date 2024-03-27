@@ -11,6 +11,7 @@ while ($row = mysqli_fetch_array($result))
   $country = $row['country'];
   $name = $row['name'];
   $phone = $row['phone'];
+  $hash_id = $row['hash_id'];
   $designation = $row['designation'];
   $email = $row['email'];
   $dikshit = $row['dikshit'];
@@ -67,6 +68,12 @@ while ($row = mysqli_fetch_array($result))
     crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css"
+    integrity="sha512-bs9fAcCAeaDfA4A+NiShWR886eClUcBtqhipoY5DM60Y1V3BbVQlabthUBal5bq8Z8nnxxiyb1wfGX2n76N1Mw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
+    integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>GIEO Gita : Updating Profile
     <?php $name ?>
   </title>
@@ -115,6 +122,10 @@ while ($row = mysqli_fetch_array($result))
     span {
       flex: 1 0 300px;
     }
+
+    .cropper-container {
+      width: 100% !important;
+    }
   </style>
 </head>
 
@@ -129,8 +140,10 @@ while ($row = mysqli_fetch_array($result))
           <h1 class="modal-title fs-5" id="exampleModalLabel">Crop Image</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body cropper-container">
-          <img id="cropperImage" src="" alt="Image to crop">
+        <div class="modal-body ">
+          <div class="cropper-container">
+            <img id="cropperImage" src="" alt="Image to crop">
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -145,14 +158,14 @@ while ($row = mysqli_fetch_array($result))
 
   <div style="min-height:100vh" class="d-flex justify-content-center align-items-center">
     <div class="container my-3 rounded ">
+      <h2 class="text-center my-2 text-danger">Updating Profile</h2>
       <div class="row ">
         <div class="col-md-3 py-3 ">
           <div class="d-flex flex-column bg-warning-subtle py-1 gap-2 rounded">
             <p class="text-left mx-3">Photo:-</p>
-            <img class="m-auto shadow rounded-circle" width="150px" src="../imgs/<?php echo $pic ?>" alt="">
+            <img class="m-auto shadow rounded-circle" width="60%" src="../imgs/<?php echo $pic ?>" alt="">
             <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change Imgae</label></p>
-            <input id="changeImg" onchange="changingImage(this)" accept="images/*" type="file" class="form-control "
-              hidden>
+            <input id="changeImg" accept="images/*" type="file" class="form-control " hidden>
           </div>
         </div>
         <div class="col-md-9 py-3">
@@ -325,6 +338,14 @@ while ($row = mysqli_fetch_array($result))
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script src="../statelist.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
+    integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"
+    integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="select.js"></script>
   <script src="../js/another.js"></script>
@@ -401,6 +422,7 @@ while ($row = mysqli_fetch_array($result))
           rotatable: true,
           rotator: true,
           checkOrientation: true, // Set to 1 to ensure the cropped image fits within the container
+
           crop: function (event) {
             // Apply circular mask to cropper container
             $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
@@ -422,7 +444,7 @@ while ($row = mysqli_fetch_array($result))
       });
 
       // When user clicks the "Upload Profile Photo" button, show the modal
-      $('#pic').on('change', function (event) {
+      $('#changeImg').on('change', function (event) {
         const input = event.target;
         if (input.files && input.files[0]) {
           const reader = new FileReader();
@@ -442,16 +464,18 @@ while ($row = mysqli_fetch_array($result))
           const croppedImageDataURL = canvas.toDataURL("image/png");
 
           // Update the original image with the cropped image
-          $('#image').attr('src', croppedImageDataURL);
+          document.getElementById('changeImg').src = croppedImageDataURL
+          // $('#changeImg').attr('src', croppedImageDataURL);
+
 
           // Get the member ID
-          var memberId = <?php echo json_encode($_GET['user']); ?>; // Assuming you're passing member ID as a query parameter
+          var memberId = "<?php echo $hash_id ?>"; // Assuming you're passing member ID as a query parameter
 
 
           // AJAX request to send cropped image data to PHP script
           $.ajax({
             type: 'POST',
-            url: 'partials/_updateprofilePic.php', // Update with the correct PHP script path
+            url: '../partials/_updateprofilePic.php', // Update with the correct PHP script path
             data: {
               croppedImage: croppedImageDataURL, // Use croppedImageDataURL instead of croppedImageData
               memberId: memberId
