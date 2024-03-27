@@ -14,7 +14,7 @@
     }
 
     form {
-      max-width: 600px;
+      max-width: 900px;
       margin: auto;
     }
 
@@ -37,6 +37,20 @@
       opacity: 0.2;
       pointer-events: none;
 
+    }
+
+    #joinForm>div {
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #joinForm>div>div,
+    span {
+      flex: 1 0 300px;
     }
   </style>
 </head>
@@ -82,115 +96,117 @@
   <div class="container shadow py-3 rounded my-2">
     <h2 class="text-center text-danger  py-3 fw-bold">Join GIEO Gita</h2>
     <form method="POST" action="submit.php" id="joinForm">
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="countrySelect">Select Country</label>
-        <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
-          <option selected>---Country---</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="name">Enter Name</label>
-        <input name="name" id="name" type="text" class="form-control">
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
-        <input id="phone" name="phone" type="text" class="form-control" required>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="email">Enter Email</label>
-        <input id="email" name="email" type="email" class="form-control">
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="dikshit">Dikshit</label>
-        <select id="dikshit" name="dikshit" class="form-select " aria-label="Small select example">
-          <option value="" selected>---Dikshit/दीक्षित परिवार---</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-          <option value="No But Interested">No, But Intrested</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="stateSelect">Select State</label>
-        <select id="stateSelect" name="state" class="form-select " aria-label="Small select example">
-          <option selected>---State---</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="citySelect">Select District</label>
-        <select id="citySelect" name="district" class="form-select " aria-label="Small select example">
-          <option selected>---District---</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="tehsilSelect">Select Tehsil</label>
-        <select name="tehsil" id="tehsilSelect" class="form-select " aria-label="Small select example">
-          <option selected>---Tehsil---</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="city">City/Village</label>
-        <input name="city" id="city" type="text" class="form-control">
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="address">Address</label>
-        <input name="address" id="address" type="text" class="form-control">
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="occupation">Occupation</label>
-        <select name="occupation" id="occupation" class="form-select " aria-label="Small select example">
-          <option value="" disabled="" selected="">---Occupation---</option>
-          <option value="Business" aria-selected="false">Business</option>
-          <option value="Home Maker" aria-selected="false">Home Maker</option>
-          <option value="Private Job" aria-selected="false">Private Job</option>
-          <option value="Govt. Job" aria-selected="false">Govt. Job</option>
-          <option value="Student" aria-selected="false">Student</option>
-          <option value="Politician" aria-selected="false">Politician</option>
-          <option value="Farmer" aria-selected="false">Farmer</option>
-          <option value="Teacher" aria-selected="false">Teacher</option>
-          <option value="Doctor" aria-selected="false">Doctor</option>
-          <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
-          <option value="Retired" aria-selected="false">Retired</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="education">Education</label>
-        <select name="education" id="education" class="form-select " aria-label="Small select example">
-          <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">---Education---</option>
-          <option value="B.Com" aria-selected="false">B.Com</option>
-          <option value="M.Com" aria-selected="false">M.Com</option>
-          <option value="M.Com" aria-selected="false">B.Tech</option>
-          <option value="M.Com" aria-selected="false">M.Tech</option>
-          <option value="LLB" aria-selected="false">LLB</option>
-          <option value="MBBS" aria-selected="false">MBBS</option>
-          <option value="CA" aria-selected="false">CA</option>
-          <option value="CS" aria-selected="false">CS</option>
-          <option value="PhD" aria-selected="false">PhD</option>
-          <option value="M.Ed." aria-selected="false">M.Ed.</option>
-          <option value="B.Ed." aria-selected="false">B.Ed.</option>
-          <option value="MBA" aria-selected="false">MBA</option>
-          <option value="JBT" aria-selected="false">JBT</option>
-          <option value="Post Graduation" aria-selected="false">Post Graduation</option>
-          <option value="Graduation" aria-selected="false">Graduation</option>
-          <option value="12th Pass" aria-selected="false">12th Pass</option>
-          <option value="10th Pass" aria-selected="false">10th Pass</option>
-          <option value="Others" aria-selected="false">Others</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="married">Marital Status</label>
-        <select name="married" id="married" class="form-select " onchange="aniver()">
-          <option value="">-- select Marital Status --</option>
-          <option value="Married" aria-selected="false">Married</option>
-          <option value="Single" aria-selected="false">Single</option>
-        </select>
-      </div>
-      <div class="bg-warning-subtle p-2 py-2 rounded mt-2">
-        <label class="form-label form-label-sm" for="dob">Date of Birth</label>
-        <input name="dob" id="dob" type="date" class="form-control" required>
-      </div>
-      <span id="aniversry">
+      <div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="countrySelect">Select Country</label>
+          <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
+            <option selected>---Country---</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="name">Enter Name</label>
+          <input name="name" id="name" type="text" class="form-control">
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
+          <input id="phone" name="phone" type="text" class="form-control" required>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="email">Enter Email</label>
+          <input id="email" name="email" type="email" class="form-control">
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="dikshit">Dikshit</label>
+          <select id="dikshit" name="dikshit" class="form-select " aria-label="Small select example">
+            <option value="" selected>---Dikshit/दीक्षित परिवार---</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No But Interested">No, But Intrested</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="stateSelect">Select State</label>
+          <select id="stateSelect" name="state" class="form-select " aria-label="Small select example">
+            <option selected>---State---</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="citySelect">Select District</label>
+          <select id="citySelect" name="district" class="form-select " aria-label="Small select example">
+            <option selected>---District---</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="tehsilSelect">Select Tehsil</label>
+          <select name="tehsil" id="tehsilSelect" class="form-select " aria-label="Small select example">
+            <option selected>---Tehsil---</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="city">City/Village</label>
+          <input name="city" id="city" type="text" class="form-control">
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="address">Address</label>
+          <input name="address" id="address" type="text" class="form-control">
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="occupation">Occupation</label>
+          <select name="occupation" id="occupation" class="form-select " aria-label="Small select example">
+            <option value="" disabled="" selected="">---Occupation---</option>
+            <option value="Business" aria-selected="false">Business</option>
+            <option value="Home Maker" aria-selected="false">Home Maker</option>
+            <option value="Private Job" aria-selected="false">Private Job</option>
+            <option value="Govt. Job" aria-selected="false">Govt. Job</option>
+            <option value="Student" aria-selected="false">Student</option>
+            <option value="Politician" aria-selected="false">Politician</option>
+            <option value="Farmer" aria-selected="false">Farmer</option>
+            <option value="Teacher" aria-selected="false">Teacher</option>
+            <option value="Doctor" aria-selected="false">Doctor</option>
+            <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
+            <option value="Retired" aria-selected="false">Retired</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="education">Education</label>
+          <select name="education" id="education" class="form-select " aria-label="Small select example">
+            <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">---Education---</option>
+            <option value="B.Com" aria-selected="false">B.Com</option>
+            <option value="M.Com" aria-selected="false">M.Com</option>
+            <option value="M.Com" aria-selected="false">B.Tech</option>
+            <option value="M.Com" aria-selected="false">M.Tech</option>
+            <option value="LLB" aria-selected="false">LLB</option>
+            <option value="MBBS" aria-selected="false">MBBS</option>
+            <option value="CA" aria-selected="false">CA</option>
+            <option value="CS" aria-selected="false">CS</option>
+            <option value="PhD" aria-selected="false">PhD</option>
+            <option value="M.Ed." aria-selected="false">M.Ed.</option>
+            <option value="B.Ed." aria-selected="false">B.Ed.</option>
+            <option value="MBA" aria-selected="false">MBA</option>
+            <option value="JBT" aria-selected="false">JBT</option>
+            <option value="Post Graduation" aria-selected="false">Post Graduation</option>
+            <option value="Graduation" aria-selected="false">Graduation</option>
+            <option value="12th Pass" aria-selected="false">12th Pass</option>
+            <option value="10th Pass" aria-selected="false">10th Pass</option>
+            <option value="Others" aria-selected="false">Others</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="married">Marital Status</label>
+          <select name="married" id="married" class="form-select " onchange="aniver()">
+            <option value="">-- select Marital Status --</option>
+            <option value="Married" aria-selected="false">Married</option>
+            <option value="Single" aria-selected="false">Single</option>
+          </select>
+        </div>
+        <div class="bg-warning-subtle p-2 py-2 rounded ">
+          <label class="form-label form-label-sm" for="dob">Date of Birth</label>
+          <input name="dob" id="dob" type="date" class="form-control" required>
+        </div>
+        <span id="aniversry">
 
-      </span>
+        </span>
+      </div>
       <div class="text-center mt-4 my-3">
         <button type="submit" name="joinsubmit" class="btn btn-danger">Join Now</button>
       </div>
