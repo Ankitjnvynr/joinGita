@@ -220,6 +220,9 @@
       </div>
     </form>
   </div>
+  <?php
+  // include 'partials/_footer.php';
+  ?>
 
 
 

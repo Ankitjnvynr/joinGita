@@ -38,7 +38,7 @@
 <div class="container-fluid bg-white p-3 sticky-top shadow">
   <div class="container ">
     <div id="mynav" class="a-navbar">
-      <div class="logo"><img width="70px" src="imgs/logo.png" alt=""></div>
+      <div class="logo"><img width="70px" src="imgs/logo.png" alt="GIEO Gita logo"></div>
       <ul class=" d-flex gap-3 align-items-center m-0">
         <li><a href="https://gieogita.org/" aria-current="page"><span>GIEO GITA</span></a></li>
         <li><a href="https://parivaar.gieogita.org/"><span>Join GIEO Gita</span></a></li>

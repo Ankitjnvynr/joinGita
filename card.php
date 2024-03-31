@@ -6,7 +6,7 @@ header("Content-Type: image/jpeg");
 
 
 include ("partials/_db.php");
-if (!isset ($_GET['member']))
+if (!isset($_GET['member']))
 {
     // header('location:view-profile.php');
     exit;
@@ -27,6 +27,7 @@ if (!$row)
 
 // Path to your font file
 $font = 'imgs/cards/font.ttf';
+$font2 = 'imgs/cards/SEGUISYM.ttf';
 $profile = 'imgs/' . $row['pic'];
 $name = $row['name'];
 $city = $row['tehsil'];
@@ -34,9 +35,16 @@ $phone = $row['phone'];
 $wing = $row['interest'];
 $designation = $row['designation'];
 $star = $row['star'] !== null ? $row['star'] : false;
+$starCount = "⭐";
 if ($star == 'null')
 {
     $star = "";
+} else
+{
+    if ($star == "Corporate Trustee")
+    {
+        $starCount = "⭐⭐";
+    }
 }
 
 header("Content-Disposition: attachment; filename=\"$name$phone.jpg\"");
@@ -96,6 +104,7 @@ imagettftext($image, 17, 0, 200, 768, $color, $font, $phone);
 imagettftext($image, 17, 0, 200, 809, $color, $font, $wing);
 imagettftext($image, 17, 0, 200, 845, $color, $font, $designation);
 imagettftext($image, 17, 0, 200, 884, $color, $font, $star);
+imagettftext($image, 39, 0, 30, 894, $color, $font2, $starCount);
 
 // Output the image
 imagejpeg($image, null, 100);
