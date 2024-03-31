@@ -99,13 +99,21 @@
       <div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="countrySelect">Select Country</label>
-          <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
-            <option selected>---Country---</option>
+          <select id="countrySelect" name="country" class="form-select " aria-label="Small select example" required="">
+            <option selected="">---Country---</option>
+            <option value="Australia" datavalue="13" sortname="AU">Australia</option>
+            <option value="Canada" datavalue="38" sortname="CA">Canada</option>
+            <option value="India" datavalue="101" sortname="IN" selected="true">India</option>
+            <option value="Japan" datavalue="109" sortname="JP">Japan</option>
+            <option value="New Zealand" datavalue="157" sortname="NZ">New Zealand</option>
+            <option value="United Arab Emirates" datavalue="229" sortname="AE">United Arab Emirates</option>
+            <option value="United Kingdom" datavalue="230" sortname="GB">United Kingdom</option>
+            <option value="United States" datavalue="231" sortname="US">United States</option>
           </select>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="name">Enter Name</label>
-          <input name="name" id="name" type="text" class="form-control">
+          <input name="name" id="name" type="text" max="10" class="form-control">
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
@@ -132,15 +140,15 @@
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="citySelect">Select District</label>
-          <select id="citySelect" name="district" class="form-select " aria-label="Small select example">
-            <option selected>---District---</option>
-          </select>
+          <input list="citySelect" type="text" name="district" class="form-select " aria-label="Small select example">
+          <datalist id="citySelect">
+          </datalist>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="tehsilSelect">Select Tehsil</label>
-          <select name="tehsil" id="tehsilSelect" class="form-select " aria-label="Small select example">
-            <option selected>---Tehsil---</option>
-          </select>
+          <input list="tehsilSelect" type="text" name="tehsil" class="form-select " aria-label="Small select example">
+          <datalist id="tehsilSelect">
+          </datalist>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="city">City/Village</label>
@@ -246,7 +254,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/another.js"></script>
-  <script src="js/formLang.js"></script>
+  <!-- <script src="js/formLang.js"></script> -->
   <script>
     window.onload = function () {
       var iframe = document.getElementById('myIframe');
@@ -260,7 +268,7 @@
     };
   </script>
   <?php
-  if (isset ($_GET['dphoneExiit']))
+  if (isset($_GET['dphoneExiit']))
   {
     $pnot = false;
     $pnot = $_GET['dphoneExiit'];

@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
+  header("location: index.php");
+  exit;
+}
+
 include ("../partials/_db.php");
 $user_id = $_GET['user'];
 $sr = 0;
