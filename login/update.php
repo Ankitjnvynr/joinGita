@@ -1,5 +1,16 @@
 <?php
+<<<<<<< HEAD
 include("../partials/_db.php");
+=======
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
+  header("location: index.php");
+  exit;
+}
+
+include ("../partials/_db.php");
+>>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
 $user_id = $_GET['user'];
 
 $sr = 0;
@@ -158,7 +169,8 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="col-md-3 py-3 ">
           <div class="d-flex flex-column bg-warning-subtle py-1 gap-2 rounded">
             <p class="text-left mx-3">Photo:-</p>
-            <img class="m-auto shadow rounded-circle" width="60%" src="../imgs/<?php echo $pic ?>" alt="">
+            <img class="m-auto shadow rounded-circle" width="60%" src="../imgs/<?php echo $pic ?>"
+              alt="<?php echo $name ?>">
             <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change Imgae</label></p>
             <input id="changeImg" accept="images/*" type="file" class="form-control " hidden>
           </div>
@@ -285,16 +297,37 @@ while ($row = mysqli_fetch_array($result)) {
               <label class="form-label form-label-sm" for="dob">Date of Birth</label>
               <input name="dob" id="dob" type="date" class="form-control" value="<?php echo $dob ?>">
             </div>
+            <div class="bg-warning-subtle p-2 py-2 rounded">
+              <label class="form-label form-label-sm" for="star">Star</label>
+              <select name="star" id="star" class="form-select " >
+                <option value="">-- Star --</option>
+                <option value="Trustee" aria-selected="false">Trustee</option>
+                <option value="Patern Trustee" aria-selected="false">Patern Trustee</option>
+                <option value="Corporate Trustee" aria-selected="false">Corporate Trustee</option>
+                <option value="<?php echo $star ?>" aria-selected="false" selected>
+                  <?php echo $star ?>
+                </option>
+              </select>
+            </div>
             <span id="aniversry">
               <?php
+<<<<<<< HEAD
               if ($aniver_date) {
+=======
+              if ($aniver_date != "0000-00-00")
+              {
+>>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
                 echo '
-                <div class="bg-warning-subtle p-2 py-2 rounded "><label class="form-label " for="anniversary">Aniversary</label><input name="aniver_date" value="' . $aniver_date . '" id="anniversary" type="date" class="form-control" ></div>
+                <div class="bg-warning-subtle p-2 py-2 rounded ">
+                  <label class="form-label " for="anniversary">Aniversary</label>
+                  <input name="aniver_date" value="' . $aniver_date . '" id="anniversary" type="date" class="form-control" >
+                </div>
                 ';
               } else
 
               ?>
             </span>
+
             <div class="text-center mt-4 my-3">
               <button type="submit" name="updatesubmit" class="btn btn-danger">Update ></button>
             </div>

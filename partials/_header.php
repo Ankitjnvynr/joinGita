@@ -38,7 +38,7 @@
 <div class="container-fluid bg-white p-3 sticky-top shadow">
   <div class="container ">
     <div id="mynav" class="a-navbar">
-      <div class="logo"><img width="70px" src="imgs/logo.png" alt=""></div>
+      <div class="logo"><img width="70px" src="imgs/logo.png" alt="GIEO Gita logo"></div>
       <ul class=" d-flex gap-3 align-items-center m-0">
         <li><a href="https://gieogita.org/" aria-current="page"><span>GIEO GITA</span></a></li>
         <li><a href="https://parivaar.gieogita.org/"><span>Join GIEO Gita</span></a></li>
@@ -49,7 +49,11 @@
         <li><a href="https://gieogita.org/our-gallery/"><span>Gallery</span></a></li>
         <li><a href="#"><span>Download</span></a></li>
         <li><a href="https://gieogita.org/contact/"><span>Contact</span></a></li>
+<<<<<<< HEAD
         <li><a href="login/"><span class="btn btn-danger" >Login</span></a></li>
+=======
+        <li><a href="login/"><span class="btn btn-danger">Login</span></a></li>
+>>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
       </ul>
     </div>
     <div id="mobilenav" class="a-navbar">
@@ -68,7 +72,11 @@
         <li><a href="https://gieogita.org/our-gallery/"><span>Gallery</span></a></li>
         <li><a href="#"><span>Download</span></a></li>
         <li><a href="https://gieogita.org/contact/"><span>Contact</span></a></li>
+<<<<<<< HEAD
         <li><a href="login/"><span class="btn btn-danger" >Login</span></a></li>
+=======
+        <li><a href="login/"><span class="btn btn-danger">Login</span></a></li>
+>>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
       </ul>
     </div>
   </div>

@@ -1,19 +1,19 @@
 <?php
 $statusMsg = '';
 include ("partials/_db.php");
-if (!isset ($_GET['member']))
+if (!isset($_GET['member']))
 {
     header('location:view-profile.php');
     exit;
 }
 
-if (isset ($_POST['Update']))
+if (isset($_POST['Update']))
 {
     $targetDir = "imgs/";
     $updateEmail = $_POST['updateEmail'];
     $memberId = $_GET['member'];
-
-
+    $dob = $_POST["dob"];
+    $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
 
     $sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
     $result = mysqli_query($conn, $sql);
@@ -22,8 +22,9 @@ if (isset ($_POST['Update']))
     $fileName = $row['pic'];
 
     // Insert image file name into database 
-    $usql = "UPDATE `users` SET `email`='$updateEmail', `pic`='$fileName' WHERE `hash_id` = '$memberId'";
+    $usql = "UPDATE `users` SET `email`='$updateEmail', `dob`='$dob', `aniver_date`='$aniver_date',  `pic`='$fileName' WHERE `hash_id` = '$memberId'";
     $update = mysqli_query($conn, $usql);
+
     $update = true;
 }
 $memberId = false;
@@ -44,11 +45,12 @@ $wing = $row['interest'];
 $designation = $row['designation'];
 $pic = $row['pic'];
 $star = $row['star'];
+$dob = $row['dob'];
+$aniver_date = $row['aniver_date'];
 if ($star == 'null')
 {
     $star = "";
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -226,8 +228,11 @@ if ($star == 'null')
                             {
                                 if ($star == "Corporate Trustee")
                                 {
+                                    $icon = "⭐⭐⭐";
+                                } elseif ($star == "Patern Trustee")
+                                {
                                     $icon = "⭐⭐";
-                                } else
+                                }else
                                 {
                                     $icon = "⭐";
                                 }
@@ -274,6 +279,18 @@ if ($star == 'null')
                                 <label for="updateEmail">Email address</label>
                                 <input type="text" value="<?php echo $row['email']; ?>" class="form-control"
                                     id="updateEmail" name="updateEmail" aria-label="Last name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md my-2 ">
+                                <label for="updatedob">Date of Birth</label>
+                                <input type="date" name="dob" class="form-control" value="<?php echo $dob; ?>"
+                                    id="updatedob" aria-label="First name">
+                            </div>
+                            <div class="col-md my-2">
+                                <label for="updateAniver">Aniversary Date</label>
+                                <input type="date" value="<?php echo $aniver_date; ?>" class="form-control"
+                                    id="updateAniver" name="aniver_date" aria-label="Last name">
                             </div>
                         </div>
                         <div class="row">
@@ -482,7 +499,7 @@ if ($star == 'null')
         document.addEventListener('DOMContentLoaded', function () {
             const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
             let cropper;
-            
+
 
 
             // Show modal and initialize cropper when it is shown

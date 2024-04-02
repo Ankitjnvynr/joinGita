@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="text-center">Export from HTML</h3>
+                <p>Checkout <a href="https://github.com/simonbengtsson/jsPDF-AutoTable">jsPDF-Autotable</a> for
+                    generating
+                    PDF tables with more customizable options.</p>
+                <br><br>
+
+                <div id="content1">
+                    <p>Table 1</p>
+                    <table id="demo" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Serial Number</th>
+                                <th>Name</th>
+                                <th>Percentile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>James</td>
+                                <td>8.9</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Harry</td>
+                                <td>7.6</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Emma</td>
+                                <td>7.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <button class="btn" id="export" onclick="exportPDF('content1')">Save</button>
+                    </div>
+                    <br><br>
+
+                    <div id="content2">
+                        <p>Table 2</p>
+
+                        <table id="demo" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Serial Number</th>
+                                    <th>Name</th>
+                                    <th>Percentile</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>James</td>
+                                    <td>8.9</td>
+                                </tr>
+                                <tr>
+                                    <td>2dsds</td>
+                                    <td>Harry</td>
+                                    <td>7.6</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Emma</td>
+                                    <td>7.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <button class="btn" id="export" onclick="exportPDF('content2')">Save</button>
+                        </div>
+
+                        <br>
+                        <footer class="footer">Demo from https://jsfiddle.net/Purushoth/bor1nggb</footer>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <script>
+            var specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector
+                '.no-export': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"
+                    return true;
+                }
+            };
+
+            function exportPDF(id) {
+                var doc = new jsPDF('p', 'pt', 'a4');
+                //A4 - 595x842 pts
+                //https://www.gnu.org/software/gv/manual/html_node/Paper-Keywords-and-paper-size-in-points.html
+
+
+                //Html source 
+                var source = document.getElementById(id);
+                console.log(source);
+                var margins = {
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    width: 595
+                };
+
+                doc.fromHTML(
+                    source, // HTML string or DOM elem ref.
+                    margins.left,
+                    margins.top, {
+                    'width': margins.width,
+                    'elementHandlers': specialElementHandlers
+                },
+
+                    function (dispose) {
+                        // dispose: object with X, Y of the last line add to the PDF 
+                        //          this allow the insertion of new lines after html
+                        doc.save('Test.pdf');
+                    }, margins);
+            }
+        </script>
+</body>
+
+</html>
