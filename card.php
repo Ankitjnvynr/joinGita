@@ -1,10 +1,6 @@
 <?php
 header("Content-Type: image/jpeg");
 
-
-
-
-
 include ("partials/_db.php");
 if (!isset($_GET['member']))
 {
@@ -21,9 +17,6 @@ if (!$row)
     echo "not";
     // header("location:view-profile.php?pnot=true");
 }
-
-
-
 
 // Path to your font file
 $font = 'imgs/cards/font.ttf';
