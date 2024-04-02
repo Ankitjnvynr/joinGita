@@ -41,9 +41,15 @@ if ($star == 'null')
     $star = "";
 } else
 {
-    if ($star == "Corporate Trustee")
+    if ($star == "Trustee")
     {
+        $starCount = "⭐";
+    }
+    elseif($star == "Patern Trustee"){
         $starCount = "⭐⭐";
+    }
+    elseif ($star == "Corporate Trustee"){
+        $starCount = "⭐⭐⭐";
     }
 }
 

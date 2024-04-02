@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 {
     header("location: index.php");
     exit;
@@ -10,7 +10,7 @@ include ("../partials/_db.php");
 
 
 // filtering data
-if (isset ($_POST['get-data']))
+if (isset($_POST['get-data']))
 {
     $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
 
@@ -141,7 +141,7 @@ if (isset ($_POST['get-data']))
 
     <div class="container mt-2">
         <button class="btn btn-danger" onclick="downloadCSV()">Download CSV</button>
-        <button class="btn btn-danger" onclick="downloadPDFWithPDFMake()">Download PDF</button>
+        <button class="btn btn-danger" onclick="ExportPDF()">Download PDF</button>
     </div>
     <div class="container tablediv">
 
@@ -162,7 +162,7 @@ if (isset ($_POST['get-data']))
             <tbody>
                 Showing :-
                 <?php
-                if (isset ($_POST['get-data']))
+                if (isset($_POST['get-data']))
                 {
                     $sr = 0;
                     $result = $conn->query($sql);
@@ -230,9 +230,6 @@ if (isset ($_POST['get-data']))
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
-        integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
@@ -245,6 +242,11 @@ if (isset ($_POST['get-data']))
 
 
     <script>
+        $('.totalCount').load('_totalProfiles.php');
+        setInterval(() => {
+            $('.totalCount').load('_totalProfiles.php');
+        }, 3000);
+
         let SelectState = (e) => {
             $.ajax({
                 url: '_selectState.php',
@@ -284,7 +286,7 @@ if (isset ($_POST['get-data']))
                 },
                 success: function (response) {
                     let stateSelect = document.getElementById('tehsilSelect')
-                    console.log(response)
+                    // console.log(response)
                     stateSelect.innerHTML = response;
                 }
             })
@@ -297,15 +299,7 @@ if (isset ($_POST['get-data']))
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <script>
-        function downloadPDF() {
-            const doc = new jsPDF();
-            doc.autoTable({
-                html: '#myTable'
-            });
-            doc.save('table.pdf');
-        }
-    </script>
+
 
 
     <script>
@@ -320,7 +314,7 @@ if (isset ($_POST['get-data']))
         // Construct the date string
         const dateString = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
 
-        console.log(dateString); // Output format: YYYY-MM-DD
+        // console.log(dateString); // Output format: YYYY-MM-DD
 
         function downloadCSV() {
             const table = document.getElementById('myTable');
@@ -343,110 +337,26 @@ if (isset ($_POST['get-data']))
             link.click();
         }
     </script>
-    <script>
-        // JavaScript to show/hide the loader
-        document.addEventListener("DOMContentLoaded", function (event) {
-            // When the DOM content is loaded
-            var loader = document.getElementById("loader");
 
-
-            // Hide loader and show content after 2 seconds (simulate loading time)
-            setTimeout(function () {
-                loader.style.display = "none";
-
-            }, 2000);
-        });
-    </script>
-
-    <!-- ////////// -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-    <button onclick="downloadPDFWithPDFMake()">Export PDF</button>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/vfs_fonts.js"></script>
-
-
-    <script>
-        function downloadPDFWithPDFMake() {
-            var rows = document.querySelectorAll("#myTable tr");
-            var data = [];
-            for (var i = 0; i < rows.length; i++) {
-                var rowData = [];
-                var cells = rows[i].querySelectorAll("td, th");
-                for (var j = 0; j < cells.length; j++) {
-                    const select = cells[j].querySelector("select");
-                    if (select) {
-                        rowData.push({
-                            text: select.value,
-                            style: 'tableData'
-                        });
-                    } else {
-                        rowData.push({
-                            text: cells[j].innerText,
-                            style: 'tableData'
-                        });
-                    }
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function ExportPDF() {
+            html2canvas(document.getElementById('myTable'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download(`GIEO GITA ${dateString}.pdf`);
                 }
-                data.push(rowData);
-            }
-
-
-            var docDefinition = {
-                header: {
-                    text: 'Your awesome table',
-                    alignment: 'center'
-                },
-                footer: function (currentPage, pageCount) {
-                    return ({
-                        text: `Page ${currentPage} of ${pageCount}`,
-                        alignment: 'center'
-                    });
-                },
-                content: [{
-                    style: 'tableExample',
-                    table: {
-                        headerRows: 1,
-                        body: [
-                            ...data
-                        ]
-                    },
-                    layout: {
-                        fillColor: function (rowIndex) {
-                            return (rowIndex % 2 === 0) ? '#E6E6FA' : null;
-                        }
-                    },
-                },],
-                styles: {
-                    tableExample: {
-                        // table style
-                    },
-                    tableData: {
-                        // table data style
-                    },
-                },
-            };
-            pdfMake.createPdf(docDefinition).download('Your awesome table');
+            });
         }
-        $('.totalCount').load('_totalProfiles.php');
-        setInterval(() => {
-            $('.totalCount').load('_totalProfiles.php');
-        }, 3000);
     </script>
-
-
-
-
-
-    <!-- /. -->
-
-
 
 </body>
 

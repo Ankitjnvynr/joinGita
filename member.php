@@ -228,8 +228,11 @@ if ($star == 'null')
                             {
                                 if ($star == "Corporate Trustee")
                                 {
+                                    $icon = "⭐⭐⭐";
+                                } elseif ($star == "Patern Trustee")
+                                {
                                     $icon = "⭐⭐";
-                                } else
+                                }else
                                 {
                                     $icon = "⭐";
                                 }

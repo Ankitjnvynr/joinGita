@@ -304,6 +304,7 @@ while ($row = mysqli_fetch_array($result))
               <label class="form-label form-label-sm" for="star">Star</label>
               <select name="star" id="star" class="form-select " >
                 <option value="">-- Star --</option>
+                <option value="Trustee" aria-selected="false">Trustee</option>
                 <option value="Patern Trustee" aria-selected="false">Patern Trustee</option>
                 <option value="Corporate Trustee" aria-selected="false">Corporate Trustee</option>
                 <option value="<?php echo $star ?>" aria-selected="false" selected>
