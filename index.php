@@ -57,7 +57,7 @@
 
 <body class="position-relative">
   <div class="background-frame position-fixed top-0 right-0">
-    <iframe id="myIframe" src="https://jaibvm.com/Gita%20Auto/" frameborder="0"></iframe>
+    <iframe id="myIframe" src="https://gieogita.org/auto-tour/" frameborder="0"></iframe>
   </div>
 
   <!-- ================Toast =========== -->

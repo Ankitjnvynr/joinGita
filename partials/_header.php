@@ -49,7 +49,7 @@
         <li><a href="https://gieogita.org/our-gallery/"><span>Gallery</span></a></li>
         <li><a href="#"><span>Download</span></a></li>
         <li><a href="https://gieogita.org/contact/"><span>Contact</span></a></li>
-        <li><a href="https://www.gieogitaindia.in/join-gieo-gita"><span>Volunteer</span></a></li>
+        <li><a href="login/"><span class="btn btn-danger" >Login</span></a></li>
       </ul>
     </div>
     <div id="mobilenav" class="a-navbar">
@@ -68,7 +68,7 @@
         <li><a href="https://gieogita.org/our-gallery/"><span>Gallery</span></a></li>
         <li><a href="#"><span>Download</span></a></li>
         <li><a href="https://gieogita.org/contact/"><span>Contact</span></a></li>
-        <li><a href="https://www.gieogitaindia.in/join-gieo-gita"><span>Volunteer</span></a></li>
+        <li><a href="login/"><span class="btn btn-danger" >Login</span></a></li>
       </ul>
     </div>
   </div>
