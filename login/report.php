@@ -138,12 +138,9 @@ if (isset($_POST['get-data']))
     </div>
 
     <!-- -------output data list ------- -->
-    <button class="btn" id="export" onclick="exportPDF('myTable')">Save</button>
-    </div>
-
     <div class="container mt-2">
         <button class="btn btn-danger" onclick="downloadCSV()">Download CSV</button>
-        <button class="btn btn-danger" onclick="ExportPDF()">Download PDF</button>
+        <button id="export" class="btn btn-danger" onclick="exportPDF('myTable')">Download PDF</button>
     </div>
     <div class="container tablediv">
 
@@ -237,11 +234,6 @@ if (isset($_POST['get-data']))
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/vfs_fonts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.77/vfs_fonts.js"></script>
-
 
     <script>
         $('.totalCount').load('_totalProfiles.php');
@@ -300,10 +292,6 @@ if (isset($_POST['get-data']))
         integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-
-
-
     <script>
         // Create a new Date object which represents the current date and time
         const currentDate = new Date();
@@ -340,29 +328,12 @@ if (isset($_POST['get-data']))
         }
     </script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <script type="text/javascript">
-        function ExportPDF() {
-            html2canvas(document.getElementById('myTable'), {
-                onrendered: function (canvas) {
-                    var data = canvas.toDataURL();
-                    var docDefinition = {
-                        content: [{
-                            image: data,
-                            width: 500
-                        }]
-                    };
-                    pdfMake.createPdf(docDefinition).download(`GIEO GITA ${dateString}.pdf`);
-                }
-            });
-        }
-    </script>
+
     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
         integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
     <script>
         var specialElementHandlers = {
@@ -373,36 +344,40 @@ if (isset($_POST['get-data']))
             }
         };
 
+
         function exportPDF(id) {
-            var doc = new jsPDF('p', 'pt', 'a4');
-            //A4 - 595x842 pts
-            //https://www.gnu.org/software/gv/manual/html_node/Paper-Keywords-and-paper-size-in-points.html
 
-
-            //Html source 
-            var source = document.getElementById(id);
-            console.log(source);
-            var margins = {
-                top: 10,
-                bottom: 10,
-                left: 10,
-                width: 595
+            var doc = new jsPDF('p', 'pt', 'letter');
+            var htmlstring = '';
+            var tempVarToCheckPageHeight = 0;
+            var pageHeight = 0;
+            pageHeight = doc.internal.pageSize.height;
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector  
+                '#bypassme': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"  
+                    return true
+                }
             };
+            margins = {
+                top: 150,
+                bottom: 60,
+                left: 40,
+                right: 40,
+                width: 60
+            };
+            var y = 20;
+            doc.setLineWidth(2);
+            doc.text(200, y = y + 30, ("GIEO Gita report of " + dateString));
+            doc.autoTable({
+                html: '#myTable',
+                startY: 70,
+                theme: 'grid',
 
-            doc.fromHTML(
-                source, // HTML string or DOM elem ref.
-                margins.left,
-                margins.top, {
-                'width': margins.width,
-                'elementHandlers': specialElementHandlers
-            },
-
-                function (dispose) {
-                    // dispose: object with X, Y of the last line add to the PDF 
-                    //          this allow the insertion of new lines after html
-                    doc.save('Test.pdf');
-                }, margins);
+            })
+            doc.save(`GIEO GITA ${dateString}.pdf`);
         }
+
     </script>
 
 </body>
