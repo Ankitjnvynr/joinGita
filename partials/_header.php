@@ -49,11 +49,7 @@
         <li><a href="https://gieogita.org/our-gallery/"><span>Gallery</span></a></li>
         <li><a href="#"><span>Download</span></a></li>
         <li><a href="https://gieogita.org/contact/"><span>Contact</span></a></li>
-<<<<<<< HEAD
-        <li><a href="login/"><span class="btn btn-danger" >Login</span></a></li>
-=======
         <li><a href="login/"><span class="btn btn-danger">Login</span></a></li>
->>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
       </ul>
     </div>
     <div id="mobilenav" class="a-navbar">
@@ -72,11 +68,7 @@
         <li><a href="https://gieogita.org/our-gallery/"><span>Gallery</span></a></li>
         <li><a href="#"><span>Download</span></a></li>
         <li><a href="https://gieogita.org/contact/"><span>Contact</span></a></li>
-<<<<<<< HEAD
-        <li><a href="login/"><span class="btn btn-danger" >Login</span></a></li>
-=======
         <li><a href="login/"><span class="btn btn-danger">Login</span></a></li>
->>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
       </ul>
     </div>
   </div>
