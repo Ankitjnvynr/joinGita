@@ -168,7 +168,7 @@ while ($row = mysqli_fetch_array($result)) {
             <img class="m-auto shadow rounded-circle" width="60%" src="../imgs/<?php echo $pic ?>"
               alt="<?php echo $name ?>">
             <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change Imgae</label></p>
-            <input id="changeImg" accept="images/*" type="file" class="form-control " hidden>
+            <input id="changeImg"  type="file" class="form-control " hidden>
           </div>
         </div>
         <div class="col-md-9 py-3">
