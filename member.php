@@ -512,8 +512,8 @@ if ($star == 'null')
                 var ctx = canvas.getContext('2d');
 
                 // Set the desired width and height for the resized image
-                var maxWidth = 2000; // Set your maximum width
-                var maxHeight = 2000; // Set your maximum height
+                var maxWidth = 3000; // Set your maximum width
+                var maxHeight = 3000; // Set your maximum height
 
                 // Ensure the image dimensions fit within the maximum dimensions while preserving aspect ratio
                 var width = image.width;
