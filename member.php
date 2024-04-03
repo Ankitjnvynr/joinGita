@@ -232,7 +232,7 @@ if ($star == 'null')
                                 } elseif ($star == "Patern Trustee")
                                 {
                                     $icon = "⭐⭐";
-                                }else
+                                } else
                                 {
                                     $icon = "⭐";
                                 }
@@ -412,7 +412,7 @@ if ($star == 'null')
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_array($result);
                         echo $row['pic'];
-                        ?>" alt="hjt">
+                        ?>" alt="<?php echo $row['pic']; ?>">
                     </div>
                 </div>
                 <div class="col-md d-flex flex-column justify-content-center align-items-center">

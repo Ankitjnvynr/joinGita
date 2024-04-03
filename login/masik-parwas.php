@@ -268,7 +268,7 @@ try
                     echo '
                     <div class="grid-item p-2 position-relative">
                         <input type="hidden" value = ' . $row['id'] . '  >
-                        <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="hello">
+                        <img class="imgs  rounded bg-white m-md-1 my-1" src="../masik_parwas/' . $row['pic'] . '" alt="' . $row['pic'] . '">
                         <button id = "' . $row['id'] . '"  type="button" class="cls btn-close position-absolute " data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"   aria-label="Close"></button>
                     </div>
                     ';
