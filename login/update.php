@@ -1,7 +1,4 @@
 <?php
-<<<<<<< HEAD
-include("../partials/_db.php");
-=======
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 {
@@ -10,7 +7,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 }
 
 include ("../partials/_db.php");
->>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
 $user_id = $_GET['user'];
 
 $sr = 0;
@@ -311,12 +307,8 @@ while ($row = mysqli_fetch_array($result)) {
             </div>
             <span id="aniversry">
               <?php
-<<<<<<< HEAD
-              if ($aniver_date) {
-=======
               if ($aniver_date != "0000-00-00")
               {
->>>>>>> 6d22d1964a22bd9fa83f6ec0e8301ba5d97fa894
                 echo '
                 <div class="bg-warning-subtle p-2 py-2 rounded ">
                   <label class="form-label " for="anniversary">Aniversary</label>

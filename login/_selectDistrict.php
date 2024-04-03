@@ -4,7 +4,7 @@ include ("../partials/_db.php");
 if (isset ($_POST['country']))
 {
     $country = $_POST['country'];
-    $optionSql = "SELECT DISTINCT `district` FROM `users` WHERE `state` = '$country' ";
+    $optionSql = "SELECT DISTINCT `district` FROM `users` WHERE `state` = '$country' ORDER BY district ASC";
     $result = $conn->query($optionSql);
     while ($row = mysqli_fetch_assoc($result))
     {
