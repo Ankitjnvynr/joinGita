@@ -16,6 +16,38 @@ function aniver() {
     }
 }
 
+function convertToLowercase(input) {
+    input.value = input.value.toLowerCase();
+  }
+
+  function blockNumbers(event) {
+    // Get the keycode of the pressed key
+    var keyCode = event.keyCode || event.which;
+
+    // Allow only alphabetic characters (A-Z, a-z), backspace, and space
+    if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode === 8 || keyCode === 32) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  
+  // Get the input element
+  var phoneInput = document.getElementById('phone');
+
+  // Add an event listener for input event
+  phoneInput.addEventListener('input', function(event) {
+    // Get the current value of the input
+    var inputValue = event.target.value;
+
+    // Remove any non-numeric characters
+    var numericValue = inputValue.replace(/\D/g, '');
+
+    // Update the input value
+    event.target.value = numericValue;
+  });
 
 
 

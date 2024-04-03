@@ -173,6 +173,7 @@ while ($row = mysqli_fetch_array($result)) {
         </div>
         <div class="col-md-9 py-3">
           <form method="POST" action="submit.php" id="joinForm">
+            <input name="memberid" value="<?php echo $user_id; ?>" type="text" hidden>
             <div class="bg-warning-subtle p-2 py-2 rounded">
               <label class="form-label form-label-sm" for="countrySelect">Change Country</label>
               <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
@@ -185,8 +186,8 @@ while ($row = mysqli_fetch_array($result)) {
             </div>
             <div class="bg-warning-subtle p-2 py-2 rounded">
               <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
-              <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control" disabled>
-              <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control" hidden>
+              <!-- <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control" > -->
+              <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control" >
             </div>
             <div class="bg-warning-subtle p-2 py-2 rounded">
               <label class="form-label form-label-sm" for="email">Enter Email</label>

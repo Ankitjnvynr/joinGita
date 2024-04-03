@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
   // echo "btn is pressed";
   $phone = $_POST["phone"];
+  $hash_id = md5($phone);
 
   $checksql = "SELECT phone FROM `users` WHERE `phone` = '$phone' ";
   $res = mysqli_query($conn, $checksql);
@@ -12,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $numrows = mysqli_num_rows($res);
   if ($numrows > 0)
   {
-    header("location:index.php?dphoneExiit=true");
+    header("location:member.php?member=$hash_id&?already=true");
     exit;
 
   }
@@ -34,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $dob = $_POST["dob"];
 
   $aniver_date = isset ($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
-  $hash_id = md5($phone);
+ 
 
 
 
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if ($result)
     {
       echo "Please Wait..........";
-      header("location:view-profile.php?joined=true");
+      header("location:member.php?member=$hash_id&?joined=true");
       exit;
 
     }

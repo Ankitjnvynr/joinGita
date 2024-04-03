@@ -6,8 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Check if the form was submitted
     if (isset ($_POST['updatesubmit']))
     {
-        echo "sdfsdf";
+       
+        echo $memberid = $_POST['memberid'];
         $phone = $_POST["phone"];
+        $hash_id = md5($phone);
         $country = $_POST["country"];
         $name = $_POST["name"];
         $email = $_POST["email"];
@@ -26,7 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         // Construct the UPDATE query
         $sql = "UPDATE `users` SET 
+
                 `country`='$country', 
+                `phone`='$phone', 
+                `hash_id`='$hash_id', 
                 `name`='$name', 
                 `email`='$email', 
                 `dikshit`='$dikshit', 
@@ -41,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 `dob`='$dob', 
                 `aniver_date`='$aniver_date', 
                 `star`='$star' 
-                WHERE `phone`='$phone'";
+                WHERE `id`='$memberid'";
 
         // Execute the query
         $result = mysqli_query($conn, $sql);
