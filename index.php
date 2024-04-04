@@ -113,11 +113,13 @@
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="name">Enter Name</label>
-          <input name="name" id="name" type="text" max="10" class="form-control" onkeypress="return blockNumbers(event)">
+          <input name="name" id="name" type="text" max="10" class="form-control"
+            onkeypress="return blockNumbers(event)">
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
-          <input id="phone" name="phone" type="text" class="form-control" inputmode="numeric" pattern="[0-9]*"  required >
+          <input id="phone" name="phone" type="text" class="form-control" inputmode="numeric" pattern="[0-9]*"
+            onkeypress="return blockChars(event)" required>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="email">Enter Email</label>
@@ -150,7 +152,7 @@
           <datalist id="tehsilSelect">
           </datalist>
         </div>
-        
+
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="address">Address</label>
           <input name="address" id="address" type="text" class="form-control">

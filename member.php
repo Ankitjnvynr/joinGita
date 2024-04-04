@@ -149,6 +149,39 @@ if ($star == 'null')
 </head>
 
 <body>
+    <!-- =============toast=============== -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="jointoast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img width="20px"
+                    src="https://static.vecteezy.com/system/resources/previews/010/152/436/original/tick-check-mark-icon-sign-symbol-design-free-png.png"
+                    class="rounded me-2" alt="...">
+                <strong class="me-auto text-success">Joined successfully</strong>
+                <small>1 second ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Thanks for joining.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="alreadyToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img width="20px"
+                    src="https://static.vecteezy.com/system/resources/previews/010/152/436/original/tick-check-mark-icon-sign-symbol-design-free-png.png"
+                    class="rounded me-2" alt="...">
+                <strong class="me-auto text-success">Already Joined</strong>
+                <small>1 second ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                This Phone Number Already Linked With this Profile
+            </div>
+        </div>
+    </div>
 
 
     <!-- Modal -->
@@ -631,6 +664,40 @@ if ($star == 'null')
             });
         });
     </script>
+    <?php
+    if (isset($_GET['joined']))
+    {
+        $joined = false;
+        $joined = $_GET['joined'];
+        if ($joined == true)
+        {
+            echo '
+            <script>
+                const toastLiveExample = document.getElementById("jointoast")
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                toastBootstrap.show()
+            </script>
+                ';
+        }
+    }
+    ?>
+    <?php
+    if (isset($_GET['already']))
+    {
+        $pnot = false;
+        $pnot = $_GET['already'];
+        if ($pnot == true)
+        {
+            echo '
+            <script>
+                const toastLiveExample = document.getElementById("alreadyToast")
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                toastBootstrap.show()
+            </script>
+                ';
+        }
+    }
+    ?>
 
 </body>
 

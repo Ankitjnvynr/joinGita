@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $numrows = mysqli_num_rows($res);
   if ($numrows > 0)
   {
-    header("location:member.php?member=$hash_id&?already=true");
+    header("location:member.php?member=$hash_id&already=true");
     exit;
 
   }
@@ -34,13 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $education = $_POST["education"];
   $dob = $_POST["dob"];
 
-  $aniver_date = isset ($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
- 
+  $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
+
 
 
 
   // Use prepared statements to insert data
-  if (isset ($_POST['joinsubmit']))
+  if (isset($_POST['joinsubmit']))
   {
     $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`,  `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `occupation`, `education`, `dob`,`interest`, `aniver_date`) VALUES ('$hash_id','$country','$name','$phone','$email','$dikshit','$married','$state','$district','$tehsil','$address','$occupation','$education','$dob','GIEO Gita','$aniver_date')";
   }
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if ($result)
     {
       echo "Please Wait..........";
-      header("location:member.php?member=$hash_id&?joined=true");
+      header("location:member.php?member=$hash_id&joined=true");
       exit;
 
     }
