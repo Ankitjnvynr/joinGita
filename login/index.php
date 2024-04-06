@@ -138,7 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             password.type = (password.type == 'text') ? 'password' : 'text';
             console.log(e.target);
         });
-
     </script>
 </body>
 

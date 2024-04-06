@@ -19,7 +19,8 @@ if (!$row)
 }
 
 // Path to your font file
-$font = 'imgs/cards/font.ttf';
+$font = 'imgs/cards/NotoSans-VariableFont_wdth,wght.ttf';
+// $font1 = 'imgs/cards/font.ttf';
 $font2 = 'imgs/cards/SEGUISYM.ttf';
 $profile = 'imgs/' . $row['pic'];
 $name = $row['name'];
@@ -37,11 +38,11 @@ if ($star == 'null')
     if ($star == "Trustee")
     {
         $starCount = "⭐";
-    }
-    elseif($star == "Patern Trustee"){
+    } elseif ($star == "Patern Trustee")
+    {
         $starCount = "⭐⭐";
-    }
-    elseif ($star == "Corporate Trustee"){
+    } elseif ($star == "Corporate Trustee")
+    {
         $starCount = "⭐⭐⭐";
     }
 }

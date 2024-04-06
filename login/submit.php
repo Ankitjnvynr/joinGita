@@ -4,9 +4,9 @@ include ("../partials/_db.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     // Check if the form was submitted
-    if (isset ($_POST['updatesubmit']))
+    if (isset($_POST['updatesubmit']))
     {
-       
+
         echo $memberid = $_POST['memberid'];
         $phone = $_POST["phone"];
         $hash_id = md5($phone);
@@ -23,8 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         // $intrest = $_POST["intrest"] ? $_POST["intrest"] : "";
         $education = $_POST["education"];
         $dob = $_POST["dob"];
-        $aniver_date = isset ($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
-        $star = isset ($_POST['star']) ? $_POST['star'] : "";
+        $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
+        $star = isset($_POST['star']) ? $_POST['star'] : "";
+        $designation = $_POST['designation'];
 
         // Construct the UPDATE query
         $sql = "UPDATE `users` SET 
@@ -45,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 `education`='$education', 
                 `dob`='$dob', 
                 `aniver_date`='$aniver_date', 
-                `star`='$star' 
+                `star`='$star' ,
+                `designation`='$designation' 
                 WHERE `id`='$memberid'";
 
         // Execute the query

@@ -38,6 +38,7 @@
                 <a class="btn btn-danger" href="report.php">Report</a>
                 <a class="btn btn-danger" href="birthday.php">Birthday/Aniversary</a>
                 <a class="btn btn-danger" href="custom-message.php">Custom Message</a>
+                <a class="btn btn-danger" href="addTehsil.php">Add Tehsils</a>
             </div>
         </div>
         <div>

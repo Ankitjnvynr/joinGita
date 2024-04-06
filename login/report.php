@@ -99,7 +99,7 @@ if (isset($_POST['get-data']))
                 id="countrySelect" onchange="SelectState(this)">
                 <option value="" selected>---Country---</option>
                 <?php
-                $optionSql = "SELECT DISTINCT `country` FROM `users` ";
+                $optionSql = "SELECT DISTINCT `country` FROM `users` ORDER BY country ASC ";
                 $result = $conn->query($optionSql);
                 while ($row = mysqli_fetch_assoc($result))
                 {
