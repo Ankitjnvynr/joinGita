@@ -1,12 +1,13 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
     header("location: index.php");
     exit;
 }
 // ====================creating masik parwas tabel if not exist================
-include("../partials/_db.php");
+include ("../partials/_db.php");
 header('Content-Type: text/html; charset=utf-8');
 ?>
 <!doctype html>
@@ -16,10 +17,15 @@ header('Content-Type: text/html; charset=utf-8');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIEO Gita : All users</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
 
@@ -151,19 +157,21 @@ header('Content-Type: text/html; charset=utf-8');
 
 <body>
     <!-- =============================toast=============================== -->
-    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center position-absolute border border-danger text-danger " role="alert"
+        aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div id="toastmsg" class="toast-body">
                 Deleted Successfully!
             </div>
-            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close me-2 m-auto bg-white" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
     </div>
 
 
     <!-- =============================toast end =============================== -->
     <!-- toast for update profile -->
-    
+
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="updatedToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -188,54 +196,104 @@ header('Content-Type: text/html; charset=utf-8');
 
     <div class="container">
         <form action="" method="POST" class="filterform d-flex flex-wrap gap-1">
-            <select required class="form-select form-select-sm" aria-label="Small select example" name="filterCountry" id="countrySelect" onchange="SelectState(this)">
+            <select required class="form-select form-select-sm" aria-label="Small select example" name="filterCountry"
+                id="countrySelect" onchange="SelectState(this)">
                 <option value="" selected>---Country---</option>
                 <?php
                 $optionSql = "SELECT DISTINCT `country` FROM `users` ";
                 $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result))
+                {
                     echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
                 }
                 ?>
             </select>
-            <select required name="filterState" class="form-select form-select-sm" aria-label="Small select example" id="stateSelect" onchange="selectingdistrict(this)">
+            <select required name="filterState" class="form-select form-select-sm" aria-label="Small select example"
+                id="stateSelect" onchange="selectingdistrict(this)">
                 <option value="" selected>---State---</option>
             </select>
-            <select name="filterdistrict" required name="filterCity" class="form-select form-select-sm" aria-label="Small select example" id="districtSelect" onchange="selectingtehsil(this)">
+            <select name="filterdistrict" required name="filterCity" class="form-select form-select-sm"
+                aria-label="Small select example" id="districtSelect" onchange="selectingtehsil(this)">
                 <option value="" selected>---District---</option>
             </select>
-            <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example" id="tehsilSelect" onchange="loadpics(0,5)">
+            <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example"
+                id="tehsilSelect" onchange="loadpics(0,5)">
                 <option value="" selected>---Tehsil---</option>
             </select>
-            <input type="text" class="form-control form-control-sm" placeholder="Name" id="filterName" oninput="loadpics(0,5)">
-            <input type="text" class="form-control form-control-sm" placeholder="Phone" id="filterPhone" oninput="loadpics(0,5)">
-            <input type="text" class="form-control form-control-sm" placeholder="Email" id="filterEmail" oninput="loadpics(0,5)">
+            <input type="text" class="form-control form-control-sm" placeholder="Name" id="filterName"
+                oninput="loadpics(0,5)">
+            <input type="text" class="form-control form-control-sm" placeholder="Phone" id="filterPhone"
+                oninput="loadpics(0,5)">
+            <input type="text" class="form-control form-control-sm" placeholder="Email" id="filterEmail"
+                oninput="loadpics(0,5)">
         </form>
     </div>
 
-    <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing <span class="showing"></span>/<span class="totalCount"></span></span></div>
+    <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing <span class="showing"></span>/<span
+                class="totalCount"></span></span></div>
     <div class="container cardbox mt-4"></div>
     <div class="container text-center my-3"><button class="btn btn-success" onclick="loadMore(5,5)" id="loadMore">Load
             More</button></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="filterselect.js"></script>
 
     <script>
+        let createhash = (phone) => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: "_createhash.php",
+            type: "POST",
+            data: {
+                phone: phone
+            },
+            success: (response) => {
+                resolve(response); // Resolve the promise with the response data
+            },
+            error: (error) => {
+                reject(error); // Reject the promise if there's an error
+            }
+        });
+    });
+};
+
+// Usage example with async/await:
+async function fetchHash(g) {
+    try {
+        let myhash = await createhash(g);
+        console.log(myhash); // Log the hash value
+        // You can use the hash value stored in 'myhash' variable here
+    } catch (error) {
+        console.error(error); // Log any errors if the promise rejects
+    }
+}
+
+
+
+            
+
+
+
+
         selectMessage = (e) => {
             const secondChild = e.parentNode.childNodes[3];
             const memberName = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].innerText;
-            console.log(memberName);
+            const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes[3].childNodes[0].innerText;
+            console.log(phoneNumber)
             const newText = e.value;
             let src = secondChild.getAttribute('href');
             let link = src.split('&');
 
+
             for (let i = 0; i < link.length; i++) {
                 if (link[i].startsWith('text=')) {
-                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText);
+                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText) + fetchHash(phoneNumber);
                     break;
                 }
             }
@@ -261,7 +319,7 @@ header('Content-Type: text/html; charset=utf-8');
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var limit = 50;
             var start = 0;
 
@@ -273,8 +331,8 @@ header('Content-Type: text/html; charset=utf-8');
 
             function deleteScript() {
                 let dels = document.getElementsByClassName('del');
-                $.each(dels, function(e, item) {
-                    $(item).off('click').on('click', function(e) {
+                $.each(dels, function (e, item) {
+                    $(item).off('click').on('click', function (e) {
                         cardid = $(this).attr('data-id');
                         if (confirm("Are you sure to Delete ?")) {
                             a = item.parentElement.parentElement.parentElement
@@ -285,7 +343,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 url: "_deletecard.php",
                                 type: "GET",
                                 data: imgd,
-                                success: function(data) {
+                                success: function (data) {
                                     // console.log(data)
                                     $('#toastmsg').text(data)
                                     toastBootstrap.show();
@@ -311,7 +369,7 @@ header('Content-Type: text/html; charset=utf-8');
                                         type: 'POST',
                                         // cache: false,
                                         data: fltr,
-                                        success: function(response) {
+                                        success: function (response) {
                                             // console.log(response)
                                             $('.showing').html(response)
 
@@ -349,7 +407,7 @@ header('Content-Type: text/html; charset=utf-8');
                     type: 'POST',
                     // cache: false,
                     data: fltr,
-                    success: function(response) {
+                    success: function (response) {
                         // console.log(response)
                         $('.cardbox').html(response);
                         deleteScript()
@@ -361,7 +419,7 @@ header('Content-Type: text/html; charset=utf-8');
                     type: 'POST',
                     // cache: false,
                     data: fltr,
-                    success: function(response) {
+                    success: function (response) {
                         // console.log(response)
                         $('.showing').html(response)
 
@@ -389,7 +447,7 @@ header('Content-Type: text/html; charset=utf-8');
                     type: 'POST',
                     // cache: false,
                     data: fltr,
-                    success: function(response) {
+                    success: function (response) {
                         if (response == '') {
                             $('#loadMore').html("No More Data")
                         } else {
@@ -423,7 +481,7 @@ header('Content-Type: text/html; charset=utf-8');
                 data: {
                     country: e.value
                 },
-                success: function(response) {
+                success: function (response) {
                     let stateSelect = document.getElementById('stateSelect')
                     // console.log(response)
                     stateSelect.innerHTML = response;
@@ -439,7 +497,7 @@ header('Content-Type: text/html; charset=utf-8');
                 data: {
                     country: e.value
                 },
-                success: function(response) {
+                success: function (response) {
                     let stateSelect = document.getElementById('districtSelect')
                     // console.log(response)
                     stateSelect.innerHTML = response;
@@ -455,7 +513,7 @@ header('Content-Type: text/html; charset=utf-8');
                 data: {
                     country: e.value
                 },
-                success: function(response) {
+                success: function (response) {
                     let stateSelect = document.getElementById('tehsilSelect')
                     console.log(response)
                     stateSelect.innerHTML = response;
@@ -465,16 +523,16 @@ header('Content-Type: text/html; charset=utf-8');
         }
     </script>
     <script>
-        
+
         const updatedToast = document.getElementById('updatedToast')
         const toastBootstrapupdate = bootstrap.Toast.getOrCreateInstance(updatedToast)
 
     </script>
-    
-    <?php 
-        
 
-        
+    <?php
+
+
+
     ?>
 
 </body>

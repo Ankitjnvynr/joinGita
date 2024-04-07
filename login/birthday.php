@@ -1,9 +1,9 @@
 <?php
-$currentURL = "http://$_SERVER[HTTP_HOST]/imgs/";
+$currentURL = "http://$_SERVER[HTTP_HOST]/";
 
 
 session_start();
-if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 {
     header("location: index.php");
     exit;
@@ -13,12 +13,12 @@ include ("../partials/_db.php");
 $totalBday = 0;
 $birthday = null;
 
-if (isset ($_POST['bdaySubmit']))
+if (isset($_POST['bdaySubmit']))
 {
     $birthday = true;
-    $birthDate = isset ($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
-    $birthMonth = isset ($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
-    $messageSelect = isset ($_POST['messageSelect']) ? $_POST['messageSelect'] : "Birthday";
+    $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : date('d');
+    $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : date('m');
+    $messageSelect = isset($_POST['messageSelect']) ? $_POST['messageSelect'] : "Birthday";
 
     $query = "SELECT * FROM users WHERE MONTH(dob) = $birthMonth AND DAY(dob) =$birthDate ";
     $resultb = mysqli_query($conn, $query);
@@ -31,13 +31,13 @@ if (isset ($_POST['bdaySubmit']))
     $message = $msgrow['msg'];
 }
 $aniverfinding = false;
-if (isset ($_POST['aniSubmit']))
+if (isset($_POST['aniSubmit']))
 {
     $aniverfinding = true;
     $birthday = false;
     $birthDate = $_POST['aniDate'];
     $birthMonth = $_POST['aniMonth'];
-    $messageSelect = isset ($_POST['messageSelect']) ? $_POST['messageSelect'] : "Birthday";
+    $messageSelect = isset($_POST['messageSelect']) ? $_POST['messageSelect'] : "Birthday";
 
     $query = "SELECT * FROM users WHERE MONTH(aniver_date) = $birthMonth AND DAY(aniver_date) = $birthDate ";
     $resultb = mysqli_query($conn, $query);
@@ -178,7 +178,7 @@ $country_code = array(
         </div>
     </div>
     <?php
-    if (isset ($_POST['newmsgSubmit']))
+    if (isset($_POST['newmsgSubmit']))
     {
         $newmsgtitle = $_POST['newmsgtitle'];
         $newmsg = $_POST['newmsg'];
@@ -335,7 +335,7 @@ $country_code = array(
                             <td>' . $targetDate . '</td>
                             <td>
                             
-                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . '&attachment=' . $currentURL . '65f7fc772d3bf.png" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i>
+                            <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . ' %0A %0ATo view profile Click here- ' . $currentURL . 'member.php?member=' . md5($row['phone']) . '&attachment=' . $currentURL . 'imgs/65f7fc772d3bf.png" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i>
                             </a>
                             
                             </td>

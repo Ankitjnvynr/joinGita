@@ -8,24 +8,19 @@ if (!isset ($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 include ("../partials/_db.php");
 
 
-$currentURL = "http://$_SERVER[HTTP_HOST]/imgs/";
+
+
+
+$currentURL = "http://$_SERVER[HTTP_HOST]/";
 // filtering data
 if (isset ($_POST['get-data']))
 {
     $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
-
     $filters = array();
     $byCountry = $_POST['filterCountry'];
     $byState = $_POST['filterState'];
     $filterdistrict = $_POST['filterdistrict'];
     $bytehsil = $_POST['bytehsil'];
-
-
-
-
-
-
-
 
     // $bydikshit = $_POST['filterDikshit'];
 
@@ -153,8 +148,6 @@ $country_code = array(
                 }
                 ?>
             </select>
-
-
             <button type="submit" name="get-data" class="btn btn-danger">Get Data ></button>
 
         </form>
@@ -231,7 +224,7 @@ $country_code = array(
                                 
                                 <td>' . $tehsil . '</td>
                                 <td>
-                                    <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . '&attachment=' . $currentURL . '65f7fc772d3bf.png" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i>
+                                    <a href="https://wa.me/' . $code . $row['phone'] . '?text=गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . ' %0A %0ATo view profile Click here- ' . $currentURL . 'member.php?member='.md5($phone).' &attachment=' . $currentURL . '/imgs/65f7fc772d3bf.png" target="_blank"><i class="fa-solid fs-3  fa-brands fa-whatsapp text-success "></i>
                                     </a>
                                 </td>
                             </tr>

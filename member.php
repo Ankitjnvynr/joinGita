@@ -14,7 +14,6 @@ if (isset($_POST['Update']))
     $memberId = $_GET['member'];
     $dob = $_POST["dob"];
     $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
-
     $sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
@@ -544,8 +543,8 @@ if ($star == 'null')
                 var ctx = canvas.getContext('2d');
 
                 // Set the desired width and height for the resized image
-                var maxWidth = 3000; // Set your maximum width
-                var maxHeight = 3000; // Set your maximum height
+                var maxWidth = 700; // Set your maximum width
+                var maxHeight = 700; // Set your maximum height
 
                 // Ensure the image dimensions fit within the maximum dimensions while preserving aspect ratio
                 var width = image.width;

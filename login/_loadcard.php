@@ -1,6 +1,8 @@
 <?php
 include ("../partials/_db.php");
 
+$currentURL = "http://$_SERVER[HTTP_HOST]/";
+
 
 $msgs = array();
 $defaultmsg = array();
@@ -179,7 +181,7 @@ while ($row = mysqli_fetch_array($result))
                                     </div>
                                     <p class="d-flex flex-wrap gap-2 flex-items-center justify-content-between px-2 m-0">
                                         ' . $msgStr . '
-                                        <a href="https://wa.me/' . $code . $phone . '?file=../imgs/' . $pic . '&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $defaultmsg[0] . '"><i class="fa-solid fs-2 fa-brands fa-whatsapp text-success fs-2"></i></a>
+                                        <a href="https://wa.me/' . $code . $phone . '?file=../imgs/' . $pic . '&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $defaultmsg[0] . '%0A %0ATo view profile Click here- ' . $currentURL . 'member.php?member=' . md5($phone) . '"><i class="fa-solid fs-2 fa-brands fa-whatsapp text-success fs-2"></i></a>
                                         
                                         <a href="mailto:' . $email . '"><i class="fa-solid fs-2   fa-envelope text-success "></i></a>
                                     </p>
@@ -187,4 +189,5 @@ while ($row = mysqli_fetch_array($result))
                             </div>
                             ';
 }
+?>
 
