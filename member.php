@@ -24,7 +24,6 @@ if (isset($_POST['Update']))
     // Insert image file name into database 
     $usql = "UPDATE `users` SET `email`='$updateEmail', `dob`='$dob', `aniver_date`='$aniver_date',  `pic`='$fileName' WHERE `hash_id` = '$memberId'";
     $update = mysqli_query($conn, $usql);
-
     $update = true;
 }
 $memberId = false;
