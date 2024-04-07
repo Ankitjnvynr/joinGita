@@ -113,7 +113,7 @@
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="name">Enter Name</label>
-          <input name="name" id="name" type="text" max="10" class="form-control"
+          <input name="name" id="name" type="text" maxlength="50" class="form-control"
             onkeypress="return blockNumbers(event)">
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">

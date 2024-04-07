@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Check if the form was submitted
     if (isset($_POST['updatesubmit']))
     {
-
         echo $memberid = $_POST['memberid'];
         $phone = $_POST["phone"];
         $hash_id = md5($phone);

@@ -25,7 +25,7 @@ function blockNumbers(event) {
   var keyCode = event.keyCode || event.which;
 
   // Allow only alphabetic characters (A-Z, a-z), backspace, and space
-  if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode === 8 || keyCode === 32) {
+  if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode === 8 || keyCode== 32) {
     return true;
   } else {
     event.preventDefault();

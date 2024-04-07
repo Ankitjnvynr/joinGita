@@ -8,6 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 include ("../partials/_db.php");
 $values = false;
 $done = false;
+$err = false;
 
 
 // filtering data
@@ -28,26 +29,40 @@ if (isset($_POST['add-tehsil']))
     foreach ($tehsils as $tehsil)
     {
         // Escape values to prevent SQL injection
-        $values[] = "('" . $conn->real_escape_string($country) . "', '" . $conn->real_escape_string($state) . "', '" . $conn->real_escape_string($district) . "', '" . $conn->real_escape_string($tehsil) . "')";
+        if ($tehsil != "")
+        {
+            $values[] = "('" . $conn->real_escape_string($country) . "', '" . $conn->real_escape_string($state) . "', '" . $conn->real_escape_string($district) . "', '" . $conn->real_escape_string($tehsil) . "')";
+        }
     }
 
     // Append values to the SQL statement
-    echo $sql .= implode(", ", $values);
+    $sql .= implode(", ", $values);
 
     // Execute the query
-    if ($conn->query($sql))
+    try
     {
-        echo "Records inserted successfully.";
-        $done = true;
-    } else
-    {
-        if ($conn->errno == 1062)
+        if ($conn->query($sql))
         {
-            echo "Error: Duplicate entry found. Record not inserted.";
+            $suc = "Records inserted successfully.";
+            $done = true;
         } else
         {
-            echo "Error: " . $conn->error;
+            if ($conn->errno == 1062)
+            {
+                echo "Error: Duplicate entry found. Record not inserted.";
+            } else
+            {
+                echo "Error: " . $conn->error;
+            }
         }
+    } catch (\Throwable $th)
+    {
+        //throw $th;
+        $err = true;
+        $msg = $th->getMessage();
+        $values = false;
+        $done = false;
+
     }
 }
 ?>
@@ -84,12 +99,33 @@ if (isset($_POST['add-tehsil']))
 
         textarea::placeholder {
             opacity: 0.7 !important;
-            font-size: 0.9rem;            
+            font-size: 0.9rem;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deletemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">Delete</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="deleteid" type="hidden">
+                    Are you sure to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="deleteid" type="button" onclick="deletetehsil()" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php include '_options.php'; ?>
 
@@ -134,14 +170,16 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
         <?php
         if ($values)
         {
+            echo $suc;
             echo '
-            You were added
+             You were added
             <span class="bg-warning-subtle rounded px-1">
             ';
         }
 
         if ($done)
         {
+
             foreach ($tehsils as $tehsil)
             {
                 echo $tehsil . ', ';
@@ -152,10 +190,48 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
         {
             echo ' </span>  in <span class="bg-warning-subtle rounded px-1 mx-1"> ' . $district . ' </span> District.';
         }
+        if ($err)
+        {
+            echo $msg;
+        }
         ?>
 
     </div>
 
+    <hr>
+    <div class="container">
+        <form action="" method="POST" class="">
+            <div class="filterform d-flex flex-wrap gap-1">
+
+                <select id="countrySelect" onchange="loadState(this)" class="form-select form-select-sm">
+                    <option value="" selected>---Country---</option>
+                    <?php
+                    $optionSql = "SELECT DISTINCT `country` FROM `allselect` ";
+                    $result = $conn->query($optionSql);
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                        echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
+                    }
+                    ?>
+                </select>
+
+                <select id="allstate" class="form-select form-select-sm" onchange="loadDistrict(this)">
+                    <option value="" selected>---states---</option>
+                </select>
+
+
+                <select id="allDistrict" onchange="loadTehsil(this)" class="form-select form-select-sm">
+                    <option value="" selected>---District---</option>
+                </select>
+
+
+            </div>
+
+        </form>
+    </div>
+    <div id="displayData" class="container">
+
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -215,6 +291,87 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
         setInterval(() => {
             $('.totalCount').load('_totalProfiles.php');
         }, 3000);
+    </script>
+    <script>
+        var userIP;
+
+        fetch("https://api.ipify.org?format=json")
+            .then(response => response.json())
+            .then(data => {
+                userIP = data.ip;
+
+                // Use userIP to get the country using a service like ipinfo.io
+                var url = "https://ipinfo.io/" + userIP + "/country";
+
+                fetch(url)
+                    .then(response => response.text())
+                    .then(country => {
+                        console.table(country)
+                        console.log("Your country:", country);
+                    })
+                    .catch(error => console.error("Error:", error));
+            })
+            .catch(error => console.error("Error:", error));
+
+
+    </script>
+    <script>
+        loadState = (e) => {
+            $.ajax({
+                url: "../selectOptions/_state.php",
+                type: "GET",
+                data: {
+                    country: e.value
+                },
+                success: (response) => {
+                    // console.log(response)
+                    $("#allstate").html(response)
+                }
+            })
+        }
+        loadDistrict = (e) => {
+            $.ajax({
+                url: "../selectOptions/_district.php",
+                type: "GET",
+                data: {
+                    country: e.value
+                },
+                success: (response) => {
+                    $("#allDistrict").html(response)
+                }
+            })
+        }
+        loadTehsil = (e) => {
+            $.ajax({
+                url: "../selectOptions/_tehsil.php",
+                type: "GET",
+                data: {
+                    country: e.value
+                },
+                success: (response) => {
+                    $("#displayData").html(response)
+                }
+            })
+        }
+
+        const myModalAlternative = new bootstrap.Modal('#deletemodal')
+
+        deleting = (e) => {
+            deletetehsil = () => {
+                $.ajax({
+                    url: "../selectOptions/_deltehsil.php",
+                    type: "post",
+                    data: {
+                        delid: e
+                    },
+                    success: (response) => {
+                        myModalAlternative.hide()
+                        h = document.getElementById('allDistrict')
+                        loadTehsil(h)
+                    }
+                })
+            }
+        }
     </script>
 </body>
 

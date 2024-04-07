@@ -1,20 +1,39 @@
-<option value="" selected>---State---</option>
-<?php
-require ("../partials/_db.php");
-if (isset($_GET['country']))
-{
-    $country = $_GET['country'];
-    $optionSql = "SELECT DISTINCT `tehsil` FROM `allselect` WHERE district = '$country' ORDER BY state ASC";
-    $result = $conn->query($optionSql);
-    while ($row = mysqli_fetch_assoc($result))
-    {
-        if ($row['tehsil'] != "")
+<table class="table my-2">
+    <thead>
+        <tr>
+            <th scope="col">Sr</th>
+            <th scope="col">Tehsils</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+        require ("../partials/_db.php");
+        if (isset($_GET['country']))
         {
-            echo '<option value="' . $row['tehsil'] . '">' . $row['tehsil'] . '</option>';
+            $country = $_GET['country'];
+            $optionSql = "SELECT DISTINCT `tehsil` , `id` FROM `allselect` WHERE district = '$country' ORDER BY state ASC";
+            $result = $conn->query($optionSql);
+            $sr = 0;
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                if ($row['tehsil'] != "")
+                {
+                    $sr++;
+                    echo '
+                    <tr>
+                        <th scope="row">'.$sr.'</th>
+                        <td>'. $row['tehsil'].'</td>
+                        <td class="dels fw-bold " onclick="deleting(' . $row['id'] . ')" id="del' . $row['id'] . '"><span data-bs-toggle="modal" data-bs-target="#deletemodal" class = "btn text-danger"> Delete</span></td>
+                    </tr>
+                    ';
+                }
+            }
+        } else
+        {
+            echo "country not selected";
         }
-    }
-} else
-{
-    echo "country not selected";
-}
-?>
+        ?>
+    </tbody>
+</table>
