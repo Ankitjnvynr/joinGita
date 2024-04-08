@@ -246,39 +246,32 @@ header('Content-Type: text/html; charset=utf-8');
 
     <script>
         let createhash = (phone) => {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: "_createhash.php",
-            type: "POST",
-            data: {
-                phone: phone
-            },
-            success: (response) => {
-                resolve(response); // Resolve the promise with the response data
-            },
-            error: (error) => {
-                reject(error); // Reject the promise if there's an error
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: "_createhash.php",
+                    type: "POST",
+                    data: {
+                        phone: phone
+                    },
+                    success: (response) => {
+                        resolve(response); // Resolve the promise with the response data
+                    },
+                    error: (error) => {
+                        reject(error); // Reject the promise if there's an error
+                    }
+                });
+            });
+        };
+
+        
+        async function fetchHash(g) {
+            try {
+                let myhash = await createhash(g);
+            } catch (error) {
+                console.error(error); // Log any errors if the promise rejects
             }
-        });
-    });
-};
-
-// Usage example with async/await:
-async function fetchHash(g) {
-    try {
-        let myhash = await createhash(g);
-        console.log(myhash); // Log the hash value
-        // You can use the hash value stored in 'myhash' variable here
-    } catch (error) {
-        console.error(error); // Log any errors if the promise rejects
-    }
-}
-
-
-
-            
-
-
+        }
+        
 
 
         selectMessage = (e) => {
@@ -298,6 +291,7 @@ async function fetchHash(g) {
                 }
             }
             href = link.join('&');
+            console.log(href)
             secondChild.setAttribute('href', href);
 
 
