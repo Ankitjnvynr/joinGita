@@ -292,29 +292,7 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
             $('.totalCount').load('_totalProfiles.php');
         }, 3000);
     </script>
-    <script>
-        var userIP;
 
-        fetch("https://api.ipify.org?format=json")
-            .then(response => response.json())
-            .then(data => {
-                userIP = data.ip;
-
-                // Use userIP to get the country using a service like ipinfo.io
-                var url = "https://ipinfo.io/" + userIP + "/country";
-
-                fetch(url)
-                    .then(response => response.text())
-                    .then(country => {
-                        console.table(country)
-                        console.log("Your country:", country);
-                    })
-                    .catch(error => console.error("Error:", error));
-            })
-            .catch(error => console.error("Error:", error));
-
-
-    </script>
     <script>
         loadState = (e) => {
             $.ajax({

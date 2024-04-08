@@ -103,7 +103,7 @@
             <option selected="">---Country---</option>
             <option value="Australia" datavalue="13" sortname="AU">Australia</option>
             <option value="Canada" datavalue="38" sortname="CA">Canada</option>
-            <option value="India" datavalue="101" sortname="IN" selected="true">India</option>
+            <option value="India" datavalue="101" sortname="IN" >India</option>
             <option value="Japan" datavalue="109" sortname="JP">Japan</option>
             <option value="New Zealand" datavalue="157" sortname="NZ">New Zealand</option>
             <option value="United Arab Emirates" datavalue="229" sortname="AE">United Arab Emirates</option>
