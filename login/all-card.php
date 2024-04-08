@@ -263,25 +263,7 @@ header('Content-Type: text/html; charset=utf-8');
     });
 };
 
-// Usage example with async/await:
-async function fetchHash(g) {
-    try {
-        let myhash = await createhash(g);
-        console.log(myhash); // Log the hash value
-        // You can use the hash value stored in 'myhash' variable here
-    } catch (error) {
-        console.error(error); // Log any errors if the promise rejects
-    }
-}
-
-
-
-            
-
-
-
-
-        selectMessage = (e) => {
+        selectMessage = async (e) => {
             const secondChild = e.parentNode.childNodes[3];
             const memberName = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].innerText;
             const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes[3].childNodes[0].innerText;
@@ -289,15 +271,18 @@ async function fetchHash(g) {
             const newText = e.value;
             let src = secondChild.getAttribute('href');
             let link = src.split('&');
-
+            let myhash = await createhash(phoneNumber);
+            console.log(myhash)
+            
 
             for (let i = 0; i < link.length; i++) {
                 if (link[i].startsWith('text=')) {
-                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText) + fetchHash(phoneNumber);
+                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText) + ' %0A %0ATo view profile Click here- '+'https://parivaar.gieogita.org/member.php?member='+ myhash;
                     break;
                 }
             }
             href = link.join('&');
+            console.log(href)
             secondChild.setAttribute('href', href);
 
 
