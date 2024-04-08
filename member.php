@@ -37,6 +37,9 @@ if (!$row)
     exit;
 }
 $name = $row['name'];
+$country = $row['country'];
+$state = $row['state'];
+$district = $row['district'];
 $tehsil = $row['tehsil'];
 $phone = $row['phone'];
 $wing = $row['interest'];
@@ -66,6 +69,9 @@ if ($star == 'null')
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <style>
@@ -142,6 +148,12 @@ if ($star == 'null')
         .cropper-face {
             border-radius: 50%;
             /* Apply circular mask */
+        }
+        .karykarinitable{
+            overflow-x: scroll;
+        }
+        .karykarinitable table{
+            font-size: 1rem !important;
         }
     </style>
 </head>
@@ -496,7 +508,61 @@ if ($star == 'null')
     </div>
 
 
+    <div class="container-fluid bg-light my-4 py-5">
+        <div class="container ">
+            <div class="row">
+                <div class="col-md d-flex justify-content-center align-items-center">
+                   <h2> कार्यकारिणी सदस्य  (
+                <?php
+                echo $district;
+                ?>)</h2>
+                </div>
+                <div class="col-md karykarinitable">
+                    <table class="table   table-striped fs-5">
+                        <thead>
+                            <tr>
+                                <th  scope="col">sr</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Designation</th>
+                                <th scope="col">Contact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                             $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND designation != 'Member';";
 
+                            $res = $conn->query($ksql);
+                            while ($r = mysqli_fetch_assoc($res))
+                            {
+                                echo '
+                                <tr class="text-secondary">
+                                <th scope="row">1</th>
+                                <td>'.$r['name'].'</td>
+                                <td>'.$r['phone'].'</td>
+                                <td>'.$r['tehsil'].'</td>
+                                <td>'.$r['designation'].'</td>
+                                <td class="text-success d-flex gap-4 fs-4">
+                                    <a href="tel:' . $r['phone'] . '">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </a>
+                                    <a href="https://wa.me/91' . $r['phone'] . '?text=गीता प्रिय ' . $r['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                                ';
+                            }
+                            ?>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
@@ -508,11 +574,7 @@ if ($star == 'null')
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script>
         const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'))
-
-
-
         function fileValidation(event) {
-
             var fileInput = document.getElementById('pic');
             var filePath = fileInput.value;
             // Allowing file type
@@ -530,9 +592,6 @@ if ($star == 'null')
         document.addEventListener('DOMContentLoaded', function () {
             const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
             let cropper;
-
-
-
             // Show modal and initialize cropper when it is shown
             $('#cropperModal').on('shown.bs.modal', function () {
                 const image = document.getElementById('cropperImage');

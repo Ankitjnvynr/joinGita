@@ -104,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <form class="relative w-100 mt-5 overflow-hidden " method="POST" action="">
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" value="<?php if($sub) echo $username ; ?>" id="username" name="username" required
-                    placeholder="name@example.com">
+                <input type="text" class="form-control" value="<?php if ($sub)
+                    echo $username; ?>" id="username" name="username" required placeholder="name@example.com">
                 <label for="username">Email address</label>
             </div>
             <div class="form-floating mb-3">
@@ -120,8 +120,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             <div class="text-center pt-2">
                 <button type="submit" class="btn btn-danger">Log In</button>
             </div>
-            <div class="text-center mt-2 "><a class="text-danger link-underline link-underline-opacity-0"
-                    href="../index.php">Homepage-></a></div>
+            <div class="text-center mt-2 ">
+                <a target="_blank" class="text-danger link-underline link-underline-opacity-0" href="../index.php">
+                    Homepage->
+                </a>
+            </div>
 
         </form>
     </div>

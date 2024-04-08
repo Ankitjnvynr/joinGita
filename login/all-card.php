@@ -232,8 +232,12 @@ header('Content-Type: text/html; charset=utf-8');
     <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing <span class="showing"></span>/<span
                 class="totalCount"></span></span></div>
     <div class="container cardbox mt-4"></div>
-    <div class="container text-center my-3"><button class="btn btn-success" onclick="loadMore(5,5)" id="loadMore">Load
-            More</button></div>
+    <div class="container text-center my-3 d-flex justify-content-center gap-2">
+        <button class="btn btn-success" onclick="loadMore(5,5)" id="loadMore">Load
+            More
+        </button>
+        <span id="moreloader"></span>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -245,6 +249,15 @@ header('Content-Type: text/html; charset=utf-8');
     <script src="filterselect.js"></script>
 
     <script>
+        var moreloader = document.getElementById('moreloader')
+        let showloader = () => {
+            moreloader.innerHTML = `
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            `;
+        }
+
         let createhash = (phone) => {
             return new Promise((resolve, reject) => {
                 $.ajax({
@@ -272,18 +285,16 @@ header('Content-Type: text/html; charset=utf-8');
             let src = secondChild.getAttribute('href');
             let link = src.split('&');
             let myhash = await createhash(phoneNumber);
-            console.log(myhash)
-            
+            // console.log(myhash)
+
 
             for (let i = 0; i < link.length; i++) {
                 if (link[i].startsWith('text=')) {
-                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText) + ' %0A %0ATo view profile Click here- '+'https://parivaar.gieogita.org/member.php?member='+ myhash;
+                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText) + ' %0A %0ATo view profile Click here- ' + 'https://parivaar.gieogita.org/member.php?member=' + myhash;
                     break;
                 }
             }
             href = link.join('&');
-            console.log(href)
-            console.log(href)
             secondChild.setAttribute('href', href);
 
 
@@ -306,7 +317,7 @@ header('Content-Type: text/html; charset=utf-8');
 
     <script>
         $(document).ready(function () {
-            var limit = 50;
+            var limit = 20;
             var start = 0;
 
             $('.totalCount').load('_totalProfiles.php');
@@ -347,7 +358,7 @@ header('Content-Type: text/html; charset=utf-8');
                                         filterState: $('#stateSelect').val(),
                                         filterDistrict: $('#districtSelect').val(),
                                         filterTehsil: $('#tehsilSelect').val(),
-                                        limit: "50",
+                                        limit: "20",
                                         start: start,
                                     }
                                     $.ajax({
@@ -385,7 +396,7 @@ header('Content-Type: text/html; charset=utf-8');
                     filterState: $('#stateSelect').val(),
                     filterDistrict: $('#districtSelect').val(),
                     filterTehsil: $('#tehsilSelect').val(),
-                    limit: "50",
+                    limit: "20",
                     start: start,
                 }
                 $.ajax({
@@ -414,6 +425,7 @@ header('Content-Type: text/html; charset=utf-8');
 
             }
             loadMore = (start, limit) => {
+                showloader();
                 let dels = document.getElementsByClassName('del');
                 start = dels.length;
 
@@ -434,11 +446,14 @@ header('Content-Type: text/html; charset=utf-8');
                     // cache: false,
                     data: fltr,
                     success: function (response) {
-                        if (response == '') {
+                        if (response == ' ') {
                             $('#loadMore').html("No More Data")
+                            moreloader.innerHTML = "";
+                            console.log("no more data")
                         } else {
                             $('.cardbox').append(response);
                             deleteScript()
+                            moreloader.innerHTML = "";
                         }
                     }
                 })
