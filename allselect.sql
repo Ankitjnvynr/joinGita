@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `allselect` (
-  `sr` int(10) NOT NULL,
+  `id` int(10) NOT NULL,
   `country` varchar(5) DEFAULT NULL,
   `state` varchar(23) DEFAULT NULL,
   `district` varchar(27) DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `allselect` (
 -- Dumping data for table `allselect`
 --
 
-INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
+INSERT INTO `allselect` (`id`, `country`, `state`, `district`, `tehsil`) VALUES
 (1, 'India', 'Haryana', 'Ambala', 'Ambala'),
 (2, 'India', 'Haryana', 'Ambala', 'Barara'),
 (3, 'India', 'Haryana', 'Ambala', 'Naraingarh'),
@@ -1031,7 +1031,7 @@ INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
 (989, 'India', 'Jharkhand', 'East Singhbhum', 'Gudabanda'),
 (990, 'India', 'Jharkhand', 'East Singhbhum', 'Gudri'),
 (991, 'India', 'Jharkhand', 'East Singhbhum', 'Jadugora');
-INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
+INSERT INTO `allselect` (`id`, `country`, `state`, `district`, `tehsil`) VALUES
 (992, 'India', 'Jharkhand', 'East Singhbhum', 'Jamshedpur'),
 (993, 'India', 'Jharkhand', 'East Singhbhum', 'Jugsalai'),
 (994, 'India', 'Jharkhand', 'East Singhbhum', 'Kalikapur'),
@@ -1943,7 +1943,7 @@ INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
 (1900, 'India', ' Madhya Pradesh', 'Datia', 'Seondha'),
 (1901, 'India', ' Madhya Pradesh', 'Dewas', 'Bagli'),
 (1902, 'India', ' Madhya Pradesh', 'Dewas', 'Dewas');
-INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
+INSERT INTO `allselect` (`id`, `country`, `state`, `district`, `tehsil`) VALUES
 (1903, 'India', ' Madhya Pradesh', 'Dewas', 'Khategaon'),
 (1904, 'India', ' Madhya Pradesh', 'Dewas', 'Kannod'),
 (1905, 'India', ' Madhya Pradesh', 'Dewas', 'Sonkatch'),
@@ -2868,7 +2868,7 @@ INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
 (2824, 'India', 'Meghalaya', 'East Jaintia Hills', 'Khliehriat'),
 (2825, 'India', 'Meghalaya', 'East Jaintia Hills', 'Amlarem'),
 (2826, 'India', 'Meghalaya', 'East Jaintia Hills', 'Khliehriat');
-INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
+INSERT INTO `allselect` (`id`, `country`, `state`, `district`, `tehsil`) VALUES
 (2827, 'India', 'Meghalaya', 'East Jaintia Hills', 'East Jaintia Hills'),
 (2828, 'India', 'Meghalaya', 'North Garo Hills', 'Resubelpara'),
 (2829, 'India', 'Meghalaya', 'North Garo Hills', 'Resubelpara'),
@@ -3768,7 +3768,7 @@ INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
 (3723, 'India', 'Delhi', 'South West   ', 'Delhi Cantonment.'),
 (3724, 'India', 'Delhi', 'West   ', 'Patel Nagar'),
 (3725, 'India', 'Delhi', 'Central  ', 'Pahar Ganj');
-INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
+INSERT INTO `allselect` (`id`, `country`, `state`, `district`, `tehsil`) VALUES
 (3726, 'India', 'Delhi', 'New Delhi', 'Connaught Place'),
 (3727, 'India', 'Delhi', 'East   ', 'Vivek Vihar'),
 (3728, 'India', 'Delhi', 'North East   ', 'Shahdara'),
@@ -3808,7 +3808,7 @@ INSERT INTO `allselect` (`sr`, `country`, `state`, `district`, `tehsil`) VALUES
 -- Indexes for table `allselect`
 --
 ALTER TABLE `allselect`
-  ADD PRIMARY KEY (`sr`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -3818,7 +3818,7 @@ ALTER TABLE `allselect`
 -- AUTO_INCREMENT for table `allselect`
 --
 ALTER TABLE `allselect`
-  MODIFY `sr` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3756;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3756;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
