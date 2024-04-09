@@ -9,12 +9,12 @@ function selectOptionByCountry(countryCode) {
   for (var i = 0; i < selectElement.options.length; i++) {
     var option = selectElement.options[i];
     var coddde = option.getAttribute("sortname");
-    console.log(coddde)
-    
-    
+    console.log(coddde.toLowerCase());
+
+
     // Check if the option's sortname attribute matches the user's country code
-    if ( coddde == countryCode) {
-      console.log(option.getAttribute("sortname"),countryCode)
+    if (coddde == countryCode) {
+      console.log(option.getAttribute("sortname"), countryCode)
       // Set the selected attribute to true
       option.selected = true;
       break; // Stop iterating once found
@@ -46,41 +46,44 @@ fetch("https://api.ipify.org?format=json")
 
 // alert("sdsd")
 loadState = (e) => {
+  document.getElementById('stateSelect').disabled = false;
   $.ajax({
-      url: "selectOptions/_state.php",
-      type: "GET",
-      data: {
-          country: e.value
-      },
-      success: (response) => {
-          // console.log(response)
-          $("#stateSelect").html(response)
+    url: "selectOptions/_state.php",
+    type: "GET",
+    data: {
+      country: e.value
+    },
+    success: (response) => {
+      // console.log(response)
+      $("#stateSelect").html(response)
 
-      }
+    }
   })
 }
 loadDistrict = (e) => {
+  document.getElementById('citySelect').disabled = false;
   $.ajax({
-      url: "selectOptions/_district.php",
-      type: "GET",
-      data: {
-          country: e.value
-      },
-      success: (response) => {
-          $("#citySelect").html(response)
-      }
+    url: "selectOptions/_district.php",
+    type: "GET",
+    data: {
+      country: e.value
+    },
+    success: (response) => {
+      $("#citySelect").html(response)
+    }
   })
 }
 loadTehsil = (e) => {
+  document.getElementById('tehsilSelect').disabled = false;
   $.ajax({
-      url: "selectOptions/_tehsilOption.php",
-      type: "GET",
-      data: {
-          country: e.value
-      },
-      success: (response) => {
-        console.log(response)
-          $("#tehsilSelect").html(response)
-      }
+    url: "selectOptions/_tehsilOption.php",
+    type: "GET",
+    data: {
+      country: e.value
+    },
+    success: (response) => {
+      // console.log(response)
+      $("#tehsilSelect").html(response)
+    }
   })
 }

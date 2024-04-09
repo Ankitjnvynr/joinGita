@@ -1,4 +1,17 @@
 <?php
+
+function getCurrentURL()
+{
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+    $host = $_SERVER['SERVER_NAME'];
+    $uri = $_SERVER['REQUEST_URI'];
+
+    return $protocol . $host . $uri;
+}
+
+$currentURL = getCurrentURL();
+
+
 $statusMsg = '';
 include ("partials/_db.php");
 if (!isset($_GET['member']))
@@ -63,7 +76,15 @@ if ($star == 'null')
         <?php echo $name; ?>
     </title>
     <link rel="shortcut icon" href="imgs/<?php echo $row['pic'] ?>" type="image/x-icon">
+
+
+    <meta property="og:title" content="GIEO Gita : <?php echo $name; ?> ">
+    <meta property="og:description" content=" <?php echo $name; ?> is a member of GIEO Gita">
     <meta property="og:image" content="imgs/<?php echo $row['pic'] ?>">
+    <meta property="og:url" content="<?php echo $currentURL ?>">
+    <meta property="og:type" content="article">
+
+
     <!-- Load FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -150,10 +171,12 @@ if ($star == 'null')
             border-radius: 50%;
             /* Apply circular mask */
         }
-        .karykarinitable{
+
+        .karykarinitable {
             overflow-x: scroll;
         }
-        .karykarinitable table{
+
+        .karykarinitable table {
             font-size: 1rem !important;
         }
     </style>
@@ -513,16 +536,17 @@ if ($star == 'null')
         <div class="container ">
             <div class="row">
                 <div class="col-md d-flex justify-content-center align-items-center">
-                   <h2> कार्यकारिणी सदस्य  (
-                <?php
-                echo $tehsil;
-                ?>)</h2>
+                    <h3> कार्यकारिणी सदस्य (
+                        <?php
+                        echo $tehsil;
+                        ?>)
+                    </h3>
                 </div>
                 <div class="col-md karykarinitable">
                     <table class="table   table-striped fs-5">
                         <thead>
                             <tr>
-                                <th  scope="col">sr</th>
+                                <th scope="col">sr</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">City</th>
@@ -532,7 +556,7 @@ if ($star == 'null')
                         </thead>
                         <tbody>
                             <?php
-                             $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND tehsil = '$tehsil' AND designation != 'Member';";
+                            $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND tehsil = '$tehsil' AND designation != 'Member';";
 
                             $res = $conn->query($ksql);
                             while ($r = mysqli_fetch_assoc($res))
@@ -540,10 +564,10 @@ if ($star == 'null')
                                 echo '
                                 <tr class="text-secondary">
                                 <th scope="row">1</th>
-                                <td>'.$r['name'].'</td>
-                                <td>'.$r['phone'].'</td>
-                                <td>'.$r['tehsil'].'</td>
-                                <td>'.$r['designation'].'</td>
+                                <td>' . $r['name'] . '</td>
+                                <td>' . $r['phone'] . '</td>
+                                <td>' . $r['tehsil'] . '</td>
+                                <td>' . $r['designation'] . '</td>
                                 <td class="text-success d-flex gap-4 fs-4">
                                     <a href="tel:' . $r['phone'] . '">
                                         <i class="fa-solid fa-phone"></i>

@@ -56,7 +56,7 @@
 
 <body class="position-relative">
   <div class="background-frame position-fixed top-0 right-0">
-    <!-- <iframe id="myIframe" src="https://gieogita.org/auto-tour/" frameborder="0"></iframe> -->
+    <iframe id="myIframe" src="https://gieogita.org/auto-tour/" frameborder="0"></iframe>
   </div>
 
   <!-- ================Toast =========== -->
@@ -131,14 +131,14 @@
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="stateSelect">Select State</label>
-          <select id="stateSelect" name="state"  class="form-select " aria-label="Small select example" onchange="loadDistrict(this)">
-            <option selected>---State---</option>
+          <select id="stateSelect" name="state"  class="form-select " aria-label="Small select example" onchange="loadDistrict(this)" disabled>
+            <option selected>--------</option>
           </select>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
         <label for="citySelect" class="form-label form-label-sm">Select District</label>
-          <select id="citySelect" name="district" class="form-select " aria-label="Small select example" onchange="loadTehsil(this)">
-            <option selected>---State---</option>
+          <select id="citySelect" name="district" class="form-select " aria-label="Small select example" onchange="loadTehsil(this)" disabled>
+            <option selected>---------</option>
           </select>
 
           
@@ -146,8 +146,8 @@
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="tehsilSelect">Select Tehsil</label>
-          <select id="tehsilSelect" name="tehsil" class="form-select " aria-label="Small select example">
-            <option selected>---State---</option>
+          <select id="tehsilSelect" name="tehsil" class="form-select " aria-label="Small select example" disabled>
+            <option selected>--------</option>
           </select>
         </div>
 
@@ -170,6 +170,8 @@
             <option value="Doctor" aria-selected="false">Doctor</option>
             <option value="Govt. Job, Retired" aria-selected="false">Govt. Job, Retired</option>
             <option value="Retired" aria-selected="false">Retired</option>
+            <option value="Professional" aria-selected="false">Professional</option>
+            <option value="Law Practice" aria-selected="false">Law Practice</option>
           </select>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">

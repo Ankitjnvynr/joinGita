@@ -1,4 +1,4 @@
-<option value="" selected>---State---</option>
+<option value="" selected>---Tehsil---</option>
 <?php
 require ("../partials/_db.php");
 if (isset($_GET['country']))

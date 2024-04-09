@@ -246,30 +246,27 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
         let SelectState = (e) => {
 
             $.ajax({
-                url: '_selectState.php',
-                type: 'POST',
+                url: "../selectOptions/_state.php",
+                type: "GET",
                 data: {
                     country: e.value
                 },
-                success: function (response) {
-                    let stateSelect = document.getElementById('stateSelect')
+                success: (response) => {
                     // console.log(response)
-                    stateSelect.innerHTML = response;
+                    $("#stateSelect").html(response)
                 }
             })
         }
         let selectingdistrict = (e) => {
 
             $.ajax({
-                url: '_selectDistrict.php',
-                type: 'POST',
+                url: "../selectOptions/_district.php",
+                type: "GET",
                 data: {
                     country: e.value
                 },
-                success: function (response) {
-                    let stateSelect = document.getElementById('districtSelect')
-                    // console.log(response)
-                    stateSelect.innerHTML = response;
+                success: (response) => {
+                    $("#districtSelect").html(response)
                 }
             })
         }
