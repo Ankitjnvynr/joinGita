@@ -1,6 +1,27 @@
 var userIP;
 var userCountry;
 
+function selectOptionByCountry(countryCode) {
+  // Get the select element
+  var selectElement = document.getElementById("countrySelect");
+
+  // Iterate over options
+  for (var i = 0; i < selectElement.options.length; i++) {
+    var option = selectElement.options[i];
+    var coddde = option.getAttribute("sortname");
+    console.log(coddde)
+    
+    
+    // Check if the option's sortname attribute matches the user's country code
+    if ( coddde == countryCode) {
+      console.log(option.getAttribute("sortname"),countryCode)
+      // Set the selected attribute to true
+      option.selected = true;
+      break; // Stop iterating once found
+    }
+  }
+}
+
 fetch("https://api.ipify.org?format=json")
   .then(response => response.json())
   .then(data => {
@@ -12,6 +33,7 @@ fetch("https://api.ipify.org?format=json")
     fetch(url)
       .then(response => response.text())
       .then(country => {
+        console.log(country)
         userCountry = country;
         // Select the option based on the user's country
         selectOptionByCountry(userCountry);
@@ -20,25 +42,7 @@ fetch("https://api.ipify.org?format=json")
   })
   .catch(error => console.error("Error:", error));
 
-function selectOptionByCountry(countryCode) {
-  // Get the select element
-  var selectElement = document.getElementById("countrySelect");
 
-  // Iterate over options
-  for (var i = 0; i < selectElement.options.length; i++) {
-    var option = selectElement.options[i];
-    var coddde = option.getAttribute("sortname");
-    
-    
-    // Check if the option's sortname attribute matches the user's country code
-    if ( coddde== countryCode) {
-      console.log(option.getAttribute("sortname"),countryCode)
-      // Set the selected attribute to true
-      option.selected = true;
-      break; // Stop iterating once found
-    }
-  }
-}
 
 // alert("sdsd")
 loadState = (e) => {
