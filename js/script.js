@@ -28,7 +28,7 @@ function selectOptionByCountry(countryCode) {
   for (var i = 0; i < selectElement.options.length; i++) {
     var option = selectElement.options[i];
     var coddde = option.getAttribute("sortname");
-    console.log(coddde == countryCode)
+    
     
     // Check if the option's sortname attribute matches the user's country code
     if ( coddde== countryCode) {
@@ -38,4 +38,45 @@ function selectOptionByCountry(countryCode) {
       break; // Stop iterating once found
     }
   }
+}
+
+// alert("sdsd")
+loadState = (e) => {
+  $.ajax({
+      url: "selectOptions/_state.php",
+      type: "GET",
+      data: {
+          country: e.value
+      },
+      success: (response) => {
+          // console.log(response)
+          $("#stateSelect").html(response)
+
+      }
+  })
+}
+loadDistrict = (e) => {
+  $.ajax({
+      url: "selectOptions/_district.php",
+      type: "GET",
+      data: {
+          country: e.value
+      },
+      success: (response) => {
+          $("#citySelect").html(response)
+      }
+  })
+}
+loadTehsil = (e) => {
+  $.ajax({
+      url: "selectOptions/_tehsilOption.php",
+      type: "GET",
+      data: {
+          country: e.value
+      },
+      success: (response) => {
+        console.log(response)
+          $("#tehsilSelect").html(response)
+      }
+  })
 }

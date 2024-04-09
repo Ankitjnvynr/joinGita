@@ -1,7 +1,4 @@
 
-
-
-
 let smarried = document.querySelector('#married');
 let aniversry = document.querySelector('#aniversry');
 function aniver() {
@@ -44,9 +41,3 @@ function blockChars(event) {
     return true;
   }
 }
-
-
-
-
-
-

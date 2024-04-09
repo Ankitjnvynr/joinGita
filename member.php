@@ -63,6 +63,7 @@ if ($star == 'null')
         <?php echo $name; ?>
     </title>
     <link rel="shortcut icon" href="imgs/<?php echo $row['pic'] ?>" type="image/x-icon">
+    <meta property="og:image" content="imgs/<?php echo $row['pic'] ?>">
     <!-- Load FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -514,7 +515,7 @@ if ($star == 'null')
                 <div class="col-md d-flex justify-content-center align-items-center">
                    <h2> कार्यकारिणी सदस्य  (
                 <?php
-                echo $district;
+                echo $tehsil;
                 ?>)</h2>
                 </div>
                 <div class="col-md karykarinitable">
@@ -531,7 +532,7 @@ if ($star == 'null')
                         </thead>
                         <tbody>
                             <?php
-                             $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND designation != 'Member';";
+                             $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND tehsil = '$tehsil' AND designation != 'Member';";
 
                             $res = $conn->query($ksql);
                             while ($r = mysqli_fetch_assoc($res))
