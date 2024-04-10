@@ -389,9 +389,9 @@ if ($star == 'null') {
                 <div class="col-md bg-warning-subtle rounded-5 py-4 bg-white">
                     <!-- Define the section for displaying details -->
                     <div class="details d-flex flex-column justify-content-center align-items-center">
-                        <div class="now-playing">PLAYING x OF y</div>
+                        <div class="now-playing">PLAYING</div>
                         <div class="track-art"></div>
-                        <div class="track-name">Song 1</div>
+                        <div style="" class="track-name fs-6 ">Song 1</div>
                         <audio data-music="0" src="audio/song1.mp3" id="currentAudio"></audio>
                     </div>
                     <!-- Define the section for displaying track buttons -->
@@ -420,9 +420,10 @@ if ($star == 'null') {
                     </div>
                 </div>
 
-                <div class="col-md px-2 py-5">
+                <div class="col-md px-2 py-3">
                     <div style=" height:100%;  " class="music-player mx-2 ">
-                        <ul id="songlist" style="max-height: 200px;" class="list-group overflow-y-scroll">
+                    click to play
+                        <ul id="songlist" style="max-height: 300px; font-size:1rem;" class="list-group overflow-y-scroll">
                             <!-- Replace the following list items with your actual music data -->
                             <li id="0" class="list-group-item music-item" data-src="audio/song1.mp3" data-cover="images/cover1.jpg">Song 1</li>
                             <li id="1" class="list-group-item music-item" data-src="audio/song2.mp3" data-cover="images/cover2.jpg">Song 2</li>

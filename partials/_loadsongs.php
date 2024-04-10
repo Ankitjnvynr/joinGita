@@ -23,9 +23,10 @@ $songs = array_filter($files, function($file) use ($directory) {
 
 // Now $songs array contains all the mp3 files in the directory
 // You can loop through $songs to display them or do any other operation
-
+$sr = 0;
 foreach ($songs as $song) {
     // echo $song . "<br>";
-    echo '<li id="0" class="list-group-item music-item" data-src="audio/'.$song.'" data-cover="images/cover1.jpg">'.$song.'</li>';
+    echo '<li id="'.$sr.'" onclick="playsong(this)" class="list-group-item music-item" data-src="audio/'.$song.'" data-cover="images/cover1.jpg">'.$song.'</li>';
+    $sr++;
 }
 ?>

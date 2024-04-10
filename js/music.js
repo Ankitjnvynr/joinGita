@@ -19,23 +19,23 @@ function playpauseTrack() {
     }
 }
 
-Array.from(Allmusic).forEach((element) => {
-    element.addEventListener("click", (e) => {
-        currentAudio.src = e.target.dataset.src;
-        playTrackName.innerHTML = e.target.innerHTML;
+
+playsong = (e) => {
+        currentAudio.src = e.dataset.src;
+        playTrackName.innerHTML = e.innerHTML;
         playPause.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
-        console.log(e.target);
+        
         let a = document.createElement("audio");
-        a.src = e.target.dataset.src;
-        console.log(a);
+        a.src = e.dataset.src;
+        
         const duration = a.duration;
         console.log(duration);
         const totalMinutes = Math.floor(duration / 60);
         const totalSeconds = Math.floor(duration % 60);
         totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? "0" : ""
             }${totalSeconds}`;
-    });
-});
+    };
+
 currentAudio.addEventListener("timeupdate", () => {
     const currentTime = currentAudio.currentTime;
     const duration = currentAudio.duration;
