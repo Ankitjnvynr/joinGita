@@ -35,10 +35,10 @@
     </div>
   </div>
 </div>
-<div class="container-fluid bg-white p-3 sticky-top shadow">
+<div class="container-fluid bg-white p-2  sticky-top shadow">
   <div class="container ">
     <div id="mynav" class="a-navbar">
-      <div class="logo"><img width="70px" src="imgs/logo.png" alt="GIEO Gita logo"></div>
+      <div class="logo"><img width="50px" src="imgs/logo.png" alt="GIEO Gita logo"></div>
       <ul class=" d-flex gap-3 align-items-center m-0">
         <li><a href="https://gieogita.org/" aria-current="page"><span>GIEO GITA</span></a></li>
         <li><a href="https://parivaar.gieogita.org/"><span>Join GIEO Gita</span></a></li>
@@ -58,7 +58,7 @@
         <label for="menutoggle" style=" position: absolute; right: 4%; "><img width="50px" src="imgs/hamburger-menu.svg"
             alt=""></label>
       </div>
-      <ul id="mobilemenu" class=" d-flex flex-column gap-3  justify-content-start p-3 mt-3 text-white">
+      <ul id="mobilemenu" class=" d-flex flex-column gap-3  justify-content-start p-1 mt-3 text-white">
         <li><a href="https://gieogita.org/" aria-current="page"><span>GIEO GITA</span></a></li>
         <li><a href="https://parivaar.gieogita.org/"><span>Join GIEO Gita</span></a></li>
         <li><a href="#"><span>About Us</span></a></li>

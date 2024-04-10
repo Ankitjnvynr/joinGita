@@ -9,8 +9,8 @@ function selectOptionByCountry(countryCode) {
   for (var i = 0; i < selectElement.options.length; i++) {
     var option = selectElement.options[i];
     var coddde = option.getAttribute("sortname");
-    var coddde = coddde.toLowerCase();
-    console.log(coddde);
+    // var coddde = coddde.toLowerCase();
+    // console.log(coddde);
 
 
     // Check if the option's sortname attribute matches the user's country code
@@ -88,3 +88,8 @@ loadTehsil = (e) => {
     }
   })
 }
+setTimeout(() => {
+  var selectedCountry = document.getElementById('countrySelect');
+  
+  loadState(selectedCountry)
+}, 700);

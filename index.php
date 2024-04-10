@@ -100,7 +100,7 @@
             <option selected="">---Country---</option>
             <option value="Australia" datavalue="13" sortname="AU">Australia</option>
             <option value="Canada" datavalue="38" sortname="CA">Canada</option>
-            <option value="India" datavalue="101" sortname="IN">India</option>
+            <option value="India" datavalue="101" sortname="IN" selected>India</option>
             <option value="Japan" datavalue="109" sortname="JP">Japan</option>
             <option value="New Zealand" datavalue="157" sortname="NZ">New Zealand</option>
             <option value="United Arab Emirates" datavalue="229" sortname="AE">United Arab Emirates</option>
@@ -172,6 +172,9 @@
             <option value="Retired" aria-selected="false">Retired</option>
             <option value="Professional" aria-selected="false">Professional</option>
             <option value="Law Practice" aria-selected="false">Law Practice</option>
+            <option value="Social Service" aria-selected="false">Social Service</option>
+            <option value="Tutor" aria-selected="false">Tutor</option>
+            <option value="Beauty Parlor" aria-selected="false">Beauty Parlor</option>
           </select>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
@@ -196,6 +199,11 @@
             <option value="12th Pass" aria-selected="false">12th Pass</option>
             <option value="10th Pass" aria-selected="false">10th Pass</option>
             <option value="Others" aria-selected="false">Others</option>
+            <option value="BAMS" aria-selected="false">BAMS</option>
+            <option value="GAMS" aria-selected="false">GAMS</option>
+            <option value="Msc" aria-selected="false">Msc</option>
+            <option value="Diploma Holder" aria-selected="false">Diploma Holder</option>
+            <option value="Engineer" aria-selected="false">Engineer</option>
           </select>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">
