@@ -172,6 +172,9 @@ if ($star == 'null') {
         .karykarinitable table {
             font-size: 1rem !important;
         }
+        .picscard{
+            flex: 1 0 200px !important;
+        }
     </style>
 </head>
 
@@ -422,7 +425,7 @@ if ($star == 'null') {
 
                 <div class="col-md px-2 py-3">
                     <div style=" height:100%;  " class="music-player mx-2 ">
-                    click to play
+                        click to play
                         <ul id="songlist" style="max-height: 300px; font-size:1rem;" class="list-group overflow-y-scroll">
                             <!-- Replace the following list items with your actual music data -->
                             <li id="0" class="list-group-item music-item" data-src="audio/song1.mp3" data-cover="images/cover1.jpg">Song 1</li>
@@ -557,6 +560,37 @@ if ($star == 'null') {
             </div>
         </div>
     </div>
+
+    <!-- =======================photo section============================ -->
+    <div class="container mb-5">
+        <h4>Downloads</h4>
+        <div class="row gap-2 d-flex flex-wrap">
+            
+            <?php
+            // Define the directory where your images are stored
+            $imageDir = 'imgs/gurujiPics/';
+
+            // Open a directory handle
+            $dirHandle = opendir($imageDir);
+
+            // Loop through each file in the directory
+            while (($file = readdir($dirHandle)) !== false) {
+                // Check if the file is an image
+                if (is_file($imageDir . $file) && in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
+                    // Display the image
+                    echo '<div  class=" picscard card d-flex align-items-center justify-content-center"> <img style="height: 100%; object-fit:cover; max-width:200px" src="' . $imageDir . $file . '" alt="' . $file . '" /><a download class="btn btn-sucess" href="imgs/gurujiPics/' . $file . '">Download</a> </div>';
+                }
+            }
+
+            // Close the directory handle
+            closedir($dirHandle);
+            ?>
+
+
+        </div>
+    </div>
+    <!-- =======================photo section end ============================ -->
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
@@ -718,7 +752,7 @@ if ($star == 'null') {
                 $.ajax({
                     type: 'POST',
                     url: 'partials/_loadsongs.php',
-                    success:(res)=>{
+                    success: (res) => {
                         // console.log(res)
                         $('#songlist').html(res)
                     }
