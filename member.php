@@ -415,7 +415,7 @@ if ($star == 'null') {
                     <!-- Define the section for displaying the volume slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3">
                         <i class="fa fa-volume-down"></i>
-                        <input style="width: 50%;" type="range" min="1" max="100" value="99" class="volume_slider contrls" onchange="setVolume()">
+                        <input style="width: 50%;" type="range" min="1" max="100" value="41" class="volume_slider contrls" onchange="setVolume()">
                         <i class="fa fa-volume-up"></i>
                     </div>
                 </div>

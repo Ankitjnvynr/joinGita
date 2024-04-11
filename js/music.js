@@ -21,20 +21,21 @@ function playpauseTrack() {
 
 
 playsong = (e) => {
-        currentAudio.src = e.dataset.src;
-        playTrackName.innerHTML = e.innerHTML;
-        playPause.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
-        
-        let a = document.createElement("audio");
-        a.src = e.dataset.src;
-        
-        const duration = a.duration;
-        console.log(duration);
-        const totalMinutes = Math.floor(duration / 60);
-        const totalSeconds = Math.floor(duration % 60);
-        totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? "0" : ""
-            }${totalSeconds}`;
-    };
+    currentAudio.src = e.dataset.src;
+    playTrackName.innerHTML = e.innerHTML;
+    playPause.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
+
+    let a = document.createElement("audio");
+    a.src = e.dataset.src;
+
+    const duration = a.duration;
+    console.log(duration);
+    const totalMinutes = Math.floor(duration / 60);
+    const totalSeconds = Math.floor(duration % 60);
+    totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? "0" : ""
+        }${totalSeconds}`;
+    playpauseTrack()
+};
 
 currentAudio.addEventListener("timeupdate", () => {
     const currentTime = currentAudio.currentTime;
@@ -70,23 +71,35 @@ function seekTo() {
     currentAudio.currentTime = seekto;
 }
 
-if(currentAudio.dataset.music == '0'){
+if (currentAudio.dataset.music == '0') {
     prev_track.style.opacity = "0.3";
 }
 function prevTrack() {
     next_track.style.opacity = "1";
-    let music = Number(currentAudio.dataset.music);
-    
-    if (music = 0) {
+    let music = Number(currentAudio.dataset.music); //current music id;
+    music--;
+    if (music == 0) {
+        prev_track.style.opacity = "0.3";
+        return;
+    } else {
         let a = document.getElementById(music);
-        
         currentAudio.src = a.dataset.src;
+        playpauseTrack();
         playTrackName.innerHTML = a.innerHTML;
         currentAudio.dataset.music = music;
-    } else {
-        console.log("No next track available");
-        prev_track.style.opacity = "0.3";
     }
+
+
+    // if (music = 0) {
+    //     let a = document.getElementById(music);
+
+    //     currentAudio.src = a.dataset.src;
+    //     playTrackName.innerHTML = a.innerHTML;
+    //     currentAudio.dataset.music = music;
+    // } else {
+    //     console.log("No next track available");
+    //     prev_track.style.opacity = "0.3";
+    // }
 }
 
 function nextTrack() {
@@ -99,13 +112,12 @@ function nextTrack() {
     // Check if the next music is within the total count
     if (music <= totalMusicCount) {
         let a = document.getElementById(music);
-        //   console.log(a);
         currentAudio.src = a.dataset.src;
+        playpauseTrack();
         playTrackName.innerHTML = a.innerHTML;
         currentAudio.dataset.music = music;
     } else {
         // If there is no next music, you can add a message or perform any other action
-        console.log("No next track available");
         next_track.style.opacity = "0.3";
         // Optionally, you can stop playback or loop back to the first track
         // currentAudio.src = document.getElementById(1).dataset.src;
