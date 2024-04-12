@@ -168,11 +168,11 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
 
     <div class="container">
         <?php
-        if ($values)
+        if ($done)
         {
             echo $suc;
             echo '
-             You were added
+             You added
             <span class="bg-warning-subtle rounded px-1">
             ';
         }
