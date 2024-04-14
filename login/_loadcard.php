@@ -146,8 +146,9 @@ while ($row = mysqli_fetch_array($result))
                             <div class="card p-0 overflow-hidden">
                                 <div class="d-flex picbg">
                                 <div style="width:100px; height:100px" class="pic relative m-2">
-                                    <img style="border:2px solid white; aspect-ratio:1/1;  width:100%;" class="absolute rounded-circle bg-white border-danger p-1" style=";" src="../imgs/' . $pic . '" alt="' . $pic . '">
-                                    
+                                <label for="changeImgs" >
+                                    <img onclick="getPicId(this,' . $user_id . ')" style="border:2px solid white; aspect-ratio:1/1;  width:100%;" class="absolute rounded-circle bg-white border-danger p-1" style=";" src="../imgs/' . $pic . '" alt="' . $pic . '">
+                                </label>
                                 </div>
                                 <div style="width:67%" class="name d-flex flex-column justify-content-around">
                                     <h2 class="card-title m-0 p-0 fs-4" style="text-transform: lowercase; text-transform: capitalize;">' . $name . '</h2>
@@ -190,4 +191,3 @@ while ($row = mysqli_fetch_array($result))
                             ';
 }
 ?>
-
