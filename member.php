@@ -13,13 +13,15 @@ $currentURL = getCurrentURL();
 
 
 $statusMsg = '';
-include("partials/_db.php");
-if (!isset($_GET['member'])) {
+include ("partials/_db.php");
+if (!isset($_GET['member']))
+{
     header('location:view-profile.php');
     exit;
 }
 
-if (isset($_POST['Update'])) {
+if (isset($_POST['Update']))
+{
     $targetDir = "imgs/";
     $updateEmail = $_POST['updateEmail'];
     $memberId = $_GET['member'];
@@ -41,7 +43,8 @@ $memberId = $_GET['member'];
 $sql = "SELECT * FROM `users` WHERE `hash_id` = '$memberId'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
-if (!$row) {
+if (!$row)
+{
     echo "not";
     header("location:view-profile.php?pnot=true");
     exit;
@@ -58,7 +61,8 @@ $pic = $row['pic'];
 $star = $row['star'];
 $dob = $row['dob'];
 $aniver_date = $row['aniver_date'];
-if ($star == 'null') {
+if ($star == 'null')
+{
     $star = "";
 }
 ?>
@@ -83,10 +87,13 @@ if ($star == 'null') {
 
     <!-- Load FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <style>
@@ -172,7 +179,8 @@ if ($star == 'null') {
         .karykarinitable table {
             font-size: 1rem !important;
         }
-        .picscard{
+
+        .picscard {
             flex: 1 0 200px !important;
         }
     </style>
@@ -183,7 +191,9 @@ if ($star == 'null') {
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="jointoast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img width="20px" src="https://static.vecteezy.com/system/resources/previews/010/152/436/original/tick-check-mark-icon-sign-symbol-design-free-png.png" class="rounded me-2" alt="...">
+                <img width="20px"
+                    src="https://static.vecteezy.com/system/resources/previews/010/152/436/original/tick-check-mark-icon-sign-symbol-design-free-png.png"
+                    class="rounded me-2" alt="...">
                 <strong class="me-auto text-success">Joined successfully</strong>
                 <small>1 second ago</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -198,7 +208,9 @@ if ($star == 'null') {
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="alreadyToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img width="20px" src="https://static.vecteezy.com/system/resources/previews/010/152/436/original/tick-check-mark-icon-sign-symbol-design-free-png.png" class="rounded me-2" alt="...">
+                <img width="20px"
+                    src="https://static.vecteezy.com/system/resources/previews/010/152/436/original/tick-check-mark-icon-sign-symbol-design-free-png.png"
+                    class="rounded me-2" alt="...">
                 <strong class="me-auto text-success">Already Joined</strong>
                 <small>1 second ago</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -240,7 +252,9 @@ if ($star == 'null') {
     <div class="container my-5">
         <div class="row">
             <div class="col-md  d-flex justify-content-center align-items-center p-3">
-                <img style="width: 42%; aspect-ratio: 1/1; object-fit:cover;" class="rounded-circle shadow-lg border border-black" src="imgs/<?php echo $row['pic'] ?>" alt="user image" class="user">
+                <img style="width: 42%; aspect-ratio: 1/1; object-fit:cover;"
+                    class="rounded-circle shadow-lg border border-black" src="imgs/<?php echo $row['pic'] ?>"
+                    alt="user image" class="user">
             </div>
             <div class="col-md p-3">
                 <div class="shadow-lg bg-white rounded-5 p-4">
@@ -281,12 +295,16 @@ if ($star == 'null') {
                             </tr>
 
                             <?php
-                            if ($star !== '') {
-                                if ($star == "Corporate Trustee") {
+                            if ($star !== '')
+                            {
+                                if ($star == "Corporate Trustee")
+                                {
                                     $icon = "⭐⭐⭐";
-                                } elseif ($star == "Patern Trustee") {
+                                } elseif ($star == "Patern Trustee")
+                                {
                                     $icon = "⭐⭐";
-                                } else {
+                                } else
+                                {
                                     $icon = "⭐";
                                 }
                                 echo '
@@ -303,7 +321,8 @@ if ($star == 'null') {
                             <tr>
 
                                 <td class="text-center bg-warning-subtle rounded-3" colspan="3">
-                                    <a download class="btn btn-danger" href="card.php?member=<?php echo $memberId ?>">Download your card</a>
+                                    <a download class="btn btn-danger"
+                                        href="card.php?member=<?php echo $memberId ?>">Download your card</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -319,31 +338,37 @@ if ($star == 'null') {
                     <h4>Update your Profile</h4>
                 </div>
                 <div class="col-md ">
-                    <form action=" <?php echo $_SERVER['PHP_SELF'] . "?member=" . $memberId; ?>" method="POST" enctype="multipart/form-data">
+                    <form action=" <?php echo $_SERVER['PHP_SELF'] . "?member=" . $memberId; ?>" method="POST"
+                        enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md my-2 ">
                                 <label for="updatephone">Phone No</label>
-                                <input type="text" class="form-control" value="<?php echo $phone; ?>" id="updatephone" aria-label="First name" disabled>
+                                <input type="text" class="form-control" value="<?php echo $phone; ?>" id="updatephone"
+                                    aria-label="First name" disabled>
                             </div>
                             <div class="col-md my-2">
                                 <label for="updateEmail">Email address</label>
-                                <input type="text" value="<?php echo $row['email']; ?>" class="form-control" id="updateEmail" name="updateEmail" aria-label="Last name">
+                                <input type="text" value="<?php echo $row['email']; ?>" class="form-control"
+                                    id="updateEmail" name="updateEmail" aria-label="Last name">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md my-2 ">
                                 <label for="updatedob">Date of Birth</label>
-                                <input type="date" name="dob" class="form-control" value="<?php echo $dob; ?>" id="updatedob" aria-label="First name">
+                                <input type="date" name="dob" class="form-control" value="<?php echo $dob; ?>"
+                                    id="updatedob" aria-label="First name">
                             </div>
                             <div class="col-md my-2">
                                 <label for="updateAniver">Aniversary Date</label>
-                                <input type="date" value="<?php echo $aniver_date; ?>" class="form-control" id="updateAniver" name="aniver_date" aria-label="Last name">
+                                <input type="date" value="<?php echo $aniver_date; ?>" class="form-control"
+                                    id="updateAniver" name="aniver_date" aria-label="Last name">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md my-2">
                                 <label for="pic">Upload Profile Photo</label>
-                                <input onchange="fileValidation(this)" type="file" id="pic" name="pic" accept="image/*" class="form-control" aria-label="picture">
+                                <input onchange="fileValidation(this)" type="file" id="pic" name="pic" accept="image/*"
+                                    class="form-control" aria-label="picture">
                                 <span class="text-danger op">
                                     <?php echo $statusMsg; ?>
                                 </span>
@@ -361,17 +386,13 @@ if ($star == 'null') {
             <div class="col-md p-2">
                 <div class="bg-white p-3 p-md-5 rounded-5 shadow-lg">
 
-                    गीता मनीषी पूज्य स्वामी श्री ज्ञानानंद जी महाराज की सत्प्रेरणा
-                    पुरुषोत्तम मास में करें,अधिक से अधिक पुरुषोत्तम योग पाठ
-                    भारतीय वर्ष एवम मास परम्परा में हर तीसरे वर्ष अधिक मास आता है,जिसके अनुसार हर बार कोई एक महीना दो
-                    बार आता है,इस वर्ष श्रावण मास दो हैं,एक अधिक मास,जिसे मल मास भी कहा जाता है,इसमें लौकिक रूप में कोई
-                    शुद्ध मुहूर्त नहीं निकलता! स्वयं को निंदित रूप में देख मल मास भगवान श्रीकृष्ण की शरण में आर्त भाव से
-                    पहुंचा,तो भगवान नेअपना नाम देकर कहा कि अब से इस मास को पुरुषोत्तम मास कहा जाएगा ,जो इस वर्ष विक्रमी
-                    संवत 2080 में 18 जुलाई से 16अगस्त तक है
-                    गीता जी का 15 वा अध्याय पुरुषोत्तम परमात्मा के भाव से भावित है,
-                    पूज्य गुरुदेव ने आह्वान किया है कि पुरुषोत्तम मास में इस पुरुषोत्तम योग का नित्य प्रति अधिकाधिक पाठ
-                    हो, हर नगर में हो ,हर घर में हो,सभी गीता प्रिय स्वयं भी पाठ करें,अन्य सभी को भी इस पाठ के लिए
-                    प्रेरित करें
+                    <?php
+                    // Define the path to the file
+                    $filePath = 'rashrSuchna.txt';
+                    // Method 1: Using file_get_contents()
+                    $fileContent = file_get_contents($filePath);
+                    echo htmlspecialchars($fileContent);
+                    ?>
                 </div>
             </div>
             <div class="col-md d-flex justify-content-center align-items-center ">
@@ -412,13 +433,15 @@ if ($star == 'null') {
                     <!-- Define the section for displaying the seek slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3 ">
                         <div class="current-time">00:00</div>
-                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider contrls" onchange="seekTo()">
+                        <input style="width: 60%;" type="range" min="1" max="100" value="0" class="seek_slider contrls"
+                            onchange="seekTo()">
                         <div class="total-duration">00:00</div>
                     </div>
                     <!-- Define the section for displaying the volume slider-->
                     <div class="slider_container d-flex justify-content-center align-items-center mt-4 gap-3">
                         <i class="fa fa-volume-down"></i>
-                        <input style="width: 50%;" type="range" min="1" max="100" value="41" class="volume_slider contrls" onchange="setVolume()">
+                        <input style="width: 50%;" type="range" min="1" max="100" value="41"
+                            class="volume_slider contrls" onchange="setVolume()">
                         <i class="fa fa-volume-up"></i>
                     </div>
                 </div>
@@ -426,11 +449,15 @@ if ($star == 'null') {
                 <div class="col-md px-2 py-3">
                     <div style=" height:100%;  " class="music-player mx-2 ">
                         click to play
-                        <ul id="songlist" style="max-height: 300px; font-size:1rem;" class="list-group overflow-y-scroll">
+                        <ul id="songlist" style="max-height: 300px; font-size:1rem;"
+                            class="list-group overflow-y-scroll">
                             <!-- Replace the following list items with your actual music data -->
-                            <li id="0" class="list-group-item music-item" data-src="audio/song1.mp3" data-cover="images/cover1.jpg">Song 1</li>
-                            <li id="1" class="list-group-item music-item" data-src="audio/song2.mp3" data-cover="images/cover2.jpg">Song 2</li>
-                            <li id="2" class="list-group-item music-item" data-src="audio/song3.mp3" data-cover="images/cover3.jpg">Song 3</li>
+                            <li id="0" class="list-group-item music-item" data-src="audio/song1.mp3"
+                                data-cover="images/cover1.jpg">Song 1</li>
+                            <li id="1" class="list-group-item music-item" data-src="audio/song2.mp3"
+                                data-cover="images/cover2.jpg">Song 2</li>
+                            <li id="2" class="list-group-item music-item" data-src="audio/song3.mp3"
+                                data-cover="images/cover3.jpg">Song 3</li>
                         </ul>
                     </div>
                 </div>
@@ -449,16 +476,18 @@ if ($star == 'null') {
                     <h3 class="fw-bold">​मासिक प्रवास</h3>
                     <div class="my-2">
                         <img width="100%" class="rounded-3 shadow-lg" src="masik_parwas/<?php
-                                                                                        $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
-                                                                                        $result = mysqli_query($conn, $sql);
-                                                                                        $row = mysqli_fetch_array($result);
-                                                                                        echo $row['pic'];
-                                                                                        ?>" alt="<?php echo $row['pic']; ?>">
+                        $sql = "SELECT * FROM `masik_parvas` ORDER BY `dt` DESC ";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_array($result);
+                        echo $row['pic'];
+                        ?>"
+                            alt="<?php echo $row['pic']; ?>">
                     </div>
                 </div>
                 <div class="col-md d-flex flex-column justify-content-center align-items-center">
                     <h3 class="fw-bold">VIDEOS</h3>
-                    <iframe class="rounded" height="100%" width="100%" src="https://gieogita.org/manual-tour/" frameborder="0"></iframe>
+                    <iframe class="rounded" height="100%" width="100%" src="https://gieogita.org/manual-tour/"
+                        frameborder="0"></iframe>
                 </div>
             </div>
             <hr>
@@ -532,7 +561,8 @@ if ($star == 'null') {
                             $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND tehsil = '$tehsil' AND designation != 'Member';";
 
                             $res = $conn->query($ksql);
-                            while ($r = mysqli_fetch_assoc($res)) {
+                            while ($r = mysqli_fetch_assoc($res))
+                            {
                                 echo '
                                 <tr class="text-secondary">
                                 <th scope="row">1</th>
@@ -565,7 +595,7 @@ if ($star == 'null') {
     <div class="container mb-5">
         <h4>Downloads</h4>
         <div class="row gap-2 d-flex flex-wrap">
-            
+
             <?php
             // Define the directory where your images are stored
             $imageDir = 'imgs/gurujiPics/';
@@ -574,9 +604,11 @@ if ($star == 'null') {
             $dirHandle = opendir($imageDir);
 
             // Loop through each file in the directory
-            while (($file = readdir($dirHandle)) !== false) {
+            while (($file = readdir($dirHandle)) !== false)
+            {
                 // Check if the file is an image
-                if (is_file($imageDir . $file) && in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
+                if (is_file($imageDir . $file) && in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+                {
                     // Display the image
                     echo '<div  class=" picscard card d-flex align-items-center justify-content-center"> <img style="height: 100%; object-fit:cover; max-width:200px" src="' . $imageDir . $file . '" alt="' . $file . '" /><a download class="btn btn-sucess" href="imgs/gurujiPics/' . $file . '">Download</a> </div>';
                 }
@@ -592,10 +624,14 @@ if ($star == 'null') {
     <!-- =======================photo section end ============================ -->
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js" integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
+        integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script>
         const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'))
 
@@ -614,11 +650,11 @@ if ($star == 'null') {
     <script src="js/music.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
             let cropper;
             // Show modal and initialize cropper when it is shown
-            $('#cropperModal').on('shown.bs.modal', function() {
+            $('#cropperModal').on('shown.bs.modal', function () {
                 const image = document.getElementById('cropperImage');
                 const cropperContainer = document.querySelector('.cropper-container');
 
@@ -665,13 +701,13 @@ if ($star == 'null') {
                     rotatable: true,
                     rotator: true,
                     checkOrientation: true, // Set to 1 to ensure the cropped image fits within the container
-                    crop: function(event) {
+                    crop: function (event) {
                         // Apply circular mask to cropper container
                         $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
                         $('.cropper-container').css('overflow', 'hidden');
                     }
                 });
-                $('#cropperModal').on('hidden.bs.modal', function(e) {
+                $('#cropperModal').on('hidden.bs.modal', function (e) {
                     // Check if Cropper instance exists
 
                     if (cropper !== undefined) {
@@ -686,11 +722,11 @@ if ($star == 'null') {
             });
 
             // When user clicks the "Upload Profile Photo" button, show the modal
-            $('#pic').on('change', function(event) {
+            $('#pic').on('change', function (event) {
                 const input = event.target;
                 if (input.files && input.files[0]) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         $('#cropperImage').attr('src', e.target.result);
                         cropperModal.show();
                     }
@@ -700,7 +736,7 @@ if ($star == 'null') {
 
 
             // When user clicks the "Save" button, save the cropped image
-            $('#saveCroppedImage').on('click', function() {
+            $('#saveCroppedImage').on('click', function () {
                 if (cropper) {
                     const canvas = cropper.getCroppedCanvas();
                     const croppedImageDataURL = canvas.toDataURL("image/png");
@@ -721,7 +757,7 @@ if ($star == 'null') {
                             memberId: memberId
                         },
                         // dataType: 'json',
-                        success: function(response) {
+                        success: function (response) {
                             if (response.success) {
                                 // Display success message or perform any other actions
                                 // console.log(response.message);
@@ -732,7 +768,7 @@ if ($star == 'null') {
                                 console.log(response)
                             }
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             // Handle AJAX error
                             console.error(error);
                         }
@@ -747,7 +783,7 @@ if ($star == 'null') {
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             loadSongs = () => {
                 $.ajax({
                     type: 'POST',
@@ -763,10 +799,12 @@ if ($star == 'null') {
         });
     </script>
     <?php
-    if (isset($_GET['joined'])) {
+    if (isset($_GET['joined']))
+    {
         $joined = false;
         $joined = $_GET['joined'];
-        if ($joined == true) {
+        if ($joined == true)
+        {
             echo '
             <script>
                 const toastLiveExample = document.getElementById("jointoast")
@@ -778,10 +816,12 @@ if ($star == 'null') {
     }
     ?>
     <?php
-    if (isset($_GET['already'])) {
+    if (isset($_GET['already']))
+    {
         $pnot = false;
         $pnot = $_GET['already'];
-        if ($pnot == true) {
+        if ($pnot == true)
+        {
             echo '
             <script>
                 const toastLiveExample = document.getElementById("alreadyToast")

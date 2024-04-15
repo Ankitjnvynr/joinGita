@@ -32,13 +32,15 @@
                 <img width="100px" style="border-radius:50%;" class="boorder border-circle shadow-sm"
                     src="../imgs/logo.png" alt="">
             </div>
-            <div class="d-flex flex-column gap-3">
+            <div class="d-flex flex-column gap-1">
                 <a class="btn btn-danger" href="all-card.php">All Profiles</a>
                 <a class="btn btn-danger" href="masik-parwas.php">Masik Parwas</a>
+                <a class="btn btn-danger" href="rastrSuchna.php">राष्ट्र सूचना</a>
                 <a class="btn btn-danger" href="report.php">Report</a>
                 <a class="btn btn-danger" href="birthday.php">Birthday/Aniversary</a>
                 <a class="btn btn-danger" href="custom-message.php">Custom Message</a>
                 <a class="btn btn-danger" href="addTehsil.php">Add Tehsils</a>
+                <a class="btn btn-danger" href="music.php">Bhajans</a>
             </div>
         </div>
         <div>
