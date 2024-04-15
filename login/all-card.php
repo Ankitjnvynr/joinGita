@@ -26,133 +26,13 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-
-            background: #f7e092;
-            overflow-x: hidden;
-
-        }
-
-
-
-        .filterform select {
-            flex: 1 0 150px;
-        }
-
-        .filterform input {
-            flex: 1 0 150px;
-        }
-
-        @media (min-width: 1400px) {
-
-            .container,
-            .container-lg,
-            .container-md,
-            .container-sm,
-            .container-xl,
-            .container-xxl {
-                max-width: 1450px;
-            }
-        }
-
-
-
-
-
-
-        .intro {
-            animation: opacityani 0.5s cubic-bezier(0, 0, 0.02, 0.95);
-        }
-
-        @keyframes opacityani {
-            from {
-                opacity: 0;
-                scale: 0.95;
-            }
-
-            to {
-                opacity: 1;
-                scale: 1;
-            }
-        }
-
-        #allPics {
-            /* border: 2px solid purple; */
-            display: grid;
-            grid-template-columns: repeat(5, minmax(20%, 350px));
-            gap: 5px;
-        }
-
-        .imgs {
-            width: 100%;
-        }
-
-        .btn-close {
-            top: 5%;
-            right: 5%;
-        }
-
-        .custom-tooltip {
-            --bs-tooltip-bg: rgb(213, 0, 0);
-            --bs-tooltip-color: var(--bs-white);
-        }
-
-        .op {
-            opacity: 0;
-            animation: op 1s;
-        }
-
-        @keyframes op {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-
-
-            100% {
-                opacity: 0;
-                transform: scale(0);
-
-            }
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .picbg {
-            background: rgb(34, 193, 195);
-            background: linear-gradient(0deg, rgba(34, 193, 195, 0) 65%, rgba(255, 0, 0, 0.1) 35%);
-        }
-
-        .cardbox {
-            transition: all 1s;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
-            gap: 20px;
-            /* grid-template-columns: repeat( auto-fill, minmax(300px, auto) ); */
-            grid-template-columns: repeat(auto-fill, minmax(max-content, auto));
-            justify-content: center;
-            /* grid-template-columns: repeat(auto-fill, 40px);   */
-        }
-
-        .card {
-            width: 100%;
-            transition: all 1s;
-        }
-
-        .table td,
-        .table {
-            padding: 0;
-            margin: 0;
-        }
-
-        .table {
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/allcard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css"
+        integrity="sha512-bs9fAcCAeaDfA4A+NiShWR886eClUcBtqhipoY5DM60Y1V3BbVQlabthUBal5bq8Z8nnxxiyb1wfGX2n76N1Mw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
+        integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -188,11 +68,37 @@ header('Content-Type: text/html; charset=utf-8');
     </div>
     <!-- toast for update profile end -->
 
+    <!-- =================profile picture upate modaal cropper js================ -->
+    <!-- Modal -->
+    <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crop Image</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <div class="cropper-container">
+                        <img id="cropperImage" src="" alt="Image to crop">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="saveCroppedImage" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =================profile picture upate modaal end ================ -->
+
+
+
 
 
 
 
     <?php include '_options.php'; ?>
+    <input id="changeImg" type="file" class="form-control " >
 
     <div class="container">
         <form action="" method="POST" class="filterform d-flex flex-wrap gap-1">
@@ -246,295 +152,20 @@ header('Content-Type: text/html; charset=utf-8');
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
+        integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"
+        integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="filterselect.js"></script>
+    <script src="../js/allcard.js"></script>
 
     <script>
-        var moreloader = document.getElementById('moreloader')
-        let showloader = () => {
-            moreloader.innerHTML = `
-                <div class="spinner-border text-success" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            `;
-        }
-
-        let createhash = (phone) => {
-            return new Promise((resolve, reject) => {
-                $.ajax({
-                    url: "_createhash.php",
-                    type: "POST",
-                    data: {
-                        phone: phone
-                    },
-                    success: (response) => {
-                        resolve(response); // Resolve the promise with the response data
-                    },
-                    error: (error) => {
-                        reject(error); // Reject the promise if there's an error
-                    }
-                });
-            });
-        };
-
-        selectMessage = async (e) => {
-            const secondChild = e.parentNode.childNodes[3];
-            const memberName = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].innerText;
-            const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes[3].childNodes[0].innerText;
-            console.log(phoneNumber)
-            const newText = e.value;
-            let src = secondChild.getAttribute('href');
-            let link = src.split('&');
-            let myhash = await createhash(phoneNumber);
-            // console.log(myhash)
-
-
-            for (let i = 0; i < link.length; i++) {
-                if (link[i].startsWith('text=')) {
-                    link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText) + ' %0A %0ATo view profile Click here- ' + 'https://parivaar.gieogita.org/member.php?member=' + myhash;
-                    break;
-                }
-            }
-            href = link.join('&');
-            secondChild.setAttribute('href', href);
-
-
-        }
-    </script>
-
-    <script>
-        function tt() {
-            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-        }
-        tt();
-        const toastElList = document.querySelectorAll('.toast')[0]
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElList);
-
-        let toastmsg = document.getElementById('toastmsg');
-        toastmsg.innerHTML = "Updated Success!";
-        // toastBootstrap.show();
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            var limit = 20;
-            var start = 0;
-
-            $('.totalCount').load('_totalProfiles.php');
-            setInterval(() => {
-                $('.totalCount').load('_totalProfiles.php');
-            }, 3000);
-
-
-            function deleteScript() {
-                let dels = document.getElementsByClassName('del');
-                $.each(dels, function (e, item) {
-                    $(item).off('click').on('click', function (e) {
-                        cardid = $(this).attr('data-id');
-                        if (confirm("Are you sure to Delete ?")) {
-                            a = item.parentElement.parentElement.parentElement
-                            let imgd = {
-                                img: cardid
-                            }
-                            $.ajax({
-                                url: "_deletecard.php",
-                                type: "GET",
-                                data: imgd,
-                                success: function (data) {
-                                    // console.log(data)
-                                    $('#toastmsg').text(data)
-                                    toastBootstrap.show();
-
-                                    a.classList.add('op')
-                                    setTimeout(() => {
-                                        a.style.display = 'none';
-                                    }, 1000);
-                                    // loadpics(start, limit);
-                                    var fltr = {
-                                        filterName: $('#filterName').val(),
-                                        phone: $('#filterPhone').val(),
-                                        filterEmail: $('#filterEmail').val(),
-                                        filterCountry: $('#countrySelect').val(),
-                                        filterState: $('#stateSelect').val(),
-                                        filterDistrict: $('#districtSelect').val(),
-                                        filterTehsil: $('#tehsilSelect').val(),
-                                        limit: "20",
-                                        start: start,
-                                    }
-                                    $.ajax({
-                                        url: '_filteredCardsNumber.php',
-                                        type: 'POST',
-                                        // cache: false,
-                                        data: fltr,
-                                        success: function (response) {
-                                            // console.log(response)
-                                            $('.showing').html(response)
-
-                                        }
-                                    })
-
-                                }
-                            })
-                        } else {
-                            console.log("no")
-                        }
-                    })
-                })
-            }
-
-
-            deleteScript()
-
-            var action = 'inactive';
-            loadpics = (start, limit) => {
-                console.log(start, limit)
-                var fltr = {
-                    filterName: $('#filterName').val(),
-                    phone: $('#filterPhone').val(),
-                    filterEmail: $('#filterEmail').val(),
-                    filterCountry: $('#countrySelect').val(),
-                    filterState: $('#stateSelect').val(),
-                    filterDistrict: $('#districtSelect').val(),
-                    filterTehsil: $('#tehsilSelect').val(),
-                    limit: "20",
-                    start: start,
-                }
-                $.ajax({
-                    url: '_loadcard.php',
-                    type: 'POST',
-                    // cache: false,
-                    data: fltr,
-                    success: function (response) {
-                        // console.log(response)
-                        $('.cardbox').html(response);
-                        deleteScript()
-
-                    }
-                })
-                $.ajax({
-                    url: '_filteredCardsNumber.php',
-                    type: 'POST',
-                    // cache: false,
-                    data: fltr,
-                    success: function (response) {
-                        // console.log(response)
-                        $('.showing').html(response)
-
-                    }
-                })
-
-            }
-            loadMore = (start, limit) => {
-                showloader();
-                let dels = document.getElementsByClassName('del');
-                start = dels.length;
-
-                var fltr = {
-                    filterName: $('#filterName').val(),
-                    phone: $('#filterPhone').val(),
-                    filterEmail: $('#filterEmail').val(),
-                    filterCountry: $('#countrySelect').val(),
-                    filterState: $('#stateSelect').val(),
-                    filterDistrict: $('#districtSelect').val(),
-                    filterTehsil: $('#tehsilSelect').val(),
-                    limit: "50",
-                    start: start,
-                }
-                $.ajax({
-                    url: '_loadcard.php',
-                    type: 'POST',
-                    // cache: false,
-                    data: fltr,
-                    success: function (response) {
-                        if (response == ' ') {
-                            $('#loadMore').html("No More Data")
-                            moreloader.innerHTML = "";
-                            console.log("no more data")
-                        } else {
-                            $('.cardbox').append(response);
-                            deleteScript()
-                            moreloader.innerHTML = "";
-                        }
-                    }
-                })
-
-
-            }
-            // loadpics()
-            resetTop = false;
-            restwindowtop = () => {
-                resetTop = true;
-            }
-
-            if (action == 'inactive') {
-                action = 'active';
-                loadpics(start, limit);
-            }
-
-
-        })
-    </script>
-    <script>
-        let SelectState = (e) => {
-            $.ajax({
-                url: '_selectState.php',
-                type: 'POST',
-                data: {
-                    country: e.value
-                },
-                success: function (response) {
-                    let stateSelect = document.getElementById('stateSelect')
-                    // console.log(response)
-                    stateSelect.innerHTML = response;
-                    loadpics(0, 5)
-                }
-            })
-        }
-        let selectingdistrict = (e) => {
-
-            $.ajax({
-                url: '_selectDistrict.php',
-                type: 'POST',
-                data: {
-                    country: e.value
-                },
-                success: function (response) {
-                    let stateSelect = document.getElementById('districtSelect')
-                    // console.log(response)
-                    stateSelect.innerHTML = response;
-                    loadpics(0, 5)
-                }
-            })
-        }
-        let selectingtehsil = (e) => {
-
-            $.ajax({
-                url: '_selectTehsil.php',
-                type: 'POST',
-                data: {
-                    country: e.value
-                },
-                success: function (response) {
-                    let stateSelect = document.getElementById('tehsilSelect')
-                    console.log(response)
-                    stateSelect.innerHTML = response;
-                    loadpics(0, 5)
-                }
-            })
-        }
-    </script>
-    <script>
-
         const updatedToast = document.getElementById('updatedToast')
         const toastBootstrapupdate = bootstrap.Toast.getOrCreateInstance(updatedToast)
-
     </script>
-
-    <?php
-
-
-
-    ?>
 
 </body>
 

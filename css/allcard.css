@@ -1,0 +1,125 @@
+body {
+
+            background: #f7e092;
+            overflow-x: hidden;
+
+        }
+
+
+
+        .filterform select {
+            flex: 1 0 150px;
+        }
+
+        .filterform input {
+            flex: 1 0 150px;
+        }
+
+        @media (min-width: 1400px) {
+
+            .container,
+            .container-lg,
+            .container-md,
+            .container-sm,
+            .container-xl,
+            .container-xxl {
+                max-width: 1450px;
+            }
+        }
+
+
+
+
+
+
+        .intro {
+            animation: opacityani 0.5s cubic-bezier(0, 0, 0.02, 0.95);
+        }
+
+        @keyframes opacityani {
+            from {
+                opacity: 0;
+                scale: 0.95;
+            }
+
+            to {
+                opacity: 1;
+                scale: 1;
+            }
+        }
+
+        #allPics {
+            /* border: 2px solid purple; */
+            display: grid;
+            grid-template-columns: repeat(5, minmax(20%, 350px));
+            gap: 5px;
+        }
+
+        .imgs {
+            width: 100%;
+        }
+
+        .btn-close {
+            top: 5%;
+            right: 5%;
+        }
+
+        .custom-tooltip {
+            --bs-tooltip-bg: rgb(213, 0, 0);
+            --bs-tooltip-color: var(--bs-white);
+        }
+
+        .op {
+            opacity: 0;
+            animation: op 1s;
+        }
+
+        @keyframes op {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+
+
+            100% {
+                opacity: 0;
+                transform: scale(0);
+
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .picbg {
+            background: rgb(34, 193, 195);
+            background: linear-gradient(0deg, rgba(34, 193, 195, 0) 65%, rgba(255, 0, 0, 0.1) 35%);
+        }
+
+        .cardbox {
+            transition: all 1s;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+            gap: 20px;
+            /* grid-template-columns: repeat( auto-fill, minmax(300px, auto) ); */
+            grid-template-columns: repeat(auto-fill, minmax(max-content, auto));
+            justify-content: center;
+            /* grid-template-columns: repeat(auto-fill, 40px);   */
+        }
+
+        .card {
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .table td,
+        .table {
+            padding: 0;
+            margin: 0;
+        }
+
+        .table {
+            width: 100%;
+        }
