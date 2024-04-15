@@ -98,7 +98,7 @@ header('Content-Type: text/html; charset=utf-8');
 
 
     <?php include '_options.php'; ?>
-    <input id="changeImg" type="file" class="form-control " >
+    <input id="changeImg" type="file" class="form-control " hidden>
 
     <div class="container">
         <form action="" method="POST" class="filterform d-flex flex-wrap gap-1">
