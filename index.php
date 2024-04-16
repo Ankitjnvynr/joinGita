@@ -97,6 +97,7 @@
         <div class="bg-warning-subtle p-2 py-2 rounded ">
           <label class="form-label form-label-sm" for="countrySelect">Select Country</label>
           <select id="countrySelect" name="country" class="form-select " aria-label="Small select example" required="" onchange="loadState(this)">
+          
             <option selected="">---Country---</option>
             <option value="Australia" datavalue="13" sortname="AU">Australia</option>
             <option value="Canada" datavalue="38" sortname="CA">Canada</option>
@@ -106,6 +107,7 @@
             <option value="United Arab Emirates" datavalue="229" sortname="AE">United Arab Emirates</option>
             <option value="United Kingdom" datavalue="230" sortname="GB">United Kingdom</option>
             <option value="United States" datavalue="231" sortname="US">United States</option>
+            
           </select>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">

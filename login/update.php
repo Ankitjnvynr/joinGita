@@ -299,11 +299,20 @@ while ($row = mysqli_fetch_array($result))
             <div class="bg-warning-subtle p-2 py-2 rounded">
               <label class="form-label form-label-sm" for="married">Marital Status</label>
               <select name="married" id="married" class="form-select " onchange="aniver()">
-                <option value="">-- select Marital Status --</option>
-                <option value="Married" aria-selected="false">Married</option>
-                <option value="Single" aria-selected="false">Single</option>
-                <option value="<?php echo $marital_status ?>" aria-selected="false" selected>
-                  <?php echo $marital_status ?>
+                <?php
+                $marriedArr = ["-- select Marital Status --", "Married", "Single"];
+                foreach ($marriedArr as $mstatus)
+                {
+                  if ($mstatus == $marital_status)
+                  {
+                    echo '<option selected value="' . $mstatus . '">' . $mstatus . '</option>';
+                  } else
+                  {
+                    echo '<option value="' . $mstatus . '">' . $mstatus . '</option>';
+                  }
+                }
+                ?>
+                
                 </option>
               </select>
             </div>
@@ -314,19 +323,19 @@ while ($row = mysqli_fetch_array($result))
             <div class="bg-warning-subtle p-2 py-2 rounded">
               <label class="form-label form-label-sm" for="star">Star</label>
               <select name="star" id="star" class="form-select ">
-                <option value="">-- Star --</option>
-                <option value="Trustee" aria-selected="false">Trustee</option>
-                <option value="Patern Trustee" aria-selected="false">Patern Trustee</option>
-                <option value="Corporate Trustee" aria-selected="false">Corporate Trustee</option>
                 <?php
-                if ($star != "")
+                $starArr = ["-- Star --", "Trustee", "Patern Trustee", "Corporate Trustee"];
+                foreach ($starArr as $chkstar)
                 {
-                  echo '
-                    <option value=" ' . $star . '" aria-selected="false" selected> ' . $star . '</option>
-                    ';
+                  if ($chkstar == $star)
+                  {
+                    echo '<option selected value="' . $chkstar . '">' . $chkstar . '</option>';
+                  } else
+                  {
+                    echo '<option value="' . $chkstar . '">' . $chkstar . '</option>';
+                  }
                 }
                 ?>
-
               </select>
             </div>
             <div class="bg-warning-subtle p-2 py-2 rounded">
