@@ -323,8 +323,9 @@ while ($row = mysqli_fetch_array($result))
             <div class="bg-warning-subtle p-2 py-2 rounded">
               <label class="form-label form-label-sm" for="star">Star</label>
               <select name="star" id="star" class="form-select ">
+                <option value="">-- Star --</option>
                 <?php
-                $starArr = ["-- Star --", "Trustee", "Patern Trustee", "Corporate Trustee"];
+                $starArr = [ "Trustee", "Patern Trustee", "Corporate Trustee"];
                 foreach ($starArr as $chkstar)
                 {
                   if ($chkstar == $star)

@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: image/jpeg");
+header("Content-Type: image/jpeg; charset=utf-8");
 
 include ("partials/_db.php");
 if (!isset($_GET['member']))
@@ -19,7 +19,7 @@ if (!$row)
 }
 
 // Path to your font file
-$font = 'imgs/cards/NotoSans-VariableFont_wdth,wght.ttf';
+$font = 'imgs/cards/Mangal_B.ttf';
 // $font1 = 'imgs/cards/font.ttf';
 $font2 = 'imgs/cards/SEGUISYM.ttf';
 $profile = 'imgs/' . $row['pic'];
@@ -47,7 +47,7 @@ if ($star == 'null')
     }
 }
 
-header("Content-Disposition: attachment; filename=\"$name$phone.jpg\"");
+// header("Content-Disposition: attachment; filename=\"$name$phone.jpg\"");
 
 
 // Load the image
@@ -72,13 +72,7 @@ $textHeight = $textBoundingBox[1] - $textBoundingBox[5];
 $x_position = ($imageWidth - $textWidth) / 2;
 $y_position = ($imageHeight + $textHeight) / 2;
 
-// Add text to the image
-
-// Example profile picture (replace with your code to fetch image data from database)
-// echo $profile;
-// $profilePicture = imagecreatefromjpeg($profile);
 $profilePicture = imagecreatefrompng($profile);
-
 
 // Get the width and height of the profile picture
 list($profileWidth, $profileHeight) = getimagesize($profile);
