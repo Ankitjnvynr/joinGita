@@ -4,7 +4,8 @@ require ("../partials/_db.php");
 if (isset($_GET['country']))
 {
     $country = $_GET['country'];
-    $optionSql = "SELECT DISTINCT `district` FROM `allselect` WHERE state = '$country' ORDER BY district ASC";
+    $state = $_GET['state'];
+    $optionSql = "SELECT DISTINCT `district` FROM `allselect` WHERE country = '$country' AND state = '$state' ORDER BY district ASC";
     $result = $conn->query($optionSql);
     while ($row = mysqli_fetch_assoc($result))
     {

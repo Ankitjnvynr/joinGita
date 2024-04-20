@@ -135,7 +135,7 @@ if (isset($_POST['add-tehsil']))
             <div class="filterform d-flex flex-wrap gap-1">
                 <input required class="form-select form-select-sm" aria-label="Small select example"
                     name="filterCountry" list="countrySelect" onkeyup="SelectState(this)" placeholder="Type Country">
-                <datalist id="countrySelect">
+                <datalist id="countrySelectlist">
                     <option value="" selected>---Country---</option>
                     <?php
                     $optionSql = "SELECT DISTINCT `country` FROM `users` ";
@@ -202,7 +202,6 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
     <div class="container">
         <form action="" method="POST" class="">
             <div class="filterform d-flex flex-wrap gap-1">
-
                 <select id="countrySelect" onchange="loadState(this)" class="form-select form-select-sm">
                     <option value="" selected>---Country---</option>
                     <?php
@@ -219,20 +218,13 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
                     <option value="" selected>---states---</option>
                 </select>
 
-
                 <select id="allDistrict" onchange="loadTehsil(this)" class="form-select form-select-sm">
                     <option value="" selected>---District---</option>
                 </select>
-
-
             </div>
-
         </form>
     </div>
-    <div id="displayData" class="container">
-
-    </div>
-
+    <div id="displayData" class="container"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -240,11 +232,8 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-
-
     <script>
         let SelectState = (e) => {
-
             $.ajax({
                 url: "../selectOptions/_state.php",
                 type: "GET",
@@ -258,12 +247,12 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
             })
         }
         let selectingdistrict = (e) => {
-
             $.ajax({
                 url: "../selectOptions/_district.php",
                 type: "GET",
                 data: {
-                    country: e.value
+                    country: $('#countrySelect').val(),
+                    state1: e.value,
                 },
                 success: (response) => {
                     $("#districtSelect").html(response)
@@ -275,7 +264,9 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
                 url: '_selectTehsil.php',
                 type: 'POST',
                 data: {
-                    country: e.value
+                    country: $('#countrySelect').val(),
+                    state: $('#countrySelect').val(),
+                    district: e.value,
                 },
                 success: function (response) {
                     let stateSelect = document.getElementById('tehsilSelect')
@@ -309,10 +300,12 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
                 url: "../selectOptions/_district.php",
                 type: "GET",
                 data: {
-                    country: e.value
+                    country: $('#countrySelect').val(),
+                    state: e.value,
                 },
                 success: (response) => {
                     $("#allDistrict").html(response)
+                    console.log(($('#countrySelect').val()))
                 }
             })
         }
@@ -321,7 +314,9 @@ if you want to add multiple tehsils seperate them by comma." class="form-control
                 url: "../selectOptions/_tehsil.php",
                 type: "GET",
                 data: {
-                    country: e.value
+                    country: $('#countrySelect').val(),
+                    state: $('#allstate').val(),
+                    district: e.value,
                 },
                 success: (response) => {
                     $("#displayData").html(response)
