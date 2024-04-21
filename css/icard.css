@@ -1,0 +1,25 @@
+ body{
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+#studentIDCard{
+    /* background-color: rgb(212, 255, 245); */
+    border: 2px solid red;
+    width: 320px;
+    /* height: 450px; */
+    aspect-ratio: 9/16;
+    background-image: url('../imgs/cards/template.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+}
+.i-card-img{
+    width: 150px;
+    margin: auto;
+}
+.i-card-img img{
+    width: 100%;
+}
