@@ -1,6 +1,7 @@
 var userIP;
 var userCountry;
 
+
 function selectOptionByCountry(countryCode) {
   // Get the select element
   var selectElement = document.getElementById("countrySelect");
@@ -90,6 +91,25 @@ loadTehsil = (e) => {
 }
 setTimeout(() => {
   var selectedCountry = document.getElementById('countrySelect');
-  
+
   loadState(selectedCountry)
 }, 700);
+
+
+var joinForm = document.getElementById('joinForm');
+var phoneNumber = document.getElementById('phoneNum');
+
+joinForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (phoneNumber.value.length == '10') {
+    joinForm.submit();
+  } else {
+    phoneNumber.focus();
+    phoneNumber.classList.add('invalid');
+  }
+  
+  console.log(phoneNumber.value.length)
+});
+
+
+
