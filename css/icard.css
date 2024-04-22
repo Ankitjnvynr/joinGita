@@ -7,18 +7,23 @@
  }
 #studentIDCard{
     /* background-color: rgb(212, 255, 245); */
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 320px;
     /* height: 450px; */
-    aspect-ratio: 9/16;
+    aspect-ratio: 590/1004;
     background-image: url('../imgs/cards/template.jpg');
     background-size: contain;
     background-repeat: no-repeat;
+    box-sizing: border-box;
     
 }
 .i-card-img{
-    width: 150px;
+    width: 190px;
     margin: auto;
+    margin-top: 39%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid saddlebrown;
 }
 .i-card-img img{
     width: 100%;
