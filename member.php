@@ -99,6 +99,7 @@ if ($star == 'null')
     <style>
         body {
             background: #f7e092;
+            overflow-x: hidden;
         }
 
         #card td {
@@ -184,6 +185,7 @@ if ($star == 'null')
             flex: 1 0 200px !important;
         }
     </style>
+    <link rel="stylesheet" href="css/icard.css">
 </head>
 
 <body>
@@ -328,6 +330,47 @@ if ($star == 'null')
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div style="transform: translatex(-30%)" class="container position-absolute">
+        <div id="studentIDCard">
+            <div class="i-card">
+                <div class="i-card-img">
+                    <img src="imgs/<?php echo $row['pic'] ?>" alt="img" />
+                </div>
+                <p class="i-card-name"><?php echo $name ?></p>
+                <table class="i-card-table">
+                    <thead>
+                        <tr>
+                            <td>City</td>
+                            <td>:</td>
+                            <td><?php echo $tehsil ?></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Phone</td>
+                            <td>:</td>
+                            <td><?php echo $phone ?></td>
+                        </tr>
+                        <tr>
+                            <td>Wing</td>
+                            <td>:</td>
+                            <td><?php echo $wing ?></td>
+                        </tr>
+                        <tr>
+                            <td>Designation</td>
+                            <td>:</td>
+                            <td><?php echo $designation ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $icon ?></td>
+                            <td>:</td>
+                            <td><?php echo $star ?></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -480,8 +523,7 @@ if ($star == 'null')
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_array($result);
                         echo $row['pic'];
-                        ?>"
-                            alt="<?php echo $row['pic']; ?>">
+                        ?>" alt="<?php echo $row['pic']; ?>">
                     </div>
                 </div>
                 <div class="col-md d-flex flex-column justify-content-center align-items-center">

@@ -1,10 +1,5 @@
- body{
-    min-width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
- }
+
+
 #studentIDCard{
     /* background-color: rgb(212, 255, 245); */
     /* border: 2px solid red; */
@@ -15,16 +10,35 @@
     background-size: contain;
     background-repeat: no-repeat;
     box-sizing: border-box;
-    
+    position: relative;
+    position: static;
+}
+.i-card{
+    position: relative;
+    padding-top: 100px;
 }
 .i-card-img{
     width: 190px;
+    position: relative;
     margin: auto;
-    margin-top: 39%;
+    margin-top: 10px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid saddlebrown;
+    border: 7px solid #c16405;
 }
 .i-card-img img{
     width: 100%;
+}
+.i-card-name{
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+}
+.i-card-table{
+    margin-left: 20px;
+    margin-top: 23px;
+    font-weight:500;
+    font-size: 17px;
 }
