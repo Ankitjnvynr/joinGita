@@ -61,6 +61,7 @@ $pic = $row['pic'];
 $star = $row['star'];
 $dob = $row['dob'];
 $aniver_date = $row['aniver_date'];
+$icon = '';
 if ($star == 'null')
 {
     $star = "";
@@ -333,7 +334,7 @@ if ($star == 'null')
             </div>
         </div>
     </div>
-    <div style="transform: translatex(-30%)" class="container position-absolute">
+    <div style="transform: translatex(-100%)" class="container position-absolute">
         <div id="studentIDCard">
             <div class="i-card">
                 <div class="i-card-img">
@@ -603,11 +604,13 @@ if ($star == 'null')
                             $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND tehsil = '$tehsil' AND designation != 'Member';";
 
                             $res = $conn->query($ksql);
+                            $ser = 0;
                             while ($r = mysqli_fetch_assoc($res))
                             {
+                                $ser++;
                                 echo '
                                 <tr class="text-secondary">
-                                <th scope="row">1</th>
+                                <th scope="row">'.$ser.'</th>
                                 <td>' . $r['name'] . '</td>
                                 <td>' . $r['phone'] . '</td>
                                 <td>' . $r['tehsil'] . '</td>
@@ -686,7 +689,7 @@ if ($star == 'null')
         function downloadImage(dataUrl) {
             const link = document.createElement('a');
             link.href = dataUrl;
-            link.download = '<?php echo $name.$phone ?>';
+            link.download = '<?php echo $name . $phone ?>';
             link.click();
         }
     </script>
