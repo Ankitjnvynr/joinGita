@@ -1,25 +1,44 @@
- body{
-    min-width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
- }
+
+
 #studentIDCard{
     /* background-color: rgb(212, 255, 245); */
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 320px;
     /* height: 450px; */
-    aspect-ratio: 9/16;
+    aspect-ratio: 590/1004;
     background-image: url('../imgs/cards/template.jpg');
     background-size: contain;
     background-repeat: no-repeat;
-    
+    box-sizing: border-box;
+    position: relative;
+    position: static;
+}
+.i-card{
+    position: relative;
+    padding-top: 100px;
 }
 .i-card-img{
-    width: 150px;
+    width: 190px;
+    position: relative;
     margin: auto;
+    margin-top: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 7px solid #c16405;
 }
 .i-card-img img{
     width: 100%;
+}
+.i-card-name{
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+}
+.i-card-table{
+    margin-left: 20px;
+    margin-top: 25px;
+    font-weight:500;
+    font-size: 15px;
 }
