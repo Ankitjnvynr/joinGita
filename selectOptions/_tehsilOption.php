@@ -6,7 +6,7 @@ if (isset($_GET['country']))
     $country = $_GET['country'];
     $state = $_GET['state'];
     $district = $_GET['district'];
-    $optionSql = "SELECT DISTINCT `tehsil` FROM `allselect`  WHERE country = '$country' state = '$state' district = '$district' ORDER BY tehsil ASC";
+    $optionSql = "SELECT DISTINCT `tehsil` FROM `allselect`  WHERE country = '$country' AND state = '$state' AND district = '$district' ORDER BY tehsil ASC";
     $result = $conn->query($optionSql);
     while ($row = mysqli_fetch_assoc($result))
     {

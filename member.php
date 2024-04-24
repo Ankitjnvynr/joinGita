@@ -559,13 +559,14 @@ if ($star == 'null')
                         <tbody>
                             <?php
                             $ksql = "SELECT `name`,`phone`,`tehsil`, `designation` FROM `users` WHERE country = '$country' AND state = '$state' AND district = '$district' AND tehsil = '$tehsil' AND designation != 'Member';";
-
+    $sr = 0;
                             $res = $conn->query($ksql);
                             while ($r = mysqli_fetch_assoc($res))
                             {
+                                $sr++;
                                 echo '
                                 <tr class="text-secondary">
-                                <th scope="row">1</th>
+                                <th scope="row">' . $sr . '</th>
                                 <td>' . $r['name'] . '</td>
                                 <td>' . $r['phone'] . '</td>
                                 <td>' . $r['tehsil'] . '</td>
