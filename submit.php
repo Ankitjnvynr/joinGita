@@ -30,24 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $tehsil = $_POST["tehsil"];
   $address = $_POST["address"];
 
-  $occupation = $_POST["occupation"];
-  $education = $_POST["education"];
-  $dob = $_POST["dob"];
+  echo $occupation = $_POST["occupation"];
+  echo $education = $_POST["education"];
+  echo $dob = $_POST["dob"];
 
   $aniver_date = isset($_POST['aniver_date']) ? $_POST['aniver_date'] : "";
-
-
-
-
   // Use prepared statements to insert data
-  if (isset($_POST['joinsubmit']))
-  {
     $sql = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`,  `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `occupation`, `education`, `dob`,`interest`, `aniver_date`) VALUES ('$hash_id','$country','$name','$phone','$email','$dikshit','$married','$state','$district','$tehsil','$address','$occupation','$education','$dob','GIEO Gita','$aniver_date')";
-  }
-
-
-
-  try
+try
   {
     $result = mysqli_query($conn, $sql);
     if ($result)

@@ -125,7 +125,7 @@
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded">
           <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country code)</label>
-          <input id="phoneNum" name="phone" size="10" minlength="9" maxlength="10" type="text" class="form-control"
+          <input id="phoneNum" name="phone" size="10" minlength="10" maxlength="10" type="text" class="form-control"
             inputmode="numeric" pattern="[0-9]*" onkeypress="return blockChars(event)" required>
         </div>
         <div class="bg-warning-subtle p-2 py-2 rounded ">

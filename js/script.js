@@ -1,7 +1,6 @@
 var userIP;
 var userCountry;
 
-
 function selectOptionByCountry(countryCode) {
   // Get the select element
   var selectElement = document.getElementById("countrySelect");
@@ -13,10 +12,9 @@ function selectOptionByCountry(countryCode) {
     // var coddde = coddde.toLowerCase();
     // console.log(coddde);
 
-
     // Check if the option's sortname attribute matches the user's country code
     if (coddde == countryCode) {
-      console.log(option.getAttribute("sortname"), countryCode)
+      console.log(option.getAttribute("sortname"), countryCode);
       // Set the selected attribute to true
       option.selected = true;
       break; // Stop iterating once found
@@ -25,91 +23,88 @@ function selectOptionByCountry(countryCode) {
 }
 
 fetch("https://api.ipify.org?format=json")
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => response.json())
+  .then((data) => {
     userIP = data.ip;
 
     // Use userIP to get the country using a service like ipinfo.io
     var url = "https://ipinfo.io/" + userIP + "/country";
 
     fetch(url)
-      .then(response => response.text())
-      .then(country => {
-        console.log(country)
+      .then((response) => response.text())
+      .then((country) => {
+        console.log(country);
         userCountry = country;
         // Select the option based on the user's country
         selectOptionByCountry(userCountry);
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   })
-  .catch(error => console.error("Error:", error));
-
-
+  .catch((error) => console.error("Error:", error));
 
 // alert("sdsd")
 loadState = (e) => {
-  document.getElementById('stateSelect').disabled = false;
+  document.getElementById("stateSelect").disabled = false;
   $.ajax({
     url: "selectOptions/_state.php",
     type: "GET",
     data: {
-      country: e.value
+      country: e.value,
     },
     success: (response) => {
       // console.log(response)
-      $("#stateSelect").html(response)
-
-    }
-  })
-}
+      $("#stateSelect").html(response);
+    },
+  });
+};
 loadDistrict = (e) => {
-  document.getElementById('citySelect').disabled = false;
+  document.getElementById("citySelect").disabled = false;
   $.ajax({
     url: "selectOptions/_district.php",
     type: "GET",
     data: {
-      country: e.value
+      country: $("#countrySelect").val(),
+      state: e.value,
     },
     success: (response) => {
-      $("#citySelect").html(response)
-    }
-  })
-}
+      $("#citySelect").html(response);
+      // console.log(response);
+    },
+  });
+};
 loadTehsil = (e) => {
-  document.getElementById('tehsilSelect').disabled = false;
+  document.getElementById("tehsilSelect").disabled = false;
   $.ajax({
     url: "selectOptions/_tehsilOption.php",
     type: "GET",
     data: {
-      country: e.value
+      country: $("#countrySelect").val(),
+      state: $("#stateSelect").val(),
+      district: e.value,
     },
     success: (response) => {
       // console.log(response)
-      $("#tehsilSelect").html(response)
-    }
-  })
-}
+      $("#tehsilSelect").html(response);
+    },
+  });
+};
 setTimeout(() => {
-  var selectedCountry = document.getElementById('countrySelect');
+  var selectedCountry = document.getElementById("countrySelect");
 
-  loadState(selectedCountry)
+  loadState(selectedCountry);
 }, 700);
 
+var joinForm = document.getElementById("joinForm");
+var phoneNumber = document.getElementById("phoneNum");
 
-var joinForm = document.getElementById('joinForm');
-var phoneNumber = document.getElementById('phoneNum');
-
-joinForm.addEventListener('submit', (e) => {
+joinForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (phoneNumber.value.length == '10') {
+  if (phoneNumber.value.length == "10") {
     joinForm.submit();
   } else {
     phoneNumber.focus();
-    phoneNumber.classList.add('invalid');
+    phoneNumber.classList.add("invalid");
   }
-  
-  console.log(phoneNumber.value.length)
+
+  console.log(phoneNumber.value.length);
 });
-
-
-
