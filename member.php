@@ -594,7 +594,7 @@ if ($star == 'null')
                                 <th scope="col">sr</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Phone</th>
-                                <th scope="col">City</th>
+                                
                                 <th scope="col">Designation</th>
                                 <th scope="col">Contact</th>
                             </tr>
@@ -613,7 +613,7 @@ if ($star == 'null')
                                 <th scope="row">'.$ser.'</th>
                                 <td>' . $r['name'] . '</td>
                                 <td>' . $r['phone'] . '</td>
-                                <td>' . $r['tehsil'] . '</td>
+                                
                                 <td>' . $r['designation'] . '</td>
                                 <td class="text-success d-flex gap-4 fs-4">
                                     <a href="tel:' . $r['phone'] . '">

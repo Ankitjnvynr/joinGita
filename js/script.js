@@ -33,8 +33,18 @@ fetch("https://api.ipify.org?format=json")
     fetch(url)
       .then((response) => response.text())
       .then((country) => {
-        console.log(country);
-        userCountry = country;
+        userCountry = String(country);
+        userCountry = userCountry.trim();
+        userCountry = userCountry.toLowerCase();
+        if(country=='in'){
+          let ph=document.getElementById('phone')
+          console.log(ph)
+          console.log("yes india")
+          console.log(userCountry)
+        }else{
+          console.log(String(userCountry))
+          console.log("no india")
+        }
         // Select the option based on the user's country
         selectOptionByCountry(userCountry);
       })
@@ -44,6 +54,15 @@ fetch("https://api.ipify.org?format=json")
 
 // alert("sdsd")
 loadState = (e) => {
+  if (e.value != "India") {
+    let phone = document.getElementById("phoneNum");
+    phone.removeAttribute("maxlength");
+    phone.removeAttribute("minlength");
+    phone.removeAttribute("size");
+  } else {
+    phone.setAttributete("maxlength", "10");
+    phone.setAttributete("minlength", "10");
+  }
   document.getElementById("stateSelect").disabled = false;
   $.ajax({
     url: "selectOptions/_state.php",

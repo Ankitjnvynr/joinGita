@@ -3,10 +3,10 @@
 #studentIDCard{
     /* background-color: rgb(212, 255, 245); */
     /* border: 2px solid red; */
-    width: 320px;
+    width: 500px;
     /* height: 450px; */
     aspect-ratio: 590/1004;
-    background-image: url('../imgs/cards/template.jpg');
+    background-image: url('../imgs/cards/template.svg');
     background-size: contain;
     background-repeat: no-repeat;
     box-sizing: border-box;
