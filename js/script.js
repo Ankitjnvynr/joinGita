@@ -1,6 +1,10 @@
 var userIP;
 var userCountry;
 
+$(document).ready(function(){
+  $("#countrySelect").load("selectOptions/_country.php");
+});
+
 function selectOptionByCountry(countryCode) {
   // Get the select element
   var selectElement = document.getElementById("countrySelect");
@@ -60,8 +64,9 @@ loadState = (e) => {
     phone.removeAttribute("minlength");
     phone.removeAttribute("size");
   } else {
-    phone.setAttributete("maxlength", "10");
-    phone.setAttributete("minlength", "10");
+    let phone = document.getElementById("phoneNum");
+    phone.setAttribute("maxlength", "10");
+    phone.setAttribute("minlength", "10");
   }
   document.getElementById("stateSelect").disabled = false;
   $.ajax({
@@ -116,14 +121,14 @@ setTimeout(() => {
 var joinForm = document.getElementById("joinForm");
 var phoneNumber = document.getElementById("phoneNum");
 
-joinForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (phoneNumber.value.length == "10") {
-    joinForm.submit();
-  } else {
-    phoneNumber.focus();
-    phoneNumber.classList.add("invalid");
-  }
+// joinForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   if (phoneNumber.value.length == "10") {
+//     joinForm.submit();
+//   } else {
+//     phoneNumber.focus();
+//     phoneNumber.classList.add("invalid");
+//   }
 
-  console.log(phoneNumber.value.length);
-});
+//   console.log(phoneNumber.value.length);
+// });
