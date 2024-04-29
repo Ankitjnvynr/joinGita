@@ -10,13 +10,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["croppedImage"]))
     $croppedImage = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $croppedImageData));
 
     // Get the member ID
-    $memberId = $_POST['memberId'];
+    echo $memberId = $_POST['memberId'];
 
     // Get the existing image file name from the database or any other source
     $sql = "SELECT `pic` FROM `users` WHERE `id` = '$memberId'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    $existingImage = $row['pic'];
+    $existingImage = isset($row['pic']) ? $row['pic'] : "defaultusers.png";
 
     // Specify the directory where you want to save the uploaded image
     $uploadDirectory = "../imgs/";
@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["croppedImage"]))
     // Update the database with the new image filename
     $usql = "UPDATE `users` SET `pic`='$newImageName' WHERE `id` = '$memberId'";
     $update = mysqli_query($conn, $usql);
+    
 
     // Delete the existing image file if it's different from the default image
     if ($existingImage !== 'defaultusers.png')

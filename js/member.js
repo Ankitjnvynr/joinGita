@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 // dataType: 'json',
                 success: function (response) {
+                    console.log(response)
                     if (response.success) {
                         // Display success message or perform any other actions
                         // console.log(response.message);

@@ -18,10 +18,10 @@
     padding-top: 100px;
 }
 .i-card-img{
-    width: 190px;
+    width: 250px;
     position: relative;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 25%;
     border-radius: 50%;
     overflow: hidden;
     border: 7px solid #c16405;
@@ -30,15 +30,17 @@
     width: 100%;
 }
 .i-card-name{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 700;
     text-align: center;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 15px;
+    text-transform: capitalize;
+
 }
 .i-card-table{
     margin-left: 20px;
     margin-top: 25px;
     font-weight:500;
-    font-size: 15px;
+    font-size: 25px;
 }
