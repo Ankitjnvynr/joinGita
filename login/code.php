@@ -33,27 +33,27 @@
             $er=0;
             $result = false;
             while (count($foo) > $count) {
-              $country = $foo[$count][2];
-              $name = $foo[$count][3];
-              $phone = $foo[$count][4];
-              $designation = ($foo[$count][5]=='') ? 'Member':$foo[$count][5];
-              $email = $foo[$count][6];
-              $dikshit = $foo[$count][7];
-              $married = $foo[$count][8];
-              $state = $foo[$count][9];
-              $district = $foo[$count][10];
-              $tehsil = $foo[$count][11];
-              $address = $foo[$count][12];
-              $intrest = $foo[$count][13];
-              $occupation = $foo[$count][14];
-              $education = $foo[$count][15];
-              $dob = $foo[$count][16];
-              $aniver_date = $foo[$count][17];
-              $message = $foo[$count][18];
+          $country = $foo[$count][2];
+          $name = $foo[$count][3];
+          $phone = $foo[$count][4];
+          $designation = ($foo[$count][5] == '') ? 'Member' : $foo[$count][5];
+          $email = $foo[$count][6];
+          $dikshit = $foo[$count][7];
+          $married = $foo[$count][8];
+          $state = $foo[$count][9];
+          $district = $foo[$count][10];
+          $tehsil = $foo[$count][11];
+          $address = $foo[$count][12];
+          $intrest = $foo[$count][13];
+          $occupation = $foo[$count][14];
+          $education = $foo[$count][15];
+          $dob = $foo[$count][16];
+          $aniver_date = $foo[$count][17];
+          $message = $foo[$count][18];
 
               $hash_id = md5($phone);
 
-              $query = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `designation`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `message`) VALUES ('$hash_id','$country','$name','$phone','$designation','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
+          $query = "INSERT INTO `users`(`hash_id`, `country`, `name`, `phone`, `designation`, `email`, `dikshit`, `marital_status`, `state`, `district`, `tehsil`, `address`, `interest`, `occupation`, `education`, `dob`, `aniver_date`, `star`) VALUES ('$hash_id','$country','$name','$phone','$designation','$email','$dikshit','$married','$state','$district','$tehsil','$address','$intrest','$occupation','$education','$dob','$aniver_date','$message')";
 
               try {
                 $sr++;
