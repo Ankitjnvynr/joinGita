@@ -318,7 +318,7 @@ if ($star == 'null') {
             </div>
         </div>
     </div>
-    <div style="transform: translatex(-100%)" class="container position-absolute">
+    <div style="transform: translatex(-200%)" class="container position-absolute">
         <div id="studentIDCard">
             <div class="i-card">
                 <div class="i-card-img">
