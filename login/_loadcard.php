@@ -140,6 +140,8 @@ while ($row = mysqli_fetch_array($result))
         "England" => "+44",
         "United kingdom" => "+44",
         "United Kingdom " => "+44",
+        "Malaysia" => "+60",
+        "" => "+91",
     );
 
     $code = $country_code[$country];

@@ -62,6 +62,8 @@ $country_code = array(
     "USA" => "1",
     "UK" => "+44",
     "England" => "+44",
+    "Malaysia" => "+60",
+    "Malaysia " => "+60",
 );
 
 
@@ -255,7 +257,6 @@ $country_code = array(
                             }
                             ?>
                         </select>
-
 
                         <button name="bdaySubmit" class="btn btn-danger mybtns">View all Birthday ></button>
 

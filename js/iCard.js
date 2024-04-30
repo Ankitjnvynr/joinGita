@@ -11,12 +11,13 @@ function htmlToImage(element) {
 
 // Event listener for download button click
 document.getElementById('downloadButton').addEventListener('click', async (e) => {
-    oldhtml = document.getElementById('downloadButton').innerHTML;
-    document.getElementById('downloadButton').innerHTML =`<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-  <span role="status">Creating Card...</span>`
+    console.log(e.target)
+    oldHTML = e.target.innerHTML;
+    e.target.innerHTML = `<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+    <span role="status">Creating Card ...</span>`;
     const studentIDCard = document.getElementById('studentIDCard');
     const dataUrl = await htmlToImage(studentIDCard);
     downloadImage(dataUrl);
-    document.getElementById('downloadButton').innerHTML = oldhtml;
+    e.target.innerHTML = oldHTML;
 });
 

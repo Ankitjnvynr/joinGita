@@ -1,1 +1,1 @@
-id,hash_id,country,name,phone,whtsapp,email,dikshit,marital_status,state,district,tehsil,address,interest,occupation,education,dob,aniver_date,message,pic,dt
+id,hash_id,country,name,phone,whtsapp,email,dikshit,marital_status,state,district,tehsil,address,Default,occupation,education,dob (YYYY-MM-DD),aniver_date(YYYY-MM-DD),star,pic,dt
