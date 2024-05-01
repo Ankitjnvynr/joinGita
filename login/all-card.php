@@ -158,6 +158,38 @@ header('Content-Type: text/html; charset=utf-8');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"
         integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        //storing function for localstorage
+        storeFilter = () => {
+            
+            var fltr = {
+                filterName: $('#filterName').val(),
+                phone: $('#filterPhone').val(),
+                filterEmail: $('#filterEmail').val(),
+                filterCountry: $('#countrySelect').val(),
+                filterState: $('#stateSelect').val(),
+                filterDistrict: $('#districtSelect').val(),
+                filterTehsil: $('#tehsilSelect').val(),
+                limit: "50",
+                start: '0',
+            }
+            var filterStringStoring = JSON.stringify(fltr);
+            isfilter = true;
+            var isfilter = JSON.stringify(isfilter);
+            sessionStorage.setItem('filterObject', filterStringStoring); // corrected typo here
+            sessionStorage.setItem('isFilter', isfilter); // corrected typo here
+            // // Clear all data from session storage
+            // sessionStorage.clear();
+
+        }
+
+        editProfileDetail = async (userId) => {
+            await storeFilter();
+            console.log(userId)
+            window.location.href = "update.php?user=" + userId;
+        }
+
+    </script>
 
     <script src="filterselect.js"></script>
     <script src="../js/allcard.js"></script>
@@ -165,7 +197,11 @@ header('Content-Type: text/html; charset=utf-8');
     <script>
         const updatedToast = document.getElementById('updatedToast')
         const toastBootstrapupdate = bootstrap.Toast.getOrCreateInstance(updatedToast)
+
+
+
     </script>
+
 
 </body>
 

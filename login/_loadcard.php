@@ -181,6 +181,7 @@ while ($row = mysqli_fetch_array($result))
                                 <hr class="m-0 mx-3 ">
                                 <div class="d-flex gap-2 p-2 justify-content-between">
                                     <div class="d-flex gap-2 ">
+                                        <button onclick="editProfileDetail(' . $user_id . ')">edit</button>
                                         <a href="update.php?user=' . $user_id . '" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                                         <div data-id = "' . $user_id . '" class="del btn btn-danger" ><i class="fa-solid fa-trash"></i></div>
                                     </div>
