@@ -137,6 +137,17 @@ $(document).ready(function () {
     deleteScript()
 
     var action = 'inactive';
+    // select optoion value after update
+    findFilter = (selectId, myValue) => {
+        var select = document.getElementById(selectId); // Get the select element
+        for (var i = 0; i < select.options.length; i++) {
+            if (select.options[i].value === myValue) {
+                select.options[i].selected = true; // Set the selected attribute to true for the matching option
+                break; // Exit the loop since we found the match
+            }
+        }
+    }
+
 
     loadpics = (start, limit) => {
         console.log(start, limit)
@@ -155,7 +166,20 @@ $(document).ready(function () {
             // Retrieve the string from session storage
             var retrievedFltrString = sessionStorage.getItem('filterObject');
             var fltr = JSON.parse(retrievedFltrString); // Convert the string back to an object
+            console.log(fltr)
+            findFilter("countrySelect", fltr.filterCountry)
+            
+                // SelectState(fltr.filterCountry);
+            
+
+            // findFilter("filterState", fltr.filterState)
+            $('#filterName').val(fltr.filterName)
+            $('#filterPhone').val(fltr.phone)
+            $('#filterEmail').val(fltr.filterEmail)
         }
+
+        // findFilter("districtSelect", fltr.filterDistrict)
+
         $.ajax({
             url: '_loadcard.php',
             type: 'POST',

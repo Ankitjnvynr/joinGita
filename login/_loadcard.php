@@ -149,7 +149,7 @@ while ($row = mysqli_fetch_array($result))
     echo '
                             <div class="card p-0 overflow-hidden">
                                 <div class="d-flex picbg">
-                                <div style="width:100px; height:100px" class="pic relative m-2">
+                                <div style="width:90px; height:100px" class="pic relative m-2">
                                 <label for="changeImgs" >
                                     <img onclick="getPicId(this,' . $user_id . ')" style="border:2px solid white; aspect-ratio:1/1;  width:100%;" class="absolute rounded-circle bg-white border-danger p-1" style=";" src="../imgs/' . $pic . '" alt="' . $pic . '">
                                 </label>
@@ -157,7 +157,7 @@ while ($row = mysqli_fetch_array($result))
                                 <div style="width:67%" class="name d-flex flex-column justify-content-around">
                                     <h2 class="card-title m-0 p-0 fs-4" style="text-transform: lowercase; text-transform: capitalize;">' . $name . '</h2>
                                     <div class="phone d-flex flex-column-reverse text-danger  align-items-around">
-                                    <table class="table">
+                                    <table style="font-size:0.9rem;" class="table">
                                         <tbody>
                                         <tr>
                                             <td>Wing:</td>
@@ -181,8 +181,8 @@ while ($row = mysqli_fetch_array($result))
                                 <hr class="m-0 mx-3 ">
                                 <div class="d-flex gap-2 p-2 justify-content-between">
                                     <div class="d-flex gap-2 ">
-                                        <button onclick="editProfileDetail(' . $user_id . ')">edit</button>
-                                        <a href="update.php?user=' . $user_id . '" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <button class="btn btn-success" onclick="editProfileDetail(' . $user_id . ')"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        
                                         <div data-id = "' . $user_id . '" class="del btn btn-danger" ><i class="fa-solid fa-trash"></i></div>
                                     </div>
                                     <p class="d-flex flex-wrap gap-2 flex-items-center justify-content-between px-2 m-0">

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Set Select Option by Value</title>
+    </head>
+
+    <body>
+
+        <select id="mySelect">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+            <option value="option4">Option 4</option>
+        </select>
+
+        <script>
+            // Your JavaScript code
+            var myValue = "option3"; // Your variable with the value to match
+
+            findFilter = (selectId,myValue)=>{
+                var select = document.getElementById(selectId); // Get the select element
+                for (var i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === myValue) {
+                        select.options[i].selected = true; // Set the selected attribute to true for the matching option
+                        break; // Exit the loop since we found the match
+                    }
+                }
+            }
+            findFilter("mySelect",myValue)
+        </script>
+
+    </body>
+
+    </html>
+
+</body>
+
+</html>
