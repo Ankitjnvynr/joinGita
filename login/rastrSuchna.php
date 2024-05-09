@@ -44,7 +44,7 @@ $fileContent = file_get_contents($filePath);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GIEO Gita : All users</title>
+    <title>GIEO Gita : राष्ट्र सूचना</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
@@ -65,10 +65,10 @@ $fileContent = file_get_contents($filePath);
 
 
     <div class="container">
-        <h1>File Reader and Updater</h1>
+        <h1  class="text-danger" >राष्ट्र सूचना</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <textarea class="form-control" name="content" rows="10" cols="50"><?php echo htmlspecialchars($fileContent); ?></textarea><br>
-            <input type="submit" value="Update File">
+            <textarea class="form-control" name="content" rows="13" cols="50"><?php echo htmlspecialchars($fileContent); ?></textarea><br>
+            <input class="btn btn-danger" type="submit" value="Update File">
         </form>
 
 

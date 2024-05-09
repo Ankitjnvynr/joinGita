@@ -26,7 +26,7 @@ $songs = array_filter($files, function($file) use ($directory) {
 $sr = 0;
 foreach ($songs as $song) {
     // echo $song . "<br>";
-    echo '<li id="'.$sr.'" onclick="playsong(this)" class="list-group-item music-item" data-src="audio/'.$song.'" data-cover="images/cover1.jpg">'.$song.'</li>';
+    echo '<li id="'.$sr.'" onclick="playsong(this)"  class="list-group-item music-item" data-src="audio/'.$song.'" data-cover="images/cover1.jpg">'.$song.'</li>';
     $sr++;
 }
 ?>

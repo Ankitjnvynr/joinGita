@@ -158,6 +158,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         })
     }
+    document.querySelectorAll('.list-group-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.scrollLeft = 0; // Ensure the scroll position is reset when re-entering
+            item.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+
     loadSongs();
 });
 
