@@ -168,6 +168,8 @@ $(document).ready(function () {
             var fltr = JSON.parse(retrievedFltrString); // Convert the string back to an object
             console.log(fltr)
             findFilter("countrySelect", fltr.filterCountry)
+            SelectState(fltr.filterCountry)
+            // findFilter("filterState", fltr.filterState)
             
                 // SelectState(fltr.filterCountry);
             
@@ -262,7 +264,7 @@ let SelectState = (e) => {
         url: '_selectState.php',
         type: 'POST',
         data: {
-            country: e.value
+            country: e
         },
         success: function (response) {
             let stateSelect = document.getElementById('stateSelect')

@@ -103,7 +103,7 @@ header('Content-Type: text/html; charset=utf-8');
     <div class="container">
         <form action="" method="POST" class="filterform d-flex flex-wrap gap-1">
             <select required class="form-select form-select-sm" aria-label="Small select example" name="filterCountry"
-                id="countrySelect" onchange="SelectState(this)">
+                id="countrySelect" onchange="SelectState(this.value)">
                 <option value="" selected>---Country---</option>
                 <?php
                 $optionSql = "SELECT DISTINCT `country` FROM `users` ";
