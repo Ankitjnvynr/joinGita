@@ -31,14 +31,15 @@ let createhash = (phone) => {
 //  creating select message changing for messages
 selectMessage = async (e) => {
     const secondChild = e.parentNode.childNodes[3];
-    const memberName = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].innerText;
-    const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes[3].childNodes[0].innerText;
+    const memberName = e.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+    // console.log(memberName)
+    const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].childNodes[3].innerHTML
     console.log(phoneNumber)
     const newText = e.value;
     let src = secondChild.getAttribute('href');
     let link = src.split('&');
     let myhash = await createhash(phoneNumber);
-    // console.log(myhash)
+    console.log(myhash)
 
 
     for (let i = 0; i < link.length; i++) {
@@ -170,9 +171,9 @@ $(document).ready(function () {
             findFilter("countrySelect", fltr.filterCountry)
             SelectState(fltr.filterCountry)
             // findFilter("filterState", fltr.filterState)
-            
-                // SelectState(fltr.filterCountry);
-            
+
+            // SelectState(fltr.filterCountry);
+
 
             // findFilter("filterState", fltr.filterState)
             $('#filterName').val(fltr.filterName)

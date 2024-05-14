@@ -199,17 +199,19 @@ while ($row = mysqli_fetch_array($result))
 
 
     <div class="profile position-relative rounded ">
+        <div class="span position-absolute text-muted fw-semibold" style=" text-align: right; font-size: small; line-height: 1; right:5px; top:5px; opacity:0.6">Join
+            date: <br> 2024-05-14</div>
         <div class="profile-img my-3">
             <img width="100%" src="../imgs/<?php echo $pic ?> " alt="">
         </div>
         <h3 class="text-center fw-bold text-danger m-0"><?php echo ucwords($name) ?></h3>
         <div class="">
             <div class="d-flex px-2 m-0 fw-semibold fs-6 ">
-                <span class="" style="width:50px">Wing</span>: 
+                <span class="" style="width:50px">Wing</span>:
                 <span><?php echo $wing ?></span>
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
-                <span style="width:50px">Phone</span>: 
+                <span style="width:50px">Phone</span>:
                 <span><?php echo $phone ?></span>
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
