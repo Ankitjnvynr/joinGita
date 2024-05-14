@@ -129,7 +129,7 @@ body {
   background-color: white;
   max-width: 480px;
   transition: all 0.3s;
-  background: #ffffffbe;
+  background: linear-gradient(#f8d7da,white);
 }
 .profile:hover {
   transform: scale(1.01);
