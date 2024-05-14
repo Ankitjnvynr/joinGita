@@ -131,6 +131,7 @@ while ($row = mysqli_fetch_array($result))
         "Canada" => "1",
         "United Kingdom" => "44",
         "India" => "91",
+        "India " => "91",
         "Japan" => "81",
         "New Zealand" => "64",
         "United Arab Emirates" => "971",
@@ -146,18 +147,18 @@ while ($row = mysqli_fetch_array($result))
 
     $code = $country_code[$country];
 
-    echo '
+
+    '
                             <div class="card p-0 overflow-hidden">
                                 <div class="d-flex picbg">
                                 <div style="width:90px; height:100px" class="pic relative m-2">
-                                <label for="changeImgs" >
-                                    <img onclick="getPicId(this,' . $user_id . ')" style="border:2px solid white; aspect-ratio:1/1;  width:100%;" class="absolute rounded-circle bg-white border-danger p-1" style=";" src="../imgs/' . $pic . '" alt="' . $pic . '">
-                                </label>
+                                    <img  style="border:2px solid white; aspect-ratio:1/1;  width:100%;" class="absolute rounded-circle bg-white border-danger p-1" style=";" src="../imgs/' . $pic . '" alt="' . $pic . '">
+                                
                                 </div>
-                                <div style="width:67%" class="name d-flex flex-column justify-content-around">
-                                    <h2 class="card-title m-0 p-0 fs-4" style="text-transform: lowercase; text-transform: capitalize;">' . $name . '</h2>
+                                <div  class="name d-flex flex-column justify-content-around">
+                                    <h2 class="card-title  fs-4" style="text-transform: lowercase; text-transform: capitalize;">' . $name . '</h2>
                                     <div class="phone d-flex flex-column-reverse text-danger  align-items-around">
-                                    <table style="font-size:0.9rem;" class="table">
+                                    <table style="font-size:0.9rem;" class="table table-borderless">
                                         <tbody>
                                         <tr>
                                             <td>Wing:</td>
@@ -194,5 +195,48 @@ while ($row = mysqli_fetch_array($result))
                                 </div>
                             </div>
                             ';
+    ?>
+
+
+    <div class="profile position-relative rounded ">
+        <div class="profile-img my-3">
+            <img width="100%" src="../imgs/<?php echo $pic ?> " alt="">
+        </div>
+        <h3 class="text-center fw-bold text-danger m-0"><?php echo ucwords($name) ?></h3>
+        <div class="">
+            <div class="d-flex px-2 m-0 fw-semibold fs-6 ">
+                <span class="" style="width:50px">Wing</span>: 
+                <span><?php echo $wing ?></span>
+            </div>
+            <div class="d-flex px-2 m-0 fw-semibold fs-6">
+                <span style="width:50px">Phone</span>: 
+                <span><?php echo $phone ?></span>
+            </div>
+            <div class="d-flex px-2 m-0 fw-semibold fs-6">
+                <span style="width:50px">Email</span>:
+                <span><?php echo $email ?></span>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex gap-2 p-2 justify-content-between">
+            <div class="d-flex gap-2 ">
+                <button class="btn btn-success" onclick="editProfileDetail(<?php echo $user_id ?>)"><i
+                        class="fa-solid fa-pen-to-square"></i></button>
+
+                <div data-id="<?php echo $user_id ?>" class="del btn btn-danger"><i class="fa-solid fa-trash"></i></div>
+            </div>
+            <p class="d-flex flex-wrap gap-2 flex-items-center justify-content-between px-2 m-0">
+                <?php echo $msgStr ?>
+                <a
+                    href="https://wa.me/<?php echo $code . $phone ?>?file=../imgs/<?php echo $pic ?>&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A<?php echo $defaultmsg[0] ?>%0A %0ATo view profile Click here- <?php echo $currentURL ?>member.php?member=<?php echo md5($phone) ?>"><i
+                        class="fa-solid  fa-brands fa-whatsapp text-success fs-1"></i></a>
+
+                <a href="mailto:<?php echo $email ?>"><i class="fa-solid fs-1   fa-envelope text-success "></i></a>
+            </p>
+        </div>
+    </div>
+
+
+    <?php
 }
 ?>

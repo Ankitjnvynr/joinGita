@@ -137,7 +137,7 @@ header('Content-Type: text/html; charset=utf-8');
 
     <div class="container  mt-4"><span class="bg-white p-2 rounded-3">Showing <span class="showing"></span>/<span
                 class="totalCount"></span></span></div>
-    <div class="container cardbox mt-4"></div>
+    <div class="container cardbox d-flex gap-2 flex-wrap mt-4"></div>
     <div class="container text-center my-3 d-flex justify-content-center gap-2">
         <button class="btn btn-success" onclick="loadMore(5,5)" id="loadMore">Load
             More
