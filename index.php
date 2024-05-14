@@ -1,3 +1,10 @@
+<?php 
+// echo '<img style="max-width:98vw; max-height:90vh" src="website-under-maintenance-5690953-4747761.webp" alt="loremfsdhslkdfhsjklhgfjkl">';
+// exit;
+?>
+
+<img src="" alt="hdskhf">
+
 <!doctype html>
 <html lang="en">
 
@@ -11,6 +18,7 @@
     body {
       background: #f7e092;
     }
+    
 
     form {
       max-width: 900px;
