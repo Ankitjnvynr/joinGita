@@ -341,6 +341,7 @@ while ($row = mysqli_fetch_array($result)) {
                 <option value="चिकित्सा सेवा प्रमुख" aria-selected="false">चिकित्सा सेवा प्रमुख</option>
                 <option value="पत्रिका सेवा प्रमुख" aria-selected="false">पत्रिका सेवा प्रमुख</option>
                 <option value="चेयरमैन" aria-selected="false">चेयरमैन</option>
+                <option value="कार्यकारणी सदस्य" aria-selected="false">कार्यकारणी सदस्य</option>
                 <?php
                 if ($designation != "Member") {
                   echo '

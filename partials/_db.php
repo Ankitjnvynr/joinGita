@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db="join-gieo2";
+$db="join-gieo";
 
 // $servername = "localhost";
 // $username = "u704382176_join_gita";

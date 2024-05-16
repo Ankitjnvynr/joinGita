@@ -31,17 +31,14 @@ let createhash = (phone) => {
 //  creating select message changing for messages
 selectMessage = async (e) => {
     const secondChild = e.parentNode.childNodes[3];
-    const memberName = e.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
-    // console.log(memberName)
-    const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].childNodes[3].innerHTML
-    console.log(phoneNumber)
+    const memberName = e.parentNode.parentNode.parentNode.childNodes[5].innerHTML;
+    console.log(memberName)
+    const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[7].childNodes[3].childNodes[3].innerHTML
+    
     const newText = e.value;
     let src = secondChild.getAttribute('href');
     let link = src.split('&');
     let myhash = await createhash(phoneNumber);
-    console.log(myhash)
-
-
     for (let i = 0; i < link.length; i++) {
         if (link[i].startsWith('text=')) {
             link[i] = 'text=' + 'गीता प्रिय ' + memberName + ' जी %0A🌹जय श्री कृष्ण🌹%0A' + encodeURIComponent(newText) + ' %0A %0ATo view profile Click here- ' + 'https://parivaar.gieogita.org/member.php?member=' + myhash;
