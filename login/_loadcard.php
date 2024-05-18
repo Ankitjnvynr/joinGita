@@ -200,7 +200,7 @@ while ($row = mysqli_fetch_array($result))
 
     <div class="profile position-relative rounded ">
         <div class="span position-absolute text-muted fw-semibold" style=" text-align: right; font-size: small; line-height: 1; right:5px; top:5px; opacity:0.6">Join
-            date: <br> 2024-05-14</div>
+            date: <br> <?php echo substr($row['dt'],0,10) ?></div>
         <div class="profile-img my-3">
             <img width="100%" src="../imgs/<?php echo $pic ?> " alt="">
         </div>
