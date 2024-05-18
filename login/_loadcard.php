@@ -31,6 +31,7 @@ $bytehsil = $_POST['filterTehsil'];
 $limit = $_POST['limit'];
 $start = $_POST['start'];
 
+
 // ----------------------from another --------------------
 
 
@@ -122,6 +123,7 @@ while ($row = mysqli_fetch_array($result))
     $aniver_date = $row['aniver_date'];
     // $message = $row['message'];
     $pic = $row['pic'];
+    
 
 
 
@@ -217,6 +219,10 @@ while ($row = mysqli_fetch_array($result))
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
                 <span style="width:50px">Email</span>:
                 <span><?php echo $email ?></span>
+            </div>
+            <div class="d-flex px-2 m-0 fw-semibold fs-6">
+                <span style="width:50px">City</span>:
+                <span><?php echo $tehsil ?></span>
             </div>
         </div>
         <hr>
