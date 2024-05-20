@@ -445,7 +445,7 @@ echo '
             height = maxHeight;
           }
         }
-
+load
         // Set the canvas dimensions to the resized image dimensions
         canvas.width = width;
         canvas.height = height;

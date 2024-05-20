@@ -122,7 +122,6 @@ body {
   overflow: hidden;
   object-fit: cover;
   border-radius: 50%;
-  margin: auto;
 }
 .profile {
   flex: 1 0 320px;

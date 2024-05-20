@@ -31,9 +31,9 @@ let createhash = (phone) => {
 //  creating select message changing for messages
 selectMessage = async (e) => {
     const secondChild = e.parentNode.childNodes[3];
-    const memberName = e.parentNode.parentNode.parentNode.childNodes[5].innerHTML;
-    console.log(memberName)
-    const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[7].childNodes[3].childNodes[3].innerHTML
+    const memberName = e.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].innerHTML;
+    const phoneNumber = e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].childNodes[3].innerHTML
+    console.log(phoneNumber)
     
     const newText = e.value;
     let src = secondChild.getAttribute('href');

@@ -123,7 +123,7 @@ while ($row = mysqli_fetch_array($result))
     $aniver_date = $row['aniver_date'];
     // $message = $row['message'];
     $pic = $row['pic'];
-    
+
 
 
 
@@ -201,12 +201,15 @@ while ($row = mysqli_fetch_array($result))
 
 
     <div class="profile position-relative rounded ">
-        <div class="span position-absolute text-muted fw-semibold" style=" text-align: right; font-size: small; line-height: 1; right:5px; top:5px; opacity:0.6">Join
-            date: <br> <?php echo substr($row['dt'],0,10) ?></div>
-        <div class="profile-img my-3">
-            <img width="100%" src="../imgs/<?php echo $pic ?> " alt="">
+        <div class="span position-absolute text-muted fw-semibold"
+            style=" text-align: right; font-size: small; line-height: 1; right:5px; top:5px; opacity:0.6">Join
+            date: <br> <?php echo substr($row['dt'], 0, 10) ?></div>
+        <div class="d-flex align-items-center">
+            <div class="profile-img m-2 border border-danger">
+                <img width="100%" src="../imgs/<?php echo $pic ?> " alt="">
+            </div>
+            <h5 class="text-center fw-bold text-danger m-0"><?php echo ucwords($name) ?></h5>
         </div>
-        <h3 class="text-center fw-bold text-danger m-0"><?php echo ucwords($name) ?></h3>
         <div class="">
             <div class="d-flex px-2 m-0 fw-semibold fs-6 ">
                 <span class="" style="width:50px">Wing</span>:
@@ -225,8 +228,8 @@ while ($row = mysqli_fetch_array($result))
                 <span><?php echo $tehsil ?></span>
             </div>
         </div>
-        <hr>
-        <div class="d-flex gap-2 p-2 justify-content-between">
+        <hr class="p-0 m-0 mt-1">
+        <div class="d-flex gap-2 p-1 justify-content-between">
             <div class="d-flex gap-2 ">
                 <button class="btn btn-success" onclick="editProfileDetail(<?php echo $user_id ?>)"><i
                         class="fa-solid fa-pen-to-square"></i></button>
