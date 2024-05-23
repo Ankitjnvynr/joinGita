@@ -341,7 +341,10 @@ while ($row = mysqli_fetch_array($result)) {
                 <option value="चिकित्सा सेवा प्रमुख" aria-selected="false">चिकित्सा सेवा प्रमुख</option>
                 <option value="पत्रिका सेवा प्रमुख" aria-selected="false">पत्रिका सेवा प्रमुख</option>
                 <option value="चेयरमैन" aria-selected="false">चेयरमैन</option>
+                <option value="अध्यक्ष" aria-selected="false">अध्यक्ष</option>
+                <option value="उपाध्यक्ष" aria-selected="false">उपाध्यक्ष</option>
                 <option value="कार्यकारणी सदस्य" aria-selected="false">कार्यकारणी सदस्य</option>
+                <option value="महासचिव" aria-selected="false">महासचिव</option>
                 <?php
                 if ($designation != "Member") {
                   echo '
@@ -427,8 +430,8 @@ echo '
         var ctx = canvas.getContext('2d');
 
         // Set the desired width and height for the resized image
-        var maxWidth = 700; // Set your maximum width
-        var maxHeight = 700; // Set your maximum height
+        var maxWidth = 500; // Set your maximum width
+        var maxHeight = 500; // Set your maximum height
 
         // Ensure the image dimensions fit within the maximum dimensions while preserving aspect ratio
         var width = image.width;
@@ -445,7 +448,7 @@ echo '
             height = maxHeight;
           }
         }
-load
+
         // Set the canvas dimensions to the resized image dimensions
         canvas.width = width;
         canvas.height = height;
