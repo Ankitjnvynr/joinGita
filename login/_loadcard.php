@@ -119,8 +119,27 @@ while ($row = mysqli_fetch_array($result))
     $wing = $row['interest'];
     $occupation = $row['occupation'];
     $education = $row['education'];
+
+    
     $dob = $row['dob'];
     $aniver_date = $row['aniver_date'];
+    
+    // Check if the date is valid
+    if ($dob != '0000-00-00') {
+        $dob = date('d-M-Y', strtotime($dob));
+    } else {
+        $dob = 'Not available';
+    }
+    
+    // Check if the anniversary date is valid
+    if ($aniver_date != '0000-00-00') {
+        $aniver_date = date('d-M-Y', strtotime($aniver_date));
+    } else {
+        $aniver_date = '<span class="text-danger" > Not available </span>';
+    }
+    
+
+
     // $message = $row['message'];
     $pic = $row['pic'];
 
@@ -220,8 +239,12 @@ while ($row = mysqli_fetch_array($result))
                 <span><?php echo $phone ?></span>
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
-                <span style="width:50px">Email</span>:
-                <span><?php echo $email ?></span>
+                <span style="width:50px">DOB</span>:
+                <span><?php echo $dob ?></span>
+            </div>
+            <div class="d-flex px-2 m-0 fw-semibold fs-6">
+                <span style="width:50px">DOA</span>:
+                <span><?php echo $aniver_date ?></span>
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
                 <span style="width:50px">City</span>:
