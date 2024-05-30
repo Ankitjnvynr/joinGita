@@ -170,7 +170,18 @@ if (isset($_POST['get-data'])) {
                             $occupation = $row['occupation'];
                             $education = $row['education'];
                             $dob = $row['dob'];
+                            if ($dob == "0000-00-00") {
+                                $dob = "<span class='text-danger'>NIL</span>";
+                            } else {
+                                $dob = date('d-m-Y', strtotime($dob));
+                            }
                             $aniver_date = $row['aniver_date'];
+                            if ($aniver_date == "0000-00-00") {
+                                $aniver_date = "<span class='text-danger'>NIL</span>";
+                            } else {
+                                $aniver_date = date('d-m-Y', strtotime($aniver_date));
+                            }
+
                             $joinOn = $row['dt'];
                             // $message = $row['message'];
                             $pic = $row['pic'];
@@ -343,7 +354,7 @@ if (isset($_POST['get-data'])) {
             };
             var y = 20;
             doc.setLineWidth(2);
-            doc.text(200, y = y + 30, ("GIEO Gita report of " + dateString));
+            doc.text(100, y = y + 30, ("GIEO Gita report of <?php echo $tehsil ?> " + dateString));
             doc.autoTable({
                 html: '#myTable',
                 startY: 70,
