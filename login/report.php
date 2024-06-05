@@ -99,7 +99,7 @@ if (isset($_POST['get-data'])) {
             <select required name="filterState" class="form-select form-select-sm" aria-label="Small select example" id="stateSelect" onchange="selectingdistrict(this)">
                 <option value="" selected>---State---</option>
             </select>
-            <select name="filterdistrict" required name="filterCity" class="form-select form-select-sm" aria-label="Small select example" id="districtSelect" onchange="selectingtehsil(this)">
+            <select name="filterdistrict" name="filterCity" class="form-select form-select-sm" aria-label="Small select example" id="districtSelect" onchange="selectingtehsil(this)">
                 <option value="" selected>---District---</option>
             </select>
             <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example" id="tehsilSelect">
