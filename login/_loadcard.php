@@ -1,5 +1,5 @@
 <?php
-include ("../partials/_db.php");
+include("../partials/_db.php");
 
 $currentURL = "http://$_SERVER[HTTP_HOST]/";
 
@@ -8,11 +8,9 @@ $msgs = array();
 $defaultmsg = array();
 $msgsql = "SELECT title, msg FROM `messages` ";
 $allmsg = $conn->query($msgsql);
-while ($allmsgs = mysqli_fetch_assoc($allmsg))
-{
+while ($allmsgs = mysqli_fetch_assoc($allmsg)) {
     array_push($msgs, '<option value="' . urldecode($allmsgs['msg']) . '">' . $allmsgs['title'] . '</option>');
     array_push($defaultmsg, $allmsgs['msg']);
-
 }
 $msgStr = '<select name="message" onchange="selectMessage(this)" id="message">' . implode("", $msgs) . '</select>';
 
@@ -46,13 +44,11 @@ $start = $_POST['start'];
 
 
 
-if ($byPhone || $byEmail || $byCountry || $byState || $bytehsil || $byName)
-{
+if ($byPhone || $byEmail || $byCountry || $byState || $bytehsil || $byName) {
     $newStr = ' WHERE ';
 }
 
-if ($byCountry)
-{
+if ($byCountry) {
     // unset($filters[1]);
     // unset($filters[2]);
     $filters = array();
@@ -60,33 +56,27 @@ if ($byCountry)
     // array_splice($filters, 1, 2);  
     array_push($filters, $byCountry);
 }
-if ($byName)
-{
+if ($byName) {
     $byName = " name LIKE '" . $byName . "%'";
     array_push($filters, $byName);
 }
-if ($byState)
-{
+if ($byState) {
     $byState = " state LIKE '" . $byState . "%'";
     array_push($filters, $byState);
 }
-if ($filterdistrict)
-{
+if ($filterdistrict) {
     $filterdistrict = " district LIKE '" . $filterdistrict . "%'";
     array_push($filters, $filterdistrict);
 }
-if ($bytehsil)
-{
+if ($bytehsil) {
     $bytehsil = " tehsil LIKE '" . $bytehsil . "%'";
     array_push($filters, $bytehsil);
 }
-if ($byPhone)
-{
+if ($byPhone) {
     $byPhone = " phone LIKE '" . $byPhone . "%'";
     array_push($filters, $byPhone);
 }
-if ($byEmail)
-{
+if ($byEmail) {
     $byEmail = " email LIKE '%" . $byEmail . "%'";
     array_push($filters, $byEmail);
 }
@@ -101,8 +91,7 @@ $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY `id` DESC LIMIT " . $st
 // SELECT * FROM `users` WHERE phone LIKE '89%' AND name LIKE '%an%' ORDER BY `id` DESC LIMIT 3;
 $result = mysqli_query($conn, $sql);
 // if(($conn->num_rows = mysqli_num_rows($result)) == 0) echo "<div class='card p-3 text-center overflow-hidden'><h2 class = 'text-muted' > No result Found </h2> </div>";
-while ($row = mysqli_fetch_array($result))
-{
+while ($row = mysqli_fetch_array($result)) {
 
     $user_id = $row['id'];
     $country = $row['country'];
@@ -120,24 +109,24 @@ while ($row = mysqli_fetch_array($result))
     $occupation = $row['occupation'];
     $education = $row['education'];
 
-    
+
     $dob = $row['dob'];
     $aniver_date = $row['aniver_date'];
-    
+
     // Check if the date is valid
     if ($dob != '0000-00-00') {
         $dob = date('d-M-Y', strtotime($dob));
     } else {
-        $dob = 'Not available';
+        $dob = '<span class="text-danger" > Not available </span>';
     }
-    
+
     // Check if the anniversary date is valid
     if ($aniver_date != '0000-00-00') {
         $aniver_date = date('d-M-Y', strtotime($aniver_date));
     } else {
         $aniver_date = '<span class="text-danger" > Not available </span>';
     }
-    
+
 
 
     // $message = $row['message'];
@@ -216,12 +205,11 @@ while ($row = mysqli_fetch_array($result))
                                 </div>
                             </div>
                             ';
-    ?>
+?>
 
 
     <div class="profile position-relative rounded ">
-        <div class="span position-absolute text-muted fw-semibold"
-            style=" text-align: right; font-size: small; line-height: 1; right:5px; top:5px; opacity:0.6">Join
+        <div class="span position-absolute text-muted fw-semibold" style=" text-align: right; font-size: small; line-height: 1; right:5px; top:5px; opacity:0.6">Join
             date: <br> <?php echo substr($row['dt'], 0, 10) ?></div>
         <div class="d-flex align-items-center">
             <div class="profile-img m-2 border border-danger">
@@ -254,16 +242,13 @@ while ($row = mysqli_fetch_array($result))
         <hr class="p-0 m-0 mt-1">
         <div class="d-flex gap-2 p-1 justify-content-between">
             <div class="d-flex gap-2 ">
-                <button class="btn btn-success" onclick="editProfileDetail(<?php echo $user_id ?>)"><i
-                        class="fa-solid fa-pen-to-square"></i></button>
+                <button class="btn btn-success" onclick="editProfileDetail(<?php echo $user_id ?>)"><i class="fa-solid fa-pen-to-square"></i></button>
 
                 <div data-id="<?php echo $user_id ?>" class="del btn btn-danger"><i class="fa-solid fa-trash"></i></div>
             </div>
             <p class="d-flex flex-wrap gap-2 flex-items-center justify-content-between px-2 m-0">
                 <?php echo $msgStr ?>
-                <a
-                    href="https://wa.me/<?php echo $code . $phone ?>?file=../imgs/<?php echo $pic ?>&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A<?php echo $defaultmsg[0] ?>%0A %0ATo view profile Click here- <?php echo $currentURL ?>member.php?member=<?php echo md5($phone) ?>"><i
-                        class="fa-solid  fa-brands fa-whatsapp text-success fs-1"></i></a>
+                <a href="https://wa.me/<?php echo $code . $phone ?>?file=../imgs/<?php echo $pic ?>&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A<?php echo $defaultmsg[0] ?>%0A %0ATo view profile Click here- <?php echo $currentURL ?>member.php?member=<?php echo md5($phone) ?>"><i class="fa-solid  fa-brands fa-whatsapp text-success fs-1"></i></a>
 
                 <a href="mailto:<?php echo $email ?>"><i class="fa-solid fs-1   fa-envelope text-success "></i></a>
             </p>
@@ -271,6 +256,6 @@ while ($row = mysqli_fetch_array($result))
     </div>
 
 
-    <?php
+<?php
 }
 ?>
