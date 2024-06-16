@@ -1,7 +1,7 @@
 <div class="container bg-danger-subtle my-2 mb-3 shadow rounded-3 sticky-top">
     <div class="  py-2 my-2 rounded d-flex gap-2 flex-wrap justify-content-between">
         <img data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-            style="width: 40px; cursor:pointer;" src="../imgs/hamburger-menu.svg" alt="">
+            style="width: 40px; cursor:pointer;" src="../../imgs/hamburger-menu.svg" alt="">
         <h4 class="text-center text-danger  py-1 ">GIEO Gita</h4>
         <div style="width:70px"
             class="border border-danger rounded-3 bg-white d-flex flex-column text-center text-danger position-relative pb-1 ">
@@ -30,19 +30,19 @@
         <div>
             <div class=" rounded-full overflow-hidden mb-3  text-center">
                 <img width="100px" style="border-radius:50%;" class="boorder border-circle shadow-sm"
-                    src="../imgs/logo.png" alt="">
+                    src="../../imgs/logo.png" alt="">
             </div>
             <div class="d-flex flex-column gap-1 overflow-y-auto">
-                <a class="btn btn-outline-danger btn-sm" href="all-card.php">All Profiles</a>
-                <a class="btn btn-outline-danger btn-sm" href="masik-parwas.php">Masik Parwas</a>
-                <a class="btn btn-outline-danger btn-sm" href="rastrSuchna.php">राष्ट्र सूचना</a>
-                <a class="btn btn-outline-danger btn-sm" href="report.php">Report</a>
-                <a class="btn btn-outline-danger btn-sm" href="birthday.php">Birthday/Aniversary</a>
-                <a class="btn btn-outline-danger btn-sm" href="custom-message.php">Custom Message</a>
-                <a class="btn btn-outline-danger btn-sm" href="addTehsil.php">Add Tehsils</a>
-                <a class="btn btn-outline-danger btn-sm" href="music.php">Bhajans</a>
-                <a class="btn btn-outline-danger btn-sm" href="exportall.php">Export All</a>
-                <a class="btn btn-outline-danger btn-sm" href="api">Api Message</a>
+                <a class="btn btn-outline-danger btn-sm" href="../all-card.php">All Profiles</a>
+                <a class="btn btn-outline-danger btn-sm" href="../masik-parwas.php">Masik Parwas</a>
+                <a class="btn btn-outline-danger btn-sm" href="../rastrSuchna.php">राष्ट्र सूचना</a>
+                <a class="btn btn-outline-danger btn-sm" href="../report.php">Report</a>
+                <a class="btn btn-outline-danger btn-sm" href="../birthday.php">Birthday/Aniversary</a>
+                <a class="btn btn-outline-danger btn-sm" href="../custom-message.php">Custom Message</a>
+                <a class="btn btn-outline-danger btn-sm" href="../addTehsil.php">Add Tehsils</a>
+                <a class="btn btn-outline-danger btn-sm" href="../music.php">Bhajans</a>
+                <a class="btn btn-outline-danger btn-sm" href="../exportall.php">Export All</a>
+                <a class="btn btn-outline-danger btn-sm" href="../api">Api Message</a>
             </div>
         </div>
         <div>
