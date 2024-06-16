@@ -8,7 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 include ("../../partials/_db.php");
 include ('_api_config.php');
 
-$currentURL = "http://$_SERVER[HTTP_HOST]/";
+$currentURL = "https://$_SERVER[HTTP_HOST]/";
 // filtering data
 if (isset($_POST['get-data']))
 {
@@ -189,7 +189,10 @@ $country_code = array(
                             $message = urldecode($message);
 
                             //preparing full message
-                            $msg = 'गीता प्रिय ' . $row['name'] . ' जी , %0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A' . $message . ' %0A %0ATo view profile Click here- ' . $currentURL . 'member.php?member=' . md5($phone);
+                            $msg = 'गीता प्रिय ' . $row['name'] . ' जी ,
+🌹 * जय श्री कृष्ण * 🌹 
+' . $message . '  
+                             To view profile Click here- ' . $currentURL . 'member.php?member=' . md5($phone);
 
 
                             echo '

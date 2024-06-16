@@ -29,20 +29,30 @@
     <div class="offcanvas-body d-flex flex-column justify-content-between">
         <div>
             <div class=" rounded-full overflow-hidden mb-3  text-center">
-                <img width="100px" style="border-radius:50%;" class="boorder border-circle shadow-sm"
+                <img width="60px" style="border-radius:50%;" class="boorder border-circle shadow-sm"
                     src="../imgs/logo.png" alt="">
             </div>
             <div class="d-flex flex-column gap-1 overflow-y-auto">
-                <a class="btn btn-outline-danger btn-sm" href="all-card.php">All Profiles</a>
-                <a class="btn btn-outline-danger btn-sm" href="masik-parwas.php">Masik Parwas</a>
-                <a class="btn btn-outline-danger btn-sm" href="rastrSuchna.php">राष्ट्र सूचना</a>
-                <a class="btn btn-outline-danger btn-sm" href="report.php">Report</a>
-                <a class="btn btn-outline-danger btn-sm" href="birthday.php">Birthday/Aniversary</a>
-                <a class="btn btn-outline-danger btn-sm" href="custom-message.php">Custom Message</a>
-                <a class="btn btn-outline-danger btn-sm" href="addTehsil.php">Add Tehsils</a>
-                <a class="btn btn-outline-danger btn-sm" href="music.php">Bhajans</a>
-                <a class="btn btn-outline-danger btn-sm" href="exportall.php">Export All</a>
-                <a class="btn btn-outline-danger btn-sm" href="api">Api Message</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="all-card.php">All Profiles</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="masik-parwas.php">Masik Parwas</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="rastrSuchna.php">राष्ट्र सूचना</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="report.php">Report</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="birthday.php">Birthday/Aniversary</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="custom-message.php">Custom Message</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="addTehsil.php">Add Tehsils</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="music.php">Bhajans</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
+                    href="exportall.php">Export All</a>
+                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="api">Api
+                    Message</a>
             </div>
         </div>
         <div>
