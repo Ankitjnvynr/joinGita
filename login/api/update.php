@@ -63,49 +63,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <title>Update Media Content</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <style>
-            body {
+    <style>
+        body {
             background: #f7e092;
             overflow-x: hidden;
         }
-        </style>
+    </style>
 </head>
 
 <body>
 
     <div class="container mt-5">
         <h2 class="text-center">Update Media Content</h2>
-        <form action="" method="post" enctype="multipart/form-data" class="mt-4">
-            <div class="form-group">
-                <label for="imageTitle">Image Title</label>
-                <input type="text" class="form-control" id="imageTitle" name="image_title"
-                    value="<?php echo htmlspecialchars($row['image_title']); ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="imageCaption">Image Caption</label>
-                <textarea class="form-control" id="imageCaption" name="image_caption" rows="3"
-                    required><?php echo htmlspecialchars($row['image_caption']); ?></textarea>
-            </div>
-            <div class="form-group">
+        <div class="row">
+            <div class="col-md d-flex align-items-center flex-column">
                 <label for="currentImage">Current Image</label>
                 <?php
                 $fileExtension = pathinfo($row['image_path'], PATHINFO_EXTENSION);
                 if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
                 {
-                    echo "<img src='" . htmlspecialchars($row['image_path']) . "' alt='" . htmlspecialchars($row['image_title']) . "' style='max-width: 320px; max-height: 240px;' class='d-block mb-3'>";
+                    echo "<img src='../../imgs/api_content/" . htmlspecialchars($row['image_path']) . "' alt='" . htmlspecialchars($row['image_title']) . "' style='max-width: 100%; max-height: 500px;' class='d-block mb-3'>";
                 } elseif (in_array($fileExtension, ['mp4', 'avi', 'mov', 'wmv']))
                 {
-                    echo "<video width='320' height='240' controls class='d-block mb-3'>";
-                    echo "<source src='" . htmlspecialchars($row['image_path']) . "' type='video/" . $fileExtension . "'>";
+                    echo "<video width='100%' height='auto' controls class='d-block mb-3'>";
+                    echo "<source src='../../imgs/api_content/" . htmlspecialchars($row['image_path']) . "' type='video/" . $fileExtension . "'>";
                     echo "Your browser does not support the video tag.";
                     echo "</video>";
                 }
                 ?>
-                <input type="file" class="form-control-file" id="image" name="image">
-                <small class="form-text text-muted">Choose a new image to replace the current one.</small>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
+            <div class="col-md">
+                <form action="" method="post" enctype="multipart/form-data" class="mt-4">
+                    <div class="form-group">
+                        <label for="imageTitle">Image Title</label>
+                        <input type="text" class="form-control" id="imageTitle" name="image_title"
+                            value="<?php echo htmlspecialchars($row['image_title']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageCaption">Image Caption</label>
+                        <textarea class="form-control" id="imageCaption" name="image_caption" rows="3"
+                            required><?php echo htmlspecialchars($row['image_caption']); ?></textarea>
+                    </div>
+                    <div class="form-group my-2 ">
+
+
+                        <input type="file" class="form-control" id="image" name="image">
+                        <small class="form-text text-muted">Choose a new image to replace the current one.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

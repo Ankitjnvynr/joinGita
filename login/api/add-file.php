@@ -113,11 +113,11 @@ $conn->close();
         <h2 class="text-center">Upload Image</h2>
         <form action="" method="post" enctype="multipart/form-data" class="mt-4">
             <div class="form-group">
-                <label for="imageTitle">Image Title</label>
+                <label for="imageTitle">Image/Video Title</label>
                 <input type="text" class="form-control" id="imageTitle" name="image_title" required>
             </div>
             <div class="form-group">
-                <label for="imageCaption">Image Caption</label>
+                <label for="imageCaption">Image/Video Caption</label>
                 <textarea class="form-control" id="imageCaption" name="image_caption" rows="3" required></textarea>
             </div>
             <div class="form-group">

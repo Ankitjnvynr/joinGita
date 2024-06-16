@@ -18,7 +18,7 @@ if (isset($_POST['get-data']))
     $byState = $_POST['filterState'];
     $filterdistrict = $_POST['filterdistrict'];
     $bytehsil = $_POST['bytehsil'];
-    $selectedMediaIds = isset($_POST['selectedMedia'])?$_POST['selectedMedia']:'';
+    $selectedMediaIds = isset($_POST['selectedMedia']) ? $_POST['selectedMedia'] : '';
 
     if ($byCountry || $byState || $filterdistrict || $bytehsil)
     {
@@ -131,7 +131,7 @@ $country_code = array(
 <body>
 
     <?php include '_api_option.php'; ?>
-    
+
 
     <div class="container tablediv pt-3">
         <table style="font-size: small;" id="myTable" class="table table-striped table-hover">
@@ -201,18 +201,20 @@ $country_code = array(
                                 <td>';
 
                             $status_msg = send_wa_messages($name, $code, $phone, $msg, $allMediaStr, $allCaptionStr);
-                            if($status_msg['status']=='200'){
-                                echo '<span class="badge text-bg-success">'.$status_msg['message'].'</span>';
-                            }elseif(($status_msg['status'] == '400')){
+                            if ($status_msg['status'] == '200')
+                            {
+                                echo '<span class="badge text-bg-success">' . $status_msg['message'] . '</span>';
+                            } elseif (($status_msg['status'] == '400'))
+                            {
                                 echo '<span class="badge text-bg-danger">' . $status_msg['error'] . '</span>';
-                            }
-                            elseif(($status_msg['status'] == '424')){
+                            } elseif (($status_msg['status'] == '424'))
+                            {
                                 echo '<span class="badge text-bg-danger">' . $status_msg['error'] . '</span>';
-                            }
-                            elseif(($status_msg['status'] == '403')){
+                            } elseif (($status_msg['status'] == '403'))
+                            {
                                 echo '<span class="badge text-bg-danger">Not Allowed</span>';
-                            }
-                            else{
+                            } else
+                            {
                                 echo '<span class="badge text-bg-danger">' . $status_msg['error'] . '</span>';
                             }
 
@@ -249,9 +251,9 @@ $country_code = array(
         </table>
 
         <?php
-            echo ''
+        echo '<div class="text-center"><a href="custom-message.php" class="btn btn-danger" >Done, Go Back-></a></div>';
         ?>
-        <a href="custom-message.php" class="btn btn-danger" >Done, Go Back-></a>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

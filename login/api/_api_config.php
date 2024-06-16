@@ -1,6 +1,6 @@
 <?php
 
-function send_wa_messages($name, $country_code, $phone,  $message, $filePath, $caption, )
+function send_wa_messages($name, $country_code, $phone, $message, $filePath, $caption)
 {
     $phone = $country_code . $phone; // adding country code to mobile 
 
@@ -14,12 +14,12 @@ function send_wa_messages($name, $country_code, $phone,  $message, $filePath, $c
         'receiverMobileNo' => htmlspecialchars($phone),
         'message' => htmlspecialchars($message),
         'filePathUrl' => htmlspecialchars($filePath),
-        'caption'=>htmlspecialchars($caption),
+        'caption' => htmlspecialchars($caption),
     );
 
     // Build the full URL with query parameters
     $url = $base_url . '?' . http_build_query($data);
-    
+
     // Initialize cURL session
     $ch = curl_init($url);
 
@@ -42,7 +42,7 @@ function send_wa_messages($name, $country_code, $phone,  $message, $filePath, $c
     // Decode the response
     return json_decode($response, true);
 
- 
+
 
 }
 ?>

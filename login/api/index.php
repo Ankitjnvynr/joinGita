@@ -99,10 +99,10 @@ if ($conn->query($sql) === TRUE)
                         $fileExtension = pathinfo($row['image_path'], PATHINFO_EXTENSION);
                         if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
                         {
-                            echo "<img src='../../imgs/api_content/" . htmlspecialchars($row['image_path']) . "' alt='" . htmlspecialchars($row['image_title']) . "' style='max-width: 320px; max-height: 240px;'>";
+                            echo "<img src='../../imgs/api_content/" . htmlspecialchars($row['image_path']) . "' alt='" . htmlspecialchars($row['image_title']) . "' style='max-width: 50px; max-height: 50px;'>";
                         } elseif (in_array($fileExtension, ['mp4', 'avi', 'mov', 'wmv']))
                         {
-                            echo "<video width='320' height='240' controls>";
+                            echo "<video width='50' height='auto' controls>";
                             echo "<source src='../../imgs/api_content/" . htmlspecialchars($row['image_path']) . "' type='video/" . $fileExtension . "'>";
                             echo "Your browser does not support the video tag.";
                             echo "</video>";
@@ -135,7 +135,12 @@ if ($conn->query($sql) === TRUE)
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
+<script>
+    $('.totalCount').load('../_totalProfiles.php');
+        setInterval(() => {
+            $('.totalCount').load('../_totalProfiles.php');
+        }, 3000);
+</script>
 </body>
 
 </html>
