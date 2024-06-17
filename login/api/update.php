@@ -23,8 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Handle file upload if a new file is provided
     if (!empty($_FILES['image']['name']))
     {
-        $targetDir = "uploads/";
-        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+        $uploadDir = '../../imgs/api_content/';
+        $existingFilePath = $row['image_path'];
+        $existingFileName = basename($existingFilePath);
+        $targetFile = $uploadDir . $existingFileName; // Preserve existing filename
+
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         if ($check !== false)
@@ -72,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </head>
 
 <body>
-
     <div class="container mt-5">
         <h2 class="text-center">Update Media Content</h2>
         <div class="row">
@@ -104,9 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         <textarea class="form-control" id="imageCaption" name="image_caption" rows="3"
                             required><?php echo htmlspecialchars($row['image_caption']); ?></textarea>
                     </div>
-                    <div class="form-group my-2 ">
-
-
+                    <div class="form-group my-2">
                         <input type="file" class="form-control" id="image" name="image">
                         <small class="form-text text-muted">Choose a new image to replace the current one.</small>
                     </div>
@@ -119,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
 </body>
 
 </html>

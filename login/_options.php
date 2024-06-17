@@ -51,8 +51,20 @@
                     href="music.php">Bhajans</a>
                 <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm"
                     href="exportall.php">Export All</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="api">Api
-                    Message</a>
+
+
+                <div class="btn-group">
+                    <button type="button"
+                        class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        API Messages
+                    </button>
+                    <ul class="dropdown-menu bg-warning-subtle fs-6 border border-danger shadow">
+                        <li><a class="dropdown-item text-danger" href="api">Media Files</a></li>
+                        <li><a class="dropdown-item text-danger" href="api/add-file.php">Add Media</a></li>
+                        <li><a class="dropdown-item text-danger" href="api/custom-message.php">Custom Message</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div>
