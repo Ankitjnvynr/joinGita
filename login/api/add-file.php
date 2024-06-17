@@ -33,8 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $imageCaption = $conn->real_escape_string($_POST['image_caption']);
     $imageCaption = htmlspecialchars($imageCaption);
     $uploadDir = '../../imgs/api_content/';
-    $uploadFile = $uploadDir . basename($_FILES['image_file']['name']);
-    $fileName = basename($_FILES['image_file']['name']); // Get the file name only
 
     // Ensure the upload directory exists
     if (!is_dir($uploadDir))
@@ -42,10 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         mkdir($uploadDir, 0777, true);
     }
 
+    // Generate a unique filename
+    $fileExtension = pathinfo($_FILES['image_file']['name'], PATHINFO_EXTENSION);
+    $uniqueFileName = uniqid() . '.' . $fileExtension;
+
     // Move the uploaded file to the server
+    $uploadFile = $uploadDir . $uniqueFileName;
     if (move_uploaded_file($_FILES['image_file']['tmp_name'], $uploadFile))
     {
-        $sql = "INSERT INTO api_content (image_title, image_path, image_caption, dt) VALUES ('$imageTitle', '$fileName', '$imageCaption', NOW())";
+        $sql = "INSERT INTO api_content (image_title, image_path, image_caption, dt) VALUES ('$imageTitle', '$uniqueFileName', '$imageCaption', NOW())";
 
         if ($conn->query($sql) === TRUE)
         {
@@ -110,7 +113,7 @@ $conn->close();
     </div>
 
     <div class="container mt-5">
-        <h2 class="text-center">Upload Image</h2>
+        <h2 class="text-center">Upload Image or Video</h2>
         <form action="" method="post" enctype="multipart/form-data" class="mt-4">
             <div class="form-group">
                 <label for="imageTitle">Image/Video Title</label>
@@ -121,7 +124,7 @@ $conn->close();
                 <textarea class="form-control" id="imageCaption" name="image_caption" rows="3" required></textarea>
             </div>
             <div class="form-group">
-                <label for="imageFile">Select Image</label>
+                <label for="imageFile">Select Image or Video</label>
                 <input type="file" class="form-control" id="imageFile" name="image_file" required>
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
@@ -134,8 +137,6 @@ $conn->close();
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-
-
     <script>
         let SelectState = (e) => {
             $.ajax({
@@ -146,13 +147,11 @@ $conn->close();
                 },
                 success: function (response) {
                     let stateSelect = document.getElementById('stateSelect')
-                    // console.log(response)
                     stateSelect.innerHTML = response;
                 }
             })
         }
         let selectingdistrict = (e) => {
-
             $.ajax({
                 url: '../_selectDistrict.php',
                 type: 'POST',
@@ -161,13 +160,11 @@ $conn->close();
                 },
                 success: function (response) {
                     let stateSelect = document.getElementById('districtSelect')
-                    // console.log(response)
                     stateSelect.innerHTML = response;
                 }
             })
         }
         let selectingtehsil = (e) => {
-
             $.ajax({
                 url: '../_selectTehsil.php',
                 type: 'POST',
@@ -176,7 +173,6 @@ $conn->close();
                 },
                 success: function (response) {
                     let stateSelect = document.getElementById('tehsilSelect')
-                    console.log(response)
                     stateSelect.innerHTML = response;
                 }
             })
@@ -186,9 +182,6 @@ $conn->close();
             $('.totalCount').load('../_totalProfiles.php');
         }, 3000);
     </script>
-
-
-
 
 </body>
 

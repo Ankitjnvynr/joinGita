@@ -192,7 +192,7 @@ $country_code = array(
                             $msg = 'गीता प्रिय ' . $row['name'] . ' जी ,
 🌹 * जय श्री कृष्ण * 🌹 
 ' . $message . '  
-                             To view profile Click here- ' . $currentURL . 'member.php?member=' . md5($phone);
+To view profile Click here- ' . $currentURL . 'member.php?member=' . md5($phone);
 
 
                             echo '

@@ -18,7 +18,7 @@ function send_wa_messages($name, $country_code, $phone, $message, $filePath, $ca
     );
 
     // Build the full URL with query parameters
-    $url = $base_url . '?' . http_build_query($data);
+    echo $url = $base_url . '?' . http_build_query($data);
 
     // Initialize cURL session
     $ch = curl_init($url);
