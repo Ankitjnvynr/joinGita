@@ -443,6 +443,8 @@ while ($row = mysqli_fetch_array($result))
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"
         integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pica/6.1.1/pica.min.js"></script>
+
 
     <script src="select.js"></script>
     <script src="../js/another.js"></script>
@@ -471,90 +473,74 @@ while ($row = mysqli_fetch_array($result))
         $(document).ready(() => {
             const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
             let cropper;
-            // Show modal and initialize cropper when it is shown
+
+
             $('#cropperModal').on('shown.bs.modal', function () {
                 const image = document.getElementById('cropperImage');
                 const cropperContainer = document.querySelector('.cropper-container');
 
-                // Create a new canvas element
-                var canvas = document.createElement('canvas');
-                var ctx = canvas.getContext('2d');
-
-                // Set the desired width and height for the resized image
-                var maxWidth = 500; // Set your maximum width
-                var maxHeight = 500; // Set your maximum height
-
-                // Ensure the image dimensions fit within the maximum dimensions while preserving aspect ratio
-                var width = image.width;
-                var height = image.height;
-
-                if (width > height) {
-                    if (width > maxWidth) {
-                        height *= maxWidth / width;
-                        width = maxWidth;
-                    }
-                } else {
-                    if (height > maxHeight) {
-                        width *= maxHeight / height;
-                        height = maxHeight;
-                    }
-                }
-
-                // Set the canvas dimensions to the resized image dimensions
-                canvas.width = width;
-                canvas.height = height;
-
-                // Draw the resized image onto the canvas
-                ctx.drawImage(image, 0, 0, width, height);
-
-                // Replace the original image source with the resized image data URL
-                image.src = canvas.toDataURL(
-                    'image/jpeg'); // Change 'image/jpeg' to the desired image format if needed
-
-                // Initialize Cropper with the resized image
-
-
                 cropper = new Cropper(image, {
-                    aspectRatio: 1, // Adjust aspect ratio as needed
+                    aspectRatio: 1,
                     viewMode: 1,
                     rotatable: true,
-                    rotator: true,
-                    checkOrientation: true, // Set to 1 to ensure the cropped image fits within the container
-
                     crop: function (event) {
-                        // Apply circular mask to cropper container
                         $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
                         $('.cropper-container').css('overflow', 'hidden');
                     }
                 });
-                $('#cropperModal').on('hidden.bs.modal', function (e) {
-                    // Check if Cropper instance exists
 
+                $('#cropperModal').on('hidden.bs.modal', function (e) {
                     if (cropper !== undefined) {
-                        // Destroy Cropper instance
                         cropper.destroy();
                     }
                 });
 
-                // Set the Cropper container's width and height explicitly
                 cropperContainer.style.width = '100%';
-                cropperContainer.style.height = '400px'; // Adjust height as needed
+                cropperContainer.style.height = '400px';
             });
 
-            // When user clicks the "Upload Profile Photo" button, show the modal
             $('#changeImg').on('change', function (event) {
                 const input = event.target;
                 if (input.files && input.files[0]) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
-                        $('#cropperImage').attr('src', e.target.result);
-                        cropperModal.show();
+                        const tempImg = new Image();
+                        tempImg.src = e.target.result;
+                        tempImg.onload = function () {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            const maxWidth = 700;
+                            const maxHeight = 700;
+                            let width = tempImg.width;
+                            let height = tempImg.height;
+
+                            if (width > height) {
+                                if (width > maxWidth) {
+                                    height *= maxWidth / width;
+                                    width = maxWidth;
+                                }
+                            } else {
+                                if (height > maxHeight) {
+                                    width *= maxHeight / height;
+                                    height = maxHeight;
+                                }
+                            }
+
+                            canvas.width = width;
+                            canvas.height = height;
+
+                            pica().resize(tempImg, canvas)
+                                .then(result => pica().toBlob(result, 'image/jpeg', 0.9))
+                                .then(blob => {
+                                    const resizedImageURL = URL.createObjectURL(blob);
+                                    $('#cropperImage').attr('src', resizedImageURL);
+                                    cropperModal.show();
+                                });
+                        };
                     }
                     reader.readAsDataURL(input.files[0]);
                 }
             });
-
-
             // When user clicks the "Save" button, save the cropped image
             $('#saveCroppedImage').on('click', function () {
                 if (cropper) {
