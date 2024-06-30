@@ -1,18 +1,20 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
     header("location: index.php");
     exit;
 }
 
-include("../partials/_db.php");
+include ("../partials/_db.php");
 $user_id = $_GET['user'];
 
 $sr = 0;
 
 $sql = "SELECT * FROM `users` WHERE `id` = '$user_id' ";
 $result = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result))
+{
     $sr++;
     $country = $row['country'];
     $name = $row['name'];
@@ -70,12 +72,17 @@ while ($row = mysqli_fetch_array($result)) {
 
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        </script>
 
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css" integrity="sha512-bs9fAcCAeaDfA4A+NiShWR886eClUcBtqhipoY5DM60Y1V3BbVQlabthUBal5bq8Z8nnxxiyb1wfGX2n76N1Mw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css"
+        integrity="sha512-bs9fAcCAeaDfA4A+NiShWR886eClUcBtqhipoY5DM60Y1V3BbVQlabthUBal5bq8Z8nnxxiyb1wfGX2n76N1Mw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
+        integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>GIEO Gita : Updating Profile
         <?php $name ?>
     </title>
@@ -166,7 +173,8 @@ while ($row = mysqli_fetch_array($result)) {
                 <div class="col-md-3 py-3 ">
                     <div class="d-flex flex-column bg-warning-subtle py-1 gap-2 rounded">
                         <p class="text-left mx-3">Photo:-</p>
-                        <img class="m-auto shadow rounded-circle" width="60%" src="../imgs/<?php echo $pic ?>" alt="<?php echo $name ?>">
+                        <img class="m-auto shadow rounded-circle" width="60%" src="../imgs/<?php echo $pic ?>"
+                            alt="<?php echo $name ?>">
                         <p class="text-center"><label class="btn btn-outline-danger" for="changeImg">Change
                                 Imgae</label></p>
                         <input id="changeImg" type="file" class="form-control " hidden>
@@ -177,12 +185,14 @@ while ($row = mysqli_fetch_array($result)) {
                         <input name="memberid" value="<?php echo $user_id; ?>" type="text" hidden>
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="countrySelect">Change Country</label>
-                            <select id="countrySelect" name="country" class="form-select " aria-label="Small select example">
+                            <select id="countrySelect" name="country" class="form-select "
+                                aria-label="Small select example">
 
                                 <?php
                                 $optionSql = "SELECT DISTINCT `country` FROM `users` ORDER BY country ASC ";
                                 $result = $conn->query($optionSql);
-                                while ($row = mysqli_fetch_assoc($result)) {
+                                while ($row = mysqli_fetch_assoc($result))
+                                {
                                     echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
                                 }
                                 ?>
@@ -196,11 +206,13 @@ while ($row = mysqli_fetch_array($result)) {
                             <label class="form-label form-label-sm" for="phone">WhatsApp Number(without country
                                 code)</label>
                             <!-- <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control" > -->
-                            <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" class="form-control">
+                            <input id="phone" name="phone" type="text" value="<?php echo $phone ?>"
+                                class="form-control">
                         </div>
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="email">Enter Email</label>
-                            <input id="email" name="email" type="email" value="<?php echo $email ?>" class="form-control">
+                            <input id="email" name="email" type="email" value="<?php echo $email ?>"
+                                class="form-control">
                         </div>
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="dikshit">Dikshit</label>
@@ -216,21 +228,24 @@ while ($row = mysqli_fetch_array($result)) {
                         </div>
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="stateSelec">Change State</label>
-                            <input list="stateSelect" id="stateSelec" name="state" class="form-select" value="<?php echo $state; ?>">
+                            <input list="stateSelect" id="stateSelec" name="state" class="form-select"
+                                value="<?php echo $state; ?>">
                             <datalist id="stateSelect">
                                 <option value="">-- Region --</option>
                             </datalist>
                         </div>
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="citySelec">Change District</label>
-                            <input id="citySelec" list="citySelect" name="district" class="form-control" value="<?php echo $district; ?>">
+                            <input id="citySelec" list="citySelect" name="district" class="form-control"
+                                value="<?php echo $district; ?>">
                             <datalist id="citySelect">
                                 <option value="">-- District --</option>
                             </datalist>
                         </div>
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="citySelec">Change Tehsil</label>
-                            <input id="selecttehsil" list="citySelect" name="tehsil" class="form-control" value="<?php echo $tehsil; ?>">
+                            <input id="selecttehsil" list="citySelect" name="tehsil" class="form-control"
+                                value="<?php echo $tehsil; ?>">
                             <datalist id="citySelect">
                                 <option value="">-- tehsil --</option>
                             </datalist>
@@ -238,12 +253,14 @@ while ($row = mysqli_fetch_array($result)) {
 
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="city">Address</label>
-                            <input value="<?php echo $address ?>" name="address" id="city" type="text" class="form-control">
+                            <input value="<?php echo $address ?>" name="address" id="city" type="text"
+                                class="form-control">
                         </div>
 
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="occupation">Occupation</label>
-                            <select name="occupation" id="occupation" class="form-select " aria-label="Small select example">
+                            <select name="occupation" id="occupation" class="form-select "
+                                aria-label="Small select example">
                                 <option value="" disabled="" selected="">---Occupation---</option>
                                 <option value="Business" aria-selected="false">Business</option>
                                 <option value="Home Maker" aria-selected="false">Home Maker</option>
@@ -263,7 +280,8 @@ while ($row = mysqli_fetch_array($result)) {
                         </div>
                         <div class="bg-warning-subtle p-2 py-2 rounded">
                             <label class="form-label form-label-sm" for="education">Education</label>
-                            <select name="education" id="education" class="form-select " aria-label="Small select example">
+                            <select name="education" id="education" class="form-select "
+                                aria-label="Small select example">
                                 <option value="" disabled="" class="F8vzy2 HDqSrI" selected="">---Education---</option>
                                 <option value="B.Com" aria-selected="false">B.Com</option>
                                 <option value="M.Com" aria-selected="false">M.Com</option>
@@ -294,10 +312,13 @@ while ($row = mysqli_fetch_array($result)) {
                             <select name="married" id="married" class="form-select " onchange="aniver()">
                                 <?php
                                 $marriedArr = ["-- select Marital Status --", "Married", "Single"];
-                                foreach ($marriedArr as $mstatus) {
-                                    if ($mstatus == $marital_status) {
+                                foreach ($marriedArr as $mstatus)
+                                {
+                                    if ($mstatus == $marital_status)
+                                    {
                                         echo '<option selected value="' . $mstatus . '">' . $mstatus . '</option>';
-                                    } else {
+                                    } else
+                                    {
                                         echo '<option value="' . $mstatus . '">' . $mstatus . '</option>';
                                     }
                                 }
@@ -316,10 +337,13 @@ while ($row = mysqli_fetch_array($result)) {
                                 <option value="">-- Star --</option>
                                 <?php
                                 $starArr = ["Trustee", "Patern Trustee", "Corporate Trustee"];
-                                foreach ($starArr as $chkstar) {
-                                    if ($chkstar == $star) {
+                                foreach ($starArr as $chkstar)
+                                {
+                                    if ($chkstar == $star)
+                                    {
                                         echo '<option selected value="' . $chkstar . '">' . $chkstar . '</option>';
-                                    } else {
+                                    } else
+                                    {
                                         echo '<option value="' . $chkstar . '">' . $chkstar . '</option>';
                                     }
                                 }
@@ -351,7 +375,8 @@ while ($row = mysqli_fetch_array($result)) {
                                 <option value="महासचिव" aria-selected="false">महासचिव</option>
                                 <option value="गौसेवा प्रमुख" aria-selected="false">गौसेवा प्रमुख</option>
                                 <?php
-                                if ($designation != "Member") {
+                                if ($designation != "Member")
+                                {
                                     echo '
                     <option value=" ' . $designation . '" aria-selected="false" selected> ' . $designation . '</option>
                     ';
@@ -362,7 +387,8 @@ while ($row = mysqli_fetch_array($result)) {
                         </div>
                         <span id="aniversry">
                             <?php
-                            if ($aniver_date != "0000-00-00") {
+                            if ($aniver_date != "0000-00-00")
+                            {
                                 echo '
                 <div class="bg-warning-subtle p-2 py-2 rounded ">
                   <label class="form-label " for="anniversary">Aniversary</label>
@@ -383,27 +409,40 @@ while ($row = mysqli_fetch_array($result)) {
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script src="../statelist.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js" integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js" integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
+        integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"
+        integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="select.js"></script>
     <script src="../js/another.js"></script>
@@ -412,7 +451,7 @@ while ($row = mysqli_fetch_array($result)) {
 
 
     <?php
-echo '
+    echo '
     <script>
       let cnntry = document.getElementById("countrySelect")
       const newOption = new Option("' . $country . '","' . $country . '");
@@ -433,7 +472,7 @@ echo '
             const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
             let cropper;
             // Show modal and initialize cropper when it is shown
-            $('#cropperModal').on('shown.bs.modal', function() {
+            $('#cropperModal').on('shown.bs.modal', function () {
                 const image = document.getElementById('cropperImage');
                 const cropperContainer = document.querySelector('.cropper-container');
 
@@ -482,13 +521,13 @@ echo '
                     rotator: true,
                     checkOrientation: true, // Set to 1 to ensure the cropped image fits within the container
 
-                    crop: function(event) {
+                    crop: function (event) {
                         // Apply circular mask to cropper container
                         $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
                         $('.cropper-container').css('overflow', 'hidden');
                     }
                 });
-                $('#cropperModal').on('hidden.bs.modal', function(e) {
+                $('#cropperModal').on('hidden.bs.modal', function (e) {
                     // Check if Cropper instance exists
 
                     if (cropper !== undefined) {
@@ -503,11 +542,11 @@ echo '
             });
 
             // When user clicks the "Upload Profile Photo" button, show the modal
-            $('#changeImg').on('change', function(event) {
+            $('#changeImg').on('change', function (event) {
                 const input = event.target;
                 if (input.files && input.files[0]) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         $('#cropperImage').attr('src', e.target.result);
                         cropperModal.show();
                     }
@@ -517,7 +556,7 @@ echo '
 
 
             // When user clicks the "Save" button, save the cropped image
-            $('#saveCroppedImage').on('click', function() {
+            $('#saveCroppedImage').on('click', function () {
                 if (cropper) {
                     const canvas = cropper.getCroppedCanvas();
                     const croppedImageDataURL = canvas.toDataURL("image/png");
@@ -541,7 +580,7 @@ echo '
                             memberId: memberId
                         },
                         // dataType: 'json',
-                        success: function(response) {
+                        success: function (response) {
                             console.table(response)
                             if (response.success) {
                                 // Display success message or perform any other actions
@@ -553,7 +592,7 @@ echo '
                                 console.log(response)
                             }
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             // Handle AJAX error
                             console.error(error);
                         }
