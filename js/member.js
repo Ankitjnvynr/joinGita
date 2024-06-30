@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var maxHeight = 700; // Set your maximum height
 
         // Ensure the image dimensions fit within the maximum dimensions while preserving aspect ratio
-        var width = image.width;
-        var height = image.height;
+        var width = image.naturalWidth;
+        var height = image.naturalHeight;
 
         if (width > height) {
             if (width > maxWidth) {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.drawImage(image, 0, 0, width, height);
 
         // Replace the original image source with the resized image data URL
-        image.src = canvas.toDataURL('image/jpeg'); // Change 'image/jpeg' to the desired image format if needed
+        image.src = canvas.toDataURL('image/jpeg', 0.9); // Change 'image/jpeg' to the desired image format if needed
 
         // Initialize Cropper with the resized image
 
