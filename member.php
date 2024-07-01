@@ -551,8 +551,7 @@ if ($star == 'null') {
         <div class="container ">
             <div class="row">
                 <div class="col-md d-flex justify-content-center align-items-center">
-                    <h3> कार्यकारिणी सदस्य (
-                        <?php
+                    <h3> कार्यकारिणी सदस्य (<?php
                         echo $tehsil;
                         ?>)
                     </h3>
@@ -605,6 +604,11 @@ if ($star == 'null') {
         </div>
     </div>
 
+
+    <?php
+    if ($designation != 'Member')
+    {
+        ?>
     <!-- =======================photo section============================ -->
     <div class="container mb-5">
         <h4>Downloads</h4>
@@ -618,9 +622,11 @@ if ($star == 'null') {
             $dirHandle = opendir($imageDir);
 
             // Loop through each file in the directory
-            while (($file = readdir($dirHandle)) !== false) {
+            while (($file = readdir($dirHandle)) !== false)
+            {
                 // Check if the file is an image
-                if (is_file($imageDir . $file) && in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
+                if (is_file($imageDir . $file) && in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+                {
                     // Display the image
                     echo '<div  class=" picscard card d-flex align-items-center justify-content-center"> <img style="height: 100%; object-fit:cover; max-width:200px" src="' . $imageDir . $file . '" alt="' . $file . '" /><a download class="btn btn-sucess" href="imgs/gurujiPics/' . $file . '">Download</a> </div>';
                 }
@@ -634,7 +640,9 @@ if ($star == 'null') {
         </div>
     </div>
     <!-- =======================photo section end ============================ -->
-
+<?php
+    }
+?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
