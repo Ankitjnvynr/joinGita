@@ -114,11 +114,12 @@ $(document).ready(()=>{
         })
         .then(response => response.json())
         .then(data => {
-            console.log(typeof data);
-            // console.log(data)
-            console.log(data.users)
-            console.log(data.users[0].phone)
-            // sendWaMessages(data.phone)
+            // console.log(typeof data);
+            // console.log(data);
+            // console.log(data.mediaPaths)
+            // console.log(data.users)
+            // console.log()
+            console.log(sendWaMessages(data.users[0].phone,data.users[0].message,data.mediaPaths,data.mediaCaptions))
         })
         .catch(error => console.error('Error:', error));
     });
