@@ -7,6 +7,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
 }
 include ("../../partials/_db.php");
 
+// Add CORS headers
+header('Access-Control-Allow-Origin: https://parivaar.gieogita.org/'); // Use a specific domain instead of * for security in production
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Allow-Credentials: true');
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
+{
+    // Send response to OPTIONS request and exit to avoid further processing
+    header('HTTP/1.1 200 OK');
+    exit;
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,8 +52,9 @@ include ("../../partials/_db.php");
             overflow-x: scroll;
             font-size: 1rem;
         }
-
-        #myTable {}
+        .fs-7{
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 
@@ -54,7 +69,7 @@ include ("../../partials/_db.php");
     </div>
     <h5 class="text-center my-3">Preparing to send message</h5>
     <div class="container bg-light p-1">
-        <form action="send_messages.php" method="POST" class="filterform d-flex flex-wrap gap-1">
+        <form id="getDataForm" action="" method="POST" class="filterform d-flex flex-wrap gap-1">
             <select required class="form-select form-select-sm" aria-label="Small select example" name="filterCountry"
                 id="countrySelect" onchange="SelectState(this)">
                 <option value="" selected>---Country---</option>
@@ -141,8 +156,25 @@ include ("../../partials/_db.php");
                 </tbody>
             </table>
 
-            <button type="submit" name="get-data" class="btn btn-danger">Get Data ></button>
+            <button id="sendBtn" type="submit" name="get-data" class="btn btn-danger">send ></button>
         </form>
+    </div>
+
+    <div class="container fs-7">
+        <table class="table fs-7">
+            <thead>
+                <tr>
+                    <th scope="col">Sr</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody id="resultData">
+                
+                
+            </tbody>
+        </table>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -151,54 +183,9 @@ include ("../../partials/_db.php");
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-    <script>
-        let SelectState = (e) => {
-            $.ajax({
-                url: '../_selectState.php',
-                type: 'POST',
-                data: {
-                    country: e.value
-                },
-                success: function (response) {
-                    let stateSelect = document.getElementById('stateSelect')
-                    // console.log(response)
-                    stateSelect.innerHTML = response;
-                }
-            })
-        }
-        let selectingdistrict = (e) => {
-            $.ajax({
-                url: '../_selectDistrict.php',
-                type: 'POST',
-                data: {
-                    country: e.value
-                },
-                success: function (response) {
-                    let stateSelect = document.getElementById('districtSelect')
-                    // console.log(response)
-                    stateSelect.innerHTML = response;
-                }
-            })
-        }
-        let selectingtehsil = (e) => {
-            $.ajax({
-                url: '../_selectTehsil.php',
-                type: 'POST',
-                data: {
-                    country: e.value
-                },
-                success: function (response) {
-                    let stateSelect = document.getElementById('tehsilSelect')
-                    console.log(response)
-                    stateSelect.innerHTML = response;
-                }
-            })
-        }
-        $('.totalCount').load('../_totalProfiles.php');
-        setInterval(() => {
-            $('.totalCount').load('../_totalProfiles.php');
-        }, 3000);
-    </script>
+    <script src="../../js/api.js"></script>
+
+
 </body>
 
 </html>
