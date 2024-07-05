@@ -131,14 +131,22 @@ $(document).ready(() => {
             // Parse JSON response
             const data = await response.json();
             const users = data.users;
-
+            var index = 0;
             // Process each user asynchronously
             for (const user of users) {
                 try {
+                    index++;
                     const result = await sendMsg(user.phone, user.message, data.mediaPaths, data.mediaCaptions);
 
-                    console.log("Response from sendMsg:", result.message);
-                    $('resultData').
+                    console.log("Response from sendMsg:", result);
+                    $('#resultData').append(`
+                        <tr>
+                            <td scope="col">${index}</td>
+                            <td scope="col">${user.name}</td>
+                            <td scope="col">${user.phone}</td>
+                            <td scope="col">${result.message}</td>
+                        </tr>
+                        `)
 
 
                 } catch (error) {

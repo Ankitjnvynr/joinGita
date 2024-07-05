@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
     </div>
 
     <div class="container fs-7">
-        <table class="table fs-7">
+        <table class="table my-3 fs-7">
             <thead>
                 <tr>
                     <th scope="col">Sr</th>
