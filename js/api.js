@@ -111,6 +111,7 @@ $(document).ready(() => {
     // Form submission event listener
     $('#getDataForm').submit(async function (event) {
         event.preventDefault();
+        $('#resultData').html('')
         $('#sendBtn').prop('disabled', true);
         $('#sendBtn').html('Loading......');
         // Construct FormData object from the form
@@ -139,6 +140,8 @@ $(document).ready(() => {
                     const result = await sendMsg(user.phone, user.message, data.mediaPaths, data.mediaCaptions);
 
                     console.log("Response from sendMsg:", result);
+                    
+                    result = (result == 'success') ? 'sent' : 'failed'
                     $('#resultData').append(`
                         <tr>
                             <td scope="col">${index}</td>
