@@ -94,6 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                 id="tehsilSelect">
                 <option value="" selected>---Tehsil---</option>
             </select>
+            <select name="dikshit" class="form-select form-select-sm" aria-label="Small select example"
+                id="dikshit">
+                <option value="" selected>---dikshit---</option>
+                <?php
+                $dikshit_select_sql = "SELECT DISTINCT dikshit FROM `users` ";
+                $dikshit_select_result = mysqli_query($conn, $dikshit_select_sql);
+                while ($dikshit_select_row = mysqli_fetch_assoc($dikshit_select_result))
+                {
+                    $selected = $dikshit_select_row['dikshit'] == 'Birthday' ? "Selected" : "";
+                    echo '<option value="' . $dikshit_select_row['dikshit'] . '" ' . $selected . '>' . $dikshit_select_row['dikshit'] . '</option>';
+                }
+                ?>
+            </select>
             <select class="form-select form-select-sm inputfields" name="messageSelect"
                 aria-label="Small select example" required>
                 <?php

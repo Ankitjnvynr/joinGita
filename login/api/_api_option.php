@@ -61,6 +61,8 @@
                         <li><a class="dropdown-item text-danger" href="./">Media Files</a></li>
                         <li><a class="dropdown-item text-danger" href="add-file.php">Add Media</a></li>
                         <li><a class="dropdown-item text-danger" href="custom-message.php">Custom Message</a></li>
+                        <li><a class="dropdown-item text-danger" href="birthday.php">Birthday</a></li>
+                        <li><a class="dropdown-item text-danger" href="aniversary.php">Aniversary</a></li>
                     </ul>
                 </div>
             </div>

@@ -12,11 +12,22 @@ $byCountry = !empty($_POST['filterCountry']) ? $_POST['filterCountry'] : null;
 $byState = !empty($_POST['filterState']) ? $_POST['filterState'] : null;
 $filterdistrict = !empty($_POST['filterdistrict']) ? $_POST['filterdistrict'] : null;
 $bytehsil = !empty($_POST['bytehsil']) ? $_POST['bytehsil'] : null;
+$dikshit = !empty($_POST['dikshit']) ? $_POST['dikshit'] : null;
+
+// geting birth date and birth month
+$birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : null;
+$birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : null;
+
+//getting aniversary date and month 
+$aniDate = isset($_POST['aniDate']) ? $_POST['aniDate'] : null;
+$aniMonth = isset($_POST['aniMonth']) ? $_POST['aniMonth'] : null;
+
+
 
 $selectedMediaIds = isset($_POST['selectedMedia']) ? json_decode($_POST['selectedMedia'], true) : [];
 
 
-if ($byCountry || $byState || $filterdistrict || $bytehsil)
+if ($byCountry || $byState || $filterdistrict || $bytehsil || $dikshit || $birthDate || $birthMonth || $aniDate || $aniMonth)
 {
     $newStr = ' WHERE ';
 }
@@ -40,6 +51,31 @@ if ($bytehsil)
 {
     $bytehsil = " tehsil LIKE '" . $bytehsil . "%'";
     array_push($filters, $bytehsil);
+}
+if ($dikshit)
+{
+    $dikshit = " dikshit LIKE '" . $dikshit . "%'";
+    array_push($filters, $dikshit);
+}
+if ($birthDate)
+{
+    $birthDate = " DAY(dob) = " . $birthDate . "";
+    array_push($filters, $birthDate);
+}
+if ($birthMonth)
+{
+    $birthMonth = " MONTH(dob) = " . $birthMonth . "";
+    array_push($filters, $birthMonth);
+}
+if ($aniDate)
+{
+    $aniDate = " DAY(aniver_date) = " . $aniDate . "";
+    array_push($filters, $aniDate);
+}
+if ($aniMonth)
+{
+    $aniMonth = " MONTH(aniver_date) = " . $aniMonth . "";
+    array_push($filters, $aniMonth);
 }
 
 $newStr = $newStr . implode(" AND ", $filters);
@@ -71,6 +107,31 @@ function convert_to_str($arr, $currentURL)
 }
 $allMediaStr = convert_to_str($mediaPaths, $currentURL);
 $allCaptionStr = implode(',', $mediaCaptions);
+
+if ($birthDate)
+{
+    if ($birthDate == date('d'))
+    {
+        $allMediaStr = "https://parivaar.gieogita.org/login/bday.jpg";
+        $allCaptionStr = "जन्मदिवस की  शुभकामना";
+    } else
+    {
+        $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
+        $allCaptionStr = "जन्मदिवस की  शुभकामना";
+    }
+}
+if ($aniDate)
+{
+    if ($aniDate == date('d'))
+    {
+        $allMediaStr = "https://parivaar.gieogita.org/login/anniversary.jpg";
+        $allCaptionStr = "वैवाहिक वर्षगांठ की शुभकामना";
+    } else
+    {
+        $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
+        $allCaptionStr = "जन्मदिवस की  शुभकामना";
+    }
+}
 
 $country_code = array(
     "Australia" => "61",

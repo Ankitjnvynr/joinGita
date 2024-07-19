@@ -48,39 +48,6 @@ setInterval(() => {
 
 
 
-
-// function to send message with api
-
-
-// async function sendWaMessages(phone, message, filePath, caption) {
-//     const baseUrl = 'https://app.jflindia.co.in/api/v1/message/create';
-//     const data = {
-//         username: 'gieo2024',
-//         password: 'Gieo@2024',
-//         receiverMobileNo: phone,
-//         message: message,
-//         filePathUrl: filePath,
-//         caption: caption
-//     };
-
-//     const url = `${baseUrl}?${new URLSearchParams(data).toString()}`;
-
-//     try {
-//         const response = await fetch(url, { method: 'GET' });
-
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-
-//         const responseData = await response.json();
-//         return responseData;
-//     } catch (error) {
-//         return { error: error.message };
-//     }
-// }
-
-
-
 // message sending script 
 // Function to send message asynchronously
 const sendMsg = (phone, message, filePath, caption) => {
@@ -125,6 +92,7 @@ $(document).ready(() => {
         try {
             // Fetch data from getData.php
             const response = await fetch('getData.php', { method: 'POST', body: formData });
+
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
@@ -137,17 +105,18 @@ $(document).ready(() => {
             for (const user of users) {
                 try {
                     index++;
-                    const result = await sendMsg(user.phone, user.message, data.mediaPaths, data.mediaCaptions);
+                    result = await sendMsg(user.phone, user.message, data.mediaPaths, data.mediaCaptions);
+                    // result = { message: "under maintaince" }
 
                     console.log("Response from sendMsg:", result);
-                    
-                    result = (result == 'success') ? 'sent' : 'failed'
+
+                    result = (result.message == 'success') ? '<span class="text-success">sent</span>' : '<span class="text-danger">Failed</span>'
                     $('#resultData').append(`
                         <tr>
                             <td scope="col">${index}</td>
                             <td scope="col">${user.name}</td>
                             <td scope="col">${user.phone}</td>
-                            <td scope="col">${result.message}</td>
+                            <td scope="col">${result}</td>
                         </tr>
                         `)
 
