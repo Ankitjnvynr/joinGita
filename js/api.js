@@ -105,9 +105,9 @@ $(document).ready(() => {
             for (const user of users) {
                 try {
                     index++;
-                    result = await sendMsg(user.phone, user.message, data.mediaPaths, data.mediaCaptions);
-                    // result = { message: "under maintaince" }
-
+                    // result = await sendMsg(user.phone, user.message, data.mediaPaths, data.mediaCaptions);
+                    result = { message: "under maintaince" }
+                    console.log(data.mediaPaths);
                     console.log("Response from sendMsg:", result);
 
                     result = (result.message == 'success') ? '<span class="text-success">sent</span>' : '<span class="text-danger">Failed</span>'

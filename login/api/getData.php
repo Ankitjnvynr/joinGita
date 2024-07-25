@@ -22,9 +22,17 @@ $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : null;
 $aniDate = isset($_POST['aniDate']) ? $_POST['aniDate'] : null;
 $aniMonth = isset($_POST['aniMonth']) ? $_POST['aniMonth'] : null;
 
-
-
 $selectedMediaIds = isset($_POST['selectedMedia']) ? json_decode($_POST['selectedMedia'], true) : [];
+
+
+if ($birthDate && $birthMonth) {
+    $bd = $birthDate;
+    $bm = $birthMonth;
+}
+if ($aniDate && $aniMonth) {
+    $ad = $aniDate;
+    $am = $aniMonth;
+}
 
 
 if ($byCountry || $byState || $filterdistrict || $bytehsil || $dikshit || $birthDate || $birthMonth || $aniDate || $aniMonth) {
@@ -52,19 +60,19 @@ if ($dikshit) {
     array_push($filters, $dikshit);
 }
 if ($birthDate) {
-    $birthDate = " DAY(dob) = " . $birthDate . "";
+    $birthDate = " DAY(dob) = " . $birthDate;
     array_push($filters, $birthDate);
 }
 if ($birthMonth) {
-    $birthMonth = " MONTH(dob) = " . $birthMonth . "";
+    $birthMonth = " MONTH(dob) = " . $birthMonth;
     array_push($filters, $birthMonth);
 }
 if ($aniDate) {
-    $aniDate = " DAY(aniver_date) = " . $aniDate . "";
+    $aniDate = " DAY(aniver_date) = " . $aniDate;
     array_push($filters, $aniDate);
 }
 if ($aniMonth) {
-    $aniMonth = " MONTH(aniver_date) = " . $aniMonth . "";
+    $aniMonth = " MONTH(aniver_date) = " . $aniMonth;
     array_push($filters, $aniMonth);
 }
 
@@ -96,22 +104,34 @@ function convert_to_str($arr, $currentURL)
 $allMediaStr = convert_to_str($mediaPaths, $currentURL);
 $allCaptionStr = implode(',', $mediaCaptions);
 
-if ($birthDate) {
-    if ($birthDate == date('d')) {
+$currentDay = date('j'); // day of the month without leading zero
+$currentMonth = date('n'); // month without leading zero
+
+
+
+if ($birthDate && $birthMonth) {
+    if (intval(ltrim($bd, '0')) === intval($currentDay) && intval(ltrim($bm, '0')) === intval($currentMonth)) {
         $allMediaStr = "https://parivaar.gieogita.org/login/bday.jpg";
-        $allCaptionStr = "जन्मदिवस की  शुभकामना";
+        $allCaptionStr = "जन्मदिवस की शुभकामना";
     } else {
         $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
-        $allCaptionStr = "जय श्री कृष्ण";
+        $allCaptionStr = "संत सेवा...भंडारा सेवा";
     }
+    // $dates = [
+    //     'cd' => $currentDay,
+    //     'cm' => $currentMonth,
+    //     'bd' => $bd,
+    //     'bm' => $bm,
+    // ];
+    // $response['dates'] = $dates;
 }
-if ($aniDate) {
-    if ($aniDate == date('d')) {
+if ($aniDate && $aniMonth) {
+    if (intval($ad) == $currentDay && intval($am) == $currentMonth) {
         $allMediaStr = "https://parivaar.gieogita.org/login/anniversary.jpg";
         $allCaptionStr = "वैवाहिक वर्षगांठ की शुभकामना";
     } else {
         $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
-        $allCaptionStr = "जय श्री कृष्ण";
+        $allCaptionStr = "संत सेवा...भंडारा सेवा";
     }
 }
 
@@ -132,7 +152,6 @@ $country_code = array(
     "England" => "+44",
     "Malaysia" => "+60",
 );
-
 
 $messageSelect = isset($_POST['messageSelect']) ? $_POST['messageSelect'] : '';
 $msgsql = "SELECT * FROM `messages` WHERE `title` = '$messageSelect'";
@@ -178,8 +197,6 @@ if ($totalresult > 0) {
 
 $response['mediaPaths'] = $allMediaStr;
 $response['mediaCaptions'] = $allCaptionStr;
-
-
 
 header('Content-Type: application/json');
 echo json_encode($response);
