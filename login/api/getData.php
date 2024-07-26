@@ -115,7 +115,7 @@ if ($birthDate && $birthMonth) {
         $allCaptionStr = "जन्मदिवस की शुभकामना";
     } else {
         $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
-        $allCaptionStr = "संत सेवा...भंडारा सेवा";
+        $allCaptionStr = "🌹संत सेवा..भंडारा..गौसेवा";
     }
     // $dates = [
     //     'cd' => $currentDay,
@@ -131,7 +131,7 @@ if ($aniDate && $aniMonth) {
         $allCaptionStr = "वैवाहिक वर्षगांठ की शुभकामना";
     } else {
         $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
-        $allCaptionStr = "संत सेवा...भंडारा सेवा";
+        $allCaptionStr = "🌹संत सेवा..भंडारा..गौसेवा";
     }
 }
 
