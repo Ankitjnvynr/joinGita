@@ -83,6 +83,9 @@ $(document).ready(() => {
         $('#sendBtn').html('Loading......');
         // Construct FormData object from the form
         const formData = new FormData(this);
+        // for (let [key, value] of formData.entries()) {
+        //     console.log(`${key}: ${value}`);
+        // }
 
         // Retrieve selected media items
         const selectedMedia = Array.from(document.querySelectorAll('input[name="selectedMedia[]"]:checked'))
@@ -107,8 +110,10 @@ $(document).ready(() => {
                     index++;
                     // result = await sendMsg(user.phone, user.message, data.mediaPaths, data.mediaCaptions);
                     result = { message: "under maintaince" }
-                    console.log(data.mediaPaths);
-                    console.log("Response from sendMsg:", result);
+                    // console.log(data.mediaPaths);
+                    console.log(user.designation);
+                    // console.log("Response from sendMsg:", result);
+                    // console.log(formData);
 
                     result = (result.message == 'success') ? '<span class="text-success">sent</span>' : '<span class="text-danger">Failed</span>'
                     $('#resultData').append(`

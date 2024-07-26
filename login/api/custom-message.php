@@ -1,11 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
-{
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("location: index.php");
     exit;
 }
-include ("../../partials/_db.php");
+include("../../partials/_db.php");
 
 // Add CORS headers
 header('Access-Control-Allow-Origin: https://parivaar.gieogita.org/'); // Use a specific domain instead of * for security in production
@@ -14,8 +13,7 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Access-Control-Allow-Credentials: true');
 
 // Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     // Send response to OPTIONS request and exit to avoid further processing
     header('HTTP/1.1 200 OK');
     exit;
@@ -35,26 +33,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        body {
-            background: #f7e092;
-            overflow-x: hidden;
-        }
+    body {
+        background: #f7e092;
+        overflow-x: hidden;
+    }
 
-        .filterform select {
-            flex: 1 0 150px;
-        }
+    .filterform select {
+        flex: 1 0 150px;
+    }
 
-        .filterform>button {
-            flex: 1 0 100px;
-        }
+    .filterform>button {
+        flex: 1 0 100px;
+    }
 
-        .tablediv {
-            overflow-x: scroll;
-            font-size: 1rem;
-        }
-        .fs-7{
-            font-size: 0.85rem;
-        }
+    .tablediv {
+        overflow-x: scroll;
+        font-size: 1rem;
+    }
+
+    .fs-7 {
+        font-size: 0.85rem;
+    }
     </style>
 </head>
 
@@ -76,8 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                 <?php
                 $optionSql = "SELECT DISTINCT `country` FROM `users` ";
                 $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result))
-                {
+                while ($row = mysqli_fetch_assoc($result)) {
                     echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
                 }
                 ?>
@@ -94,14 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                 id="tehsilSelect">
                 <option value="" selected>---Tehsil---</option>
             </select>
-            <select name="dikshit" class="form-select form-select-sm" aria-label="Small select example"
-                id="dikshit">
+            <select name="dikshit" class="form-select form-select-sm" aria-label="Small select example" id="dikshit">
                 <option value="" selected>---dikshit---</option>
                 <?php
                 $dikshit_select_sql = "SELECT DISTINCT dikshit FROM `users` ";
                 $dikshit_select_result = mysqli_query($conn, $dikshit_select_sql);
-                while ($dikshit_select_row = mysqli_fetch_assoc($dikshit_select_result))
-                {
+                while ($dikshit_select_row = mysqli_fetch_assoc($dikshit_select_result)) {
                     $selected = $dikshit_select_row['dikshit'] == 'Birthday' ? "Selected" : "";
                     echo '<option value="' . $dikshit_select_row['dikshit'] . '" ' . $selected . '>' . $dikshit_select_row['dikshit'] . '</option>';
                 }
@@ -112,13 +108,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                 <?php
                 $message_select_sql = "SELECT * FROM `messages` ";
                 $message_select_result = mysqli_query($conn, $message_select_sql);
-                while ($message_select_row = mysqli_fetch_assoc($message_select_result))
-                {
+                while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
                     $selected = $message_select_row['title'] == 'Birthday' ? "Selected" : "";
                     echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
                 }
                 ?>
             </select>
+
+            <div class="form-check inputfields bg-light border bg-white rounded  px-2">
+                <input class="form-check-input mx-1" type="checkbox" name="executive" value="karykarini" id="executive">
+                <label class="form-check-label" for="executive">
+                    Karykarini
+                </label>
+            </div>
 
             <?php
             // Fetch data from api_content table
@@ -138,19 +140,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                 </thead>
                 <tbody>
                     <?php
-                    if ($result->num_rows > 0)
-                    {
-                        while ($row = $result->fetch_assoc())
-                        {
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td><input class='form-check-input' type='checkbox' name='selectedMedia[]' value='" . $row['id'] . "'></td>";
                             echo "<td>";
                             $fileExtension = pathinfo($row['image_path'], PATHINFO_EXTENSION);
-                            if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
-                            {
+                            if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
                                 echo "<img src='../../imgs/api_content/" . htmlspecialchars($row['image_path']) . "' alt='" . htmlspecialchars($row['image_title']) . "' style='max-width: 70px; max-height: 70px;'>";
-                            } elseif (in_array($fileExtension, ['mp4', 'avi', 'mov', 'wmv']))
-                            {
+                            } elseif (in_array($fileExtension, ['mp4', 'avi', 'mov', 'wmv'])) {
                                 echo "<video width='70' height='auto' controls>";
                                 echo "<source src='../../imgs/api_content/" . htmlspecialchars($row['image_path']) . "' type='video/" . $fileExtension . "'>";
                                 echo "Your browser does not support the video tag.";
@@ -161,8 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                             echo "<td>" . htmlspecialchars($row['image_caption']) . "</td>";
                             echo "</tr>";
                         }
-                    } else
-                    {
+                    } else {
                         echo "<tr><td colspan='4'>No data found</td></tr>";
                     }
                     ?>
@@ -184,15 +181,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                 </tr>
             </thead>
             <tbody id="resultData">
-                
-                
+
+
             </tbody>
         </table>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 

@@ -13,6 +13,7 @@ $byState = !empty($_POST['filterState']) ? $_POST['filterState'] : null;
 $filterdistrict = !empty($_POST['filterdistrict']) ? $_POST['filterdistrict'] : null;
 $bytehsil = !empty($_POST['bytehsil']) ? $_POST['bytehsil'] : null;
 $dikshit = !empty($_POST['dikshit']) ? $_POST['dikshit'] : null;
+$executive = !empty($_POST['executive']) ? $_POST['executive'] : null;
 
 // geting birth date and birth month
 $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : null;
@@ -35,7 +36,7 @@ if ($aniDate && $aniMonth) {
 }
 
 
-if ($byCountry || $byState || $filterdistrict || $bytehsil || $dikshit || $birthDate || $birthMonth || $aniDate || $aniMonth) {
+if ($byCountry || $byState || $filterdistrict || $bytehsil || $dikshit || $birthDate || $birthMonth || $aniDate || $aniMonth || $executive) {
     $newStr = ' WHERE ';
 }
 
@@ -74,6 +75,10 @@ if ($aniDate) {
 if ($aniMonth) {
     $aniMonth = " MONTH(aniver_date) = " . $aniMonth;
     array_push($filters, $aniMonth);
+}
+if ($executive) {
+    $executive = " designation != 'Member'";
+    array_push($filters, $executive);
 }
 
 $newStr = $newStr . implode(" AND ", $filters);
