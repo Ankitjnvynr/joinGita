@@ -63,6 +63,7 @@
                         <li><a class="dropdown-item text-danger" href="custom-message.php">Custom Message</a></li>
                         <li><a class="dropdown-item text-danger" href="birthday.php">Birthday</a></li>
                         <li><a class="dropdown-item text-danger" href="aniversary.php">Aniversary</a></li>
+                        <li><a class="dropdown-item text-danger" href="joining.php">Joining</a></li>
                     </ul>
                 </div>
             </div>
