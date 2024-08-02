@@ -28,31 +28,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIEO Gita : Custom message</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        body {
-            background: #f7e092;
-            overflow-x: hidden;
-        }
+    body {
+        background: #f7e092;
+        overflow-x: hidden;
+    }
 
-        .filterform select,
-        input {
-            flex: 1 0 150px;
-        }
+    .filterform select,
+    input {
+        flex: 1 0 150px;
+    }
 
-        .filterform>button {
-            flex: 1 0 100px;
-        }
+    .filterform>button {
+        flex: 1 0 100px;
+    }
 
-        .tablediv {
-            overflow-x: scroll;
-            font-size: 1rem;
-        }
+    .tablediv {
+        overflow-x: scroll;
+        font-size: 1rem;
+    }
 
-        .fs-7 {
-            font-size: 0.85rem;
-        }
+    .fs-7 {
+        font-size: 0.85rem;
+    }
     </style>
 </head>
 
@@ -67,17 +70,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     <h5 class="text-center my-3">Sending Date Wise</h5>
     <div class="container bg-light p-1">
         <form id="getDataForm" action="" method="POST" class="filterform d-flex align-items-center flex-wrap gap-1">
-            <input type="datetime-local" name="fromDate" class="form-control form-control-sm inputfields" placeholder="Enter Date and Time" value="<?php echo date('Y-m-d\TH:i') ?>" required>
+            <input type="datetime-local" name="fromDate" class="form-control form-control-sm inputfields"
+                placeholder="Enter Date and Time" value="<?php echo date('Y-m-d\TH:i') ?>" required>
             <span class="text-danger fw-bolder">TO</span>
-            <input type="datetime-local" name="toDate" class="form-control form-control-sm inputfields" placeholder="Enter Date and Time" value="<?php echo date('Y-m-d\TH:i') ?>" required>
+            <input type="datetime-local" name="toDate" class="form-control form-control-sm inputfields"
+                placeholder="Enter Date and Time" value="<?php echo date('Y-m-d\TH:i') ?>" required>
 
-            <select class="form-select form-select-sm inputfields" name="messageSelect" aria-label="Small select example" required>
+            <select class="form-select form-select-sm inputfields" name="messageSelect"
+                aria-label="Small select example" required>
                 <option value="">Select Message</option>
                 <?php
                 $message_select_sql = "SELECT * FROM `messages`";
                 $message_select_result = mysqli_query($conn, $message_select_sql);
                 while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
-                    $selected = $message_select_row['title'] == 'Welcome' ? "selected" : "";
+                    $selected = $message_select_row['title'] == 'Welcome ' ? "selected" : "";
                     echo '<option value="' . htmlspecialchars($message_select_row['title']) . '" ' . $selected . '>' . htmlspecialchars($message_select_row['title']) . '</option>';
                 }
                 ?>
@@ -95,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
                     <th scope="col">Sr</th>
                     <th scope="col">Name</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">joinOn</th>
+
                     <th scope="col">Status</th>
                 </tr>
             </thead>
@@ -106,9 +112,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         </table>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <script src="../../js/api.js"></script>
 

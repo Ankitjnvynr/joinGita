@@ -60,9 +60,18 @@ if ($executive) {
 if ($fromDate && $toDate) {
     // Ensure proper date formatting
     $fromDate = date('Y-m-d', strtotime($fromDate));
-    $toDate = date('Y-m-d', strtotime($toDate));
+
+    // Create a DateTime object for toDate
+    $toDateTime = new DateTime($toDate);
+    // Add one day
+    $toDateTime->modify('+1 day');
+    // Format the new toDate
+    $toDate = $toDateTime->format('Y-m-d');
+
+    // Add filter to the array
     $filters[] = "dt BETWEEN '$fromDate' AND '$toDate'";
 }
+
 
 // Build SQL query with filters
 if (!empty($filters)) {
