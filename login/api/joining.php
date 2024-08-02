@@ -1,11 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
-{
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("location: index.php");
     exit;
 }
-include ("../../partials/_db.php");
+include("../../partials/_db.php");
 
 // Add CORS headers
 header('Access-Control-Allow-Origin: https://parivaar.gieogita.org/'); // Use a specific domain instead of * for security in production
@@ -13,9 +12,9 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Access-Control-Allow-Credentials: true');
 
+date_default_timezone_set('Asia/Kolkata');
 // Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     // Send response to OPTIONS request and exit to avoid further processing
     header('HTTP/1.1 200 OK');
     exit;
@@ -29,11 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIEO Gita : Custom message</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             background: #f7e092;
@@ -71,31 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
     <h5 class="text-center my-3">Sending Date Wise</h5>
     <div class="container bg-light p-1">
         <form id="getDataForm" action="" method="POST" class="filterform d-flex align-items-center flex-wrap gap-1">
-            <input type="date" name="fromDate" class="form-control form-control-sm  inputfields"
-                placeholder="Enter Date" value="<?php echo date('yy-m-d') ?>" oninput="validateDate(this)" required>
+            <input type="datetime-local" name="fromDate" class="form-control form-control-sm inputfields" placeholder="Enter Date and Time" value="<?php echo date('Y-m-d\TH:i') ?>" required>
             <span class="text-danger fw-bolder">TO</span>
-            <input type="date" name="toMonth" class="form-control form-control-sm inputfields"
-                placeholder="Enter Month" value="<?php echo date('yy-m-d') ?>" oninput="validateMonth(this)" required>
+            <input type="datetime-local" name="toDate" class="form-control form-control-sm inputfields" placeholder="Enter Date and Time" value="<?php echo date('Y-m-d\TH:i') ?>" required>
 
-            <select class="form-select form-select-sm inputfields" name="messageSelect"
-                aria-label="Small select example" required>
-                <option value="">select msg</option>
+            <select class="form-select form-select-sm inputfields" name="messageSelect" aria-label="Small select example" required>
+                <option value="">Select Message</option>
                 <?php
-                $message_select_sql = "SELECT * FROM `messages` ";
+                $message_select_sql = "SELECT * FROM `messages`";
                 $message_select_result = mysqli_query($conn, $message_select_sql);
-                while ($message_select_row = mysqli_fetch_assoc($message_select_result))
-                {
-                    $selected = $message_select_row['title'] == 'Welcome' ? "Selected" : "";
-                    echo '<option value="' . $message_select_row['title'] . '" ' . $selected . '>' . $message_select_row['title'] . '</option>';
+                while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
+                    $selected = $message_select_row['title'] == 'Welcome' ? "selected" : "";
+                    echo '<option value="' . htmlspecialchars($message_select_row['title']) . '" ' . $selected . '>' . htmlspecialchars($message_select_row['title']) . '</option>';
                 }
                 ?>
             </select>
 
-
-
-
-            <button id="sendBtn" type="submit" name="get-data" class="btn btn-danger">send ></button>
+            <button id="sendBtn" type="submit" name="get-data" class="btn btn-danger">Send ></button>
         </form>
+
     </div>
 
     <div class="container fs-7">
@@ -105,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
                     <th scope="col">Sr</th>
                     <th scope="col">Name</th>
                     <th scope="col">Phone</th>
+                    <th scope="col">joinOn</th>
                     <th scope="col">Status</th>
                 </tr>
             </thead>
@@ -115,11 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
         </table>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <script src="../../js/api.js"></script>
 

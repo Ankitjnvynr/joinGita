@@ -121,6 +121,7 @@ $(document).ready(() => {
                             <td scope="col">${index}</td>
                             <td scope="col">${user.name}</td>
                             <td scope="col">${user.phone}</td>
+                            <td scope="col">${user.joinOn}</td>
                             <td scope="col">${result}</td>
                         </tr>
                         `)

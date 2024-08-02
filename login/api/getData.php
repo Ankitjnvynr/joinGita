@@ -1,123 +1,85 @@
 <?php
 $newStr = "";
-include ("../../partials/_db.php");
+include("../../partials/_db.php");
 
 $currentURL = "https://$_SERVER[HTTP_HOST]/";
 $response = [];
 
+// Default SQL query
+$sql = "SELECT * FROM `users`";
 
-$sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
-$filters = array();
+// Fetch filter values
 $byCountry = !empty($_POST['filterCountry']) ? $_POST['filterCountry'] : null;
 $byState = !empty($_POST['filterState']) ? $_POST['filterState'] : null;
 $filterdistrict = !empty($_POST['filterdistrict']) ? $_POST['filterdistrict'] : null;
 $bytehsil = !empty($_POST['bytehsil']) ? $_POST['bytehsil'] : null;
 $dikshit = !empty($_POST['dikshit']) ? $_POST['dikshit'] : null;
 $executive = !empty($_POST['executive']) ? $_POST['executive'] : null;
-
-// geting birth date and birth month
 $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : null;
 $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : null;
-
-//getting aniversary date and month 
 $aniDate = isset($_POST['aniDate']) ? $_POST['aniDate'] : null;
 $aniMonth = isset($_POST['aniMonth']) ? $_POST['aniMonth'] : null;
-
 $fromDate = isset($_POST['fromDate']) ? $_POST['fromDate'] : null;
-$toDate = isset($_POST['toDate']) ? $_POST['fromDate'] : null;
-
-
+$toDate = isset($_POST['toDate']) ? $_POST['toDate'] : null;
 $selectedMediaIds = isset($_POST['selectedMedia']) ? json_decode($_POST['selectedMedia'], true) : [];
 
+// Initialize filters array
+$filters = [];
 
-if ($birthDate && $birthMonth)
-{
-    $bd = $birthDate;
-    $bm = $birthMonth;
+// Apply filters to SQL query
+if ($byCountry) {
+    $filters[] = "country LIKE '" . $conn->real_escape_string($byCountry) . "%'";
 }
-if ($aniDate && $aniMonth)
-{
-    $ad = $aniDate;
-    $am = $aniMonth;
+if ($byState) {
+    $filters[] = "state LIKE '" . $conn->real_escape_string($byState) . "%'";
 }
-
-
-if ($byCountry || $byState || $filterdistrict || $bytehsil || $dikshit || $birthDate || $birthMonth || $aniDate || $aniMonth || $executive || $fromDate || $toDate)
-{
-    $newStr = ' WHERE ';
+if ($filterdistrict) {
+    $filters[] = "district LIKE '" . $conn->real_escape_string($filterdistrict) . "%'";
 }
-
-if ($byCountry)
-{
-    $byCountry = " country LIKE '" . $byCountry . "%'";
-    array_push($filters, $byCountry);
+if ($bytehsil) {
+    $filters[] = "tehsil LIKE '" . $conn->real_escape_string($bytehsil) . "%'";
 }
-if ($byState)
-{
-    $byState = " state LIKE '" . $byState . "%'";
-    array_push($filters, $byState);
+if ($dikshit) {
+    $filters[] = "dikshit LIKE '" . $conn->real_escape_string($dikshit) . "%'";
 }
-if ($filterdistrict)
-{
-    $filterdistrict = " district LIKE '" . $filterdistrict . "%'";
-    array_push($filters, $filterdistrict);
+if ($birthDate) {
+    $filters[] = "DAY(dob) = " . intval($birthDate);
 }
-if ($bytehsil)
-{
-    $bytehsil = " tehsil LIKE '" . $bytehsil . "%'";
-    array_push($filters, $bytehsil);
+if ($birthMonth) {
+    $filters[] = "MONTH(dob) = " . intval($birthMonth);
 }
-if ($dikshit)
-{
-    $dikshit = " dikshit LIKE '" . $dikshit . "%'";
-    array_push($filters, $dikshit);
+if ($aniDate) {
+    $filters[] = "DAY(aniver_date) = " . intval($aniDate);
 }
-if ($birthDate)
-{
-    $birthDate = " DAY(dob) = " . $birthDate;
-    array_push($filters, $birthDate);
+if ($aniMonth) {
+    $filters[] = "MONTH(aniver_date) = " . intval($aniMonth);
 }
-if ($birthMonth)
-{
-    $birthMonth = " MONTH(dob) = " . $birthMonth;
-    array_push($filters, $birthMonth);
+if ($executive) {
+    $filters[] = "designation != 'Member'";
 }
-if ($aniDate)
-{
-    $aniDate = " DAY(aniver_date) = " . $aniDate;
-    array_push($filters, $aniDate);
-}
-if ($aniMonth)
-{
-    $aniMonth = " MONTH(aniver_date) = " . $aniMonth;
-    array_push($filters, $aniMonth);
-}
-if ($executive)
-{
-    $executive = " designation != 'Member'";
-    array_push($filters, $executive);
-}
-if ($fromDate && $toDate)
-{
+if ($fromDate && $toDate) {
+    // Ensure proper date formatting
     $fromDate = date('Y-m-d', strtotime($fromDate));
     $toDate = date('Y-m-d', strtotime($toDate));
-    $dateWise = " WHERE dt BETWEEN {$fromDate} AND {$toDate} ";
+    $filters[] = "dt BETWEEN '$fromDate' AND '$toDate'";
 }
 
-$newStr = $newStr . implode(" AND ", $filters);
-$sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY name ASC;";
+// Build SQL query with filters
+if (!empty($filters)) {
+    $sql .= " WHERE " . implode(" AND ", $filters);
+}
+$sql .= " ORDER BY name ASC";
+// echo $sql;
 
 // Fetch selected media paths and captions
 $mediaPaths = [];
 $mediaCaptions = [];
-if (!empty($selectedMediaIds))
-{
-    $ids = implode(",", $selectedMediaIds);
+if (!empty($selectedMediaIds)) {
+    $ids = implode(",", array_map('intval', $selectedMediaIds));
     $mediaSql = "SELECT image_path, image_caption FROM api_content WHERE id IN ($ids)";
     $mediaResult = $conn->query($mediaSql);
 
-    while ($mediaRow = $mediaResult->fetch_assoc())
-    {
+    while ($mediaRow = $mediaResult->fetch_assoc()) {
         $mediaPaths[] = $mediaRow['image_path'];
         $mediaCaptions[] = $mediaRow['image_caption'];
     }
@@ -131,47 +93,35 @@ function convert_to_str($arr, $currentURL)
     }, $arr);
     return implode(',', $prefixedArray);
 }
+
 $allMediaStr = convert_to_str($mediaPaths, $currentURL);
 $allCaptionStr = implode(',', $mediaCaptions);
 
 $currentDay = date('j'); // day of the month without leading zero
 $currentMonth = date('n'); // month without leading zero
 
-
-
-if ($birthDate && $birthMonth)
-{
-    if (intval(ltrim($bd, '0')) === intval($currentDay) && intval(ltrim($bm, '0')) === intval($currentMonth))
-    {
+if ($birthDate && $birthMonth) {
+    if (intval(ltrim($birthDate, '0')) === intval($currentDay) && intval(ltrim($birthMonth, '0')) === intval($currentMonth)) {
         $allMediaStr = "https://parivaar.gieogita.org/login/bday.jpg";
         $allCaptionStr = "जन्मदिवस की शुभकामना";
-    } else
-    {
-        $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
-        $allCaptionStr = "🌹संत सेवा..भंडारा..गौसेवा";
-    }
-    // $dates = [
-    //     'cd' => $currentDay,
-    //     'cm' => $currentMonth,
-    //     'bd' => $bd,
-    //     'bm' => $bm,
-    // ];
-    // $response['dates'] = $dates;
-}
-if ($aniDate && $aniMonth)
-{
-    if (intval($ad) == $currentDay && intval($am) == $currentMonth)
-    {
-        $allMediaStr = "https://parivaar.gieogita.org/login/anniversary.jpg";
-        $allCaptionStr = "वैवाहिक वर्षगांठ की शुभकामना";
-    } else
-    {
+    } else {
         $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
         $allCaptionStr = "🌹संत सेवा..भंडारा..गौसेवा";
     }
 }
 
-$country_code = array(
+if ($aniDate && $aniMonth) {
+    if (intval($aniDate) == $currentDay && intval($aniMonth) == $currentMonth) {
+        $allMediaStr = "https://parivaar.gieogita.org/login/anniversary.jpg";
+        $allCaptionStr = "वैवाहिक वर्षगांठ की शुभकामना";
+    } else {
+        $allMediaStr = "https://parivaar.gieogita.org/login/advance.jpg";
+        $allCaptionStr = "🌹संत सेवा..भंडारा..गौसेवा";
+    }
+}
+
+// Country codes
+$country_code = [
     "Australia" => "61",
     "Canada" => "1",
     "United Kingdom" => "44",
@@ -187,23 +137,24 @@ $country_code = array(
     "UK" => "+44",
     "England" => "+44",
     "Malaysia" => "+60",
-);
+];
 
+// Fetch message
 $messageSelect = isset($_POST['messageSelect']) ? $_POST['messageSelect'] : '';
-$msgsql = "SELECT * FROM `messages` WHERE `title` = '$messageSelect'";
+$msgsql = "SELECT * FROM `messages` WHERE `title` = '" . $conn->real_escape_string($messageSelect) . "'";
 $msgresult = mysqli_query($conn, $msgsql);
 
 $msgrow = mysqli_fetch_assoc($msgresult);
 $message = $msgrow['msg'];
 
+// Execute query and process results
 $users = [];
 $result = $conn->query($sql);
 $totalresult = mysqli_num_rows($result);
-if ($totalresult > 0)
-{
-    while ($row = mysqli_fetch_array($result))
-    {
-        $code = $country_code[$row['country']];
+
+if ($totalresult > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+        $code = isset($country_code[$row['country']]) ? $country_code[$row['country']] : '';
         $user = [
             'id' => $row['id'],
             'country' => $row['country'],
@@ -224,13 +175,13 @@ if ($totalresult > 0)
             'aniver_date' => $row['aniver_date'],
             'joinOn' => $row['dt'],
             'pic' => $row['pic'],
-            'message' => 'गीता प्रिय ' . $row['name'] . ' जी , 🌹 * जय श्री कृष्ण * 🌹 ' . urldecode(html_entity_decode($message)) . ' To view profile Click here- ' . $currentURL . 'member.php?member=' . md5($row['phone'])
+            'message' => 'गीता प्रिय ' . $row['name'] . ' जी , 🌹 * जय श्री कृष्ण * 🌹 ' . urldecode(html_entity_decode($message)) . ' To view profile Click here- ' . $currentURL . 'member.php?member=' . md5($row['phone']),
+
         ];
         $users[] = $user;
     }
     $response['users'] = $users;
-} else
-{
+} else {
     $response['users'] = [];
 }
 
