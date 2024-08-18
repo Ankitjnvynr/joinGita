@@ -1,15 +1,17 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+{
     header("location: index.php");
     exit;
 }
-include("../partials/_db.php");
+include ("../partials/_db.php");
 
 
 
 // filtering data
-if (isset($_POST['get-data'])) {
+if (isset($_POST['get-data']))
+{
     $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
 
     $filters = array();
@@ -19,29 +21,35 @@ if (isset($_POST['get-data'])) {
     $bytehsil = $_POST['bytehsil'];
     $bydikshit = $_POST['filterDikshit'];
 
-    if ($byCountry || $byState || $byCity || $bydikshit) {
+    if ($byCountry || $byState || $byCity || $bydikshit)
+    {
         $newStr = ' WHERE ';
     }
 
-    if ($byCountry) {
+    if ($byCountry)
+    {
         $filters = array();
         $byCountry = " country LIKE '" . $byCountry . "%'";
         array_push($filters, $byCountry);
     }
-    if ($byState) {
+    if ($byState)
+    {
         $byState = " state LIKE '" . $byState . "%'";
         array_push($filters, $byState);
     }
-    if ($filterdistrict) {
+    if ($filterdistrict)
+    {
         $filterdistrict = " district LIKE '" . $filterdistrict . "%'";
         array_push($filters, $filterdistrict);
     }
-    if ($bytehsil) {
+    if ($bytehsil)
+    {
         $bytehsil = " tehsil LIKE '" . $bytehsil . "%'";
         array_push($filters, $bytehsil);
     }
 
-    if ($bydikshit) {
+    if ($bydikshit)
+    {
         $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
         array_push($filters, $bydikshit);
     }
@@ -61,22 +69,22 @@ if (isset($_POST['get-data'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-    body {
-        background: #f7e092;
-        overflow-x: hidden;
-    }
+        body {
+            background: #f7e092;
+            overflow-x: hidden;
+        }
 
-    .filterform select {
-        flex: 1 0 150px;
-    }
+        .filterform select {
+            flex: 1 0 150px;
+        }
 
-    .filterform>button {
-        flex: 1 0 100px;
-    }
+        .filterform>button {
+            flex: 1 0 100px;
+        }
 
-    .tablediv {
-        overflow-x: scroll;
-    }
+        .tablediv {
+            overflow-x: scroll;
+        }
     </style>
 </head>
 
@@ -93,7 +101,8 @@ if (isset($_POST['get-data'])) {
                 <?php
                 $optionSql = "SELECT DISTINCT `country` FROM `users` ORDER BY country ASC ";
                 $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result))
+                {
                     echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
                 }
                 ?>
@@ -115,7 +124,8 @@ if (isset($_POST['get-data'])) {
                 <?php
                 $optionSql = "SELECT DISTINCT `dikshit` FROM `users` ";
                 $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result))
+                {
                     echo '<option value="' . $row['dikshit'] . '">' . $row['dikshit'] . '</option>';
                 }
                 ?>
@@ -141,7 +151,7 @@ if (isset($_POST['get-data'])) {
                     <th scope="col">Name</th>
                     <th scope="col">Mobile</th>
                     <th scope="col">City</th>
-                    <th scope="col">Address</th>
+                    <!-- <th scope="col">Address</th> -->
                     <th scope="col">Dikshit</th>
                     <th scope="col">DOB</th>
                     <th scope="col">Anniversary</th>
@@ -152,12 +162,15 @@ if (isset($_POST['get-data'])) {
             <tbody>
                 Showing :-
                 <?php
-                if (isset($_POST['get-data'])) {
+                if (isset($_POST['get-data']))
+                {
                     $sr = 0;
                     $result = $conn->query($sql);
                     echo $totalresult = mysqli_num_rows($result);
-                    if ($totalresult > 0) {
-                        while ($row = mysqli_fetch_array($result)) {
+                    if ($totalresult > 0)
+                    {
+                        while ($row = mysqli_fetch_array($result))
+                        {
                             $sr++;
                             $user_id = $row['id'];
                             $country = $row['country'];
@@ -176,15 +189,19 @@ if (isset($_POST['get-data'])) {
                             $occupation = $row['occupation'];
                             $education = $row['education'];
                             $dob = $row['dob'];
-                            if ($dob == "0000-00-00") {
+                            if ($dob == "0000-00-00")
+                            {
                                 $dob = "<span class='text-danger'>NIL</span>";
-                            } else {
+                            } else
+                            {
                                 $dob = date('d-m-Y', strtotime($dob));
                             }
                             $aniver_date = $row['aniver_date'];
-                            if ($aniver_date == "0000-00-00") {
+                            if ($aniver_date == "0000-00-00")
+                            {
                                 $aniver_date = "<span class='text-danger'>NIL</span>";
-                            } else {
+                            } else
+                            {
                                 $aniver_date = date('d-m-Y', strtotime($aniver_date));
                             }
 
@@ -198,7 +215,6 @@ if (isset($_POST['get-data'])) {
                                 <td>' . $name . '</td>
                                 <td><a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . '</span></a></td>
                                 <td>' . $tehsil . '</td>
-                                <td>' . $address . '</td>
                                 <td>' . $dikshit . '</td>
                                 <td>' . $dob . '</td>
                                 <td>' . $aniver_date . '</td>
@@ -206,14 +222,16 @@ if (isset($_POST['get-data'])) {
                             </tr>
                             ';
                         }
-                    } else {
+                    } else
+                    {
                         echo '
                     <tr>
                         <td class="text-center" colspan="7"> No data found </td>
                     </tr>
                     ';
                     }
-                } else {
+                } else
+                {
                     echo '
                     <tr>
                         <td class="text-center" colspan="7"> Select filter to view data</td>
@@ -229,60 +247,60 @@ if (isset($_POST['get-data'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <script>
-    $('.totalCount').load('_totalProfiles.php');
-    setInterval(() => {
         $('.totalCount').load('_totalProfiles.php');
-    }, 3000);
+        setInterval(() => {
+            $('.totalCount').load('_totalProfiles.php');
+        }, 3000);
 
-    let SelectState = (e) => {
-        $.ajax({
-            url: '_selectState.php',
-            type: 'POST',
-            data: {
-                country: e.value
-            },
-            success: function(response) {
-                let stateSelect = document.getElementById('stateSelect')
-                // console.log(response)
-                stateSelect.innerHTML = response;
-            }
-        })
-    }
-    let selectingdistrict = (e) => {
+        let SelectState = (e) => {
+            $.ajax({
+                url: '_selectState.php',
+                type: 'POST',
+                data: {
+                    country: e.value
+                },
+                success: function (response) {
+                    let stateSelect = document.getElementById('stateSelect')
+                    // console.log(response)
+                    stateSelect.innerHTML = response;
+                }
+            })
+        }
+        let selectingdistrict = (e) => {
 
-        $.ajax({
-            url: '_selectDistrict.php',
-            type: 'POST',
-            data: {
-                country: e.value
-            },
-            success: function(response) {
-                let stateSelect = document.getElementById('districtSelect')
-                // console.log(response)
-                stateSelect.innerHTML = response;
-            }
-        })
-    }
-    let selectingtehsil = (e) => {
+            $.ajax({
+                url: '_selectDistrict.php',
+                type: 'POST',
+                data: {
+                    country: e.value
+                },
+                success: function (response) {
+                    let stateSelect = document.getElementById('districtSelect')
+                    // console.log(response)
+                    stateSelect.innerHTML = response;
+                }
+            })
+        }
+        let selectingtehsil = (e) => {
 
-        $.ajax({
-            url: '_selectTehsil.php',
-            type: 'POST',
-            data: {
-                country: e.value
-            },
-            success: function(response) {
-                let stateSelect = document.getElementById('tehsilSelect')
-                // console.log(response)
-                stateSelect.innerHTML = response;
-            }
-        })
-    }
+            $.ajax({
+                url: '_selectTehsil.php',
+                type: 'POST',
+                data: {
+                    country: e.value
+                },
+                success: function (response) {
+                    let stateSelect = document.getElementById('tehsilSelect')
+                    // console.log(response)
+                    stateSelect.innerHTML = response;
+                }
+            })
+        }
     </script>
 
 
@@ -291,90 +309,91 @@ if (isset($_POST['get-data'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-    // Create a new Date object which represents the current date and time
-    const currentDate = new Date();
+        // Create a new Date object which represents the current date and time
+        const currentDate = new Date();
 
-    // Get the current date components
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Month is zero-based, so we add 1
-    const day = currentDate.getDate();
+        // Get the current date components
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1; // Month is zero-based, so we add 1
+        const day = currentDate.getDate();
 
-    // Construct the date string
-    const dateString = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        // Construct the date string
+        
+        const dateString = `${day < 10 ? '0' : ''}${day}-${month}-${year}`;
 
-    // console.log(dateString); // Output format: YYYY-MM-DD
+        // console.log(dateString); // Output format: YYYY-MM-DD
 
-    function downloadCSV() {
-        const table = document.getElementById('myTable');
-        const rows = table.querySelectorAll('tr');
-        let csv = [];
-        for (let i = 0; i < rows.length; i++) {
-            let row = [],
-                cols = rows[i].querySelectorAll('td, th');
-            for (let j = 0; j < cols.length; j++) {
-                row.push(cols[j].innerText);
+        function downloadCSV() {
+            const table = document.getElementById('myTable');
+            const rows = table.querySelectorAll('tr');
+            let csv = [];
+            for (let i = 0; i < rows.length; i++) {
+                let row = [],
+                    cols = rows[i].querySelectorAll('td, th');
+                for (let j = 0; j < cols.length; j++) {
+                    row.push(cols[j].innerText);
+                }
+                csv.push(row.join(','));
             }
-            csv.push(row.join(','));
+            const csvContent = 'data:text/csv;charset=utf-8,' + csv.join('\n');
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', `GIEO GITA ${dateString}.csv`);
+            document.body.appendChild(link);
+            link.click();
         }
-        const csvContent = 'data:text/csv;charset=utf-8,' + csv.join('\n');
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement('a');
-        link.setAttribute('href', encodedUri);
-        link.setAttribute('download', `GIEO GITA ${dateString}.csv`);
-        document.body.appendChild(link);
-        link.click();
-    }
     </script>
 
 
     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
         integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
     <script>
-    var specialElementHandlers = {
-        // element with id of "bypass" - jQuery style selector
-        '.no-export': function(element, renderer) {
-            // true = "handled elsewhere, bypass text extraction"
-            return true;
-        }
-    };
-
-
-    function exportPDF(id) {
-
-        var doc = new jsPDF('p', 'pt', 'letter');
-        var htmlstring = '';
-        var tempVarToCheckPageHeight = 0;
-        var pageHeight = 0;
-        pageHeight = doc.internal.pageSize.height;
-        specialElementHandlers = {
-            // element with id of "bypass" - jQuery style selector  
-            '#bypassme': function(element, renderer) {
-                // true = "handled elsewhere, bypass text extraction"  
-                return true
+        var specialElementHandlers = {
+            // element with id of "bypass" - jQuery style selector
+            '.no-export': function (element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true;
             }
         };
-        margins = {
-            top: 150,
-            bottom: 60,
-            left: 40,
-            right: 40,
-            width: 60
-        };
-        var y = 20;
-        doc.setLineWidth(2);
-        doc.text(100, y = y + 30, ("GIEO Gita report of <?php echo $tehsil ?> " + dateString));
-        doc.autoTable({
-            html: '#myTable',
-            startY: 70,
-            theme: 'grid',
 
-        })
-        doc.save(`GIEO GITA report <?php echo $tehsil ?> ${dateString}.pdf`);
-    }
+
+        function exportPDF(id) {
+
+            var doc = new jsPDF('p', 'pt', 'letter');
+            var htmlstring = '';
+            var tempVarToCheckPageHeight = 0;
+            var pageHeight = 0;
+            pageHeight = doc.internal.pageSize.height;
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector  
+                '#bypassme': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"  
+                    return true
+                }
+            };
+            margins = {
+                top: 150,
+                bottom: 60,
+                left: 40,
+                right: 40,
+                width: 60
+            };
+            var y = 20;
+            doc.setLineWidth(2);
+            doc.text(100, y = y + 30, ("GIEO Gita report of <?php echo $tehsil ?> " + dateString));
+            doc.autoTable({
+                html: '#myTable',
+                startY: 70,
+                theme: 'grid',
+
+            })
+            doc.save(`GIEO GITA report <?php echo $tehsil ?> ${dateString}.pdf`);
+        }
     </script>
 
 </body>
