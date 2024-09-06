@@ -15,6 +15,7 @@ $filterdistrict = !empty($_POST['filterdistrict']) ? $_POST['filterdistrict'] : 
 $bytehsil = !empty($_POST['bytehsil']) ? $_POST['bytehsil'] : null;
 $dikshit = !empty($_POST['dikshit']) ? $_POST['dikshit'] : null;
 $executive = !empty($_POST['executive']) ? $_POST['executive'] : null;
+$trustee = !empty($_POST['trustee']) ? $_POST['trustee'] : null;
 $birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : null;
 $birthMonth = isset($_POST['birthMonth']) ? $_POST['birthMonth'] : null;
 $aniDate = isset($_POST['aniDate']) ? $_POST['aniDate'] : null;
@@ -40,7 +41,11 @@ if ($bytehsil) {
     $filters[] = "tehsil LIKE '" . $conn->real_escape_string($bytehsil) . "%'";
 }
 if ($dikshit) {
-    $filters[] = "dikshit LIKE '" . $conn->real_escape_string($dikshit) . "%'";
+    if($dikshit=='Yes'||$dikshit=='No'){
+        $filters[] = "dikshit LIKE '" . $conn->real_escape_string($dikshit) . "%'";
+    }else{
+        $filters[] = "dikshit LIKE '" . $conn->real_escape_string($dikshit) . "%' AND dt > '2024-06-01' ";
+    }
 }
 if ($birthDate) {
     $filters[] = "DAY(dob) = " . intval($birthDate);
@@ -56,6 +61,9 @@ if ($aniMonth) {
 }
 if ($executive) {
     $filters[] = "designation != 'Member'";
+}
+if ($trustee) {
+    $filters[] = "star != ''";
 }
 if ($fromDate && $toDate) {
     // Ensure proper date formatting

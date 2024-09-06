@@ -121,6 +121,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
                     Karykarini
                 </label>
             </div>
+            <div class="form-check inputfields bg-light border bg-white rounded  px-2">
+                <input class="form-check-input mx-1" type="checkbox" name="trustee" value="trustee" id="trustee">
+                <label class="form-check-label" for="trustee">
+                    Trustee
+                </label>
+            </div>
 
             <?php
             // Fetch data from api_content table
