@@ -137,6 +137,12 @@ if ($aniDate && $aniMonth) {
     }
 }
 
+if ($fromDate && $toDate) {
+    $allMediaStr = "https://parivaar.gieogita.org/login/joiningpic.jpg";
+    $allCaptionStr = "🌹संत सेवा..भंडारा..गौसेवा";
+}
+
+
 // Country codes
 $country_code = [
     "Australia" => "61",
