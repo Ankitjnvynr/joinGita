@@ -1,8 +1,6 @@
 // select options script
 
-let  SelectState = async (e) => {
-    
-    
+let SelectState = async (e) => {
   $.ajax({
     url: "_selectState.php",
     type: "POST",
@@ -13,7 +11,7 @@ let  SelectState = async (e) => {
       let stateSelect = document.getElementById("stateSelect");
       // console.log(response)
       stateSelect.innerHTML = response;
-      loadpics(0, 5);
+      loadpics(0, 20);
     },
   });
 };
@@ -28,7 +26,7 @@ let selectingdistrict = async (e) => {
       let stateSelect = document.getElementById("districtSelect");
       // console.log(response)
       stateSelect.innerHTML = response;
-      loadpics(0, 5);
+      loadpics(0, 20);
     },
   });
 };
@@ -41,65 +39,68 @@ let selectingtehsil = async (e) => {
     },
     success: function (response) {
       let stateSelect = document.getElementById("tehsilSelect");
-      
+
       stateSelect.innerHTML = response;
-      loadpics(0, 5);
+      loadpics(0, 20);
     },
   });
 };
 
-
 async function selectOptionByValue(selectId, value) {
-    const selectElement = document.getElementById(selectId);
-    if (selectElement) {
-      for (let i = 0; i < selectElement.options.length; i++) {
-        if (selectElement.options[i].value === value) {
-          selectElement.options[i].selected = true;
-          break;
-        }
+  const selectElement = document.getElementById(selectId);
+  if (selectElement) {
+    for (let i = 0; i < selectElement.options.length; i++) {
+      console.log(selectElement.options.length);
+
+      if (
+        selectElement.options[i].value.toLowerCase().trim() ==
+        value.toLowerCase().trim()
+      ) {
+        selectElement.options[i].selected = true;
+        console.log("selected", value);
+
+        break;
       }
-    } else {
-      console.error(`Select element with ID "${selectId}" not found.`);
     }
+  } else {
+    console.error(`Select element with ID "${selectId}" not found.`);
   }
-  
-  const getFilterBack = async () => {
-    const filteritems = JSON.parse(sessionStorage.getItem("filterObject"));
-    if (filteritems) {
-      try {
-        await selectOptionByValue('countrySelect', filteritems.filterCountry);
-        await SelectState(filteritems.filterCountry); // Load states based on country selection
-  
-        await selectOptionByValue('stateSelect', filteritems.filterState.trim());
-        console.log(filteritems.filterState);
-        
-        
-        
-        await selectingdistrict({ value: filteritems.filterState }); // Load districts based on state selection
-  
-        await selectOptionByValue('districtSelect', filteritems.filterDistrict);
-        await selectingtehsil({ value: filteritems.filterDistrict }); // Load tehsils based on district selection
-  
-        await selectOptionByValue('tehsilSelect', filteritems.filterTehsil);
-  
-        console.log('Filters applied successfully');
-      } catch (error) {
-        console.error(error); // Log the error if something goes wrong
-      }
-    } else {
-      console.log("No filter available");
+}
+
+const scrollTarget = async (filteritems) => {
+  window.scrollTo(0, filteritems.scroll);
+};
+
+const getFilterBack = async () => {
+  const filteritems = JSON.parse(sessionStorage.getItem("filterObject"));
+  if (filteritems) {
+    try {
+      await selectOptionByValue("countrySelect", filteritems.filterCountry);
+      await SelectState(filteritems.filterCountry); // Load states based on country selection
+      await selectingdistrict({ value: filteritems.filterState }); // Load districts based on state selection
+      await selectingtehsil({ value: filteritems.filterDistrict }); // Load tehsils based on district selection
+      $("#filterName").val(filteritems.filterName);
+      $("#filterPhone").val(filteritems.phone);
+      $("#filterEmail").val(filteritems.filterEmail);
+
+      setTimeout(async () => {
+        selectOptionByValue("stateSelect", filteritems.filterState);
+        selectOptionByValue("districtSelect", filteritems.filterDistrict);
+        selectOptionByValue("tehsilSelect", filteritems.filterTehsil);
+        await loadpics(0, filteritems.limit);
+        setTimeout(() => {
+          scrollTarget(filteritems);
+        }, 300);
+      }, 300);
+    } catch (error) {
+      console.error(error); // Log the error if something goes wrong
     }
-  };
-  
-  
+  } else {
+    console.log("No filter available");
+  }
+};
 
-    getFilterBack();
-
-
-
-
-
-
+getFilterBack();
 
 // loading more profiles with the button load more
 var moreloader = document.getElementById("moreloader");
@@ -257,7 +258,7 @@ $(document).ready(function () {
     }
   };
 
-  loadpics = (start, limit) => {
+  loadpics = async (start, limit = 20) => {
     console.log(start, limit);
     var fltr = {
       filterName: $("#filterName").val(),
@@ -267,7 +268,7 @@ $(document).ready(function () {
       filterState: $("#stateSelect").val(),
       filterDistrict: $("#districtSelect").val(),
       filterTehsil: $("#tehsilSelect").val(),
-      limit: "20",
+      limit: limit,
       start: start,
     };
 
@@ -339,7 +340,7 @@ $(document).ready(function () {
 
   if (action == "inactive") {
     action = "active";
-    loadpics(start, limit);
+    loadpics(start, 20);
   }
 });
 
@@ -488,9 +489,6 @@ $(document).ready(() => {
       }
     });
   };
-
-
-  
 });
 
 const edituerModal = new bootstrap.Modal("#edituerModal");
@@ -509,4 +507,17 @@ editUser = (id) => {
   });
 };
 
-// storing the filter before going to update page
+
+
+
+
+
+  
+
+
+
+
+
+
+
+

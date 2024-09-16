@@ -33,6 +33,19 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
         integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+    // Set a timeout to clear session storage after 4 seconds
+    setTimeout(function() {
+        // Clear session storage
+        sessionStorage.clear();
+        console.log('Session storage cleared');
+    }, 5000); // 4000 milliseconds = 4 seconds
+    </script>
+    <style>
+    * {
+        scroll-behavior: smooth;
+    }
+    </style>
 </head>
 
 <body>
@@ -123,7 +136,7 @@ header('Content-Type: text/html; charset=utf-8');
                 <option value="" selected>---District---</option>
             </select>
             <select name="bytehsil" class="form-select form-select-sm" aria-label="Small select example"
-                id="tehsilSelect" onchange="loadpics(0,5)">
+                id="tehsilSelect" onchange="loadpics(0,20)">
                 <option value="" selected>---Tehsil---</option>
             </select>
             <input type="text" class="form-control form-control-sm" placeholder="Name" id="filterName"
@@ -146,8 +159,8 @@ header('Content-Type: text/html; charset=utf-8');
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -159,48 +172,49 @@ header('Content-Type: text/html; charset=utf-8');
         integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        //storing function for localstorage
-        storeFilter = () => {
-            
-            var fltr = {
-                filterName: $('#filterName').val(),
-                phone: $('#filterPhone').val(),
-                filterEmail: $('#filterEmail').val(),
-                filterCountry: $('#countrySelect').val(),
-                filterState: $('#stateSelect').val(),
-                filterDistrict: $('#districtSelect').val(),
-                filterTehsil: $('#tehsilSelect').val(),
-                limit: "50",
-                start: '0',
-            }
-            var filterStringStoring = JSON.stringify(fltr);
-            isfilter = true;
-            var isfilter = JSON.stringify(isfilter);
-            sessionStorage.setItem('filterObject', filterStringStoring); // corrected typo here
-            sessionStorage.setItem('isFilter', isfilter); // corrected typo here
-            // // Clear all data from session storage
-            // sessionStorage.clear();
+    //storing function for localstorage
+    storeFilter = () => {
+
+        var fltr = {
+            filterName: $('#filterName').val(),
+            phone: $('#filterPhone').val(),
+            filterEmail: $('#filterEmail').val(),
+            filterCountry: $('#countrySelect').val(),
+            filterState: $('#stateSelect').val(),
+            filterDistrict: $('#districtSelect').val(),
+            filterTehsil: $('#tehsilSelect').val(),
+            limit: $(".cardbox").children().length,
+            start: '0',
+            scroll: window.scrollY,
 
         }
+        var filterStringStoring = JSON.stringify(fltr);
+        isfilter = true;
+        var isfilter = JSON.stringify(isfilter);
+        sessionStorage.setItem('filterObject', filterStringStoring); // corrected typo here
+        sessionStorage.setItem('isFilter', isfilter); // corrected typo here
+        // // Clear all data from session storage
+        // sessionStorage.clear();
 
-        editProfileDetail = async (userId) => {
-            await storeFilter();
-            console.log(userId)
-            window.location.href = "update.php?user=" + userId;
-        }
+    }
 
+    editProfileDetail = async (userId) => {
+        await storeFilter();
+        console.log(userId)
+        window.location.href = "update.php?user=" + userId;
+    }
     </script>
 
     <script src="filterselect.js"></script>
     <script src="../js/allcard.js"></script>
 
     <script>
-        const updatedToast = document.getElementById('updatedToast')
-        const toastBootstrapupdate = bootstrap.Toast.getOrCreateInstance(updatedToast)
-
-
-
+    const updatedToast = document.getElementById('updatedToast')
+    const toastBootstrapupdate = bootstrap.Toast.getOrCreateInstance(updatedToast)
     </script>
+
+
+
 
 
 </body>
