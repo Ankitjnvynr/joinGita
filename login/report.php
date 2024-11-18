@@ -1,17 +1,16 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
-{
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("location: index.php");
     exit;
 }
-include ("../partials/_db.php");
+include("../partials/_db.php");
 
 
-
+// echo '<pre>';
+// print_r($_POST);
 // filtering data
-if (isset($_POST['get-data']))
-{
+if (isset($_POST['get-data'])) {
     $sql = "SELECT * FROM `users` ORDER BY `id` DESC ";
 
     $filters = array();
@@ -21,35 +20,29 @@ if (isset($_POST['get-data']))
     $bytehsil = $_POST['bytehsil'];
     $bydikshit = $_POST['filterDikshit'];
 
-    if ($byCountry || $byState || $byCity || $bydikshit)
-    {
+    if ($byCountry || $byState || $byCity || $bydikshit) {
         $newStr = ' WHERE ';
     }
 
-    if ($byCountry)
-    {
+    if ($byCountry) {
         $filters = array();
         $byCountry = " country LIKE '" . $byCountry . "%'";
         array_push($filters, $byCountry);
     }
-    if ($byState)
-    {
+    if ($byState) {
         $byState = " state LIKE '" . $byState . "%'";
         array_push($filters, $byState);
     }
-    if ($filterdistrict)
-    {
+    if ($filterdistrict) {
         $filterdistrict = " district LIKE '" . $filterdistrict . "%'";
         array_push($filters, $filterdistrict);
     }
-    if ($bytehsil)
-    {
+    if ($bytehsil) {
         $bytehsil = " tehsil LIKE '" . $bytehsil . "%'";
         array_push($filters, $bytehsil);
     }
 
-    if ($bydikshit)
-    {
+    if ($bydikshit) {
         $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
         array_push($filters, $bydikshit);
     }
@@ -74,7 +67,8 @@ if (isset($_POST['get-data']))
             overflow-x: hidden;
         }
 
-        .filterform select {
+        .filterform select,
+        .filter-item {
             flex: 1 0 150px;
         }
 
@@ -101,8 +95,7 @@ if (isset($_POST['get-data']))
                 <?php
                 $optionSql = "SELECT DISTINCT `country` FROM `users` ORDER BY country ASC ";
                 $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result))
-                {
+                while ($row = mysqli_fetch_assoc($result)) {
                     echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
                 }
                 ?>
@@ -124,12 +117,15 @@ if (isset($_POST['get-data']))
                 <?php
                 $optionSql = "SELECT DISTINCT `dikshit` FROM `users` ";
                 $result = $conn->query($optionSql);
-                while ($row = mysqli_fetch_assoc($result))
-                {
+                while ($row = mysqli_fetch_assoc($result)) {
                     echo '<option value="' . $row['dikshit'] . '">' . $row['dikshit'] . '</option>';
                 }
                 ?>
             </select>
+            <div class="d-flex align-items-center gap-1 filter-item form-control form-control-sm">
+                <input type="checkbox" name="isAddress" id="isAddress" />
+                <label for="isAddress">Is Address</label>
+            </div>
 
 
             <button type="submit" name="get-data" class="btn btn-danger">Get Data ></button>
@@ -151,7 +147,16 @@ if (isset($_POST['get-data']))
                     <th scope="col">Name</th>
                     <th scope="col">Mobile</th>
                     <th scope="col">City</th>
-                    <!-- <th scope="col">Address</th> -->
+                    <?php
+                    if (isset($_POST['isAddress'])) {
+
+
+                    ?>
+                        <th scope="col">Address</th>
+
+                    <?php
+                    }
+                    ?>
                     <th scope="col">Dikshit</th>
                     <th scope="col">DOB</th>
                     <th scope="col">Anniversary</th>
@@ -162,15 +167,12 @@ if (isset($_POST['get-data']))
             <tbody>
                 Showing :-
                 <?php
-                if (isset($_POST['get-data']))
-                {
+                if (isset($_POST['get-data'])) {
                     $sr = 0;
                     $result = $conn->query($sql);
                     echo $totalresult = mysqli_num_rows($result);
-                    if ($totalresult > 0)
-                    {
-                        while ($row = mysqli_fetch_array($result))
-                        {
+                    if ($totalresult > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
                             $sr++;
                             $user_id = $row['id'];
                             $country = $row['country'];
@@ -189,19 +191,15 @@ if (isset($_POST['get-data']))
                             $occupation = $row['occupation'];
                             $education = $row['education'];
                             $dob = $row['dob'];
-                            if ($dob == "0000-00-00")
-                            {
+                            if ($dob == "0000-00-00") {
                                 $dob = "<span class='text-danger'>NIL</span>";
-                            } else
-                            {
+                            } else {
                                 $dob = date('d-m-Y', strtotime($dob));
                             }
                             $aniver_date = $row['aniver_date'];
-                            if ($aniver_date == "0000-00-00")
-                            {
+                            if ($aniver_date == "0000-00-00") {
                                 $aniver_date = "<span class='text-danger'>NIL</span>";
-                            } else
-                            {
+                            } else {
                                 $aniver_date = date('d-m-Y', strtotime($aniver_date));
                             }
 
@@ -214,24 +212,29 @@ if (isset($_POST['get-data']))
                                 <th scope="row">' . $sr . '</th>
                                 <td>' . $name . '</td>
                                 <td><a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . '</span></a></td>
-                                <td>' . $tehsil . '</td>
-                                <td>' . $dikshit . '</td>
+                                <td>' . $tehsil . '</td>';
+                                if (isset($_POST['isAddress'])) {
+                                    echo '<td>' . $address . '</td>';
+                                ?>
+
+
+                                <?php
+                                }
+                                echo '<td>' . $dikshit . '</td>
                                 <td>' . $dob . '</td>
                                 <td>' . $aniver_date . '</td>
                                 
                             </tr>
                             ';
                         }
-                    } else
-                    {
+                    } else {
                         echo '
                     <tr>
                         <td class="text-center" colspan="7"> No data found </td>
                     </tr>
                     ';
                     }
-                } else
-                {
+                } else {
                     echo '
                     <tr>
                         <td class="text-center" colspan="7"> Select filter to view data</td>
@@ -247,7 +250,7 @@ if (isset($_POST['get-data']))
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
@@ -264,7 +267,7 @@ if (isset($_POST['get-data']))
                 data: {
                     country: e.value
                 },
-                success: function (response) {
+                success: function(response) {
                     let stateSelect = document.getElementById('stateSelect')
                     // console.log(response)
                     stateSelect.innerHTML = response;
@@ -279,7 +282,7 @@ if (isset($_POST['get-data']))
                 data: {
                     country: e.value
                 },
-                success: function (response) {
+                success: function(response) {
                     let stateSelect = document.getElementById('districtSelect')
                     // console.log(response)
                     stateSelect.innerHTML = response;
@@ -294,7 +297,7 @@ if (isset($_POST['get-data']))
                 data: {
                     country: e.value
                 },
-                success: function (response) {
+                success: function(response) {
                     let stateSelect = document.getElementById('tehsilSelect')
                     // console.log(response)
                     stateSelect.innerHTML = response;
@@ -318,7 +321,7 @@ if (isset($_POST['get-data']))
         const day = currentDate.getDate();
 
         // Construct the date string
-        
+
         const dateString = `${day < 10 ? '0' : ''}${day}-${month}-${year}`;
 
         // console.log(dateString); // Output format: YYYY-MM-DD
@@ -349,13 +352,13 @@ if (isset($_POST['get-data']))
     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
         integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
     <script>
         var specialElementHandlers = {
             // element with id of "bypass" - jQuery style selector
-            '.no-export': function (element, renderer) {
+            '.no-export': function(element, renderer) {
                 // true = "handled elsewhere, bypass text extraction"
                 return true;
             }
@@ -371,7 +374,7 @@ if (isset($_POST['get-data']))
             pageHeight = doc.internal.pageSize.height;
             specialElementHandlers = {
                 // element with id of "bypass" - jQuery style selector  
-                '#bypassme': function (element, renderer) {
+                '#bypassme': function(element, renderer) {
                     // true = "handled elsewhere, bypass text extraction"  
                     return true
                 }
