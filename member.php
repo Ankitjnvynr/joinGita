@@ -262,7 +262,7 @@ if ($star == 'null') {
                             <tr>
                                 <th scope="row">City</th>
                                 <td colspan="2">
-                                    <?php echo $tehsil; ?>
+                                    <?php echo $tehsil; if($state=='Delhi') echo ', Delhi'; ?>
                                 </td>
                             </tr>
                             <tr>
