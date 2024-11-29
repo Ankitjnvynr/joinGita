@@ -213,14 +213,14 @@ if (isset($_POST['get-data'])) {
                                 <td>' . $name . '</td>
                                 <td><a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . '</span></a></td>
                                 <td>' . $tehsil . '</td>';
-                                if (isset($_POST['isAddress'])) {
-                                    echo '<td>' . $address . '</td>';
-                                ?>
+                            if (isset($_POST['isAddress'])) {
+                                echo '<td>' . $address . '</td>';
+                ?>
 
 
-                                <?php
-                                }
-                                echo '<td>' . $dikshit . '</td>
+                <?php
+                            }
+                            echo '<td>' . $dikshit . '</td>
                                 <td>' . $dob . '</td>
                                 <td>' . $aniver_date . '</td>
                                 
@@ -355,47 +355,68 @@ if (isset($_POST['get-data'])) {
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
+
+
     <script>
-        var specialElementHandlers = {
-            // element with id of "bypass" - jQuery style selector
-            '.no-export': function(element, renderer) {
-                // true = "handled elsewhere, bypass text extraction"
-                return true;
-            }
-        };
-
-
-        function exportPDF(id) {
-
-            var doc = new jsPDF('p', 'pt', 'letter');
-            var htmlstring = '';
-            var tempVarToCheckPageHeight = 0;
-            var pageHeight = 0;
-            pageHeight = doc.internal.pageSize.height;
-            specialElementHandlers = {
-                // element with id of "bypass" - jQuery style selector  
-                '#bypassme': function(element, renderer) {
-                    // true = "handled elsewhere, bypass text extraction"  
-                    return true
+        // Convert a file path to a Base64 string
+        async function convertFilePathToBase64(filePath) {
+            try {
+                const response = await fetch(filePath); // Fetch the file from the path
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch file: ${response.statusText}`);
                 }
-            };
-            margins = {
-                top: 150,
-                bottom: 60,
-                left: 40,
-                right: 40,
-                width: 60
-            };
-            var y = 20;
-            doc.setLineWidth(2);
-            doc.text(100, y = y + 30, ("GIEO Gita report of <?php echo $tehsil ?> " + dateString));
-            doc.autoTable({
-                html: '#myTable',
-                startY: 70,
-                theme: 'grid',
+                const blob = await response.blob(); // Get the file as a Blob
+                return await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result.split(',')[1]); // Extract Base64 part
+                    reader.onerror = (error) => reject(error);
+                    reader.readAsDataURL(blob);
+                });
+            } catch (error) {
+                console.error("Error converting file to Base64:", error);
+            }
+        }
 
-            })
-            doc.save(`GIEO GITA report <?php echo $tehsil ?> ${dateString}.pdf`);
+        async function exportPDF(id) {
+            const doc = new jsPDF('p', 'pt', 'letter');
+
+            // Path to your font file
+            const fontPath = '../login/notosens/Poppins-Regular.ttf';
+
+            // Convert font file to Base64
+            const notobase64 = await convertFilePathToBase64(fontPath);
+
+            if (!notobase64) {
+                console.error("Base64 conversion failed. Check the font path or permissions.");
+                return;
+            }
+
+            console.log("Base64 string length:", notobase64.length);
+
+            // Add Base64-encoded font to jsPDF
+            doc.addFileToVFS("NotoSansDevanagari-Regular.ttf", notobase64);
+            doc.addFont("NotoSansDevanagari-Regular.ttf", "NotoSansDevanagari", "normal");
+            doc.setFont("NotoSansDevanagari", "normal");
+
+            // Example Hindi content
+            doc.text(100, 100, "यह एक परीक्षण रिपोर्ट है।");
+
+            // Add table content
+            doc.autoTable({
+                html: '#' + id,
+                startY: 150,
+                theme: 'grid',
+                styles: {
+                    font: "NotoSansDevanagari",
+                    fontSize: 10,
+                    cellPadding: 5,
+                    halign: 'center',
+                    valign: 'middle'
+                }
+            });
+
+            // Save the PDF
+            doc.save("report.pdf");
         }
     </script>
 

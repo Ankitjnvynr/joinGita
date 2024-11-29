@@ -29,29 +29,32 @@
             </div>
             <div class="d-flex flex-column gap-1 overflow-y-auto">
                 <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="all-card.php">All Profiles</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="masik-parwas.php">Masik Parwas</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="rastrSuchna.php">राष्ट्र सूचना</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="report.php">Report</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="birthday.php">Birthday/Aniversary</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="custom-message.php">Custom Message</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="addTehsil.php">Add Tehsils</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="music.php">Bhajans</a>
-                <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="exportall.php">Export All</a>
+                <?php if ($_SESSION['type'] == 'admin') { ?>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="masik-parwas.php">Masik Parwas</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="rastrSuchna.php">राष्ट्र सूचना</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="report.php">Report</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="birthday.php">Birthday/Aniversary</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="custom-message.php">Custom Message</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="addTehsil.php">Add Tehsils</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="music.php">Bhajans</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="exportall.php">Export All</a>
+                    <a class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm" href="admins.php">Admin users</a>
 
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        API Messages
-                    </button>
-                    <ul class="dropdown-menu bg-warning-subtle fs-6 border border-danger shadow">
-                        <li><a class="dropdown-item text-danger" href="api">Media Files</a></li>
-                        <li><a class="dropdown-item text-danger" href="api/add-file.php">Add Media</a></li>
-                        <li><a class="dropdown-item text-danger" href="api/custom-message.php">Custom Message</a></li>
-                        <li><a class="dropdown-item text-danger" href="api/birthday.php">Birthday</a></li>
-                        <li><a class="dropdown-item text-danger" href="api/aniversary.php">Aniversary</a></li>
-                        <li><a class="dropdown-item text-danger" href="api/joining.php">Joining</a></li>
-                    </ul>
-                </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-danger border border-0 border-top border-danger-subtle btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            API Messages
+                        </button>
+                        <ul class="dropdown-menu bg-warning-subtle fs-6 border border-danger shadow">
+                            <li><a class="dropdown-item text-danger" href="api">Media Files</a></li>
+                            <li><a class="dropdown-item text-danger" href="api/add-file.php">Add Media</a></li>
+                            <li><a class="dropdown-item text-danger" href="api/custom-message.php">Custom Message</a></li>
+                            <li><a class="dropdown-item text-danger" href="api/birthday.php">Birthday</a></li>
+                            <li><a class="dropdown-item text-danger" href="api/aniversary.php">Aniversary</a></li>
+                            <li><a class="dropdown-item text-danger" href="api/joining.php">Joining</a></li>
+                        </ul>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <div>

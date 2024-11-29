@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../partials/_db.php");
 
 $currentURL = "http://$_SERVER[HTTP_HOST]/";
@@ -224,7 +225,8 @@ while ($row = mysqli_fetch_array($result)) {
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
                 <span style="width:50px">Phone</span>:
-                <span><?php echo $phone ?></span>
+                <span><?php echo '<a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . ' </span></a>'; echo '<a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="badge text-bg-success ml-1" > Call</span></a>'; ?></span>
+                
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
                 <span style="width:50px">DOB</span>:
@@ -243,15 +245,22 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="d-flex gap-2 p-1 justify-content-between">
             <div class="d-flex gap-2 ">
                 <button class="btn btn-success" onclick="editProfileDetail(<?php echo $user_id ?>)"><i class="fa-solid fa-pen-to-square"></i></button>
-
+                
+               
+                <?php if($_SESSION['type']=='admin') {  ?>
+               
                 <div data-id="<?php echo $user_id ?>" class="del btn btn-danger"><i class="fa-solid fa-trash"></i></div>
+
+                 <?php }  ?>
             </div>
+              <?php if($_SESSION['type']=='admin') {  ?>
             <p class="d-flex flex-wrap gap-2 flex-items-center justify-content-between px-2 m-0">
                 <?php echo $msgStr ?>
                 <a href="https://wa.me/<?php echo $code . $phone ?>?file=../imgs/<?php echo $pic ?>&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A<?php echo $defaultmsg[0] ?>%0A %0ATo view profile Click here- <?php echo $currentURL ?>member.php?member=<?php echo md5($phone) ?>"><i class="fa-solid  fa-brands fa-whatsapp text-success fs-1"></i></a>
 
                 <a href="mailto:<?php echo $email ?>"><i class="fa-solid fs-1   fa-envelope text-success "></i></a>
             </p>
+            <?php }  ?>
         </div>
     </div>
 

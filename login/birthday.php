@@ -3,7 +3,7 @@ $currentURL = "http://$_SERVER[HTTP_HOST]/";
 
 
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION['type']!='admin')
 {
     header("location: index.php");
     exit;

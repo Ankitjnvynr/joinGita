@@ -1,4 +1,8 @@
 <?php
+
+
+// echo $hashpassword = password_hash("ankit", PASSWORD_DEFAULT);
+
 $sub = false;
 session_start();
 if (isset($_SESSION['loggedin']))
@@ -29,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 session_start();
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
+                $_SESSION['type'] = $row['type'];
                 $_SESSION['intro'] = true;
                 header("location: all-card.php");
                 exit;
