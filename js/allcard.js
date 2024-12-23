@@ -137,14 +137,14 @@ selectMessage = async (e) => {
   const memberName =
     e.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].innerHTML;
   const phoneNumber =
-    e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].childNodes[3]
-      .innerHTML;
-  console.log(phoneNumber);
+    e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].childNodes[3].childNodes[0].childNodes[0].innerHTML;
+  
 
   const newText = e.value;
   let src = secondChild.getAttribute("href");
   let link = src.split("&");
-  let myhash = await createhash(phoneNumber);
+  let myhash = await createhash(phoneNumber.trim());
+  console.log(phoneNumber, myhash);
   for (let i = 0; i < link.length; i++) {
     if (link[i].startsWith("text=")) {
       link[i] =
@@ -512,7 +512,7 @@ editUser = (id) => {
 
 
 
-  
+
 
 
 
