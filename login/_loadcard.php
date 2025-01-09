@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include("../partials/_db.php");
 
 $currentURL = "http://$_SERVER[HTTP_HOST]/";
@@ -10,10 +11,16 @@ $defaultmsg = array();
 $msgsql = "SELECT title, msg FROM `messages` ";
 $allmsg = $conn->query($msgsql);
 while ($allmsgs = mysqli_fetch_assoc($allmsg)) {
+    if($allmsgs['title'] == 'Welcome'){
+    array_push($msgs, '<option selected value="' . urldecode($allmsgs['msg']) . '">' . $allmsgs['title'] . '</option>');
+        
+    }else{
+        
     array_push($msgs, '<option value="' . urldecode($allmsgs['msg']) . '">' . $allmsgs['title'] . '</option>');
+    }
     array_push($defaultmsg, $allmsgs['msg']);
 }
-$msgStr =  implode("", $msgs) . '</select>';
+$msgStr = '<select name="message" onchange="selectMessage(this)" id="message">' . implode("", $msgs) . '</select>';
 
 $newStr = null;
 
@@ -230,10 +237,6 @@ while ($row = mysqli_fetch_array($result)) {
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
                 <span style="width:50px">DOB</span>:
-                <span><?php echo md5($phone) ?></span>
-            </div>
-            <div class="d-flex px-2 m-0 fw-semibold fs-6">
-                <span style="width:50px">DOB</span>:
                 <span><?php echo $dob ?></span>
             </div>
             <div class="d-flex px-2 m-0 fw-semibold fs-6">
@@ -259,8 +262,7 @@ while ($row = mysqli_fetch_array($result)) {
             </div>
               <?php if($_SESSION['type']=='admin') {  ?>
             <p class="d-flex flex-wrap gap-2 flex-items-center justify-content-between px-2 m-0">
-                <?php echo '<select name="message" onchange="selectMessage(this)" id="message">' .$msgStr ?>
-              
+                <?php echo $msgStr ?>
                 <a href="https://wa.me/<?php echo $code . $phone ?>?file=../imgs/<?php echo $pic ?>&text=%0A 🌹 &ast; जय श्री कृष्ण &ast; 🌹 %0A<?php echo $defaultmsg[0] ?>%0A %0ATo view profile Click here- <?php echo $currentURL ?>member.php?member=<?php echo md5($phone) ?>"><i class="fa-solid  fa-brands fa-whatsapp text-success fs-1"></i></a>
 
                 <a href="mailto:<?php echo $email ?>"><i class="fa-solid fs-1   fa-envelope text-success "></i></a>

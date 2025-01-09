@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION['type']!='admin') {
     header("location: index.php");
     exit;
 }
@@ -43,8 +43,13 @@ if (isset($_POST['get-data'])) {
     }
 
     if ($bydikshit) {
-        $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
-        array_push($filters, $bydikshit);
+        if($bydikshit=='Yes'||$bydikshit=='No'){
+            $bydikshit = " dikshit LIKE '" . $bydikshit . "%'";
+            array_push($filters, $bydikshit);
+        }else{
+            $bydikshit = " dikshit LIKE '" . $bydikshit . "%' AND dt > '2024-06-01' ";
+            array_push($filters, $bydikshit);
+        }
     }
     $newStr = $newStr . implode(" AND ", $filters);
     $sql = "SELECT * FROM `users`  " . $newStr . "  ORDER BY name ASC;";

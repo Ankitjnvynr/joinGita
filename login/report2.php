@@ -6,6 +6,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 }
 include("../partials/_db.php");
 
+$csvnames = "";
+
 
 // echo '<pre>';
 // print_r($_POST);
@@ -19,6 +21,8 @@ if (isset($_POST['get-data'])) {
     $filterdistrict = $_POST['filterdistrict'];
     $bytehsil = $_POST['bytehsil'];
     $bydikshit = $_POST['filterDikshit'];
+    
+    $csvnames = $filterdistrict.", ".$byState;
 
     if ($byCountry || $byState || $byCity || $bydikshit) {
         $newStr = ' WHERE ';
@@ -146,6 +150,8 @@ if (isset($_POST['get-data'])) {
                     <th scope="col">Sr</th>
                     <th scope="col">Name</th>
                     <th scope="col">Mobile</th>
+                    <th scope="col">Dikshit</th>
+                    <th scope="col">State</th>
                     <th scope="col">City</th>
                     <?php
                     if (isset($_POST['isAddress'])) {
@@ -157,9 +163,9 @@ if (isset($_POST['get-data'])) {
                     <?php
                     }
                     ?>
-                    <th scope="col">Dikshit</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Anniversary</th>
+                   
+                    <!-- <th scope="col">DOB</th>
+                    <th scope="col">Anniversary</th> -->
                     <!-- <th scope="col">Join On</th> -->
                     <!-- <td>' . substr($joinOn,0,10) . '</td> -->
                 </tr>
@@ -212,17 +218,19 @@ if (isset($_POST['get-data'])) {
                                 <th scope="row">' . $sr . '</th>
                                 <td>' . $name . '</td>
                                 <td><a style="text-decoration:none;" href="tel:' . $phone . '"><span  class="text-black" >' . $phone . '</span></a></td>
+                                <td>' . $dikshit . '</td>
+                                <td>' . $state . '</td>
+                                
+                                
                                 <td>' . $tehsil . '</td>';
-                            if (isset($_POST['isAddress'])) {
-                                echo '<td>' . $address . '</td>';
-                ?>
+                                if (isset($_POST['isAddress'])) {
+                                    echo '<td>' . $address . '</td>';
+                                ?>
 
 
-                <?php
-                            }
-                            echo '<td>' . $dikshit . '</td>
-                                <td>' . $dob . '</td>
-                                <td>' . $aniver_date . '</td>
+                                <?php
+                                }
+                                echo '
                                 
                             </tr>
                             ';
@@ -312,6 +320,8 @@ if (isset($_POST['get-data'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+    
+        var csvname = '<?php echo $csvnames;  ?>';
         // Create a new Date object which represents the current date and time
         const currentDate = new Date();
 
@@ -342,7 +352,7 @@ if (isset($_POST['get-data'])) {
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement('a');
             link.setAttribute('href', encodedUri);
-            link.setAttribute('download', `GIEO GITA ${dateString}.csv`);
+            link.setAttribute('download', `GIEO GITA ${csvname} ${dateString}.csv`);
             document.body.appendChild(link);
             link.click();
         }
@@ -355,68 +365,47 @@ if (isset($_POST['get-data'])) {
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
-
-
     <script>
-        // Convert a file path to a Base64 string
-        async function convertFilePathToBase64(filePath) {
-            try {
-                const response = await fetch(filePath); // Fetch the file from the path
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch file: ${response.statusText}`);
+        var specialElementHandlers = {
+            // element with id of "bypass" - jQuery style selector
+            '.no-export': function(element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true;
+            }
+        };
+
+
+         function exportPDF(id) {
+
+            var doc = new jsPDF('p', 'pt', 'letter');
+            var htmlstring = '';
+            var tempVarToCheckPageHeight = 0;
+            var pageHeight = 0;
+            pageHeight = doc.internal.pageSize.height;
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector  
+                '#bypassme': function(element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"  
+                    return true
                 }
-                const blob = await response.blob(); // Get the file as a Blob
-                return await new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => resolve(reader.result.split(',')[1]); // Extract Base64 part
-                    reader.onerror = (error) => reject(error);
-                    reader.readAsDataURL(blob);
-                });
-            } catch (error) {
-                console.error("Error converting file to Base64:", error);
-            }
-        }
-
-        async function exportPDF(id) {
-            const doc = new jsPDF('p', 'pt', 'letter');
-
-            // Path to your font file
-            const fontPath = '../login/notosens/Poppins-Regular.ttf';
-
-            // Convert font file to Base64
-            const notobase64 = await convertFilePathToBase64(fontPath);
-
-            if (!notobase64) {
-                console.error("Base64 conversion failed. Check the font path or permissions.");
-                return;
-            }
-
-            console.log("Base64 string length:", notobase64.length);
-
-            // Add Base64-encoded font to jsPDF
-            doc.addFileToVFS("NotoSansDevanagari-Regular.ttf", notobase64);
-            doc.addFont("NotoSansDevanagari-Regular.ttf", "NotoSansDevanagari", "normal");
-            doc.setFont("NotoSansDevanagari", "normal");
-
-            // Example Hindi content
-            doc.text(100, 100, "यह एक परीक्षण रिपोर्ट है।");
-
-            // Add table content
+            };
+            margins = {
+                top: 150,
+                bottom: 60,
+                left: 40,
+                right: 40,
+                width: 60
+            };
+            var y = 20;
+            doc.setLineWidth(2);
+            doc.text(100, y = y + 30, ("GIEO Gita report of <?php echo $tehsil ?> " + dateString));
             doc.autoTable({
-                html: '#' + id,
-                startY: 150,
+                html: '#myTable',
+                startY: 70,
                 theme: 'grid',
-                styles: {
-                    font: "NotoSansDevanagari",
-                    fontSize: 10,
-                    cellPadding: 5,
-                    halign: 'center',
-                    valign: 'middle'
-                }
-            });
 
-            // Save the PDF
-            doc.save("report.pdf");
+            })
+            doc.save(`GIEO GITA report <?php echo $tehsil ?> ${dateString}.pdf`);
         }
     </script>
 

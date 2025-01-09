@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION['type']!='admin'){
     header("location: index.php");
     exit;
 }
@@ -80,11 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
                 }
                 ?>
             </select>
-            <select required name="filterState" class="form-select form-select-sm" aria-label="Small select example"
+            <select  name="filterState" class="form-select form-select-sm" aria-label="Small select example"
                 id="stateSelect" onchange="selectingdistrict(this)">
                 <option value="" selected>---State---</option>
             </select>
-            <select name="filterdistrict" required name="filterCity" class="form-select form-select-sm"
+            <select name="filterdistrict"  name="filterCity" class="form-select form-select-sm"
                 aria-label="Small select example" id="districtSelect" onchange="selectingtehsil(this)">
                 <option value="" selected>---District---</option>
             </select>

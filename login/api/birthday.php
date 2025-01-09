@@ -1,7 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
-{
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION['type']!='admin'){
     header("location: index.php");
     exit;
 }
@@ -35,28 +34,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-    body {
-        background: #f7e092;
-        overflow-x: hidden;
-    }
+        body {
+            background: #f7e092;
+            overflow-x: hidden;
+        }
 
-    .filterform select,
-    input {
-        flex: 1 0 150px;
-    }
+        .filterform select,
+        input {
+            flex: 1 0 150px;
+        }
 
-    .filterform>button {
-        flex: 1 0 100px;
-    }
+        .filterform>button {
+            flex: 1 0 100px;
+        }
 
-    .tablediv {
-        overflow-x: scroll;
-        font-size: 1rem;
-    }
+        .tablediv {
+            overflow-x: scroll;
+            font-size: 1rem;
+        }
 
-    .fs-7 {
-        font-size: 0.85rem;
-    }
+        .fs-7 {
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 
@@ -72,10 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
     <div class="container bg-light p-1">
         <form id="getDataForm" action="" method="POST" class="filterform d-flex flex-wrap gap-1">
             <input type="number" name="birthDate" class="form-control form-control-sm  inputfields"
-                placeholder="Enter Date" value="<?php echo date('d') ?>" oninput="validateDate(this)" required>
+                placeholder="Enter Date"  value="<?php echo date('d') ?>" oninput="validateDate(this)" required>
 
             <input type="number" name="birthMonth" class="form-control form-control-sm inputfields"
-                placeholder="Enter Month" value="<?php echo date('m') ?>" oninput="validateMonth(this)" required>
+                placeholder="Enter Month"  value="<?php echo date('m') ?>" oninput="validateMonth(this)" required>
 
             <select class="form-select form-select-sm inputfields" name="messageSelect"
                 aria-label="Small select example" required>
@@ -115,87 +114,89 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <script src="../../js/api.js"></script>
 
     <script>
-    function validateDate(input) {
-        if (input.value < 1) {
-            input.value = "";
-        } else if (input.value > 31) {
-            input.value = 31;
-        }
-    }
-
-    function validateMonth(input) {
-        if (input.value < 1) {
-            input.value = "";
-        } else if (input.value > 12) {
-            input.value = 12;
-        }
-    }
-    let loadMessages = () => {
-
-        $.ajax({
-            url: '_viewAllMessages.php',
-            method: 'POST',
-            success: function(response) {
-                $('#allMessage').html(response)
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.error('Error updating content:', error);
+        function validateDate(input) {
+            if (input.value < 1) {
+                input.value = "";
+            } else if (input.value > 31) {
+                input.value = 31;
             }
-        });
-    }
+        }
 
-    function updateContent(textarea, sr) {
-        var newText = textarea.value;
-        $.ajax({
-            url: '_update_message.php',
-            method: 'POST',
-            data: {
-                sr: sr,
-                msg: newText
-            },
-            success: function(response) {
-                // Handle success
-
-                console.log('Content updated successfully');
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.error('Error updating content:', error);
+        function validateMonth(input) {
+            if (input.value < 1) {
+                input.value = "";
+            } else if (input.value > 12) {
+                input.value = 12;
             }
-        });
-    }
-    let deleteMsg = (e, sr) => {
-        let card = e.parentNode.parentNode;
-        if (confirm("Are You sure")) {
+        }
+        let loadMessages = () => {
+
             $.ajax({
-                url: '_deletemsg.php',
+                url: '_viewAllMessages.php',
                 method: 'POST',
-                data: {
-                    sr: sr,
+                success: function (response) {
+                    $('#allMessage').html(response)
                 },
-                success: function(response) {
-                    card.classList.add("deleteditem");
-                    setInterval(() => {
-                        card.style.display = "none";
-                    }, 1000);
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     // Handle error
                     console.error('Error updating content:', error);
                 }
             });
         }
-    }
+
+        function updateContent(textarea, sr) {
+            var newText = textarea.value;
+            $.ajax({
+                url: '_update_message.php',
+                method: 'POST',
+                data: {
+                    sr: sr,
+                    msg: newText
+                },
+                success: function (response) {
+                    // Handle success
+
+                    console.log('Content updated successfully');
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error('Error updating content:', error);
+                }
+            });
+        }
+        let deleteMsg = (e, sr) => {
+            let card = e.parentNode.parentNode;
+            if (confirm("Are You sure")) {
+                $.ajax({
+                    url: '_deletemsg.php',
+                    method: 'POST',
+                    data: {
+                        sr: sr,
+                    },
+                    success: function (response) {
+                        card.classList.add("deleteditem");
+                        setInterval(() => {
+                            card.style.display = "none";
+                        }, 1000);
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error('Error updating content:', error);
+                    }
+                });
+            }
+        }
+
+
     </script>
 
 

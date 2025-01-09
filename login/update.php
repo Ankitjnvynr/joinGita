@@ -1,20 +1,18 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true)
-{
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("location: index.php");
     exit;
 }
 
-include ("../partials/_db.php");
+include("../partials/_db.php");
 $user_id = $_GET['user'];
 
 $sr = 0;
 
 $sql = "SELECT * FROM `users` WHERE `id` = '$user_id' ";
 $result = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_array($result))
-{
+while ($row = mysqli_fetch_array($result)) {
     $sr++;
     $country = $row['country'];
     $name = $row['name'];
@@ -47,34 +45,34 @@ while ($row = mysqli_fetch_array($result))
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <style>
-        body {
-            background: #f7e092;
-        }
+    body {
+        background: #f7e092;
+    }
 
-        .container {
-            /* max-width: 900px; */
-            background: rgba(255, 255, 255, 0.9);
-            position: relative;
+    .container {
+        /* max-width: 900px; */
+        background: rgba(255, 255, 255, 0.9);
+        position: relative;
 
-        }
+    }
 
-        .form-floating>label {
-            left: 10px;
-        }
+    .form-floating>label {
+        left: 10px;
+    }
 
 
 
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
 
-        }
+    }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-        </script>
+    </script>
 
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css"
@@ -87,54 +85,54 @@ while ($row = mysqli_fetch_array($result))
         <?php $name ?>
     </title>
     <style>
-        .loading {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            /* overflow: hidden; */
-            position: absolute;
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            top: 0;
-            scroll-behavior: none;
-        }
+    .loading {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        /* overflow: hidden; */
+        position: absolute;
+        z-index: 100;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(5px);
+        top: 0;
+        scroll-behavior: none;
+    }
 
-        .l-box {
-            height: 100px;
-            width: 100px;
-            border-top: 5px solid green;
-            /* border-right: 5px solid red ; */
-            border-radius: 50%;
-            /* transition: all 0.1s ease-in-out; */
-            animation: rotation 1s infinite;
-        }
+    .l-box {
+        height: 100px;
+        width: 100px;
+        border-top: 5px solid green;
+        /* border-right: 5px solid red ; */
+        border-radius: 50%;
+        /* transition: all 0.1s ease-in-out; */
+        animation: rotation 1s infinite;
+    }
 
-        @keyframes rotation {
+    @keyframes rotation {
 
-            /* from{transform: rotate(0deg);} */
-            to {
-                transform: rotate(360deg);
-            }
+        /* from{transform: rotate(0deg);} */
+        to {
+            transform: rotate(360deg);
         }
+    }
     </style>
     <style>
-        #joinForm {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+    #joinForm {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-        #joinForm>div,
-        span {
-            flex: 1 0 300px;
-        }
+    #joinForm>div,
+    span {
+        flex: 1 0 300px;
+    }
 
-        .cropper-container {
-            width: 100% !important;
-        }
+    .cropper-container {
+        width: 100% !important;
+    }
     </style>
 </head>
 
@@ -191,8 +189,7 @@ while ($row = mysqli_fetch_array($result))
                                 <?php
                                 $optionSql = "SELECT DISTINCT `country` FROM `users` ORDER BY country ASC ";
                                 $result = $conn->query($optionSql);
-                                while ($row = mysqli_fetch_assoc($result))
-                                {
+                                while ($row = mysqli_fetch_assoc($result)) {
                                     echo '<option value="' . $row['country'] . '">' . $row['country'] . '</option>';
                                 }
                                 ?>
@@ -312,13 +309,10 @@ while ($row = mysqli_fetch_array($result))
                             <select name="married" id="married" class="form-select " onchange="aniver()">
                                 <?php
                                 $marriedArr = ["-- select Marital Status --", "Married", "Single"];
-                                foreach ($marriedArr as $mstatus)
-                                {
-                                    if ($mstatus == $marital_status)
-                                    {
+                                foreach ($marriedArr as $mstatus) {
+                                    if ($mstatus == $marital_status) {
                                         echo '<option selected value="' . $mstatus . '">' . $mstatus . '</option>';
-                                    } else
-                                    {
+                                    } else {
                                         echo '<option value="' . $mstatus . '">' . $mstatus . '</option>';
                                     }
                                 }
@@ -337,13 +331,10 @@ while ($row = mysqli_fetch_array($result))
                                 <option value="">-- Star --</option>
                                 <?php
                                 $starArr = ["Trustee", "Patern Trustee", "Corporate Trustee"];
-                                foreach ($starArr as $chkstar)
-                                {
-                                    if ($chkstar == $star)
-                                    {
+                                foreach ($starArr as $chkstar) {
+                                    if ($chkstar == $star) {
                                         echo '<option selected value="' . $chkstar . '">' . $chkstar . '</option>';
-                                    } else
-                                    {
+                                    } else {
                                         echo '<option value="' . $chkstar . '">' . $chkstar . '</option>';
                                     }
                                 }
@@ -374,9 +365,12 @@ while ($row = mysqli_fetch_array($result))
                                 <option value="कार्यकारणी सदस्य" aria-selected="false">कार्यकारणी सदस्य</option>
                                 <option value="महासचिव" aria-selected="false">महासचिव</option>
                                 <option value="गौसेवा प्रमुख" aria-selected="false">गौसेवा प्रमुख</option>
+                                <option value="यज्ञ प्रमुख" aria-selected="false">यज्ञ प्रमुख</option>
+                                <option value="गोलक सेवा प्रमुख" aria-selected="false">गोलक सेवा प्रमुख</option>
+                                <option value="कोषाध्यक्ष" aria-selected="false">कोषाध्यक्ष</option>
+                                <option value="सह कोषाध्यक्ष" aria-selected="false">सह कोषाध्यक्ष</option>
                                 <?php
-                                if ($designation != "Member")
-                                {
+                                if ($designation != "Member") {
                                     echo '
                     <option value=" ' . $designation . '" aria-selected="false" selected> ' . $designation . '</option>
                     ';
@@ -387,8 +381,7 @@ while ($row = mysqli_fetch_array($result))
                         </div>
                         <span id="aniversry">
                             <?php
-                            if ($aniver_date != "0000-00-00")
-                            {
+                            if ($aniver_date != "0000-00-00") {
                                 echo '
                 <div class="bg-warning-subtle p-2 py-2 rounded ">
                   <label class="form-label " for="anniversary">Aniversary</label>
@@ -411,25 +404,25 @@ while ($row = mysqli_fetch_array($result))
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
@@ -453,7 +446,7 @@ while ($row = mysqli_fetch_array($result))
 
 
     <?php
-    echo '
+echo '
     <script>
       let cnntry = document.getElementById("countrySelect")
       const newOption = new Option("' . $country . '","' . $country . '");
@@ -467,130 +460,130 @@ while ($row = mysqli_fetch_array($result))
     ?>
 
     <script>
-        // let changingImage = (e) => {
-        //   console.log(e.value)
-        // }
-        $(document).ready(() => {
-            const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
-            let cropper;
+    // let changingImage = (e) => {
+    //   console.log(e.value)
+    // }
+    $(document).ready(() => {
+        const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
+        let cropper;
 
 
-            $('#cropperModal').on('shown.bs.modal', function () {
-                const image = document.getElementById('cropperImage');
-                const cropperContainer = document.querySelector('.cropper-container');
+        $('#cropperModal').on('shown.bs.modal', function() {
+            const image = document.getElementById('cropperImage');
+            const cropperContainer = document.querySelector('.cropper-container');
 
-                cropper = new Cropper(image, {
-                    aspectRatio: 1,
-                    viewMode: 1,
-                    rotatable: true,
-                    crop: function (event) {
-                        $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
-                        $('.cropper-container').css('overflow', 'hidden');
-                    }
-                });
-
-                $('#cropperModal').on('hidden.bs.modal', function (e) {
-                    if (cropper !== undefined) {
-                        cropper.destroy();
-                    }
-                });
-
-                cropperContainer.style.width = '100%';
-                cropperContainer.style.height = '400px';
-            });
-
-            $('#changeImg').on('change', function (event) {
-                const input = event.target;
-                if (input.files && input.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const tempImg = new Image();
-                        tempImg.src = e.target.result;
-                        tempImg.onload = function () {
-                            const canvas = document.createElement('canvas');
-                            const ctx = canvas.getContext('2d');
-                            const maxWidth = 700;
-                            const maxHeight = 700;
-                            let width = tempImg.width;
-                            let height = tempImg.height;
-
-                            if (width > height) {
-                                if (width > maxWidth) {
-                                    height *= maxWidth / width;
-                                    width = maxWidth;
-                                }
-                            } else {
-                                if (height > maxHeight) {
-                                    width *= maxHeight / height;
-                                    height = maxHeight;
-                                }
-                            }
-
-                            canvas.width = width;
-                            canvas.height = height;
-
-                            pica().resize(tempImg, canvas)
-                                .then(result => pica().toBlob(result, 'image/jpeg', 0.9))
-                                .then(blob => {
-                                    const resizedImageURL = URL.createObjectURL(blob);
-                                    $('#cropperImage').attr('src', resizedImageURL);
-                                    cropperModal.show();
-                                });
-                        };
-                    }
-                    reader.readAsDataURL(input.files[0]);
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 1,
+                rotatable: true,
+                crop: function(event) {
+                    $('.cropper-view-box, .cropper-face').css('border-radius', '50%');
+                    $('.cropper-container').css('overflow', 'hidden');
                 }
             });
-            // When user clicks the "Save" button, save the cropped image
-            $('#saveCroppedImage').on('click', function () {
-                if (cropper) {
-                    const canvas = cropper.getCroppedCanvas();
-                    const croppedImageDataURL = canvas.toDataURL("image/png");
 
-                    // Update the original image with the cropped image
-                    document.getElementById('changeImg').src = croppedImageDataURL
-                    // $('#changeImg').attr('src', croppedImageDataURL);
+            $('#cropperModal').on('hidden.bs.modal', function(e) {
+                if (cropper !== undefined) {
+                    cropper.destroy();
+                }
+            });
 
+            cropperContainer.style.width = '100%';
+            cropperContainer.style.height = '400px';
+        });
 
-                    // Get the member ID
-                    var memberId =
-                        "<?php echo $idM ?>"; // Assuming you're passing member ID as a query parameter
+        $('#changeImg').on('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const tempImg = new Image();
+                    tempImg.src = e.target.result;
+                    tempImg.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const maxWidth = 700;
+                        const maxHeight = 700;
+                        let width = tempImg.width;
+                        let height = tempImg.height;
 
-
-                    // AJAX request to send cropped image data to PHP script
-                    $.ajax({
-                        type: 'POST',
-                        url: '../partials/_updateprofilePic.php', // Update with the correct PHP script path
-                        data: {
-                            croppedImage: croppedImageDataURL, // Use croppedImageDataURL instead of croppedImageData
-                            memberId: memberId
-                        },
-                        // dataType: 'json',
-                        success: function (response) {
-                            console.table(response)
-                            if (response.success) {
-                                // Display success message or perform any other actions
-                                // console.log(response.message);
-                                console.log(response)
-                            } else {
-                                // Display error message or handle error case
-                                // console.error(response.message);
-                                console.log(response)
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height *= maxWidth / width;
+                                width = maxWidth;
                             }
-                        },
-                        error: function (xhr, status, error) {
-                            // Handle AJAX error
-                            console.error(error);
+                        } else {
+                            if (height > maxHeight) {
+                                width *= maxHeight / height;
+                                height = maxHeight;
+                            }
                         }
-                    });
 
-                    // Close the modal
-                    cropperModal.hide();
-                } else {
-                    console.error('Cropper is not initialized.');
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        pica().resize(tempImg, canvas)
+                            .then(result => pica().toBlob(result, 'image/jpeg', 0.9))
+                            .then(blob => {
+                                const resizedImageURL = URL.createObjectURL(blob);
+                                $('#cropperImage').attr('src', resizedImageURL);
+                                cropperModal.show();
+                            });
+                    };
                 }
-            });
-        })
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+        // When user clicks the "Save" button, save the cropped image
+        $('#saveCroppedImage').on('click', function() {
+            if (cropper) {
+                const canvas = cropper.getCroppedCanvas();
+                const croppedImageDataURL = canvas.toDataURL("image/png");
+
+                // Update the original image with the cropped image
+                document.getElementById('changeImg').src = croppedImageDataURL
+                // $('#changeImg').attr('src', croppedImageDataURL);
+
+
+                // Get the member ID
+                var memberId =
+                    "<?php echo $idM ?>"; // Assuming you're passing member ID as a query parameter
+
+
+                // AJAX request to send cropped image data to PHP script
+                $.ajax({
+                    type: 'POST',
+                    url: '../partials/_updateprofilePic.php', // Update with the correct PHP script path
+                    data: {
+                        croppedImage: croppedImageDataURL, // Use croppedImageDataURL instead of croppedImageData
+                        memberId: memberId
+                    },
+                    // dataType: 'json',
+                    success: function(response) {
+                        console.table(response)
+                        if (response.success) {
+                            // Display success message or perform any other actions
+                            // console.log(response.message);
+                            console.log(response)
+                        } else {
+                            // Display error message or handle error case
+                            // console.error(response.message);
+                            console.log(response)
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle AJAX error
+                        console.error(error);
+                    }
+                });
+
+                // Close the modal
+                cropperModal.hide();
+            } else {
+                console.error('Cropper is not initialized.');
+            }
+        });
+    })
     </script>
 
 </body>

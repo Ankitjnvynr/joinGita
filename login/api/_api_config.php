@@ -16,7 +16,7 @@ $files = array_map('htmlspecialchars', $files);
 $captions = array_map('htmlspecialchars', $captions);
 
 // API URL
-$base_url = 'https://app.jflindia.co.in/api/v1/message/create';
+$base_url = 'http://app.jflindia.co.in/api/v1/message/create';
 
 // Data to be sent as query parameters
 $data = array(
