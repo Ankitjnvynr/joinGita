@@ -24,6 +24,11 @@ $fromDate = isset($_POST['fromDate']) ? $_POST['fromDate'] : null;
 $toDate = isset($_POST['toDate']) ? $_POST['toDate'] : null;
 $selectedMediaIds = isset($_POST['selectedMedia']) ? json_decode($_POST['selectedMedia'], true) : [];
 
+$dob1970 = isset($_POST['dob1970']) ? $_POST['dob1970'] : null;
+$blankdob = isset($_POST['blankdob']) ? $_POST['blankdob'] : null;
+$blankdoa = isset($_POST['blankdoa']) ? $_POST['blankdob'] : null;
+
+
 // Initialize filters array
 $filters = [];
 
@@ -65,6 +70,18 @@ if ($executive) {
 if ($trustee) {
     $filters[] = "star != ''";
 }
+
+if ($dob1970) {
+    $filters[] = " dob = '1970-01-01' ";
+} 
+if ($blankdob) {
+    $filters[] = " dob = '' ";
+} 
+if ($blankdoa) {
+    $filters[] = " aniver_date = '' ";
+} 
+
+
 if ($fromDate && $toDate) {
     // Ensure proper date formatting
     $fromDate = date('Y-m-d', strtotime($fromDate));

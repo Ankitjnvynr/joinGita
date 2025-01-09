@@ -102,7 +102,10 @@ $(document).ready(() => {
 
             // Parse JSON response
             const data = await response.json();
+            console.log("data",data);
             const users = data.users;
+            //console.log( "users", users);
+
             var index = 0;
             // Process each user asynchronously
             for (const user of users) {

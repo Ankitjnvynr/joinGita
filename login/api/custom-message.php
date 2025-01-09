@@ -127,6 +127,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
                     Trustee
                 </label>
             </div>
+            <div class="form-check inputfields bg-light border bg-white rounded  px-2">
+                <input class="form-check-input mx-1" type="checkbox" name="dob1970" value="dob1970" id="dob1970">
+                <label class="form-check-label" for="dob1970">
+                    1-1-1970 dob
+                </label>
+            </div>
+            <div class="form-check inputfields bg-light border bg-white rounded  px-2">
+                <input class="form-check-input mx-1" type="checkbox" name="blankdob" value="blankdob" id="blankdob">
+                <label class="form-check-label" for="blankdob">
+                    blank dob
+                </label>
+            </div>
+            <div class="form-check inputfields bg-light border bg-white rounded  px-2">
+                <input class="form-check-input mx-1" type="checkbox" name="blankdoa" value="blankdoa" id="blankdoa">
+                <label class="form-check-label" for="blankdoa">
+                    blank doa
+                </label>
+            </div>
 
             <?php
             // Fetch data from api_content table
