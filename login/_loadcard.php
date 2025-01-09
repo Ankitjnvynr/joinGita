@@ -13,12 +13,12 @@ $allmsg = $conn->query($msgsql);
 while ($allmsgs = mysqli_fetch_assoc($allmsg)) {
     if($allmsgs['title'] == 'Welcome'){
     array_push($msgs, '<option selected value="' . urldecode($allmsgs['msg']) . '">' . $allmsgs['title'] . '</option>');
+    array_push($defaultmsg, $allmsgs['msg']);
         
     }else{
         
     array_push($msgs, '<option value="' . urldecode($allmsgs['msg']) . '">' . $allmsgs['title'] . '</option>');
     }
-    array_push($defaultmsg, $allmsgs['msg']);
 }
 $msgStr = '<select name="message" onchange="selectMessage(this)" id="message">' . implode("", $msgs) . '</select>';
 

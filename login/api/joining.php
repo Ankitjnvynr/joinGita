@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
                 $message_select_sql = "SELECT * FROM `messages`";
                 $message_select_result = mysqli_query($conn, $message_select_sql);
                 while ($message_select_row = mysqli_fetch_assoc($message_select_result)) {
-                    $selected = $message_select_row['title'] == 'Welcome ' ? "selected" : "";
+                    $selected = $message_select_row['title'] == 'Welcome' ? "selected" : "";
                     echo '<option value="' . htmlspecialchars($message_select_row['title']) . '" ' . $selected . '>' . htmlspecialchars($message_select_row['title']) . '</option>';
                 }
                 ?>
